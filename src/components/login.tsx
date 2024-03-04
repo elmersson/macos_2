@@ -13,8 +13,8 @@ export function Login() {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const { setLogedIn } = useSystem();
-  const time = useTime();
-  const timeObject = getFullFormatDate(time);
+  const timeHook = useTime();
+  const { dayOfWeek, dayOfMonth, month, time } = getFullFormatDate(timeHook);
 
   const inputAnimationControls = useAnimation();
 
@@ -53,10 +53,10 @@ export function Login() {
     <div className="h-full flex flex-col" onClick={handleClickOnScreen}>
       <div className="flex flex-col items-center mt-10">
         <span className="text-[2rem] font-bold text-teal-100 mix-blend-overlay text-shadow">
-          {timeObject.dayOfWeek}, {timeObject.dayOfMonth} {timeObject.month}
+          {dayOfWeek}, {dayOfMonth} {month}
         </span>
         <span className="text-[8rem] font-black text-teal-100 mix-blend-overlay -mt-8 text-shadow">
-          {timeObject.time}
+          {time}
         </span>
       </div>
       <div className="flex flex-col items-center mt-[55vh]">

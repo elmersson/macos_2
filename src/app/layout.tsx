@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/lib/providers/theme-provider";
 import Wallpaper from "@/components/wallpaper";
+import { Navbar } from "@/components/navbar";
+import { Boot } from "@/components/boot";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,7 +28,10 @@ export default function RootLayout({
           disableTransitionOnChange
           storageKey="macos-theme"
         >
+          <Boot />
+          <Navbar />
           {children}
+          <Wallpaper />
         </ThemeProvider>
       </body>
     </html>
