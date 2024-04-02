@@ -6,6 +6,7 @@ import getFullFormatDate from "@/lib/date/getFullFormatDate";
 import { cn } from "@/lib/utils";
 import { IoLogoApple } from "react-icons/io5";
 import { Battery } from "./navbar/battery";
+import { AppleMenu } from "./navbar/apple-menu";
 
 export function Navbar() {
   const { logedIn } = useSystem();
@@ -21,11 +22,7 @@ export function Navbar() {
           "bg-slate-800 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 dark:bg-slate-800/40"
       )}
     >
-      <div className="flex flex-row items-center">
-        <div className="px-2.5 rounded-md py-1">
-          <IoLogoApple className="text-white size-[18px] drop-shadow-lg" />
-        </div>
-      </div>
+      <AppleMenu />
       <div className="flex flex-row items-center space-x-2">
         <Battery />
         <div className="flex items-center space-x-1 text-sm text-slate-300">

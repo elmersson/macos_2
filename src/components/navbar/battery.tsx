@@ -14,16 +14,10 @@ import Image from "next/image";
 
 export function Battery() {
   const batteryState = useBattery();
-  const [isBatteryVisible, setIsBatteryVisible] = useState<boolean>(false);
-
-  const handleClick = () => {
-    setIsBatteryVisible(!isBatteryVisible);
-    console.log(isBatteryVisible);
-  };
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger onClick={handleClick} asChild>
+      <DropdownMenuTrigger asChild>
         <div
           role="button"
           className={"flex items-center px-2.5 py-1 rounded-md"}
