@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { IoLogoApple } from "react-icons/io5";
 import { Battery } from "./navbar/battery";
 import { AppleMenu } from "./navbar/apple-menu";
+import { ControlCentre } from "./navbar/control-centre";
 
 export function Navbar() {
   const { logedIn } = useSystem();
@@ -25,6 +26,7 @@ export function Navbar() {
       <AppleMenu />
       <div className="flex flex-row items-center space-x-2">
         <Battery />
+        <ControlCentre />
         <div className="flex items-center space-x-1 text-sm text-slate-300">
           <span>{dayOfWeek.substring(0, 3)}</span>
           <span>{dayOfMonth}</span>
