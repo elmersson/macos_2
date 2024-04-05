@@ -1,19 +1,14 @@
 "use client";
 
 import { useSystem } from "@/hooks/useSystem";
-import useTime from "@/hooks/useTime";
-import getFullFormatDate from "@/lib/date/getFullFormatDate";
 import { cn } from "@/lib/utils";
-import { IoLogoApple } from "react-icons/io5";
 import { Battery } from "./navbar/battery";
 import { AppleMenu } from "./navbar/apple-menu";
 import { ControlCentre } from "./navbar/control-centre";
+import { WidgetsBar } from "./navbar/widgets-bar";
 
 export function Navbar() {
   const { logedIn } = useSystem();
-
-  const timeHook = useTime();
-  const { dayOfWeek, dayOfMonth, month, time } = getFullFormatDate(timeHook);
 
   return (
     <div
@@ -27,12 +22,7 @@ export function Navbar() {
       <div className="flex flex-row items-center space-x-2">
         <Battery />
         <ControlCentre />
-        <div className="flex items-center space-x-1 text-sm text-slate-300">
-          <span>{dayOfWeek.substring(0, 3)}</span>
-          <span>{dayOfMonth}</span>
-          <span>{month.substring(0, 3)}</span>
-          <span>{time}</span>
-        </div>
+        <WidgetsBar />
       </div>
     </div>
   );

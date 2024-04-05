@@ -1,11 +1,15 @@
 "use client";
 import { useSystem } from "@/hooks/useSystem";
+import { WeatherData } from "@/types/Weather";
 import { useEffect, useState } from "react";
 import { IoLogoApple } from "react-icons/io5";
+import axios from "axios";
 
 export function Boot() {
   const [progress, setProgress] = useState<number>(0);
-  const { booted, setBooted } = useSystem();
+  const [latitude, setLatitude] = useState<number>(59.3326);
+  const [longitude, setLongitude] = useState<number>(18.0649);
+  const { booted, setBooted, setWeather } = useSystem();
 
   useEffect(() => {
     if (progress < 100) {
@@ -20,6 +24,39 @@ export function Boot() {
       }, 1000);
     }
   }, [progress, setBooted]);
+
+  useEffect(() => {
+    const fetchWeatherData = async () => {
+      try {
+        const apiKey = process.env.NEXT_PUBLIC_OPEN_WEATHER;
+        const response = await axios.get(
+          `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
+        );
+        const weatherData: WeatherData = response.data;
+        setWeather(weatherData);
+        console.log(response.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          console.log(latitude, longitude);
+          setLatitude(latitude);
+          setLongitude(longitude);
+          fetchWeatherData();
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    } else {
+      fetchWeatherData();
+    }
+  }, [latitude, longitude, setWeather]);
 
   if (booted) {
     return;
