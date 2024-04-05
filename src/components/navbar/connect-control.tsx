@@ -44,7 +44,7 @@ export function ConnectControl() {
   };
 
   return (
-    <div className="rounded-md px-3 py-1 w-[50%] bg-clip-padding backdrop-filter backdrop-blur-3xl bg-slate-200/10 shadow-md flex flex-col justify-evenly border-slate-400/40 border">
+    <div className="rounded-md px-3 py-1 w-[50%] bg-clip-padding backdrop-filter backdrop-blur-3xl bg-slate-200/10 dark:bg-slate-800/5 shadow-md flex flex-col justify-evenly border-slate-400/40 border">
       <div className="flex flex-row space-x-2" onClick={handleWifiClick}>
         <div
           className={`h-7 w-7 ${

@@ -1,4 +1,6 @@
+import { WeatherData } from "@/types/Weather";
 import { create } from "zustand";
+import weatherJson from "../data/Weather.json";
 
 type SystemStore = {
   booted: boolean;
@@ -15,6 +17,8 @@ type SystemStore = {
   setVolume: (volume: number) => void;
   display: number;
   setDisplay: (display: number) => void;
+  weather: WeatherData;
+  setWeather: (weather: WeatherData) => void;
 };
 
 export const useSystem = create<SystemStore>((set) => ({
@@ -32,4 +36,6 @@ export const useSystem = create<SystemStore>((set) => ({
   setVolume: (volume: number) => set({ volume }),
   display: 100,
   setDisplay: (display: number) => set({ display }),
+  weather: weatherJson,
+  setWeather: (weather: WeatherData) => set({ weather }),
 }));

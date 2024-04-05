@@ -25,7 +25,7 @@ export function ThemeSwitcher() {
 
   return (
     <div
-      className="rounded-md px-3 py-4 w-[100%] h-[100%] bg-clip-padding backdrop-filter backdrop-blur-3xl bg-slate-200/10 shadow-md flex flex-row items-center space-x-2 border-slate-400/40 border"
+      className="rounded-md px-3 py-4 w-[100%] h-[100%] bg-clip-padding backdrop-filter backdrop-blur-3xl bg-slate-200/10 dark:bg-slate-800/5 shadow-md flex flex-row items-center space-x-2 border-slate-400/40 border"
       onClick={handleClick}
     >
       <div className="h-7 w-7 bg-apple-blue-100 rounded-full flex justify-center items-center">
