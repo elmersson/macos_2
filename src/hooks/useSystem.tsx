@@ -19,6 +19,8 @@ type SystemStore = {
   setDisplay: (display: number) => void;
   weather: WeatherData;
   setWeather: (weather: WeatherData) => void;
+  nameOfTheDay: string[];
+  setNameOfTheDay: (nameOfTheDay: string[]) => void;
 };
 
 export const useSystem = create<SystemStore>((set) => ({
@@ -38,4 +40,6 @@ export const useSystem = create<SystemStore>((set) => ({
   setDisplay: (display: number) => set({ display }),
   weather: weatherJson,
   setWeather: (weather: WeatherData) => set({ weather }),
+  nameOfTheDay: ["Rasmus", "Amanda"],
+  setNameOfTheDay: (nameOfTheDay: string[]) => set({ nameOfTheDay }),
 }));
