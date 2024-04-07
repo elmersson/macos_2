@@ -7,7 +7,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { useState } from "react";
 import BatteryLevelIndicator from "./battery-level-indicator";
 import Charging from "@/assets/icons/charging.svg";
 import Image from "next/image";
@@ -40,7 +39,9 @@ export function Battery() {
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-[270px] mt-1">
-        <DropdownMenuLabel className="pb-0">Battery</DropdownMenuLabel>
+        <DropdownMenuLabel className="pb-0 text-white">
+          Battery
+        </DropdownMenuLabel>
         <DropdownMenuItem>
           <p className="text-xs text-slate-400">
             Power source: {batteryState.charging ? "Power Adapter" : "Battery"}
@@ -54,7 +55,7 @@ export function Battery() {
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <p className="text-xs">Battery Settings...</p>
+          <p className="text-xs text-white">Battery Settings...</p>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

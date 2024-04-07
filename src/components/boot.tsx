@@ -4,12 +4,14 @@ import { WeatherData } from "@/types/Weather";
 import { useEffect, useState } from "react";
 import { IoLogoApple } from "react-icons/io5";
 import axios from "axios";
+import useTime from "@/hooks/useTime";
+import getFullFormatDate from "@/lib/date/getFullFormatDate";
 
 export function Boot() {
   const [progress, setProgress] = useState<number>(0);
   const [latitude, setLatitude] = useState<number>(59.3326);
   const [longitude, setLongitude] = useState<number>(18.0649);
-  const { booted, setBooted, setWeather } = useSystem();
+  const { booted, setBooted, setWeather, setNameOfTheDay } = useSystem();
 
   useEffect(() => {
     if (progress < 100) {
@@ -57,6 +59,36 @@ export function Boot() {
       fetchWeatherData();
     }
   }, [latitude, longitude, setWeather]);
+
+  const currentTime = useTime();
+  const forrmatedTime = getFullFormatDate(currentTime);
+
+  const currentDate =
+    currentTime.getFullYear() +
+    "/" +
+    (currentTime.getMonth() + 1) +
+    "/" +
+    forrmatedTime.dayOfMonth;
+
+  const apiUrl = `http://sholiday.faboul.se/dagar/v2.1/${currentDate}`;
+
+  useEffect(() => {
+    axios
+      .get(apiUrl)
+      .then((response) => {
+        if (
+          response.data &&
+          response.data.dagar &&
+          response.data.dagar.length > 0
+        ) {
+          const namesForToday = response.data.dagar[0].namnsdag;
+          setNameOfTheDay(namesForToday);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, [apiUrl, setNameOfTheDay]);
 
   if (booted) {
     return;
