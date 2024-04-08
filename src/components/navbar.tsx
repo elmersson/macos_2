@@ -7,6 +7,7 @@ import { AppleMenu } from "./navbar/apple-menu";
 import { ControlCentre } from "./navbar/control-centre";
 import { WidgetsBar } from "./navbar/widgets-bar";
 import { Hidden } from "./navbar/hidden";
+import { Wifi } from "./navbar/wifi";
 
 export function Navbar() {
   const { logedIn } = useSystem();
@@ -21,8 +22,9 @@ export function Navbar() {
     >
       <div>{logedIn && <AppleMenu />}</div>
       <div className="flex flex-row items-center space-x-2">
-        <Hidden />
+        {logedIn && <Hidden />}
         <Battery />
+        <Wifi />
         {logedIn && <ControlCentre />}
         <WidgetsBar />
       </div>
