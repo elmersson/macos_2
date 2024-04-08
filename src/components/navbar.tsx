@@ -6,6 +6,7 @@ import { Battery } from "./navbar/battery";
 import { AppleMenu } from "./navbar/apple-menu";
 import { ControlCentre } from "./navbar/control-centre";
 import { WidgetsBar } from "./navbar/widgets-bar";
+import { Hidden } from "./navbar/hidden";
 
 export function Navbar() {
   const { logedIn } = useSystem();
@@ -18,10 +19,11 @@ export function Navbar() {
           "bg-slate-800 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 dark:bg-slate-800/40"
       )}
     >
-      <AppleMenu />
+      <div>{logedIn && <AppleMenu />}</div>
       <div className="flex flex-row items-center space-x-2">
+        <Hidden />
         <Battery />
-        <ControlCentre />
+        {logedIn && <ControlCentre />}
         <WidgetsBar />
       </div>
     </div>
