@@ -1,4 +1,5 @@
 import { Slider } from "../ui/slider";
+import { HiSpeakerWave, HiSpeakerXMark } from "react-icons/hi2";
 
 interface SoundProps {
   volume: number;
@@ -7,6 +8,7 @@ interface SoundProps {
 
 export function Sound({ volume, setVolume }: SoundProps) {
   const handleDisplayChange = (value: number[]) => {
+    console.log(volume);
     setVolume(value[0] / 100);
   };
   return (
@@ -19,6 +21,7 @@ export function Sound({ volume, setVolume }: SoundProps) {
           step={1}
           className="w-[100%]"
           onValueChange={handleDisplayChange}
+          icon={volume === 0 ? <HiSpeakerXMark /> : <HiSpeakerWave />}
         />
       </div>
     </div>

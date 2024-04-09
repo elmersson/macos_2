@@ -7,8 +7,10 @@ import { cn } from "@/lib/utils";
 
 const Slider = React.forwardRef<
   React.ElementRef<typeof SliderPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root>
->(({ className, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root> & {
+    icon?: React.ReactElement;
+  }
+>(({ className, icon, ...props }, ref) => (
   <SliderPrimitive.Root
     ref={ref}
     className={cn(
@@ -17,8 +19,13 @@ const Slider = React.forwardRef<
     )}
     {...props}
   >
-    <SliderPrimitive.Track className="relative h-5 w-full grow overflow-hidden rounded-full bg-slate-200/50">
-      <SliderPrimitive.Range className="absolute h-full bg-white" />
+    {icon && (
+      <div className="absolute left-2.5 top-1 z-10 transform -translate-x-1/2 text-slate-500">
+        {React.cloneElement(icon, { size: 12 })}
+      </div>
+    )}
+    <SliderPrimitive.Track className="relative h-5 w-full grow overflow-hidden rounded-full bg-slate-400/50">
+      <SliderPrimitive.Range className="absolute h-full bg-slate-200" />
     </SliderPrimitive.Track>
     <SliderPrimitive.Thumb className="block h-5 w-5 rounded-full bg-white border-none shadow-lg outline-none" />
   </SliderPrimitive.Root>

@@ -1,5 +1,6 @@
 import { useSystem } from "@/hooks/useSystem";
 import { Slider } from "../ui/slider";
+import { BsFillSunFill } from "react-icons/bs";
 
 export function Display() {
   const { display, setDisplay } = useSystem();
@@ -18,6 +19,7 @@ export function Display() {
           step={1}
           className="w-[100%]"
           onValueChange={handleDisplayChange}
+          icon={<BsFillSunFill />}
         />
       </div>
     </div>
