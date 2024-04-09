@@ -14,8 +14,10 @@ import { Display } from "./display";
 import { Sound } from "./sound";
 import { Music } from "./music";
 import { useAudio } from "react-use";
+import { useSystem } from "@/hooks/useSystem";
 
 export function ControlCentre() {
+  const { volume, setVolume } = useSystem();
   const [audio, state, controls, ref] = useAudio({
     src: "/music/Stockholmsvy.mp3",
     loop: true,
@@ -45,7 +47,7 @@ export function ControlCentre() {
           </div>
         </div>
         <Display />
-        <Sound volume={state.volume} setVolume={controls.volume} />
+        <Sound volume={volume} setVolume={setVolume} />
         <Music
           isPlaying={state.playing}
           play={controls.play}

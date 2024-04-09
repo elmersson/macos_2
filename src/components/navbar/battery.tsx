@@ -17,10 +17,7 @@ export function Battery() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div
-          role="button"
-          className={"flex items-center px-2.5 py-1 rounded-md"}
-        >
+        <div role="button" className={"flex items-center px-2 py-1 rounded-md"}>
           <p className="text-slate-200 text-xs text-shadow">
             {(batteryState.level * 100).toFixed(0)} %
           </p>

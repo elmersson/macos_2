@@ -8,6 +8,7 @@ import { ControlCentre } from "./navbar/control-centre";
 import { WidgetsBar } from "./navbar/widgets-bar";
 import { Hidden } from "./navbar/hidden";
 import { Wifi } from "./navbar/wifi";
+import { AppMenu } from "./navbar/app-menu";
 
 export function Navbar() {
   const { logedIn } = useSystem();
@@ -15,13 +16,20 @@ export function Navbar() {
   return (
     <div
       className={cn(
-        "flex justify-between py-2 px-2 fixed top-0 left-0 right-0 z-50 w-full",
+        "flex justify-between py-2 px-3 fixed top-0 left-0 right-0 z-50 w-full",
         logedIn &&
           "bg-slate-800 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-10 dark:bg-slate-800/40"
       )}
     >
-      <div>{logedIn && <AppleMenu />}</div>
-      <div className="flex flex-row items-center space-x-2">
+      <div>
+        {logedIn && (
+          <div className="flex flex-row">
+            <AppleMenu />
+            <AppMenu />
+          </div>
+        )}
+      </div>
+      <div className="flex flex-row items-center">
         {logedIn && <Hidden />}
         <Battery />
         <Wifi />
