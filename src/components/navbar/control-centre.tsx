@@ -13,14 +13,12 @@ import { StageAndScreen } from "./stage-and-screen";
 import { Display } from "./display";
 import { Sound } from "./sound";
 import { Music } from "./music";
-import { useAudio } from "react-use";
-import { useSystem } from "@/hooks/useSystem";
+import { useAudio } from "@/hooks/useAudio";
 
 export function ControlCentre() {
-  const { volume, setVolume } = useSystem();
-  const [audio, state, controls, ref] = useAudio({
+  const [_audio, state, controls, _ref] = useAudio({
     src: "/music/Stockholmsvy.mp3",
-    loop: true,
+    autoReplay: true,
   });
 
   return (
@@ -47,12 +45,8 @@ export function ControlCentre() {
           </div>
         </div>
         <Display />
-        <Sound volume={volume} setVolume={setVolume} />
-        <Music
-          isPlaying={state.playing}
-          play={controls.play}
-          pause={controls.pause}
-        />
+        <Sound setAudioVolume={controls.volume} />
+        <Music isPlaying={state.playing} togglePlayPause={controls.toggle} />
       </DropdownMenuContent>
     </DropdownMenu>
   );
