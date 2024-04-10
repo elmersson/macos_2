@@ -4,17 +4,9 @@ import Stockholmsvy from "../../assets/images/stockholmsvy.jpeg";
 
 interface MusicProps {
   isPlaying: boolean;
-  play: () => void;
-  pause: () => void;
+  togglePlayPause: () => void;
 }
-export function Music({ isPlaying, play, pause }: MusicProps) {
-  const togglePlayPause = () => {
-    if (isPlaying) {
-      pause();
-    } else {
-      play();
-    }
-  };
+export function Music({ isPlaying, togglePlayPause }: MusicProps) {
   return (
     <div className="rounded-md px-3 py-3 w-[100%] bg-clip-padding backdrop-filter backdrop-blur-3xl bg-slate-200/10 dark:bg-slate-800/5 shadow-md border-slate-400/40 border">
       <div className="flex flex-row justify-center items-center">
