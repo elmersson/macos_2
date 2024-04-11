@@ -1,7 +1,9 @@
+import Dock from "./dock";
+
 export function Desktop() {
   return (
-    <div>
-      <span>Desktop</span>
+    <div className="flex overflow-hidden no-scrollbar">
+      <Dock />
     </div>
   );
 }
