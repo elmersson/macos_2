@@ -7,8 +7,17 @@ import {
   TooltipArrow,
 } from "@/components/ui/tooltip";
 import Image from "next/image";
+import { useSystem } from "@/hooks/useSystem";
 
 export function DockItem({ title, img, id }: AppData) {
+  const { setLaunchPad } = useSystem();
+
+  const handleClick = () => {
+    if (title === "Launchpad") {
+      setLaunchPad(true);
+    }
+  };
+
   return (
     <TooltipProvider delayDuration={100}>
       <Tooltip>
@@ -16,6 +25,7 @@ export function DockItem({ title, img, id }: AppData) {
           <li
             className="flex justify-center relative group overflow-hidden no-scrollbar"
             id={id}
+            onClick={handleClick}
           >
             <Image src={img} alt={title} className="w-14" />
           </li>

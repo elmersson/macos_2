@@ -18,7 +18,7 @@ export function Battery() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <div role="button" className={"flex items-center px-2 py-1 rounded-md"}>
-          <p className="text-slate-200 text-xs text-shadow">
+          <p className="text-xs text-shadow">
             {(batteryState.level * 100).toFixed(0)} %
           </p>
           <div className="relative flex items-center drop-shadow-lg">

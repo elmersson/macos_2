@@ -10,7 +10,6 @@ function mapBatteryStateToRange(batteryState: number) {
   const newMin = 0;
   const newMax = 19;
 
-  // Scale the battery state to the new range
   const scaledValue = batteryState * (newMax - newMin) + newMin;
 
   return scaledValue;

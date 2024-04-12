@@ -21,6 +21,8 @@ type SystemStore = {
   setWeather: (weather: WeatherData) => void;
   nameOfTheDay: string[];
   setNameOfTheDay: (nameOfTheDay: string[]) => void;
+  launchPad: boolean;
+  setLaunchPad: (launchPad: boolean) => void;
 };
 
 export const useSystem = create<SystemStore>((set) => ({
@@ -42,4 +44,6 @@ export const useSystem = create<SystemStore>((set) => ({
   setWeather: (weather: WeatherData) => set({ weather }),
   nameOfTheDay: ["Rasmus", "Amanda"],
   setNameOfTheDay: (nameOfTheDay: string[]) => set({ nameOfTheDay }),
+  launchPad: false,
+  setLaunchPad: (launchPad: boolean) => set({ launchPad }),
 }));
