@@ -42,7 +42,6 @@ export function ControlCentre() {
           role="button"
           className={"flex items-center px-2.5 py-1 rounded-md"}
         >
-          git
           <Image
             src={ControlCenterImage}
             height={14}

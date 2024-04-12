@@ -54,10 +54,7 @@ export function Wifi() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div
-          role="button"
-          className="flex items-center px-2.5 py-1 rounded-md text-white"
-        >
+        <div role="button" className="flex items-center px-2.5 py-1 rounded-md">
           {wifiIcon()}
         </div>
       </DropdownMenuTrigger>

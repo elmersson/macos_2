@@ -10,10 +10,7 @@ export function WidgetsBar() {
   return (
     <MyDrawer
       trigger={
-        <div
-          className="flex items-center space-x-1 text-sm text-slate-300"
-          role="button"
-        >
+        <div className="flex items-center space-x-1 text-sm" role="button">
           <span>{dayOfWeek.substring(0, 3)}</span>
           <span>{dayOfMonth}</span>
           <span>{month.substring(0, 3)}</span>

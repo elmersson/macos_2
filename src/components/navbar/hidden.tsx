@@ -46,7 +46,7 @@ export function Hidden() {
       <div
         onClick={handleHidden}
         className={cn(
-          "flex items-center px-2 py-1 ml-1 rounded-md text-white",
+          "flex items-center px-2 py-1 ml-1 rounded-md",
           isPressed && "bg-slate-100/20"
         )}
       >
@@ -64,11 +64,7 @@ export function Hidden() {
             <RxDividerVertical />
           </div>
         )}
-        {isHidden ? (
-          <IoChevronForwardOutline style={{ color: "white" }} />
-        ) : (
-          <IoChevronBackOutline style={{ color: "white" }} />
-        )}
+        {isHidden ? <IoChevronForwardOutline /> : <IoChevronBackOutline />}
       </div>
     </div>
   );
