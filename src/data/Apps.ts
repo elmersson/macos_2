@@ -15,7 +15,7 @@ export interface AppData {
   url?: string;
 }
 
-const apps: AppData[] = [
+export const apps: AppData[] = [
   {
     id: 'finder',
     title: 'Finder',
@@ -57,6 +57,4 @@ const apps: AppData[] = [
     title: 'Notes',
     img: Notes,
   },
-];
-
-export default apps;
+] as const;

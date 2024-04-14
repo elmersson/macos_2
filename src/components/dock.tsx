@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, useAnimation } from "framer-motion";
-import apps from "../data/Apps";
+import { apps } from "../data/Apps";
 import { DockItem } from "./dock-item";
 
 export default function Dock() {
@@ -27,7 +27,7 @@ export default function Dock() {
       onMouseLeave={handleMouseLeave}
     >
       <motion.ul
-        className="bg-clip-padding backdrop-filter backdrop-blur-md bg-neutral-300/10 border border-neutral-100/20 flex rounded-3xl p-1 dark:bg-neutral-500/10 dark:border-neutral-300/20"
+        className="bg-clip-padding backdrop-filter backdrop-blur-md bg-neutral-300/20 border border-neutral-100/20 flex rounded-3xl p-1 dark:bg-neutral-500/10 dark:border-neutral-300/20 space-x-2"
         initial={{ y: initialY }}
         animate={{ y: animateY }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}

@@ -23,6 +23,8 @@ type SystemStore = {
   setNameOfTheDay: (nameOfTheDay: string[]) => void;
   launchPad: boolean;
   setLaunchPad: (launchPad: boolean) => void;
+  vsCode: boolean;
+  setVsCode: (vsCode: boolean) => void;
 };
 
 export const useSystem = create<SystemStore>((set) => ({
@@ -46,4 +48,6 @@ export const useSystem = create<SystemStore>((set) => ({
   setNameOfTheDay: (nameOfTheDay: string[]) => set({ nameOfTheDay }),
   launchPad: false,
   setLaunchPad: (launchPad: boolean) => set({ launchPad }),
+  vsCode: false,
+  setVsCode: (vsCode: boolean) => set({ vsCode }),
 }));
