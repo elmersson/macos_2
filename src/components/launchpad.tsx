@@ -1,5 +1,5 @@
 import { useSystem } from "@/hooks/useSystem";
-import apps, { AppData } from "@/data/Apps";
+import { apps, AppData } from "@/data/Apps";
 import Image from "next/image";
 import { Input } from "./ui/input";
 import { useState, ChangeEvent } from "react";

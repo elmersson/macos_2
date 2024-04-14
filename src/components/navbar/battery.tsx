@@ -10,8 +10,10 @@ import {
 import BatteryLevelIndicator from "./battery-level-indicator";
 import Charging from "@/assets/icons/charging.svg";
 import Image from "next/image";
+import { useSystem } from "@/hooks/useSystem";
 
 export function Battery() {
+  const { logedIn } = useSystem();
   const batteryState = useBattery();
 
   return (

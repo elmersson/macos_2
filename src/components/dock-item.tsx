@@ -10,11 +10,13 @@ import Image from "next/image";
 import { useSystem } from "@/hooks/useSystem";
 
 export function DockItem({ title, img, id }: AppData) {
-  const { setLaunchPad } = useSystem();
+  const { setLaunchPad, setVsCode } = useSystem();
 
   const handleClick = () => {
     if (title === "Launchpad") {
       setLaunchPad(true);
+    } else if (title === "Visual Studio Code") {
+      setVsCode(true);
     }
   };
 
@@ -27,7 +29,7 @@ export function DockItem({ title, img, id }: AppData) {
             id={id}
             onClick={handleClick}
           >
-            <Image src={img} alt={title} className="w-14" />
+            <Image src={img} alt={title} className=" w-[4.2rem]" />
           </li>
         </TooltipTrigger>
         <TooltipContent className="mb-2">
