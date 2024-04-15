@@ -101,6 +101,7 @@ export function Boot() {
         <div
           className="h-1 rounded-full bg-white border"
           style={{ width: `${progress}%`, transition: "width 0.5s ease" }}
+          role="progressbar"
         ></div>
       </div>
     </div>
