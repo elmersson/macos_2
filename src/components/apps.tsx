@@ -1,6 +1,6 @@
-import { useSystem } from "@/hooks/useSystem";
-import { DraggableItem } from "./apps/draggable-item";
-import { VSCode } from "./apps/vscode";
+import { useSystem } from '@/hooks/useSystem';
+import { DraggableItem } from './apps/draggable-item';
+import { VSCode } from './apps/vscode';
 export function Apps() {
   const { vsCode, setVsCode } = useSystem();
   return (

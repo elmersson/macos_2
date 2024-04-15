@@ -1,4 +1,4 @@
-import { useTheme } from "next-themes";
+import { useTheme } from 'next-themes';
 
 interface BatteryLevelIndicatorProps {
   batteryLevel: number;
@@ -6,7 +6,7 @@ interface BatteryLevelIndicatorProps {
 
 function mapBatteryStateToRange(batteryState: number) {
   if (batteryState < 0 || batteryState > 1) {
-    throw new Error("Battery state must be between 0 and 1");
+    throw new Error('Battery state must be between 0 and 1');
   }
 
   const newMin = 0;
@@ -18,13 +18,13 @@ function mapBatteryStateToRange(batteryState: number) {
 }
 
 export default function BatteryLevelIndicator({
-  batteryLevel,
+  batteryLevel
 }: BatteryLevelIndicatorProps) {
   const { resolvedTheme } = useTheme();
   const batteryWidth = mapBatteryStateToRange(batteryLevel).toFixed(0);
 
   const fillColor =
-    resolvedTheme === "dark" ? "rgba(226, 232, 240, 1)" : "#090909";
+    resolvedTheme === 'dark' ? 'rgba(226, 232, 240, 1)' : '#090909';
 
   return (
     <svg
@@ -48,7 +48,7 @@ export default function BatteryLevelIndicator({
           width={batteryWidth}
           height="8"
           rx="1"
-          fill={batteryLevel < 0.11 ? "rgba(255, 78, 78, 0.92)" : fillColor}
+          fill={batteryLevel < 0.11 ? 'rgba(255, 78, 78, 0.92)' : fillColor}
         />
       </g>
       <defs>

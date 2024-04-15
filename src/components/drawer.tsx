@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { ReactNode } from "react";
-import { Drawer } from "vaul";
+import { ReactNode } from 'react';
+import { Drawer } from 'vaul';
 
 interface MyDrawerProps {
   trigger: ReactNode;

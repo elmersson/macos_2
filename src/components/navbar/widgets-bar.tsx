@@ -1,7 +1,7 @@
-import useTime from "@/hooks/useTime";
-import getFullFormatDate from "@/lib/date/getFullFormatDate";
-import { MyDrawer } from "../drawer";
-import { Widgets } from "./widgets";
+import useTime from '@/hooks/useTime';
+import getFullFormatDate from '@/lib/date/getFullFormatDate';
+import { MyDrawer } from '../drawer';
+import { Widgets } from './widgets';
 
 export function WidgetsBar() {
   const timeHook = useTime();

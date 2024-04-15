@@ -1,8 +1,8 @@
-import React, { ReactNode, useEffect, useState } from "react";
-import Draggable from "react-draggable";
-import ActionButtons from "./action-buttons";
-import { ResizableBox, ResizeCallbackData } from "react-resizable";
-import "react-resizable/css/styles.css";
+import React, { ReactNode, useEffect, useState } from 'react';
+import Draggable from 'react-draggable';
+import ActionButtons from './action-buttons';
+import { ResizableBox, ResizeCallbackData } from 'react-resizable';
+import 'react-resizable/css/styles.css';
 
 interface DraggableItemProps {
   children: ReactNode;
@@ -18,8 +18,8 @@ export function DraggableItem({ children, onclose }: DraggableItemProps) {
     size: { width: 640, height: 400 },
     position: {
       x: 0,
-      y: NAVBAR_HEIGTH,
-    },
+      y: NAVBAR_HEIGTH
+    }
   });
 
   useEffect(() => {
@@ -35,14 +35,14 @@ export function DraggableItem({ children, onclose }: DraggableItemProps) {
   ) => {
     const { size: newSize, handle } = data;
 
-    const deltaX = handle.includes("w") ? size.width - newSize.width : 0;
-    const deltaY = handle.includes("n") ? size.height - newSize.height : 0;
+    const deltaX = handle.includes('w') ? size.width - newSize.width : 0;
+    const deltaY = handle.includes('n') ? size.height - newSize.height : 0;
 
     setSize({ width: newSize.width, height: newSize.height });
 
     setPosition((prev) => ({
       x: prev.x + deltaX,
-      y: prev.y + deltaY,
+      y: prev.y + deltaY
     }));
 
     setLastState({ size, position });
@@ -57,7 +57,7 @@ export function DraggableItem({ children, onclose }: DraggableItemProps) {
 
       setSize({
         width: window.innerWidth,
-        height: window.innerHeight - NAVBAR_HEIGTH,
+        height: window.innerHeight - NAVBAR_HEIGTH
       });
       setPosition({ x: 0, y: NAVBAR_HEIGTH });
     } else {
@@ -73,7 +73,7 @@ export function DraggableItem({ children, onclose }: DraggableItemProps) {
         left: 0,
         top: NAVBAR_HEIGTH,
         right: window.innerWidth - size.width,
-        bottom: window.innerHeight - size.height,
+        bottom: window.innerHeight - size.height
       }}
       position={position}
       onStop={(e, data) => {
@@ -91,7 +91,7 @@ export function DraggableItem({ children, onclose }: DraggableItemProps) {
               ref={ref}
             />
           )}
-          resizeHandles={["n", "ne", "e", "se", "s", "sw", "w", "nw"]}
+          resizeHandles={['n', 'ne', 'e', 'se', 's', 'sw', 'w', 'nw']}
         >
           <div className="flex flex-col w-full h-full shadow-lg">
             <div

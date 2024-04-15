@@ -1,7 +1,7 @@
-import { useSystem } from "@/hooks/useSystem";
-import useTime from "@/hooks/useTime";
-import getFullFormatDate from "@/lib/date/getFullFormatDate";
-import GoogleCalendarView from "./GoogleCalendarView";
+import { useSystem } from '@/hooks/useSystem';
+import useTime from '@/hooks/useTime';
+import getFullFormatDate from '@/lib/date/getFullFormatDate';
+import GoogleCalendarView from './GoogleCalendarView';
 
 export default function Calendar() {
   const { nameOfTheDay } = useSystem();

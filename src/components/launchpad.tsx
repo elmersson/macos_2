@@ -1,13 +1,13 @@
-import { useSystem } from "@/hooks/useSystem";
-import { apps, AppData } from "@/data/Apps";
-import Image from "next/image";
-import { Input } from "./ui/input";
-import { useState, ChangeEvent } from "react";
+import { useSystem } from '@/hooks/useSystem';
+import { apps, AppData } from '@/data/Apps';
+import Image from 'next/image';
+import { Input } from './ui/input';
+import { useState, ChangeEvent } from 'react';
 
 export function Launchpad() {
   const { launchPad, setLaunchPad } = useSystem();
 
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleClick = () => {
     setLaunchPad(false);
@@ -23,7 +23,7 @@ export function Launchpad() {
 
   return (
     <div
-      className={`fixed inset-0 bg-slate-800/50 backdrop-blur-2xl flex flex-col items-center p-10 transition-opacity duration-800 ${launchPad ? "opacity-100" : "opacity-0"}`}
+      className={`fixed inset-0 bg-slate-800/50 backdrop-blur-2xl flex flex-col items-center p-10 transition-opacity duration-800 ${launchPad ? 'opacity-100' : 'opacity-0'}`}
       onClick={handleClick}
     >
       <div onClick={(e) => e.stopPropagation()}>

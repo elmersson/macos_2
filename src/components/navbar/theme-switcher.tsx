@@ -1,7 +1,7 @@
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
-import { IoSunny } from "react-icons/io5";
-import { IoMdMoon } from "react-icons/io";
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
+import { IoSunny } from 'react-icons/io5';
+import { IoMdMoon } from 'react-icons/io';
 
 export function ThemeSwitcher() {
   const [mounted, setMounted] = useState(false);
@@ -16,10 +16,10 @@ export function ThemeSwitcher() {
   }
 
   function handleClick() {
-    if (theme === "light") {
-      setTheme("dark");
+    if (theme === 'light') {
+      setTheme('dark');
     } else {
-      setTheme("light");
+      setTheme('light');
     }
   }
 
@@ -29,15 +29,15 @@ export function ThemeSwitcher() {
       onClick={handleClick}
     >
       <div className="h-7 w-7 bg-apple-blue-100 rounded-full flex justify-center items-center">
-        {theme === "dark" ? (
-          <IoMdMoon style={{ color: "white" }} />
+        {theme === 'dark' ? (
+          <IoMdMoon style={{ color: 'white' }} />
         ) : (
-          <IoSunny style={{ color: "black" }} />
+          <IoSunny style={{ color: 'black' }} />
         )}
       </div>
       <div>
         <p className="text-xs font-semibold">
-          {theme === "dark" ? "Dark" : "Light"}
+          {theme === 'dark' ? 'Dark' : 'Light'}
         </p>
       </div>
     </div>

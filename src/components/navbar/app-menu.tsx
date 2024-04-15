@@ -11,8 +11,8 @@ import {
   MenubarSub,
   MenubarSubContent,
   MenubarSubTrigger,
-  MenubarTrigger,
-} from "@/components/ui/menubar";
+  MenubarTrigger
+} from '@/components/ui/menubar';
 
 export function AppMenu() {
   return (

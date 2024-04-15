@@ -1,35 +1,35 @@
-import { MdWifi, MdWifi2Bar, MdWifi1Bar } from "react-icons/md";
+import { MdWifi, MdWifi2Bar, MdWifi1Bar } from 'react-icons/md';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
-import { useNetworkState } from "react-use";
-import { useSystem } from "@/hooks/useSystem";
-import { Switch } from "../ui/switch";
-import { IoBatteryHalf, IoCellularSharp, IoLockClosed } from "react-icons/io5";
-import { FaLink } from "react-icons/fa6";
+  DropdownMenuTrigger
+} from '../ui/dropdown-menu';
+import { useNetworkState } from 'react-use';
+import { useSystem } from '@/hooks/useSystem';
+import { Switch } from '../ui/switch';
+import { IoBatteryHalf, IoCellularSharp, IoLockClosed } from 'react-icons/io5';
+import { FaLink } from 'react-icons/fa6';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
-  AccordionTrigger,
-} from "../ui/accordion";
+  AccordionTrigger
+} from '../ui/accordion';
 
 const otherNetworks = [
-  "Pretty Fly For a Wifi",
-  "Wu-Tang LAN",
-  "I am watching you",
+  'Pretty Fly For a Wifi',
+  'Wu-Tang LAN',
+  'I am watching you',
   "Drop it like it's a Hotspot",
-  "Dunder Mifflin",
-  "Routers of Rohan",
-  "Never Gonna Give You Wifi",
-  "Yer A Wifi Harry",
-  "The Ping of the North",
-  "404 Network Unavailable",
+  'Dunder Mifflin',
+  'Routers of Rohan',
+  'Never Gonna Give You Wifi',
+  'Yer A Wifi Harry',
+  'The Ping of the North',
+  '404 Network Unavailable'
 ];
 
 export function Wifi() {
@@ -38,13 +38,13 @@ export function Wifi() {
 
   const wifiIcon = () => {
     switch (state.effectiveType) {
-      case "4g":
+      case '4g':
         return <MdWifi />;
-      case "3g":
+      case '3g':
         return <MdWifi2Bar />;
-      case "2g":
+      case '2g':
         return <MdWifi1Bar />;
-      case "slow-2g":
+      case 'slow-2g':
         return <MdWifi1Bar />;
       default:
         return <MdWifi />;
@@ -70,7 +70,7 @@ export function Wifi() {
         <DropdownMenuItem className="flex flex-row justify-between items-center">
           <div className="flex flex-row justify-center items-center space-x-2">
             <div className="h-7 w-7 bg-clip-padding backdrop-filter backdrop-blur-3xl bg-slate-200/30 rounded-full flex justify-center items-center">
-              <FaLink style={{ color: "white" }} />
+              <FaLink style={{ color: 'white' }} />
             </div>
             <p>Rasmus - Iphone</p>
           </div>
@@ -85,7 +85,7 @@ export function Wifi() {
         <DropdownMenuItem className="flex flex-row justify-between items-center">
           <div className="flex flex-row justify-center items-center space-x-2">
             <div className="h-7 w-7 bg-clip-padding backdrop-filter backdrop-blur-3xl bg-slate-200/30 rounded-full flex justify-center items-center">
-              <MdWifi style={{ color: "white" }} />
+              <MdWifi style={{ color: 'white' }} />
             </div>
             <p>NETGEAR15</p>
           </div>
@@ -101,8 +101,8 @@ export function Wifi() {
             <div
               className={`h-7 w-7 ${
                 wifi
-                  ? "bg-apple-blue"
-                  : "bg-clip-padding backdrop-filter backdrop-blur-3xl bg-slate-200/30"
+                  ? 'bg-apple-blue'
+                  : 'bg-clip-padding backdrop-filter backdrop-blur-3xl bg-slate-200/30'
               } rounded-full flex justify-center items-center text-white`}
             >
               {wifiIcon()}
@@ -127,7 +127,7 @@ export function Wifi() {
                 >
                   <div className="flex flex-row justify-center items-center space-x-2">
                     <div className="h-7 w-7 bg-clip-padding backdrop-filter backdrop-blur-3xl bg-slate-200/30 rounded-full flex justify-center items-center">
-                      <MdWifi style={{ color: "white" }} />
+                      <MdWifi style={{ color: 'white' }} />
                     </div>
                     <p>{wifiName}</p>
                   </div>

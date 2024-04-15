@@ -19,42 +19,42 @@ export const apps: AppData[] = [
   {
     id: 'finder',
     title: 'Finder',
-    img: Finder,
+    img: Finder
   },
   {
     id: 'launchpad',
     title: 'Launchpad',
-    img: LaunchPad,
+    img: LaunchPad
   },
   {
     id: 'safari',
     title: 'Safari',
-    img: Safari,
+    img: Safari
   },
   {
     id: 'mail',
     title: 'Mail',
-    img: Mail,
+    img: Mail
   },
   {
     id: 'iterm2',
     title: 'Iterm2',
-    img: Iterm2,
+    img: Iterm2
   },
   {
     id: 'visual_studio_code',
     title: 'Visual Studio Code',
-    img: VsCode,
+    img: VsCode
   },
   {
     id: 'github',
     title: 'Github',
     img: Github,
-    url: 'https://github.com/elmersson',
+    url: 'https://github.com/elmersson'
   },
   {
     id: 'notes',
     title: 'Notes',
-    img: Notes,
-  },
+    img: Notes
+  }
 ] as const;

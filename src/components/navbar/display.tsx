@@ -1,6 +1,6 @@
-import { useSystem } from "@/hooks/useSystem";
-import { Slider } from "../ui/slider";
-import { BsFillSunFill } from "react-icons/bs";
+import { useSystem } from '@/hooks/useSystem';
+import { Slider } from '../ui/slider';
+import { BsFillSunFill } from 'react-icons/bs';
 
 export function Display() {
   const { display, setDisplay } = useSystem();
