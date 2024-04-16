@@ -1,11 +1,11 @@
-"use client";
-import { useSystem } from "@/hooks/useSystem";
-import { WeatherData } from "@/types/Weather";
-import { useEffect, useState } from "react";
-import { IoLogoApple } from "react-icons/io5";
-import axios from "axios";
-import useTime from "@/hooks/useTime";
-import getFullFormatDate from "@/lib/date/getFullFormatDate";
+'use client';
+import { useSystem } from '@/hooks/useSystem';
+import { WeatherData } from '@/types/Weather';
+import { useEffect, useState } from 'react';
+import { IoLogoApple } from 'react-icons/io5';
+import axios from 'axios';
+import useTime from '@/hooks/useTime';
+import getFullFormatDate from '@/lib/date/getFullFormatDate';
 
 export function Boot() {
   const [progress, setProgress] = useState<number>(0);
@@ -65,9 +65,9 @@ export function Boot() {
 
   const currentDate =
     currentTime.getFullYear() +
-    "/" +
+    '/' +
     (currentTime.getMonth() + 1) +
-    "/" +
+    '/' +
     forrmatedTime.dayOfMonth;
 
   const apiUrl = `http://sholiday.faboul.se/dagar/v2.1/${currentDate}`;
@@ -86,7 +86,7 @@ export function Boot() {
         }
       })
       .catch((error) => {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
       });
   }, [apiUrl, setNameOfTheDay]);
 
@@ -100,7 +100,7 @@ export function Boot() {
       <div className="h-1.5 w-64 rounded-full bg-neutral-700/80 border border-neutral-100/20 mt-[5%]">
         <div
           className="h-1 rounded-full bg-white border"
-          style={{ width: `${progress}%`, transition: "width 0.5s ease" }}
+          style={{ width: `${progress}%`, transition: 'width 0.5s ease' }}
           role="progressbar"
         ></div>
       </div>

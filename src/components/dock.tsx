@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { motion, useAnimation } from "framer-motion";
-import { apps } from "../data/Apps";
-import { DockItem } from "./dock-item";
+import React, { useState } from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import { apps } from '../data/Apps';
+import { DockItem } from './dock-item';
 
 export default function Dock() {
   const [isDockFocused, setIsDockFocused] = useState(false);
   const controls = useAnimation();
 
-  const initialY = "120%";
-  const animateY = isDockFocused ? "0%" : "120%";
+  const initialY = '120%';
+  const animateY = isDockFocused ? '0%' : '120%';
 
   const handleMouseEnter = () => {
-    controls.start({ y: "0%" });
+    controls.start({ y: '0%' });
     setIsDockFocused(true);
   };
 
@@ -30,7 +30,7 @@ export default function Dock() {
         className="bg-clip-padding backdrop-filter backdrop-blur-md bg-neutral-300/20 border border-neutral-100/20 flex rounded-3xl p-1 dark:bg-neutral-500/10 dark:border-neutral-300/20 space-x-2"
         initial={{ y: initialY }}
         animate={{ y: animateY }}
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       >
         {apps.map((app) => (
           <DockItem key={app.id} title={app.title} img={app.img} id={app.id} />

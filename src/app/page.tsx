@@ -1,11 +1,11 @@
-"use client";
-import { Boot } from "@/components/boot";
-import { Desktop } from "@/components/desktop";
-import { Launchpad } from "@/components/launchpad";
-import { Login } from "@/components/login";
-import { Navbar } from "@/components/navbar";
-import Wallpaper from "@/components/wallpaper";
-import { useSystem } from "@/hooks/useSystem";
+'use client';
+import { Boot } from '@/components/boot';
+import { Desktop } from '@/components/desktop';
+import { Launchpad } from '@/components/launchpad';
+import { Login } from '@/components/login';
+import { Navbar } from '@/components/navbar';
+import Wallpaper from '@/components/wallpaper';
+import { useSystem } from '@/hooks/useSystem';
 
 export default function Home() {
   const { logedIn, display, launchPad } = useSystem();

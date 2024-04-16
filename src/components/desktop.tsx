@@ -1,6 +1,6 @@
-import { Apps } from "./apps";
-import { VSCode } from "./apps/vscode";
-import Dock from "./dock";
+import { Apps } from './apps';
+import { VSCode } from './apps/vscode';
+import Dock from './dock';
 
 export function Desktop() {
   return (

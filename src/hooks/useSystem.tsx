@@ -1,6 +1,6 @@
-import { WeatherData } from "@/types/Weather";
-import { create } from "zustand";
-import weatherJson from "../data/Weather.json";
+import { WeatherData } from '@/types/Weather';
+import { create } from 'zustand';
+import weatherJson from '../data/Weather.json';
 
 type SystemStore = {
   booted: boolean;
@@ -44,10 +44,10 @@ export const useSystem = create<SystemStore>((set) => ({
   setDisplay: (display: number) => set({ display }),
   weather: weatherJson,
   setWeather: (weather: WeatherData) => set({ weather }),
-  nameOfTheDay: ["Rasmus", "Amanda"],
+  nameOfTheDay: ['Rasmus', 'Amanda'],
   setNameOfTheDay: (nameOfTheDay: string[]) => set({ nameOfTheDay }),
   launchPad: false,
   setLaunchPad: (launchPad: boolean) => set({ launchPad }),
   vsCode: false,
-  setVsCode: (vsCode: boolean) => set({ vsCode }),
+  setVsCode: (vsCode: boolean) => set({ vsCode })
 }));

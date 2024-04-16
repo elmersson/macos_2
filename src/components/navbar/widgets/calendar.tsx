@@ -1,7 +1,7 @@
-import { useSystem } from "@/hooks/useSystem";
-import useTime from "@/hooks/useTime";
-import getFullFormatDate from "@/lib/date/getFullFormatDate";
-import GoogleCalendarView from "./GoogleCalendarView";
+import { useSystem } from '@/hooks/useSystem';
+import useTime from '@/hooks/useTime';
+import getFullFormatDate from '@/lib/date/getFullFormatDate';
+import GoogleCalendarView from './GoogleCalendarView';
 
 export default function Calendar() {
   const { nameOfTheDay } = useSystem();
@@ -22,7 +22,7 @@ export default function Calendar() {
           <div className="flex flex-row bg-slate-200 p-1 rounded-full space-x-1 items-center mb-1 w-36">
             <div className="h-3 w-3 rounded-full bg-slate-600" />
             {nameOfTheDay.map((name, index) => (
-              <div key={index} className="flex flex-row">
+              <div key={`${name}-${index}`} className="flex flex-row">
                 <p className="text-xs">{name}</p>
                 {index !== nameOfTheDay.length - 1 && (
                   <p className="text-xs">,</p>

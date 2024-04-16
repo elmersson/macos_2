@@ -1,4 +1,4 @@
-import useTime from "@/hooks/useTime";
+import useTime from '@/hooks/useTime';
 
 interface getMonthArrayData {
   daysInMonthArray: number[];
@@ -51,14 +51,14 @@ function getMonthArray(): getMonthArrayData {
   return {
     daysInMonthArray,
     firstDayOfMonthIndex,
-    lastDayOfMonthIndex: (lastDayOfMonthDay + 6) % 7,
+    lastDayOfMonthIndex: (lastDayOfMonthDay + 6) % 7
   };
 }
 
 export default function GoogleCalendarView() {
   const currentTime = useTime();
 
-  const daysOfWeek = ["M", "T", "W", "T", "F", "S", "S"];
+  const daysOfWeek = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
   const renderDaysOfWeek = () => {
     return daysOfWeek.map((day, index) => (
@@ -95,15 +95,15 @@ export default function GoogleCalendarView() {
                 date === currentTime.getDate() &&
                 !isFirstRowBeforeMonth &&
                 !isLastRowAfterMonth
-                  ? "bg-blue-400 text-white rounded-full"
-                  : ""
+                  ? 'bg-blue-400 text-white rounded-full'
+                  : ''
               }`}
             >
               <p
                 className={`text-3xs ${
                   isFirstRowBeforeMonth || isLastRowAfterMonth
-                    ? "text-slate-400"
-                    : ""
+                    ? 'text-slate-400'
+                    : ''
                 }`}
               >
                 {date}

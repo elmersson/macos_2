@@ -1,6 +1,6 @@
-import { IoPauseSharp, IoPlayForward, IoPlaySharp } from "react-icons/io5";
-import Image from "next/image";
-import Stockholmsvy from "../../assets/images/stockholmsvy.jpeg";
+import { IoPauseSharp, IoPlayForward, IoPlaySharp } from 'react-icons/io5';
+import Image from 'next/image';
+import Stockholmsvy from '../../assets/images/stockholmsvy.jpeg';
 
 interface MusicProps {
   isPlaying: boolean;
@@ -27,12 +27,12 @@ export function Music({ isPlaying, togglePlayPause }: MusicProps) {
             <div className="flex flex-row space-x-2">
               <div onClick={togglePlayPause}>
                 {isPlaying ? (
-                  <IoPauseSharp style={{ fontSize: "20px" }} />
+                  <IoPauseSharp style={{ fontSize: '20px' }} />
                 ) : (
-                  <IoPlaySharp style={{ fontSize: "20px" }} />
+                  <IoPlaySharp style={{ fontSize: '20px' }} />
                 )}
               </div>
-              <IoPlayForward style={{ fontSize: "20px" }} />
+              <IoPlayForward style={{ fontSize: '20px' }} />
             </div>
           </div>
         </div>

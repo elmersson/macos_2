@@ -1,13 +1,13 @@
-"use client";
-import Image from "next/image";
-import ProfileImage from "@/assets/images/ProfileImage.png";
-import useTime from "@/hooks/useTime";
-import getFullFormatDate from "@/lib/date/getFullFormatDate";
-import { useRef, useState } from "react";
-import { motion, useAnimation } from "framer-motion";
-import { useSystem } from "@/hooks/useSystem";
+'use client';
+import Image from 'next/image';
+import ProfileImage from '@/assets/images/ProfileImage.png';
+import useTime from '@/hooks/useTime';
+import getFullFormatDate from '@/lib/date/getFullFormatDate';
+import { useRef, useState } from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import { useSystem } from '@/hooks/useSystem';
 export function Login() {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState('');
   const [isPasswordCorrect, setIsPasswordCorrect] = useState(true);
   const [showInput, setShowInput] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -18,7 +18,7 @@ export function Login() {
 
   const inputAnimationControls = useAnimation();
 
-  const password = "RasmusRocks!!!";
+  const password = 'RasmusRocks!!!';
 
   const handlePasswordValidation = () => {
     if (inputValue === password) {
@@ -35,7 +35,7 @@ export function Login() {
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       handlePasswordValidation();
     }
   };
@@ -73,7 +73,7 @@ export function Login() {
           <p>Rasmus Elmersson</p>
         ) : (
           <motion.div
-            className={`flex items-center w-32 h-6 px-2 rounded-2xl bg-sky-200/30 backdrop-blur-sm mt-2 drop-shadow p-1 ${isPasswordCorrect ? "" : "shake"}`}
+            className={`flex items-center w-32 h-6 px-2 rounded-2xl bg-sky-200/30 backdrop-blur-sm mt-2 drop-shadow p-1 ${isPasswordCorrect ? '' : 'shake'}`}
             animate={inputAnimationControls}
           >
             <input

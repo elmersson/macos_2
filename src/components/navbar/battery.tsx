@@ -1,16 +1,16 @@
-import { useBattery } from "@/hooks/useBattery";
+import { useBattery } from '@/hooks/useBattery';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
-import BatteryLevelIndicator from "./battery-level-indicator";
-import Charging from "@/assets/icons/charging.svg";
-import Image from "next/image";
-import { useSystem } from "@/hooks/useSystem";
+  DropdownMenuTrigger
+} from '../ui/dropdown-menu';
+import BatteryLevelIndicator from './battery-level-indicator';
+import Charging from '@/assets/icons/charging.svg';
+import Image from 'next/image';
+import { useSystem } from '@/hooks/useSystem';
 
 export function Battery() {
   const { logedIn } = useSystem();
@@ -19,7 +19,7 @@ export function Battery() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div role="button" className={"flex items-center px-2 py-1 rounded-md"}>
+        <div role="button" className={'flex items-center px-2 py-1 rounded-md'}>
           <p className="text-xs text-shadow">
             {(batteryState.level * 100).toFixed(0)} %
           </p>
@@ -43,7 +43,7 @@ export function Battery() {
         </DropdownMenuLabel>
         <DropdownMenuItem>
           <p className="text-xs text-slate-400">
-            Power source: {batteryState.charging ? "Power Adapter" : "Battery"}
+            Power source: {batteryState.charging ? 'Power Adapter' : 'Battery'}
           </p>
         </DropdownMenuItem>
         <DropdownMenuSeparator />

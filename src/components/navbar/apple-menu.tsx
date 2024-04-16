@@ -1,4 +1,4 @@
-import { IoLogoApple } from "react-icons/io5";
+import { IoLogoApple } from 'react-icons/io5';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,9 +9,9 @@ import {
   DropdownMenuSub,
   DropdownMenuSubTrigger,
   DropdownMenuPortal,
-  DropdownMenuSubContent,
-} from "../ui/dropdown-menu";
-import { useSystem } from "@/hooks/useSystem";
+  DropdownMenuSubContent
+} from '../ui/dropdown-menu';
+import { useSystem } from '@/hooks/useSystem';
 
 export function AppleMenu() {
   const { logedIn, setBooted, setLogedIn } = useSystem();
@@ -29,7 +29,7 @@ export function AppleMenu() {
       <DropdownMenuTrigger asChild>
         <div
           role="button"
-          className={"flex items-center px-2.5 py-1 rounded-md"}
+          className={'flex items-center px-2.5 py-1 rounded-md'}
         >
           <div className="rounded-md">
             <IoLogoApple className="text-white size-[18px] drop-shadow-lg" />

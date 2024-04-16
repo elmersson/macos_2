@@ -1,6 +1,6 @@
-import React from "react";
-import Draggable from "react-draggable";
-import ActionButtons from "./action-buttons";
+import React from 'react';
+import Draggable from 'react-draggable';
+import ActionButtons from './action-buttons';
 
 export function VSCode() {
   return (

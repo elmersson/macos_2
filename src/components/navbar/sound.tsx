@@ -1,6 +1,6 @@
-import { useSystem } from "@/hooks/useSystem";
-import { Slider } from "../ui/slider";
-import { HiSpeakerWave, HiSpeakerXMark } from "react-icons/hi2";
+import { useSystem } from '@/hooks/useSystem';
+import { Slider } from '../ui/slider';
+import { HiSpeakerWave, HiSpeakerXMark } from 'react-icons/hi2';
 
 interface SoundProps {
   setAudioVolume: (newVolume: number) => void;

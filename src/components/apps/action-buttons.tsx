@@ -41,7 +41,7 @@ export default function ActionButtons({ exit, fullSize }: ActionButtonsProps) {
             style={{
               color: 'text-slate-900',
               fontSize: '0.55rem',
-              transform: 'rotate(45deg)',
+              transform: 'rotate(45deg)'
             }}
           />
         )}

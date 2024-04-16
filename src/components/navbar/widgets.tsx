@@ -1,5 +1,5 @@
-import Calendar from "./widgets/calendar";
-import { Weather } from "./widgets/weather";
+import Calendar from './widgets/calendar';
+import { Weather } from './widgets/weather';
 
 export function Widgets() {
   return (

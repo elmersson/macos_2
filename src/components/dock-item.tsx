@@ -1,21 +1,21 @@
-import { AppData } from "@/data/Apps";
+import { AppData } from '@/data/Apps';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-  TooltipArrow,
-} from "@/components/ui/tooltip";
-import Image from "next/image";
-import { useSystem } from "@/hooks/useSystem";
+  TooltipArrow
+} from '@/components/ui/tooltip';
+import Image from 'next/image';
+import { useSystem } from '@/hooks/useSystem';
 
 export function DockItem({ title, img, id }: AppData) {
   const { setLaunchPad, setVsCode } = useSystem();
 
   const handleClick = () => {
-    if (title === "Launchpad") {
+    if (title === 'Launchpad') {
       setLaunchPad(true);
-    } else if (title === "Visual Studio Code") {
+    } else if (title === 'Visual Studio Code') {
       setVsCode(true);
     }
   };

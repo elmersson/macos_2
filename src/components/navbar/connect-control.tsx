@@ -1,12 +1,12 @@
-import { useSystem } from "@/hooks/useSystem";
-import { useNetworkState } from "react-use";
-import { IoBluetooth } from "react-icons/io5";
+import { useSystem } from '@/hooks/useSystem';
+import { useNetworkState } from 'react-use';
+import { IoBluetooth } from 'react-icons/io5';
 import {
   MdWifi,
   MdWifi2Bar,
   MdWifi1Bar,
-  MdWifiTethering,
-} from "react-icons/md";
+  MdWifiTethering
+} from 'react-icons/md';
 export function ConnectControl() {
   const state = useNetworkState();
   const { wifi, setWifi, bluetooth, setBluetooth, airdrop, setAirdrop } =
@@ -30,13 +30,13 @@ export function ConnectControl() {
 
   const wifiIcon = () => {
     switch (state.effectiveType) {
-      case "4g":
+      case '4g':
         return <MdWifi />;
-      case "3g":
+      case '3g':
         return <MdWifi2Bar />;
-      case "2g":
+      case '2g':
         return <MdWifi1Bar />;
-      case "slow-2g":
+      case 'slow-2g':
         return <MdWifi1Bar />;
       default:
         return <MdWifi />;
@@ -49,8 +49,8 @@ export function ConnectControl() {
         <div
           className={`h-7 w-7 ${
             wifi
-              ? "bg-apple-blue"
-              : "bg-clip-padding backdrop-filter backdrop-blur-3xl bg-slate-200/30"
+              ? 'bg-apple-blue'
+              : 'bg-clip-padding backdrop-filter backdrop-blur-3xl bg-slate-200/30'
           } rounded-full flex justify-center items-center text-white`}
         >
           {wifiIcon()}
@@ -58,7 +58,7 @@ export function ConnectControl() {
         <div>
           <p className="text-xs font-semibold">Wi-Fi</p>
           <p className="text-xxs dark:text-slate-200/60">
-            {wifi ? "NETGEAR15-5G" : "Not connected"}
+            {wifi ? 'NETGEAR15-5G' : 'Not connected'}
           </p>
         </div>
       </div>
@@ -66,16 +66,16 @@ export function ConnectControl() {
         <div
           className={`h-7 w-7 ${
             bluetooth
-              ? "bg-apple-blue"
-              : "bg-clip-padding backdrop-filter backdrop-blur-3xl bg-slate-200/30"
+              ? 'bg-apple-blue'
+              : 'bg-clip-padding backdrop-filter backdrop-blur-3xl bg-slate-200/30'
           } rounded-full flex justify-center items-center`}
         >
-          <IoBluetooth style={{ color: "white" }} />
+          <IoBluetooth style={{ color: 'white' }} />
         </div>
         <div>
           <p className="text-xs font-semibold">Bluetooth</p>
           <p className="text-xxs dark:text-slate-200/60">
-            {bluetooth ? "On" : "Off"}
+            {bluetooth ? 'On' : 'Off'}
           </p>
         </div>
       </div>
@@ -83,16 +83,16 @@ export function ConnectControl() {
         <div
           className={`h-7 w-7 ${
             airdrop
-              ? "bg-apple-blue"
-              : "bg-clip-padding backdrop-filter backdrop-blur-3xl bg-slate-200/30"
+              ? 'bg-apple-blue'
+              : 'bg-clip-padding backdrop-filter backdrop-blur-3xl bg-slate-200/30'
           } rounded-full flex justify-center items-center`}
         >
-          <MdWifiTethering style={{ color: "white" }} />
+          <MdWifiTethering style={{ color: 'white' }} />
         </div>
         <div>
           <p className="text-xs font-semibold">Airdrop</p>
           <p className="text-xxs dark:text-slate-200/60">
-            {airdrop ? "Contacts only" : "Off"}
+            {airdrop ? 'Contacts only' : 'Off'}
           </p>
         </div>
       </div>

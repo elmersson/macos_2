@@ -1,42 +1,42 @@
-import { WeatherData } from "@/types/Weather";
-import Data from "../../../data/Weather.json";
-import Image from "next/image";
-import { FaLocationArrow } from "react-icons/fa";
-import { getHours } from "date-fns";
-import { useSystem } from "@/hooks/useSystem";
+import { WeatherData } from '@/types/Weather';
+import Data from '../../../data/Weather.json';
+import Image from 'next/image';
+import { FaLocationArrow } from 'react-icons/fa';
+import { getHours } from 'date-fns';
+import { useSystem } from '@/hooks/useSystem';
 
 const capitalizeWords = (str: string) => {
   return str
-    .split(" ")
+    .split(' ')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+    .join(' ');
 };
 
 const getBackgroundColor = (weatherDescription: string) => {
   switch (weatherDescription) {
-    case "Clear":
-      return "bg-blue-400";
-    case "Clouds":
-      return "bg-gray-400";
-    case "Rain":
-    case "Drizzle":
-      return "bg-blue-600";
-    case "Thunderstorm":
-      return "bg-purple-700";
-    case "Snow":
-      return "bg-blue-100";
-    case "Mist":
-    case "Smoke":
-    case "Haze":
-    case "Dust":
-    case "Fog":
-    case "Sand":
-    case "Ash":
-    case "Squall":
-    case "Tornado":
-      return "bg-gray-300";
+    case 'Clear':
+      return 'bg-blue-400';
+    case 'Clouds':
+      return 'bg-gray-400';
+    case 'Rain':
+    case 'Drizzle':
+      return 'bg-blue-600';
+    case 'Thunderstorm':
+      return 'bg-purple-700';
+    case 'Snow':
+      return 'bg-blue-100';
+    case 'Mist':
+    case 'Smoke':
+    case 'Haze':
+    case 'Dust':
+    case 'Fog':
+    case 'Sand':
+    case 'Ash':
+    case 'Squall':
+    case 'Tornado':
+      return 'bg-gray-300';
     default:
-      return "bg-blue-300";
+      return 'bg-blue-300';
   }
 };
 export function Weather() {
@@ -51,7 +51,7 @@ export function Weather() {
           <div>
             <div className="flex flex-row text-white items-center space-x-1 text-shadow-lg">
               <p className="font-semibold text-base text-white">
-                {weather.city.name || "Stockholm"}
+                {weather.city.name || 'Stockholm'}
               </p>
               <FaLocationArrow size="0.6em" />
             </div>
@@ -65,7 +65,7 @@ export function Weather() {
               alt="icon"
               width={25}
               height={25}
-              style={{ marginLeft: "auto" }}
+              style={{ marginLeft: 'auto' }}
             />
             <p className="text-sm mt-1 font-bold text-white text-right text-shadow">
               {capitalizeWords(weather.list[0].weather[0].description)}

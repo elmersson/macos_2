@@ -1,19 +1,19 @@
-"use client";
-import { useSystem } from "@/hooks/useSystem";
-import { useEffect, useRef, useState } from "react";
+'use client';
+import { useSystem } from '@/hooks/useSystem';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Wallpaper() {
   const { logedIn } = useSystem();
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoSource, setVideoSource] = useState<string>(
-    "https://sylvan.apple.com/Videos/P001_C005_UHD_SDR_2K_AVC.mov"
+    'https://sylvan.apple.com/Videos/P001_C005_UHD_SDR_2K_AVC.mov'
   );
 
   useEffect(() => {
     const handleVideoError = () => {
       setVideoSource(
-        "http://sylvan.apple.com/Videos/P001_C005_UHD_SDR_2K_AVC.mov"
+        'http://sylvan.apple.com/Videos/P001_C005_UHD_SDR_2K_AVC.mov'
       );
     };
 
@@ -41,9 +41,9 @@ export default function Wallpaper() {
         ref={videoRef}
         src={videoSource}
         style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover'
         }}
         autoPlay
         loop
