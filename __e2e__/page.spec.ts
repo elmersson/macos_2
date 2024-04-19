@@ -1,7 +1,23 @@
 import { test, expect } from '@playwright/test';
 
-test('navigates to page', async ({ page }) => {
+test.beforeEach(async ({ page }) => {
   await page.goto('/');
-  await expect(page.getByRole('progressbar')).toBeVisible();
-  await expect(page.getByText('Rasmus Elmersson')).toBeVisible();
+});
+
+test('has title', async ({ page }) => {
+  await expect(page).toHaveTitle(/Rasmus Elmersson/);
+});
+
+test('has boot', async ({ page }) => {
+  const progressBar = await page.$('.h-1');
+  expect(progressBar).not.toBeNull();
+
+  await page.waitForFunction(() => {
+    const progress = document.querySelector('.h-1') as HTMLElement;
+    return progress.style.width === '100%';
+  });
+});
+
+test('has booted', async ({ page }) => {
+  await expect(page.getByText('Rasmus Elmersson')).toBeDefined();
 });
