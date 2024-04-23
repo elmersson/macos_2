@@ -24,9 +24,8 @@ export function Hidden() {
       setIsPressed(false);
     }, 200);
   };
-
   useEffect(() => {
-    let timer: NodeJS.Timeout;
+    let timer: ReturnType<typeof setTimeout>;
 
     if (isHidden) {
       timer = setTimeout(() => {

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { WeatherData } from '@/types/Weather';
 import { create } from 'zustand';
 import weatherJson from '../data/Weather.json';

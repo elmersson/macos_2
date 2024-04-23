@@ -59,8 +59,8 @@ export function Login() {
           {time}
         </span>
       </div>
-      <div className="flex flex-col items-center mt-[55vh]">
-        <div className="w-16 h-16 bg-slate-700 bg-clip-padding backdrop-filter backdrop-blur-3xl bg-opacity-30 rounded-full p-2">
+      <div className="flex flex-col items-center mt-[55vh] space-y-4">
+        <div className="w-24 h-24 bg-slate-700 bg-clip-padding backdrop-filter backdrop-blur-3xl bg-opacity-30 rounded-full p-2">
           <Image
             src={ProfileImage}
             alt="account image"
@@ -70,10 +70,10 @@ export function Login() {
         </div>
 
         {!showInput ? (
-          <p>Rasmus Elmersson</p>
+          <p className="text-white text-lg">Rasmus Elmersson</p>
         ) : (
           <motion.div
-            className={`flex items-center w-32 h-6 px-2 rounded-2xl bg-sky-200/30 backdrop-blur-sm mt-2 drop-shadow p-1 ${isPasswordCorrect ? '' : 'shake'}`}
+            className={`flex items-center w-48 h-8 px-2 rounded-2xl bg-sky-200/30 backdrop-blur-sm mt-2 drop-shadow p-1 ${isPasswordCorrect ? '' : 'shake'}`}
             animate={inputAnimationControls}
           >
             <input
@@ -82,7 +82,7 @@ export function Login() {
               onBlur={handlePasswordValidation}
               onChange={handleInputChange}
               onKeyDown={handleKeyPress}
-              className="focus:none outline-none text-white bg-transparent placeholder-sky-50/80 text-shadow text-xs"
+              className="focus:none outline-none text-white bg-transparent placeholder-sky-50/80 text-shadow text-sm"
             />
           </motion.div>
         )}

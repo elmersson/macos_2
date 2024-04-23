@@ -14,7 +14,7 @@ import {
 import { useSystem } from '@/hooks/useSystem';
 
 export function AppleMenu() {
-  const { logedIn, setBooted, setLogedIn } = useSystem();
+  const { setBooted, setLogedIn } = useSystem();
 
   const handleQuit = () => {
     setBooted(false);

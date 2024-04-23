@@ -1,5 +1,3 @@
-import { WeatherData } from '@/types/Weather';
-import Data from '../../../data/Weather.json';
 import Image from 'next/image';
 import { FaLocationArrow } from 'react-icons/fa';
 import { getHours } from 'date-fns';
