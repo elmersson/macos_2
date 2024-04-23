@@ -28,6 +28,7 @@ function getOpacityClass(displayValue: number) {
 
 export function ControlCentre() {
   const { display } = useSystem();
+  // eslint-disable-next-line no-unused-vars
   const [_audio, state, controls, _ref] = useAudio({
     src: '/music/Stockholmsvy.mp3',
     autoReplay: true
