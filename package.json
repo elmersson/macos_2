@@ -10,6 +10,7 @@
     "test": "jest",
     "test:e2e": "playwright test",
     "format": "npx prettier --write .",
+    "verify": "next lint && npx prettier --write . && playwright test",
     "check": "prettier --check",
     "prepare": "husky"
   },

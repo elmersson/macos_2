@@ -11,4 +11,4 @@
 
 # export PATH="$NVM_DIR/versions/node/$v/bin:$PATH"
 
-npm run format
+npm run verify
