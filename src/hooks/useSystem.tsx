@@ -2,8 +2,9 @@
 import { WeatherData } from '@/types/Weather';
 import { create } from 'zustand';
 import weatherJson from '../data/Weather.json';
+import { persist } from 'zustand/middleware';
 
-type SystemStore = {
+interface SystemStore {
   booted: boolean;
   setBooted: (booted: boolean) => void;
   logedIn: boolean;
@@ -21,34 +22,41 @@ type SystemStore = {
   weather: WeatherData;
   setWeather: (weather: WeatherData) => void;
   nameOfTheDay: string[];
-  setNameOfTheDay: (nameOfTheDay: string[]) => void;
+  setNameOfTheDay: (names: string[]) => void;
   launchPad: boolean;
   setLaunchPad: (launchPad: boolean) => void;
   vsCode: boolean;
   setVsCode: (vsCode: boolean) => void;
-};
+}
 
-export const useSystem = create<SystemStore>((set) => ({
-  booted: false,
-  setBooted: (booted: boolean) => set({ booted }),
-  logedIn: false,
-  setLogedIn: (logedIn: boolean) => set({ logedIn }),
-  wifi: true,
-  setWifi: (wifi: boolean) => set({ wifi }),
-  bluetooth: true,
-  setBluetooth: (bluetooth: boolean) => set({ bluetooth }),
-  airdrop: true,
-  setAirdrop: (airdrop: boolean) => set({ airdrop }),
-  volume: 50,
-  setVolume: (volume: number) => set({ volume }),
-  display: 100,
-  setDisplay: (display: number) => set({ display }),
-  weather: weatherJson,
-  setWeather: (weather: WeatherData) => set({ weather }),
-  nameOfTheDay: ['Rasmus', 'Amanda'],
-  setNameOfTheDay: (nameOfTheDay: string[]) => set({ nameOfTheDay }),
-  launchPad: false,
-  setLaunchPad: (launchPad: boolean) => set({ launchPad }),
-  vsCode: false,
-  setVsCode: (vsCode: boolean) => set({ vsCode })
-}));
+export const useSystem = create<SystemStore>()(
+  persist(
+    (set) => ({
+      booted: false,
+      setBooted: (booted) => set({ booted }),
+      logedIn: false,
+      setLogedIn: (logedIn) => set({ logedIn }),
+      wifi: true,
+      setWifi: (wifi) => set({ wifi }),
+      bluetooth: true,
+      setBluetooth: (bluetooth) => set({ bluetooth }),
+      airdrop: true,
+      setAirdrop: (airdrop) => set({ airdrop }),
+      volume: 50,
+      setVolume: (volume) => set({ volume }),
+      display: 100,
+      setDisplay: (display) => set({ display }),
+      weather: weatherJson,
+      setWeather: (weather) => set({ weather }),
+      nameOfTheDay: ['Rasmus', 'Amanda'],
+      setNameOfTheDay: (nameOfTheDay) => set({ nameOfTheDay }),
+      launchPad: false,
+      setLaunchPad: (launchPad) => set({ launchPad }),
+      vsCode: false,
+      setVsCode: (vsCode) => set({ vsCode })
+    }),
+    {
+      name: 'use-system'
+    }
+  )
+);

@@ -3,6 +3,7 @@ import './globals.css';
 import { ThemeProvider } from '@/lib/providers/theme-provider';
 import QueryProvider from '@/lib/providers/query-client';
 import { SFPRO } from '../assets/fonts/SFPRO';
+import Hydration from '@/components/hydration';
 
 const sfpro = SFPRO;
 
@@ -26,6 +27,7 @@ export default function RootLayout({
             disableTransitionOnChange
             storageKey="macos-theme"
           >
+            <Hydration />
             {children}
           </ThemeProvider>
         </body>
