@@ -3,6 +3,7 @@ import { WeatherData } from '@/types/Weather';
 import { create } from 'zustand';
 import weatherJson from '../data/Weather.json';
 import { persist } from 'zustand/middleware';
+import { AppData, apps } from '@/data/Apps';
 
 interface SystemStore {
   booted: boolean;
@@ -25,13 +26,16 @@ interface SystemStore {
   setNameOfTheDay: (names: string[]) => void;
   launchPad: boolean;
   setLaunchPad: (launchPad: boolean) => void;
-  vsCode: boolean;
-  setVsCode: (vsCode: boolean) => void;
+  apps: AppData[];
+  setApps: (apps: AppData[]) => void;
+  bringToFront: (id: string) => void;
+  closeApp: (id: string) => void;
+  openApp: (id: string) => void;
 }
 
 export const useSystem = create<SystemStore>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       booted: false,
       setBooted: (booted) => set({ booted }),
       logedIn: false,
@@ -52,8 +56,28 @@ export const useSystem = create<SystemStore>()(
       setNameOfTheDay: (nameOfTheDay) => set({ nameOfTheDay }),
       launchPad: false,
       setLaunchPad: (launchPad) => set({ launchPad }),
-      vsCode: false,
-      setVsCode: (vsCode) => set({ vsCode })
+      apps,
+      setApps: (apps) => set({ apps }),
+      bringToFront: (id) => {
+        const apps = get().apps;
+        const maxZ = Math.max(...apps.map((app) => app.z)) + 1;
+        const newApps = apps.map((app) =>
+          app.id === id ? { ...app, z: maxZ } : app
+        );
+        set({ apps: newApps });
+      },
+      closeApp: (id) => {
+        const apps = get().apps.map((app) =>
+          app.id === id ? { ...app, isOpen: false } : app
+        );
+        set({ apps });
+      },
+      openApp: (id) => {
+        const apps = get().apps.map((app) =>
+          app.id === id ? { ...app, isOpen: true } : app
+        );
+        set({ apps });
+      }
     }),
     {
       name: 'use-system'
