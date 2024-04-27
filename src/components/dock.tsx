@@ -33,7 +33,13 @@ export default function Dock() {
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       >
         {apps.map((app) => (
-          <DockItem key={app.id} title={app.title} img={app.img} id={app.id} />
+          <DockItem
+            key={app.id}
+            title={app.title}
+            img={app.img}
+            id={app.id}
+            isOpen={app.isOpen}
+          />
         ))}
       </motion.ul>
     </motion.div>

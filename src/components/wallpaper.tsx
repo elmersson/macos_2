@@ -7,7 +7,8 @@ export default function Wallpaper() {
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoSource, setVideoSource] = useState<string>(
-    'https://sylvan.apple.com/Videos/P001_C005_UHD_SDR_2K_AVC.mov'
+    // 'https://sylvan.apple.com/Videos/P001_C005_UHD_SDR_2K_AVC.mov'
+    './videos/bg.mov'
   );
 
   useEffect(() => {
