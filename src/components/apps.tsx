@@ -1,6 +1,7 @@
 import { useSystem } from '@/hooks/useSystem';
 import { DraggableItem } from './apps/draggable-item';
 import { VSCode } from './apps/vscode';
+import { Finder } from './apps/finder';
 export function Apps() {
   const { apps, closeApp, bringToFront } = useSystem();
   return (
@@ -23,7 +24,11 @@ export function Apps() {
               }}
             >
               <DraggableItem onclose={() => closeApp(app.id)}>
-                {app.id === 'vscode' ? <VSCode /> : <VSCode />}
+                {app.id === 'visual_studio_code' ? (
+                  <VSCode />
+                ) : app.id === 'finder' ? (
+                  <Finder />
+                ) : null}
               </DraggableItem>
             </div>
           )

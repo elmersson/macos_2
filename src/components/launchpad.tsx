@@ -47,7 +47,7 @@ export function Launchpad() {
   );
 }
 
-function LaunchpadItem({ title, img }: AppData) {
+function LaunchpadItem({ title, img }: Omit<AppData, 'z' | 'size' | 'isOpen'>) {
   return (
     <div
       className="flex flex-col justify-center items-center"
