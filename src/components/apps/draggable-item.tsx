@@ -100,7 +100,7 @@ export function DraggableItem({ children, onclose }: DraggableItemProps) {
             >
               <ActionButtons exit={onclose} fullSize={handleFullscreen} />
             </div>
-            <div className="w-full flex-1 bg-black">{children}</div>
+            <div className="w-full flex-1">{children}</div>
           </div>
         </ResizableBox>
       </div>
