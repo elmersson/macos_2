@@ -80,7 +80,7 @@ export const useSystem = create<SystemStore>()(
       }
     }),
     {
-      name: 'use-system'
+      name: 'use-system-1'
     }
   )
 );

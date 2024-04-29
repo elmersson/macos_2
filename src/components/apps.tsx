@@ -2,6 +2,7 @@ import { useSystem } from '@/hooks/useSystem';
 import { DraggableItem } from './apps/draggable-item';
 import { VSCode } from './apps/vscode';
 import { Finder } from './apps/finder';
+import { Arc } from './apps/arc';
 export function Apps() {
   const { apps, closeApp, bringToFront } = useSystem();
   return (
@@ -19,7 +20,6 @@ export function Apps() {
                 position: 'absolute'
               }}
               onClick={() => {
-                console.log(app.id);
                 bringToFront(app.id);
               }}
             >
@@ -28,6 +28,10 @@ export function Apps() {
                   <VSCode />
                 ) : app.id === 'finder' ? (
                   <Finder />
+                ) : app.id === 'arc' ? (
+                  <Arc />
+                ) : app.id === 'notes' ? (
+                  <Arc />
                 ) : null}
               </DraggableItem>
             </div>

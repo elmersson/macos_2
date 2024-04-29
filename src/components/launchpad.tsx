@@ -23,7 +23,7 @@ export function Launchpad() {
 
   return (
     <div
-      className={`fixed inset-0 bg-slate-800/50 backdrop-blur-2xl flex flex-col items-center p-10 transition-opacity duration-800 ${launchPad ? 'opacity-100' : 'opacity-0'}`}
+      className={`z-[999999] fixed inset-0 bg-slate-800/50 backdrop-blur-2xl flex flex-col items-center p-10 transition-opacity duration-800 ${launchPad ? 'opacity-100' : 'opacity-0'}`}
       onClick={handleClick}
     >
       <div onClick={(e) => e.stopPropagation()}>
