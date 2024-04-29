@@ -9,7 +9,7 @@ interface DraggableItemProps {
   onclose(): void;
 }
 
-const NAVBAR_HEIGTH = 43;
+const NAVBAR_HEIGTH = 40;
 
 export function DraggableItem({ children, onclose }: DraggableItemProps) {
   const [size, setSize] = useState({ width: 640, height: 400 });

@@ -3,7 +3,7 @@ import { Weather } from './widgets/weather';
 
 export function Widgets() {
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 mt-6">
       <Weather />
       <Calendar />
       <div className="flex justify-center">

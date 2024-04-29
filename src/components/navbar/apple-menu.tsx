@@ -27,7 +27,7 @@ export function AppleMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div role="button" className={'flex items-center px-4 py-1 rounded-md'}>
+        <div role="button" className="flex items-center px-4 py-1 rounded-md">
           <div className="rounded-md">
             <IoLogoApple className="text-white size-[20px] drop-shadow-lg" />
           </div>

@@ -10,17 +10,17 @@ export default function Calendar() {
   const forrmatedTime = getFullFormatDate(currentTime);
 
   return (
-    <div className="bg-white dark:bg-black rounded-2xl p-3 shadow-2xl">
+    <div className="bg-white dark:bg-neutral-800 rounded-2xl p-3 shadow-2xl">
       <div className="flex flex-row">
         <div className="mr-10 space-y-1.5">
-          <p className="text-xs text-slate-700">
+          <p className="text-xs text-slate-700 dark:text-slate-200">
             {forrmatedTime.month.toUpperCase()}
           </p>
           <GoogleCalendarView />
         </div>
         <div>
-          <div className="flex flex-row bg-slate-200 p-1 rounded-full space-x-1 items-center mb-1 w-36">
-            <div className="h-3 w-3 rounded-full bg-slate-600" />
+          <div className="flex flex-row bg-neutral-200 dark:bg-neutral-600 p-1 rounded-full space-x-1 items-center mb-1 w-36">
+            <div className="h-2 w-2 rounded-full bg-slate-400 ml-1" />
             {nameOfTheDay.map((name, index) => (
               <div key={`${name}-${index}`} className="flex flex-row">
                 <p className="text-xs">{name}</p>

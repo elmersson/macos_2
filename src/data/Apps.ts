@@ -1,7 +1,7 @@
 import { StaticImageData } from 'next/image';
 import Finder from '@/assets/apps/finder.png';
 import LaunchPad from '@/assets/apps/launchpad.png';
-import Safari from '@/assets/apps/safari.png';
+import Arc from '@/assets/apps/arc.png';
 import Mail from '@/assets/apps/MAIL.png';
 import Iterm2 from '@/assets/apps/iterm2.png';
 import VsCode from '@/assets/apps/vscode.png';
@@ -36,10 +36,10 @@ export const apps: AppData[] = [
     size: { width: 640, height: 400 }
   },
   {
-    id: 'safari',
-    title: 'Safari',
+    id: 'arc',
+    title: 'Arc',
     isOpen: false,
-    img: Safari,
+    img: Arc,
     z: 0,
     size: { width: 640, height: 400 }
   },
