@@ -20,6 +20,13 @@ export function DockItem({
   const handleClick = () => {
     if (title === 'Launchpad') {
       setLaunchPad(true);
+    } else if (id === 'github') {
+      const newWindow = window.open(
+        'https://github.com/elmersson',
+        '_blank',
+        'noopener,noreferrer'
+      );
+      if (newWindow) newWindow.opener = null;
     } else {
       openApp(id);
       bringToFront(id);
