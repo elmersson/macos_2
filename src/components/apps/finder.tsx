@@ -38,7 +38,12 @@ export function Finder() {
 
 function Favorites() {
   return (
-    <Accordion type="single" collapsible className="w-full">
+    <Accordion
+      type="single"
+      collapsible
+      className="w-full"
+      defaultValue="item-1"
+    >
       <AccordionItem value="item-1">
         <AccordionTrigger className="text-sm text-neutral-300">
           Favorites
