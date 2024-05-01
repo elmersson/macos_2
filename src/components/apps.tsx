@@ -3,6 +3,7 @@ import { DraggableItem } from './apps/draggable-item';
 import { VSCode } from './apps/vscode';
 import { Finder } from './apps/finder';
 import { Arc } from './apps/arc';
+import { Notes } from './apps/notes';
 export function Apps() {
   const { apps, closeApp, bringToFront } = useSystem();
   return (
@@ -31,7 +32,7 @@ export function Apps() {
                 ) : app.id === 'arc' ? (
                   <Arc />
                 ) : app.id === 'notes' ? (
-                  <Arc />
+                  <Notes />
                 ) : null}
               </DraggableItem>
             </div>
