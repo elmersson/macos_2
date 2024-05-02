@@ -13,22 +13,26 @@ export default function ActionButtons({ exit, fullSize }: ActionButtonsProps) {
 
   return (
     <div
-      className="flex items-center"
+      className="flex items-center space-x-2 px-3"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       <div
-        className="rounded-full h-3 w-3 bg-[#FF6157] border-[#E24640] mx-2 flex justify-center items-center"
+        className="rounded-full h-3 w-3 bg-[#FF6157] border-[#E24640] flex justify-center items-center"
         onClick={exit}
       >
         {hovered && (
-          <RxCross2 style={{ color: 'text-slate-900', fontSize: '0.55rem' }} />
+          <RxCross2
+            className="text-slate-900"
+            style={{ fontSize: '0.55rem' }}
+          />
         )}
       </div>
-      <div className="rounded-full h-3 w-3 bg-[#FFC12F] border-[#DFA023] mr-2 flex justify-center items-center">
+      <div className="rounded-full h-3 w-3 bg-[#FFC12F] border-[#DFA023] flex justify-center items-center">
         {hovered && (
           <PiMinusBold
-            style={{ color: 'text-slate-900', fontSize: '0.55rem' }}
+            className="text-slate-900"
+            style={{ fontSize: '0.55rem' }}
           />
         )}
       </div>
@@ -38,8 +42,8 @@ export default function ActionButtons({ exit, fullSize }: ActionButtonsProps) {
       >
         {hovered && (
           <RiExpandLeftRightFill
+            className="text-slate-900"
             style={{
-              color: 'text-slate-900',
               fontSize: '0.55rem',
               transform: 'rotate(45deg)'
             }}
