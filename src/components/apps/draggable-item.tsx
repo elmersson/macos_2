@@ -95,7 +95,7 @@ export function DraggableItem({ children, onclose }: DraggableItemProps) {
         >
           <div className="flex flex-col w-full h-full shadow-lg">
             <div
-              className="handle flex items-center justify-between bg-[#3c3c3c] rounded-t-md py-2 px-4"
+              className="handle flex items-center justify-between bg-[#3c3c3c] rounded-t-md py-2"
               onDoubleClick={handleFullscreen}
             >
               <ActionButtons exit={onclose} fullSize={handleFullscreen} />
