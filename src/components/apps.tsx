@@ -5,6 +5,7 @@ import { Finder } from './apps/finder';
 import { Arc } from './apps/arc';
 import { Notes } from './apps/notes';
 import { Iterm2 } from './apps/iterm2';
+import { Outlook } from './apps/outlook';
 export function Apps() {
   const { apps, closeApp, bringToFront } = useSystem();
   return (
@@ -36,6 +37,8 @@ export function Apps() {
                   <Notes />
                 ) : app.id === 'iterm2' ? (
                   <Iterm2 />
+                ) : app.id === 'mail' ? (
+                  <Outlook />
                 ) : null}
               </DraggableItem>
             </div>
