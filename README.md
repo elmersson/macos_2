@@ -2,7 +2,17 @@
 
 ## Description
 
-A personal website made to look like my current OS running on my Macbook. Updated version from last try ([﻿MacOs](https://github.com/elmersson/MacOS))
+A personal website made to look like my current OS running on my Macbook. Updated version from last try ([﻿MacOs](https://github.com/elmersson/MacOS)).
+
+## TODO
+
+- [ ] Z-index
+- [ ] Store position, scale and z-index in store
+- [ ] App function
+  - [ ] Finder
+  - [ ] Launchpad
+  - [ ] Outlook
+  - [ ] iterm2
 
 ## Tech-stack
 
