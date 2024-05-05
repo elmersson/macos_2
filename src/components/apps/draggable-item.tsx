@@ -7,11 +7,20 @@ import 'react-resizable/css/styles.css';
 interface DraggableItemProps {
   children: ReactNode;
   onclose(): void;
+  barItem?: ReactNode;
+  className?: React.ComponentProps<'div'>['className'];
+  actionButtonStyle?: React.ComponentProps<'div'>['className'];
 }
 
 const NAVBAR_HEIGTH = 40;
 
-export function DraggableItem({ children, onclose }: DraggableItemProps) {
+export function DraggableItem({
+  children,
+  onclose,
+  barItem,
+  className,
+  actionButtonStyle
+}: DraggableItemProps) {
   const [size, setSize] = useState({ width: 640, height: 400 });
   const [position, setPosition] = useState({ x: 0, y: NAVBAR_HEIGTH });
   const [lastState, setLastState] = useState({
@@ -95,10 +104,15 @@ export function DraggableItem({ children, onclose }: DraggableItemProps) {
         >
           <div className="flex flex-col w-full h-full shadow-lg">
             <div
-              className="handle flex items-center justify-between bg-[#3c3c3c] rounded-t-md py-2"
+              className={`handle flex items-center bg-[#3c3c3c] ${className} `}
               onDoubleClick={handleFullscreen}
             >
-              <ActionButtons exit={onclose} fullSize={handleFullscreen} />
+              <ActionButtons
+                exit={onclose}
+                fullSize={handleFullscreen}
+                className={actionButtonStyle}
+              />
+              {barItem}
             </div>
             <div className="w-full flex-1">{children}</div>
           </div>

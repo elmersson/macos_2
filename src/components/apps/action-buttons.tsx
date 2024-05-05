@@ -6,19 +6,24 @@ import { RxCross2 } from 'react-icons/rx';
 interface ActionButtonsProps {
   exit: () => void;
   fullSize: () => void;
+  className?: React.ComponentProps<'div'>['className'];
 }
 
-export default function ActionButtons({ exit, fullSize }: ActionButtonsProps) {
+export default function ActionButtons({
+  exit,
+  fullSize,
+  className
+}: ActionButtonsProps) {
   const [hovered, setHovered] = useState(false);
 
   return (
     <div
-      className="flex items-center space-x-2 px-3"
+      className={`flex items-center px-3 ${className}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       <div
-        className="rounded-full h-3 w-3 bg-[#FF6157] border-[#E24640] flex justify-center items-center"
+        className="rounded-full h-3 w-3 p-2 bg-[#FF6157] border-[#E24640] flex justify-center items-center"
         onClick={exit}
       >
         {hovered && (
@@ -28,7 +33,7 @@ export default function ActionButtons({ exit, fullSize }: ActionButtonsProps) {
           />
         )}
       </div>
-      <div className="rounded-full h-3 w-3 bg-[#FFC12F] border-[#DFA023] flex justify-center items-center">
+      <div className="rounded-full h-3 w-3 p-2 bg-[#FFC12F] border-[#DFA023] flex justify-center items-center">
         {hovered && (
           <PiMinusBold
             className="text-slate-900"
@@ -37,7 +42,7 @@ export default function ActionButtons({ exit, fullSize }: ActionButtonsProps) {
         )}
       </div>
       <div
-        className="rounded-full h-3 w-3 bg-[#2ACB42] border-[#1BAC2C] flex justify-center items-center"
+        className="rounded-full h-3 w-3 p-2 bg-[#2ACB42] border-[#1BAC2C] flex justify-center items-center"
         onClick={fullSize}
       >
         {hovered && (

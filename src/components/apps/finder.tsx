@@ -10,27 +10,109 @@ import { IoTimeOutline } from 'react-icons/io5';
 import { PiAppStoreLogoBold, PiFolderSimpleUserFill } from 'react-icons/pi';
 import { BsWindowDesktop } from 'react-icons/bs';
 import { HiOutlineDocument } from 'react-icons/hi2';
-import { MdOutlineDownloadForOffline } from 'react-icons/md';
+import {
+  MdOutlineDownloadForOffline,
+  MdOutlineSplitscreen
+} from 'react-icons/md';
 import { CiCloudOn } from 'react-icons/ci';
+import { DraggableItem } from './draggable-item';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import { BsGrid } from 'react-icons/bs';
+
+import {
+  IoListSharp,
+  IoSearchSharp,
+  IoPricetagOutline,
+  IoAppsOutline
+} from 'react-icons/io5';
+import { BsLayoutThreeColumns, BsFillFolderFill } from 'react-icons/bs';
+import { MdOutlineIosShare } from 'react-icons/md';
+import { HiOutlineDotsCircleHorizontal } from 'react-icons/hi';
+import { FaHardDrive } from 'react-icons/fa6';
+
+import { useSystem } from '@/hooks/useSystem';
 
 export function Finder() {
+  const { closeApp } = useSystem();
   return (
-    <div className="w-full h-full bg-transparent">
-      <div className="flex h-full">
-        <ScrollArea className="w-40 bg-slate-800/70 bg-clip-padding backdrop-filter backdrop-blur-xl dark:bg-slate-800/70 p-4">
-          <Favorites />
-          <ICloud />
-          <Tags />
-        </ScrollArea>
+    <DraggableItem
+      onclose={() => closeApp('finder')}
+      className="bg-transparent"
+      actionButtonStyle="w-[161px] bg-slate-800/70 bg-clip-padding backdrop-filter backdrop-blur-xl dark:bg-slate-800/70 h-full"
+      barItem={barItem()}
+    >
+      <div className="w-full h-full bg-transparent">
+        <div className="flex h-full">
+          <ScrollArea className="w-40 bg-slate-800/70 bg-clip-padding backdrop-filter backdrop-blur-xl dark:bg-slate-800/70 p-4">
+            <Favorites />
+            <ICloud />
+            <Tags />
+          </ScrollArea>
 
-        <ScrollArea className="flex w-full p-4 bg-neutral-100 dark:bg-neutral-900">
-          <div className="grid grid-row-fit gap-4">
-            <div className="w-48 h-32 bg-white p-2 rounded shadow">File 1</div>
-            <div className="w-48 h-32 bg-white p-2 rounded shadow">File 2</div>
-            <div className="w-48 h-32 bg-white p-2 rounded shadow">File 3</div>
-            <div className="w-48 h-32 bg-white p-2 rounded shadow">File 4</div>
+          <div className="flex flex-col w-full h-full">
+            <ScrollArea className="p-4 bg-neutral-100 dark:bg-neutral-900 w-full h-full flex">
+              <div className="grid grid-col-fit gap-4">
+                <div className="w-32 h-32 bg-white p-2 rounded shadow">
+                  File 1
+                </div>
+                <div className="w-32 h-32 bg-white p-2 rounded shadow">
+                  File 2
+                </div>
+                <div className="w-32 h-32 bg-white p-2 rounded shadow">
+                  File 3
+                </div>
+                <div className="w-32 h-32 bg-white p-2 rounded shadow">
+                  File 4
+                </div>
+              </div>
+            </ScrollArea>
+            <div className="text-sm items-center">
+              <div className="bg-neutral-900 border-t border-white/20 py-1 px-2 text-white/60 flex flex-row items-center space-x-1">
+                <FaHardDrive className="text-gray-400 size-[15px]" />
+                <span>Macintosh HD</span>
+                <IoIosArrowForward />
+                <BsFillFolderFill className="text-blue-400 size-[15px]" />
+                <span>Users</span>
+                <IoIosArrowForward />
+                <BsFillFolderFill className="text-blue-400 size-[15px]" />
+                <span>rasmuselmersson</span>
+                <IoIosArrowForward />
+                <BsFillFolderFill className="text-blue-400 size-[15px]" />
+                <span>Desktop</span>
+              </div>
+              <div className="bg-neutral-800 py-1 px-2 flex justify-center text-white/30">
+                26 items, 520,64 GB avalible
+              </div>
+            </div>
           </div>
-        </ScrollArea>
+        </div>
+      </div>
+    </DraggableItem>
+  );
+}
+
+function barItem() {
+  return (
+    <div className="bg-neutral-800 flex flex-row w-full h-full items-center justify-between p-3">
+      <div className="flex flex-row items-center space-x-3">
+        <IoIosArrowBack className="text-lg opacity-40" />
+        <IoIosArrowForward className="text-lg" />
+        <span className="font-bold">Desktop</span>
+      </div>
+      <div className="flex flex-row items-center space-x-10 text-xl">
+        <div className="flex flex-row items-center space-x-4">
+          <BsGrid />
+          <IoListSharp />
+          <BsLayoutThreeColumns />
+          <MdOutlineSplitscreen />
+        </div>
+        <div className="flex flex-row items-center space-x-2">
+          <IoAppsOutline />
+          <MdOutlineIosShare />
+          <IoPricetagOutline />
+          <HiOutlineDotsCircleHorizontal />
+        </div>
+        <IoSearchSharp />
       </div>
     </div>
   );

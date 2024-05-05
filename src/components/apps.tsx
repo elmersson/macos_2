@@ -1,5 +1,4 @@
 import { useSystem } from '@/hooks/useSystem';
-import { DraggableItem } from './apps/draggable-item';
 import { VSCode } from './apps/vscode';
 import { Finder } from './apps/finder';
 import { Arc } from './apps/arc';
@@ -7,7 +6,7 @@ import { Notes } from './apps/notes';
 import { Iterm2 } from './apps/iterm2';
 import { Outlook } from './apps/outlook';
 export function Apps() {
-  const { apps, closeApp, bringToFront } = useSystem();
+  const { apps, bringToFront } = useSystem();
   return (
     <div
       className="flex"
@@ -26,21 +25,19 @@ export function Apps() {
                 bringToFront(app.id);
               }}
             >
-              <DraggableItem onclose={() => closeApp(app.id)}>
-                {app.id === 'visual_studio_code' ? (
-                  <VSCode />
-                ) : app.id === 'finder' ? (
-                  <Finder />
-                ) : app.id === 'arc' ? (
-                  <Arc />
-                ) : app.id === 'notes' ? (
-                  <Notes />
-                ) : app.id === 'iterm2' ? (
-                  <Iterm2 />
-                ) : app.id === 'mail' ? (
-                  <Outlook />
-                ) : null}
-              </DraggableItem>
+              {app.id === 'visual_studio_code' ? (
+                <VSCode />
+              ) : app.id === 'finder' ? (
+                <Finder />
+              ) : app.id === 'arc' ? (
+                <Arc />
+              ) : app.id === 'notes' ? (
+                <Notes />
+              ) : app.id === 'iterm2' ? (
+                <Iterm2 />
+              ) : app.id === 'mail' ? (
+                <Outlook />
+              ) : null}
             </div>
           )
       )}

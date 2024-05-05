@@ -7,31 +7,36 @@ import {
 import { ScrollArea } from '../ui/scroll-area';
 import { IoFolderOutline } from 'react-icons/io5';
 import { PiUserCircleFill } from 'react-icons/pi';
+import { DraggableItem } from './draggable-item';
+import { useSystem } from '@/hooks/useSystem';
 
 export function Notes() {
+  const { closeApp } = useSystem();
   return (
-    <div className="w-full h-full bg-transparent">
-      <div className="flex h-full">
-        <ScrollArea className="w-80 bg-slate-800/90 bg-clip-padding backdrop-filter backdrop-blur-xl dark:bg-slate-800/90 p-4">
-          <div className="flex flex-row items-center justify-between py-2">
-            <div className="flex flex-row items-center space-x-2">
-              <PiUserCircleFill className="text-yellow-500" />
-              <span>Shared</span>
+    <DraggableItem onclose={() => closeApp('notes')}>
+      <div className="w-full h-full bg-transparent">
+        <div className="flex h-full">
+          <ScrollArea className="w-80 bg-slate-800/90 bg-clip-padding backdrop-filter backdrop-blur-xl dark:bg-slate-800/90 p-4">
+            <div className="flex flex-row items-center justify-between py-2">
+              <div className="flex flex-row items-center space-x-2">
+                <PiUserCircleFill className="text-yellow-500" />
+                <span>Shared</span>
+              </div>
+
+              <span className="text-neutral-400">1</span>
             </div>
 
-            <span className="text-neutral-400">1</span>
-          </div>
-
-          <ICloud />
-        </ScrollArea>
-        <ScrollArea className=" w-96 bg-neutral-800 p-4">
-          <MonthList month="March" />
-        </ScrollArea>
-        <ScrollArea className="flex w-full p-4 bg-neutral-100 dark:bg-neutral-900">
-          <Content />
-        </ScrollArea>
+            <ICloud />
+          </ScrollArea>
+          <ScrollArea className=" w-96 bg-neutral-800 p-4">
+            <MonthList month="March" />
+          </ScrollArea>
+          <ScrollArea className="flex w-full p-4 bg-neutral-100 dark:bg-neutral-900">
+            <Content />
+          </ScrollArea>
+        </div>
       </div>
-    </div>
+    </DraggableItem>
   );
 }
 
