@@ -8,15 +8,21 @@ import useTime from '@/hooks/useTime';
 import getFullFormatDate from '@/lib/date/getFullFormatDate';
 
 export function Boot() {
-  const [progress, setProgress] = useState<number>(0);
   const [latitude, setLatitude] = useState<number>(59.3326);
   const [longitude, setLongitude] = useState<number>(18.0649);
-  const { booted, setBooted, setWeather, setNameOfTheDay } = useSystem();
+  const {
+    booted,
+    setBooted,
+    setWeather,
+    setNameOfTheDay,
+    bootProgress,
+    setBootProgress
+  } = useSystem();
 
   useEffect(() => {
-    if (progress < 100) {
+    if (bootProgress < 100) {
       const interval = setInterval(() => {
-        setProgress((prevProgress) => (prevProgress + 1) % 101);
+        setBootProgress((bootProgress + 1) % 101);
       }, 50);
 
       return () => clearInterval(interval);
@@ -25,7 +31,7 @@ export function Boot() {
         setBooted(true);
       }, 1000);
     }
-  }, [progress, setBooted]);
+  }, [bootProgress, setBooted, setBootProgress]);
 
   useEffect(() => {
     const fetchWeatherData = async () => {
@@ -100,7 +106,7 @@ export function Boot() {
       <div className="h-1.5 w-64 rounded-full bg-neutral-700/80 border border-neutral-100/20 mt-[5%]">
         <div
           className="h-1 rounded-full bg-white border"
-          style={{ width: `${progress}%`, transition: 'width 0.5s ease' }}
+          style={{ width: `${bootProgress}%`, transition: 'width 0.5s ease' }}
           role="progressbar"
         ></div>
       </div>

@@ -8,12 +8,15 @@ import { ScrollArea } from '../ui/scroll-area';
 import { IoFolderOutline } from 'react-icons/io5';
 import { PiUserCircleFill } from 'react-icons/pi';
 import { DraggableItem } from './draggable-item';
-import { useSystem } from '@/hooks/useSystem';
+import { AppProps } from '@/data/Apps';
 
-export function Notes() {
-  const { closeApp } = useSystem();
+export function Notes({ appData, closeApp, bringToFront }: AppProps) {
   return (
-    <DraggableItem onclose={() => closeApp('notes')}>
+    <DraggableItem
+      appData={appData}
+      onclose={closeApp}
+      bringToFront={bringToFront}
+    >
       <div className="w-full h-full bg-transparent">
         <div className="flex h-full">
           <ScrollArea className="w-80 bg-slate-800/90 bg-clip-padding backdrop-filter backdrop-blur-xl dark:bg-slate-800/90 p-4">

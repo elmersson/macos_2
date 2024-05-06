@@ -30,16 +30,17 @@ import { MdOutlineIosShare } from 'react-icons/md';
 import { HiOutlineDotsCircleHorizontal } from 'react-icons/hi';
 import { FaHardDrive } from 'react-icons/fa6';
 
-import { useSystem } from '@/hooks/useSystem';
+import { AppProps } from '@/data/Apps';
 
-export function Finder() {
-  const { closeApp } = useSystem();
+export function Finder({ appData, closeApp, bringToFront }: AppProps) {
   return (
     <DraggableItem
-      onclose={() => closeApp('finder')}
+      onclose={closeApp}
       className="bg-transparent"
       actionButtonStyle="w-[161px] bg-slate-800/70 bg-clip-padding backdrop-filter backdrop-blur-xl dark:bg-slate-800/70 h-full"
       barItem={barItem()}
+      appData={appData}
+      bringToFront={bringToFront}
     >
       <div className="w-full h-full bg-transparent">
         <div className="flex h-full">

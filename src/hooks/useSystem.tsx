@@ -6,6 +6,8 @@ import { persist } from 'zustand/middleware';
 import { AppData, apps } from '@/data/Apps';
 
 interface SystemStore {
+  bootProgress: number;
+  setBootProgress: (bootProgress: number) => void;
   booted: boolean;
   setBooted: (booted: boolean) => void;
   logedIn: boolean;
@@ -31,11 +33,16 @@ interface SystemStore {
   bringToFront: (id: string) => void;
   closeApp: (id: string) => void;
   openApp: (id: string) => void;
+  setSize: (id: string, size: { width: number; height: number }) => void;
+  setPosition: (id: string, position: { x: number; y: number }) => void;
+  resetStore: () => void;
 }
 
 export const useSystem = create<SystemStore>()(
   persist(
     (set, get) => ({
+      bootProgress: 0,
+      setBootProgress: (bootProgress) => set({ bootProgress }),
       booted: false,
       setBooted: (booted) => set({ booted }),
       logedIn: false,
@@ -77,10 +84,35 @@ export const useSystem = create<SystemStore>()(
           app.id === id ? { ...app, isOpen: true } : app
         );
         set({ apps });
+      },
+      setSize: (id, size) => {
+        const newApps = get().apps.map((app) =>
+          app.id === id ? { ...app, size } : app
+        );
+        set({ apps: newApps });
+      },
+      setPosition: (id, position) => {
+        const newApps = get().apps.map((app) =>
+          app.id === id ? { ...app, position } : app
+        );
+        set({ apps: newApps });
+      },
+      resetStore: () => {
+        set({
+          booted: false,
+          logedIn: false,
+          wifi: true,
+          bluetooth: true,
+          airdrop: true,
+          volume: 50,
+          display: 100,
+          launchPad: false,
+          apps: apps.map((app) => ({ ...app, isOpen: false }))
+        });
       }
     }),
     {
-      name: 'use-system-1'
+      name: 'use-system-2'
     }
   )
 );

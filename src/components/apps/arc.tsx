@@ -8,14 +8,16 @@ import {
 } from '../ui/arc-accordion';
 import { BsFillFolderFill } from 'react-icons/bs';
 import { DraggableItem } from './draggable-item';
-import { useSystem } from '@/hooks/useSystem';
-
-export function Arc() {
-  const { closeApp } = useSystem();
+import { AppProps } from '@/data/Apps';
+export function Arc({ appData, closeApp, bringToFront }: AppProps) {
   const items = Array.from({ length: 8 }, (_, index) => index);
 
   return (
-    <DraggableItem onclose={() => closeApp('arc')}>
+    <DraggableItem
+      appData={appData}
+      onclose={closeApp}
+      bringToFront={bringToFront}
+    >
       <div className="w-full h-full bg-[#6891ab]/90 bg-clip-padding backdrop-filter backdrop-blur-xl">
         <div className="flex h-full space-x-2 mr-4">
           <div className="my-4 ml-2 flex justify-between flex-col">

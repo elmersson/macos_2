@@ -3,6 +3,8 @@ import Draggable from 'react-draggable';
 import ActionButtons from './action-buttons';
 import { ResizableBox, ResizeCallbackData } from 'react-resizable';
 import 'react-resizable/css/styles.css';
+import { AppData } from '@/data/Apps';
+import { useSystem } from '@/hooks/useSystem';
 
 interface DraggableItemProps {
   children: ReactNode;
@@ -10,31 +12,45 @@ interface DraggableItemProps {
   barItem?: ReactNode;
   className?: React.ComponentProps<'div'>['className'];
   actionButtonStyle?: React.ComponentProps<'div'>['className'];
+  appData: AppData;
+  bringToFront(): void;
 }
 
-const NAVBAR_HEIGTH = 40;
+export const NAVBAR_HEIGHT = 40;
 
 export function DraggableItem({
   children,
   onclose,
   barItem,
   className,
-  actionButtonStyle
+  actionButtonStyle,
+  appData,
+  bringToFront
 }: DraggableItemProps) {
-  const [size, setSize] = useState({ width: 640, height: 400 });
-  const [position, setPosition] = useState({ x: 0, y: NAVBAR_HEIGTH });
+  const { setSize, setPosition } = useSystem();
+  const { size, position } = appData;
+
   const [lastState, setLastState] = useState({
     size: { width: 640, height: 400 },
     position: {
       x: 0,
-      y: NAVBAR_HEIGTH
+      y: NAVBAR_HEIGHT
     }
   });
 
   useEffect(() => {
-    const centerX = (window.innerWidth - size.width) / 2;
-    const centerY = (window.innerHeight - size.height - NAVBAR_HEIGTH) / 2;
-    setPosition({ x: centerX, y: centerY });
+    if (appData.position.y === 0) {
+      const initialSize = {
+        width: window.innerWidth / 2,
+        height: (window.innerHeight - NAVBAR_HEIGHT) / 2
+      };
+      const centerX = (window.innerWidth - initialSize.width) / 2;
+      const centerY =
+        (window.innerHeight - initialSize.height - NAVBAR_HEIGHT) / 2;
+
+      setSize(appData.id, initialSize);
+      setPosition(appData.id, { x: centerX, y: centerY });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -47,77 +63,85 @@ export function DraggableItem({
     const deltaX = handle.includes('w') ? size.width - newSize.width : 0;
     const deltaY = handle.includes('n') ? size.height - newSize.height : 0;
 
-    setSize({ width: newSize.width, height: newSize.height });
+    setSize(appData.id, newSize);
 
-    setPosition((prev) => ({
-      x: prev.x + deltaX,
-      y: prev.y + deltaY
-    }));
+    setPosition(appData.id, {
+      x: appData.position.x + deltaX,
+      y: appData.position.y + deltaY
+    });
 
     setLastState({ size, position });
   };
 
   const handleFullscreen = () => {
     if (
-      size.height !== window.innerHeight - NAVBAR_HEIGTH &&
+      size.height !== window.innerHeight - NAVBAR_HEIGHT &&
       size.width !== window.innerWidth
     ) {
       setLastState({ size, position });
 
-      setSize({
+      setSize(appData.id, {
         width: window.innerWidth,
-        height: window.innerHeight - NAVBAR_HEIGTH
+        height: window.innerHeight - NAVBAR_HEIGHT
       });
-      setPosition({ x: 0, y: NAVBAR_HEIGTH });
+      setPosition(appData.id, { x: 0, y: NAVBAR_HEIGHT });
     } else {
-      setSize(lastState.size);
-      setPosition(lastState.position);
+      setSize(appData.id, lastState.size);
+      setPosition(appData.id, lastState.position);
     }
   };
 
   return (
-    <Draggable
-      handle=".handle"
-      bounds={{
-        left: 0,
-        top: NAVBAR_HEIGTH,
-        right: window.innerWidth - size.width,
-        bottom: window.innerHeight - size.height
+    <div
+      style={{
+        zIndex: appData.z,
+        position: 'absolute'
       }}
-      position={position}
-      onStop={(e, data) => {
-        setPosition({ x: data.x, y: data.y });
-      }}
+      onClick={bringToFront}
     >
-      <div>
-        <ResizableBox
-          width={size.width}
-          height={size.height}
-          onResize={handleResize}
-          handle={(handleAxis, ref) => (
-            <span
-              className={`react-resizable-handle react-resizable-handle-${handleAxis}`}
-              ref={ref}
-            />
-          )}
-          resizeHandles={['n', 'ne', 'e', 'se', 's', 'sw', 'w', 'nw']}
-        >
-          <div className="flex flex-col w-full h-full shadow-lg">
-            <div
-              className={`handle flex items-center bg-[#3c3c3c] ${className} `}
-              onDoubleClick={handleFullscreen}
-            >
-              <ActionButtons
-                exit={onclose}
-                fullSize={handleFullscreen}
-                className={actionButtonStyle}
+      <Draggable
+        handle=".handle"
+        bounds={{
+          left: 0,
+          top: NAVBAR_HEIGHT,
+          right: window.innerWidth - size.width,
+          bottom: window.innerHeight - size.height
+        }}
+        position={position}
+        onStop={(e, data) => {
+          setPosition(appData.id, { x: data.x, y: data.y });
+        }}
+      >
+        <div onClick={bringToFront}>
+          <ResizableBox
+            width={size.width}
+            height={size.height}
+            onResize={handleResize}
+            handle={(handleAxis, ref) => (
+              <span
+                className={`react-resizable-handle react-resizable-handle-${handleAxis}`}
+                ref={ref}
               />
-              {barItem}
+            )}
+            resizeHandles={['n', 'ne', 'e', 'se', 's', 'sw', 'w', 'nw']}
+          >
+            <div className="flex flex-col w-full h-full shadow-lg">
+              <div
+                className={`handle flex items-center bg-[#3c3c3c] ${className} `}
+                onDoubleClick={handleFullscreen}
+              >
+                <ActionButtons
+                  exit={onclose}
+                  fullSize={handleFullscreen}
+                  className={actionButtonStyle}
+                />
+                {barItem}
+              </div>
+              <div className="w-full flex-1">{children}</div>
             </div>
-            <div className="w-full flex-1">{children}</div>
-          </div>
-        </ResizableBox>
-      </div>
-    </Draggable>
+          </ResizableBox>
+        </div>
+      </Draggable>
+    </div>
   );
 }

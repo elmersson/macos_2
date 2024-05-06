@@ -6,39 +6,58 @@ import { Notes } from './apps/notes';
 import { Iterm2 } from './apps/iterm2';
 import { Outlook } from './apps/outlook';
 export function Apps() {
-  const { apps, bringToFront } = useSystem();
+  const { apps, closeApp, bringToFront } = useSystem();
+
   return (
-    <div
-      className="flex"
-      style={{ position: 'relative', width: '100%', height: '100%' }}
-    >
+    <div className="flex relative w-full h-full">
       {apps.map(
         (app) =>
           app.isOpen && (
-            <div
-              key={app.id}
-              style={{
-                zIndex: app.z,
-                position: 'absolute'
-              }}
-              onClick={() => {
-                bringToFront(app.id);
-              }}
-            >
+            <>
               {app.id === 'visual_studio_code' ? (
-                <VSCode />
+                <VSCode
+                  key={app.id}
+                  appData={app}
+                  closeApp={() => closeApp(app.id)}
+                  bringToFront={() => bringToFront(app.id)}
+                />
               ) : app.id === 'finder' ? (
-                <Finder />
+                <Finder
+                  key={app.id}
+                  appData={app}
+                  closeApp={() => closeApp(app.id)}
+                  bringToFront={() => bringToFront(app.id)}
+                />
               ) : app.id === 'arc' ? (
-                <Arc />
+                <Arc
+                  key={app.id}
+                  appData={app}
+                  closeApp={() => closeApp(app.id)}
+                  bringToFront={() => bringToFront(app.id)}
+                />
               ) : app.id === 'notes' ? (
-                <Notes />
+                <Notes
+                  key={app.id}
+                  appData={app}
+                  closeApp={() => closeApp(app.id)}
+                  bringToFront={() => bringToFront(app.id)}
+                />
               ) : app.id === 'iterm2' ? (
-                <Iterm2 />
+                <Iterm2
+                  key={app.id}
+                  appData={app}
+                  closeApp={() => closeApp(app.id)}
+                  bringToFront={() => bringToFront(app.id)}
+                />
               ) : app.id === 'mail' ? (
-                <Outlook />
+                <Outlook
+                  key={app.id}
+                  appData={app}
+                  closeApp={() => closeApp(app.id)}
+                  bringToFront={() => bringToFront(app.id)}
+                />
               ) : null}
-            </div>
+            </>
           )
       )}
     </div>

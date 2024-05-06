@@ -16,6 +16,13 @@ export interface AppData {
   url?: string;
   z: number;
   size: { width: number; height: number };
+  position: { x: number; y: number };
+}
+
+export interface AppProps {
+  appData: AppData;
+  closeApp: () => void;
+  bringToFront: () => void;
 }
 
 export const apps: AppData[] = [
@@ -25,7 +32,8 @@ export const apps: AppData[] = [
     isOpen: false,
     img: Finder,
     z: 0,
-    size: { width: 640, height: 400 }
+    size: { width: 640, height: 400 },
+    position: {x: 0, y: 0}
   },
   {
     id: 'launchpad',
@@ -33,40 +41,40 @@ export const apps: AppData[] = [
     isOpen: false,
     img: LaunchPad,
     z: 0,
-    size: { width: 640, height: 400 }
-  },
+    size: { width: 640, height: 400 },
+    position: {x: 0, y: 0}  },
   {
     id: 'arc',
     title: 'Arc',
     isOpen: false,
     img: Arc,
     z: 0,
-    size: { width: 640, height: 400 }
-  },
+    size: { width: 640, height: 400 },
+    position: {x: 0, y: 0}  },
   {
     id: 'mail',
     title: 'Mail',
     isOpen: false,
     img: Mail,
     z: 0,
-    size: { width: 640, height: 400 }
-  },
+    size: { width: 640, height: 400 },
+    position: {x: 0, y: 0}  },
   {
     id: 'iterm2',
     title: 'Iterm2',
     isOpen: false,
     img: Iterm2,
     z: 0,
-    size: { width: 640, height: 400 }
-  },
+    size: { width: 640, height: 400 },
+    position: {x: 0, y: 0}  },
   {
     id: 'visual_studio_code',
     title: 'Visual Studio Code',
     isOpen: false,
     img: VsCode,
     z: 0,
-    size: { width: 640, height: 400 }
-  },
+    size: { width: 640, height: 400 },
+    position: {x: 0, y: 0}  },
   {
     id: 'github',
     title: 'Github',
@@ -74,14 +82,14 @@ export const apps: AppData[] = [
     img: Github,
     url: 'https://github.com/elmersson',
     z: 0,
-    size: { width: 640, height: 400 }
-  },
+    size: { width: 640, height: 400 },
+    position: {x: 0, y: 0}  },
   {
     id: 'notes',
     title: 'Notes',
     isOpen: false,
     img: Notes,
     z: 0,
-    size: { width: 640, height: 400 }
-  }
+    size: { width: 640, height: 400 },
+    position: {x: 0, y: 0}  }
 ] as const;
