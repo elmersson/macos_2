@@ -58,13 +58,13 @@ export function Wifi() {
           {wifiIcon()}
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-[270px] mt-1">
+      <DropdownMenuContent className="w-[270px] mt-[6px]">
         <DropdownMenuLabel className="pb-0 text-white flex flex-row justify-between items-center">
           <p>Wifi</p>
           <Switch checked={wifi} onCheckedChange={(bol) => setWifi(bol)} />
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <p className="text-sm text-slate-400 font-bold ml-2">
+        <p className="text-sm text-slate-300 font-bold ml-2">
           Personal Hotspot
         </p>
         <DropdownMenuItem className="flex flex-row justify-between items-center">
@@ -81,7 +81,7 @@ export function Wifi() {
           </div>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <p className="text-sm text-slate-400 font-bold ml-2">Known Networks</p>
+        <p className="text-sm text-slate-300 font-bold ml-2">Known Networks</p>
         <DropdownMenuItem className="flex flex-row justify-between items-center">
           <div className="flex flex-row justify-center items-center space-x-2">
             <div className="h-7 w-7 bg-clip-padding backdrop-filter backdrop-blur-3xl bg-slate-200/30 rounded-full flex justify-center items-center">
@@ -116,7 +116,7 @@ export function Wifi() {
         <DropdownMenuSeparator />
         <Accordion type="single" collapsible className="mx-2">
           <AccordionItem value="item-1">
-            <AccordionTrigger className="text-sm text-slate-400 font-bold">
+            <AccordionTrigger className="text-sm text-slate-300 font-bold">
               Other Networks
             </AccordionTrigger>
             <AccordionContent className="space-y-2">

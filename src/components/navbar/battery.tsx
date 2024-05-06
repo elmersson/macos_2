@@ -35,18 +35,18 @@ export function Battery() {
           </div>
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-[270px] mt-1">
+      <DropdownMenuContent className="w-[270px] mt-[6px]">
         <DropdownMenuLabel className="pb-0 text-white">
           Battery
         </DropdownMenuLabel>
         <DropdownMenuItem>
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-slate-300">
             Power source: {batteryState.charging ? 'Power Adapter' : 'Battery'}
           </p>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-slate-300">
             No Apps Using Significant Energy
           </p>
         </DropdownMenuItem>

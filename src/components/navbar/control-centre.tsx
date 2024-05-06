@@ -53,7 +53,7 @@ export function ControlCentre() {
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className={`w-[340px] mt-1 rounded-xl space-y-2 p-3 ${opacityClass}`}
+        className={`w-[340px] mt-[6px] rounded-xl space-y-2 p-3 ${opacityClass}`}
       >
         <div className="flex flex-row space-x-2">
           <ConnectControl />

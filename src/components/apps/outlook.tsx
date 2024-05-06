@@ -23,14 +23,17 @@ import {
   AccordionTrigger
 } from '../ui/outlook_accordion';
 import { DraggableItem } from './draggable-item';
-import { useSystem } from '@/hooks/useSystem';
+import { AppProps } from '@/data/Apps';
 
 const SIDE_BAR_WIDTH = 320;
 
-export function Outlook() {
-  const { closeApp } = useSystem();
+export function Outlook({ appData, closeApp, bringToFront }: AppProps) {
   return (
-    <DraggableItem onclose={() => closeApp('mail')}>
+    <DraggableItem
+      appData={appData}
+      onclose={closeApp}
+      bringToFront={bringToFront}
+    >
       <div className="w-full h-full bg-slate-800/70 bg-clip-padding backdrop-filter backdrop-blur-xl flex flex-row">
         <AppBar />
         <div className="w-full">

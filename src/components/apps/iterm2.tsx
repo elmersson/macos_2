@@ -1,16 +1,20 @@
 import { cn } from '@/lib/utils';
 import { Roboto_Mono } from 'next/font/google';
 import { DraggableItem } from './draggable-item';
-import { useSystem } from '@/hooks/useSystem';
+import { AppProps } from '@/data/Apps';
 
 const font = Roboto_Mono({
   subsets: ['latin'],
   weight: ['300', '700']
 });
-export function Iterm2() {
-  const { closeApp } = useSystem();
+export function Iterm2({ appData, closeApp, bringToFront }: AppProps) {
   return (
-    <DraggableItem onclose={() => closeApp('iterm2')} barItem={barItem()}>
+    <DraggableItem
+      appData={appData}
+      onclose={closeApp}
+      barItem={barItem()}
+      bringToFront={bringToFront}
+    >
       <div
         className={cn(
           'w-full h-full flex flex-col bg-slate-900/80 bg-clip-padding backdrop-filter backdrop-blur-sm border-l border-r border-b px-1 border-slate-400/60',

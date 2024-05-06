@@ -14,11 +14,10 @@ import {
 import { useSystem } from '@/hooks/useSystem';
 
 export function AppleMenu() {
-  const { setBooted, setLogedIn } = useSystem();
+  const { resetStore, setLogedIn } = useSystem();
 
   const handleQuit = () => {
-    setBooted(false);
-    setLogedIn(false);
+    resetStore();
   };
 
   const handleSignOut = () => {

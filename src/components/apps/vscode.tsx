@@ -1,11 +1,13 @@
+import { AppProps } from '@/data/Apps';
 import { DraggableItem } from './draggable-item';
-import { useSystem } from '@/hooks/useSystem';
 
-export function VSCode() {
-  const { closeApp } = useSystem();
-
+export function VSCode({ appData, closeApp, bringToFront }: AppProps) {
   return (
-    <DraggableItem onclose={() => closeApp('visual_studio_code')}>
+    <DraggableItem
+      onclose={closeApp}
+      appData={appData}
+      bringToFront={bringToFront}
+    >
       <iframe
         className="w-full h-full bg-black"
         title="VSCode GitHub"
