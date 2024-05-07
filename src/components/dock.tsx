@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
-import { apps } from '../data/Apps';
 import { DockItem } from './dock-item';
+import { useSystem } from '@/hooks/useSystem';
 
 export default function Dock() {
+  const { apps } = useSystem();
   const [isDockFocused, setIsDockFocused] = useState(false);
   const controls = useAnimation();
 

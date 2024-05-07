@@ -8,16 +8,18 @@ import {
 } from '@/components/ui/tooltip';
 import Image from 'next/image';
 import { useSystem } from '@/hooks/useSystem';
+import { cn } from '@/lib/utils';
 
 export function DockItem({
   title,
   img,
   id,
   isOpen
-}: Omit<AppData, 'z' | 'size'>) {
+}: Omit<AppData, 'z' | 'size' | 'isMinimized' | 'position'>) {
   const { setLaunchPad, openApp, bringToFront } = useSystem();
 
   const handleClick = () => {
+    console.log(id, isOpen);
     if (title === 'Launchpad') {
       setLaunchPad(true);
     } else if (id === 'github') {
@@ -38,15 +40,16 @@ export function DockItem({
       <Tooltip>
         <TooltipTrigger>
           <li
-            className="flex justify-center relative group overflow-hidden no-scrollbar"
+            className="flex flex-col justify-center items-center relative overflow-hidden no-scrollbar"
             id={id}
             onClick={handleClick}
           >
             <Image src={img} alt={title} className=" w-[4.2rem]" />
             <div
-              className={`h-1 w-1 m-0 rounded-full bg-slate-950/80 dark:bg-slate-50/80 mt-1 ${
-                isOpen ? 'opacity-100' : 'opacity-0'
-              } transition-all duration-100`}
+              className={cn(
+                'h-1 w-1 rounded-full bg-white/60 mt-1',
+                !isOpen && 'opacity-0'
+              )}
             />
           </li>
         </TooltipTrigger>

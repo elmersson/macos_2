@@ -8,26 +8,23 @@ import { useSystem } from '@/hooks/useSystem';
 
 interface DraggableItemProps {
   children: ReactNode;
-  onclose(): void;
   barItem?: ReactNode;
   className?: React.ComponentProps<'div'>['className'];
   actionButtonStyle?: React.ComponentProps<'div'>['className'];
   appData: AppData;
-  bringToFront(): void;
 }
 
 export const NAVBAR_HEIGHT = 40;
 
 export function DraggableItem({
   children,
-  onclose,
   barItem,
   className,
   actionButtonStyle,
-  appData,
-  bringToFront
+  appData
 }: DraggableItemProps) {
-  const { setSize, setPosition } = useSystem();
+  const { setSize, setPosition, bringToFront, closeApp, minimizeApp } =
+    useSystem();
   const { size, position } = appData;
 
   const [lastState, setLastState] = useState({
@@ -97,7 +94,7 @@ export function DraggableItem({
         zIndex: appData.z,
         position: 'absolute'
       }}
-      onClick={bringToFront}
+      onClick={() => bringToFront(appData.id)}
     >
       <Draggable
         handle=".handle"
@@ -112,7 +109,7 @@ export function DraggableItem({
           setPosition(appData.id, { x: data.x, y: data.y });
         }}
       >
-        <div onClick={bringToFront}>
+        <div onClick={() => bringToFront(appData.id)}>
           <ResizableBox
             width={size.width}
             height={size.height}
@@ -131,7 +128,8 @@ export function DraggableItem({
                 onDoubleClick={handleFullscreen}
               >
                 <ActionButtons
-                  exit={onclose}
+                  exit={() => closeApp(appData.id)}
+                  minimize={() => minimizeApp(appData.id)}
                   fullSize={handleFullscreen}
                   className={actionButtonStyle}
                 />
