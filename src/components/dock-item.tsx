@@ -14,20 +14,16 @@ export function DockItem({
   title,
   img,
   id,
+  url,
   isOpen
 }: Omit<AppData, 'z' | 'size' | 'isMinimized' | 'position'>) {
   const { setLaunchPad, openApp, bringToFront } = useSystem();
 
   const handleClick = () => {
-    console.log(id, isOpen);
     if (title === 'Launchpad') {
       setLaunchPad(true);
-    } else if (id === 'github') {
-      const newWindow = window.open(
-        'https://github.com/elmersson',
-        '_blank',
-        'noopener,noreferrer'
-      );
+    } else if (url) {
+      const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
       if (newWindow) newWindow.opener = null;
     } else {
       openApp(id);
