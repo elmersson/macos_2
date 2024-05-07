@@ -33,6 +33,7 @@ interface SystemStore {
   bringToFront: (id: string) => void;
   closeApp: (id: string) => void;
   openApp: (id: string) => void;
+  minimizeApp: (id: string) => void;
   setSize: (id: string, size: { width: number; height: number }) => void;
   setPosition: (id: string, position: { x: number; y: number }) => void;
   resetStore: () => void;
@@ -81,9 +82,15 @@ export const useSystem = create<SystemStore>()(
       },
       openApp: (id) => {
         const apps = get().apps.map((app) =>
-          app.id === id ? { ...app, isOpen: true } : app
+          app.id === id ? { ...app, isOpen: true, isMinimized: false } : app
         );
         set({ apps });
+      },
+      minimizeApp: (id) => {
+        const newApps = get().apps.map((app) =>
+          app.id === id ? { ...app, isMinimized: true } : app
+        );
+        set({ apps: newApps });
       },
       setSize: (id, size) => {
         const newApps = get().apps.map((app) =>
@@ -112,7 +119,7 @@ export const useSystem = create<SystemStore>()(
       }
     }),
     {
-      name: 'use-system-2'
+      name: 'use-system-3'
     }
   )
 );

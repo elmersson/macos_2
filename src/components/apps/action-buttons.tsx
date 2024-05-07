@@ -5,12 +5,14 @@ import { RxCross2 } from 'react-icons/rx';
 
 interface ActionButtonsProps {
   exit: () => void;
+  minimize: () => void;
   fullSize: () => void;
   className?: React.ComponentProps<'div'>['className'];
 }
 
 export default function ActionButtons({
   exit,
+  minimize,
   fullSize,
   className
 }: ActionButtonsProps) {
@@ -32,7 +34,7 @@ export default function ActionButtons({
           )}
         </div>
       </div>
-      <div className="py-2 px-1">
+      <div className="py-2 px-1" onClick={minimize}>
         <div className="rounded-full h-3 w-3 bg-[#FFC12F] border-[#DFA023] flex justify-center items-center">
           {hovered && (
             <PiMinusBold
