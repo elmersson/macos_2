@@ -5,7 +5,7 @@ import { Input } from './ui/input';
 import { useState, ChangeEvent } from 'react';
 
 export function Launchpad() {
-  const { launchPad, setLaunchPad } = useSystem();
+  const { launchPad, setLaunchPad, openApp, bringToFront } = useSystem();
 
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -17,8 +17,9 @@ export function Launchpad() {
     setSearchQuery(event.target.value.toLowerCase());
   };
 
-  const filteredApps = apps.filter((app) =>
-    app.title.toLowerCase().includes(searchQuery)
+  const filteredApps = apps.filter(
+    (app) =>
+      app.id !== 'launchpad' && app.title.toLowerCase().includes(searchQuery)
   );
 
   return (
@@ -37,9 +38,10 @@ export function Launchpad() {
         {filteredApps.map((app) => (
           <LaunchpadItem
             key={app.id}
-            title={app.title}
-            id={app.id}
-            img={app.img}
+            appData={app}
+            openApp={() => openApp(app.id)}
+            bringToFront={() => bringToFront(app.id)}
+            setLaunchPad={() => setLaunchPad(false)}
           />
         ))}
       </div>
@@ -47,11 +49,37 @@ export function Launchpad() {
   );
 }
 
-function LaunchpadItem({ title, img }: Omit<AppData, 'z' | 'size' | 'isOpen'>) {
+interface LaunchpadItemProps {
+  appData: AppData;
+  openApp(): void;
+  bringToFront(): void;
+  setLaunchPad(): void;
+}
+
+function LaunchpadItem({
+  appData,
+  openApp,
+  bringToFront,
+  setLaunchPad
+}: LaunchpadItemProps) {
+  const { img, title, url } = appData;
+
+  const handlePress = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
+    if (url) {
+      const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+      if (newWindow) newWindow.opener = null;
+    } else {
+      openApp();
+      bringToFront();
+    }
+    setLaunchPad();
+  };
+
   return (
     <div
       className="flex flex-col justify-center items-center"
-      onClick={(e) => e.stopPropagation()}
+      onClick={handlePress}
     >
       <Image src={img} alt={title} className="w-36" />
       <span className="text-white">{title}</span>

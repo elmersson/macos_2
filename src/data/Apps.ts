@@ -7,6 +7,8 @@ import Iterm2 from '@/assets/apps/iterm2.png';
 import VsCode from '@/assets/apps/vscode.png';
 import Github from '@/assets/apps/github.png';
 import Notes from '@/assets/apps/notes.png';
+import Lotion from '@/assets/apps/lotion.png';
+import Liro from '@/assets/apps/liro.png';
 
 export interface AppData {
   id: string;
@@ -102,6 +104,28 @@ export const apps: AppData[] = [
     isOpen: false,
     isMinimized: false,
     img: Notes,
+    z: 0,
+    size: { width: 640, height: 400 },
+    position: { x: 0, y: 0 }
+  },
+  {
+    id: 'lotion',
+    title: 'Lotion',
+    isOpen: false,
+    isMinimized: false,
+    img: Lotion,
+    url: 'https://lotion.rasmuselmersson.se/',
+    z: 0,
+    size: { width: 640, height: 400 },
+    position: { x: 0, y: 0 }
+  },
+  {
+    id: 'liro',
+    title: 'Liro',
+    isOpen: false,
+    isMinimized: false,
+    img: Liro,
+    url: 'https://liro.rasmuselmersson.se/',
     z: 0,
     size: { width: 640, height: 400 },
     position: { x: 0, y: 0 }

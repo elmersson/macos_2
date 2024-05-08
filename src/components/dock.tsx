@@ -33,7 +33,7 @@ export default function Dock() {
         animate={{ y: animateY }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       >
-        {apps.map((app) => (
+        {apps.slice(0, 8).map((app) => (
           <DockItem
             key={app.id}
             title={app.title}
