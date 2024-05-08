@@ -15,7 +15,7 @@ export function AppMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <span role="button" className="text-sm shadow-md">
+        <span role="button" className="text-sm drop-shadow-lg">
           File
         </span>
       </DropdownMenuTrigger>
