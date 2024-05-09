@@ -131,3 +131,11 @@ export const apps: AppData[] = [
     position: { x: 0, y: 0 }
   }
 ] as const;
+
+export interface iTerm2Data {
+  id: string;
+  title: string;
+  type: string;
+  content?: React.ReactNode | string;
+  children?: iTerm2Data[];
+}

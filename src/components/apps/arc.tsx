@@ -9,15 +9,11 @@ import {
 import { BsFillFolderFill } from 'react-icons/bs';
 import { DraggableItem } from './draggable-item';
 import { AppProps } from '@/data/Apps';
-export function Arc({ appData, closeApp, bringToFront }: AppProps) {
+export function Arc({ appData }: AppProps) {
   const items = Array.from({ length: 8 }, (_, index) => index);
 
   return (
-    <DraggableItem
-      appData={appData}
-      onclose={closeApp}
-      bringToFront={bringToFront}
-    >
+    <DraggableItem appData={appData}>
       <div className="w-full h-full bg-[#6891ab]/90 bg-clip-padding backdrop-filter backdrop-blur-xl">
         <div className="flex h-full space-x-2 mr-4">
           <div className="my-4 ml-2 flex justify-between flex-col">

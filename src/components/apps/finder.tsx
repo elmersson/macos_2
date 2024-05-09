@@ -32,15 +32,13 @@ import { FaHardDrive } from 'react-icons/fa6';
 
 import { AppProps } from '@/data/Apps';
 
-export function Finder({ appData, closeApp, bringToFront }: AppProps) {
+export function Finder({ appData }: AppProps) {
   return (
     <DraggableItem
-      onclose={closeApp}
       className="bg-transparent"
       actionButtonStyle="w-[161px] bg-slate-800/70 bg-clip-padding backdrop-filter backdrop-blur-xl dark:bg-slate-800/70 h-full"
       barItem={barItem()}
       appData={appData}
-      bringToFront={bringToFront}
     >
       <div className="w-full h-full bg-transparent">
         <div className="flex h-full">
