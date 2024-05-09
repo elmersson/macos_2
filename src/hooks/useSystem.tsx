@@ -37,6 +37,19 @@ interface SystemStore {
   setSize: (id: string, size: { width: number; height: number }) => void;
   setPosition: (id: string, position: { x: number; y: number }) => void;
   resetStore: () => void;
+  iterm2: {
+    history: { command: string; dir?: string }[];
+    curDir?: string;
+    curCommand?: number;
+    visibleHistory: number;
+  };
+  addHistory: (history: {
+    command: string;
+    dir?: string;
+    index: number;
+  }) => void;
+  setCurDir: (dir: string) => void;
+  setVisibleHistory: (index: number) => void;
 }
 
 export const useSystem = create<SystemStore>()(
@@ -114,9 +127,43 @@ export const useSystem = create<SystemStore>()(
           volume: 50,
           display: 100,
           launchPad: false,
+          iterm2: {
+            history: [],
+            curDir: undefined,
+            curCommand: undefined,
+            visibleHistory: 0
+          },
           apps: apps.map((app) => ({ ...app, isOpen: false }))
         });
-      }
+      },
+      iterm2: {
+        history: [],
+        curDir: undefined,
+        curCommand: undefined,
+        visibleHistory: 0
+      },
+      addHistory: (entry) =>
+        set((state) => ({
+          iterm2: {
+            ...state.iterm2,
+            history: [...state.iterm2.history, entry],
+            curCommand: entry.index
+          }
+        })),
+      setCurDir: (dir) =>
+        set((state) => ({
+          iterm2: {
+            ...state.iterm2,
+            curDir: dir
+          }
+        })),
+      setVisibleHistory: (index) =>
+        set((state) => ({
+          iterm2: {
+            ...state.iterm2,
+            visibleHistory: index
+          }
+        }))
     }),
     {
       name: 'use-system-3'

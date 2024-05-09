@@ -10,13 +10,9 @@ import { PiUserCircleFill } from 'react-icons/pi';
 import { DraggableItem } from './draggable-item';
 import { AppProps } from '@/data/Apps';
 
-export function Notes({ appData, closeApp, bringToFront }: AppProps) {
+export function Notes({ appData }: AppProps) {
   return (
-    <DraggableItem
-      appData={appData}
-      onclose={closeApp}
-      bringToFront={bringToFront}
-    >
+    <DraggableItem appData={appData}>
       <div className="w-full h-full bg-transparent">
         <div className="flex h-full">
           <ScrollArea className="w-80 bg-slate-800/90 bg-clip-padding backdrop-filter backdrop-blur-xl dark:bg-slate-800/90 p-4">

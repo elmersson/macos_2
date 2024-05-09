@@ -1,13 +1,9 @@
 import { AppProps } from '@/data/Apps';
 import { DraggableItem } from './draggable-item';
 
-export function VSCode({ appData, closeApp, bringToFront }: AppProps) {
+export function VSCode({ appData }: AppProps) {
   return (
-    <DraggableItem
-      onclose={closeApp}
-      appData={appData}
-      bringToFront={bringToFront}
-    >
+    <DraggableItem appData={appData}>
       <iframe
         className="w-full h-full bg-black"
         title="VSCode GitHub"

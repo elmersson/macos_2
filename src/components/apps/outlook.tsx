@@ -27,13 +27,9 @@ import { AppProps } from '@/data/Apps';
 
 const SIDE_BAR_WIDTH = 320;
 
-export function Outlook({ appData, closeApp, bringToFront }: AppProps) {
+export function Outlook({ appData }: AppProps) {
   return (
-    <DraggableItem
-      appData={appData}
-      onclose={closeApp}
-      bringToFront={bringToFront}
-    >
+    <DraggableItem appData={appData}>
       <div className="w-full h-full bg-slate-800/70 bg-clip-padding backdrop-filter backdrop-blur-xl flex flex-row">
         <AppBar />
         <div className="w-full">
