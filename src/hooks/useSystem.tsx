@@ -4,6 +4,7 @@ import { create } from 'zustand';
 import weatherJson from '../data/Weather.json';
 import { persist } from 'zustand/middleware';
 import { AppData, apps } from '@/data/Apps';
+import { starterNotes, NoteAppProps, Note } from '@/data/notes';
 
 interface SystemStore {
   bootProgress: number;
@@ -50,6 +51,11 @@ interface SystemStore {
   }) => void;
   setCurDir: (dir: string) => void;
   setVisibleHistory: (index: number) => void;
+  notes: NoteAppProps[];
+  selectedNotes: Note[];
+  selectedNote: Note;
+  setSelectedNotes: (notes: Note[]) => void;
+  setSelectedNote: (note: Note) => void;
 }
 
 export const useSystem = create<SystemStore>()(
@@ -133,7 +139,9 @@ export const useSystem = create<SystemStore>()(
             curCommand: undefined,
             visibleHistory: 0
           },
-          apps: apps.map((app) => ({ ...app, isOpen: false }))
+          apps: apps.map((app) => ({ ...app, isOpen: false })),
+          selectedNotes: starterNotes[0].notes,
+          selectedNote: starterNotes[0].notes[0]
         });
       },
       iterm2: {
@@ -163,10 +171,15 @@ export const useSystem = create<SystemStore>()(
             ...state.iterm2,
             visibleHistory: index
           }
-        }))
+        })),
+      notes: [{ dir: 'ICloud', folders: starterNotes }],
+      selectedNotes: starterNotes[0].notes,
+      selectedNote: starterNotes[0].notes[0],
+      setSelectedNotes: (notes) => set({ selectedNotes: notes }),
+      setSelectedNote: (note) => set({ selectedNote: note })
     }),
     {
-      name: 'use-system-3'
+      name: 'use-system-5'
     }
   )
 );

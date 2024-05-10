@@ -19,9 +19,13 @@ AccordionItem.displayName = 'AccordionItem';
 
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
->(({ className, children, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> & {
+    chevronPosition?: 'left' | 'right' | 'none';
+  }
+>(({ className, children, chevronPosition = 'right', ...props }, ref) => {
   const [isHovered, setIsHovered] = useState(false);
+
+  const showChevron = chevronPosition === 'right' ? isHovered : true;
 
   return (
     <AccordionPrimitive.Header
@@ -32,20 +36,29 @@ const AccordionTrigger = React.forwardRef<
       <AccordionPrimitive.Trigger
         ref={ref}
         className={cn(
-          'flex flex-1 items-center justify-between py-4 font-medium transition-all [&[data-state=open]>svg]:rotate-90',
+          'flex flex-1 items-center py-2 font-medium transition-all [&[data-state=open]>svg]:rotate-90',
+          chevronPosition !== 'right' ? 'flex-row' : 'justify-between',
           className
         )}
         {...props}
       >
+        {chevronPosition !== 'right' && (
+          <ChevronRight
+            className={cn(
+              'h-4 w-4 shrink-0 transition-transform duration-200',
+              chevronPosition === 'none' ? 'text-transparent' : ''
+            )}
+          />
+        )}
         {children}
-        {isHovered && (
+        {showChevron && chevronPosition === 'right' && (
           <ChevronRight className="h-4 w-4 shrink-0 transition-transform duration-200" />
         )}
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
   );
 });
-AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
+AccordionTrigger.displayName = 'AccordionTrigger';
 
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
@@ -56,7 +69,7 @@ const AccordionContent = React.forwardRef<
     className="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
     {...props}
   >
-    <div className={cn('pb-4 pt-0', className)}>{children}</div>
+    <div className={cn('p-0', className)}>{children}</div>
   </AccordionPrimitive.Content>
 ));
 
