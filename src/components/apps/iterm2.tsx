@@ -35,7 +35,7 @@ export function Iterm2({ appData }: AppProps) {
 
     switch (command.toLowerCase()) {
       case 'clear':
-        setVisibleHistory(iterm2.history.length);
+        setVisibleHistory(iterm2.history.length + 1);
         break;
       case 'cd':
         changeDirectory(argument);

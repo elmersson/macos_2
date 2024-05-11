@@ -52,10 +52,12 @@ interface SystemStore {
   setCurDir: (dir: string) => void;
   setVisibleHistory: (index: number) => void;
   notes: NoteAppProps[];
-  selectedNotes: Note[];
-  selectedNote: Note;
-  setSelectedNotes: (notes: Note[]) => void;
-  setSelectedNote: (note: Note) => void;
+  selectedNotes: string[];
+  selectedNote: string;
+  setSelectedNotes: (notes: string[]) => void;
+  setSelectedNote: (note: string) => void;
+  getNoteById: (noteId: string) => Note | undefined;
+  updateNoteById: (noteId: string, noteData: Partial<Note>) => void;
 }
 
 export const useSystem = create<SystemStore>()(
@@ -140,8 +142,13 @@ export const useSystem = create<SystemStore>()(
             visibleHistory: 0
           },
           apps: apps.map((app) => ({ ...app, isOpen: false })),
-          selectedNotes: starterNotes[0].notes,
-          selectedNote: starterNotes[0].notes[0]
+          selectedNotes: [
+            'work-meeting-notes',
+            'work-project-ideas',
+            'work-cv',
+            'work-personal-letter'
+          ],
+          selectedNote: 'work-meeting-notes'
         });
       },
       iterm2: {
@@ -173,13 +180,37 @@ export const useSystem = create<SystemStore>()(
           }
         })),
       notes: [{ dir: 'ICloud', folders: starterNotes }],
-      selectedNotes: starterNotes[0].notes,
-      selectedNote: starterNotes[0].notes[0],
-      setSelectedNotes: (notes) => set({ selectedNotes: notes }),
-      setSelectedNote: (note) => set({ selectedNote: note })
+      selectedNotes: [
+        'work-meeting-notes',
+        'work-project-ideas',
+        'work-cv',
+        'work-personal-letter'
+      ],
+      selectedNote: 'work-meeting-notes',
+      setSelectedNote: (noteId) => set({ selectedNote: noteId }),
+      setSelectedNotes: (noteIds) => set({ selectedNotes: noteIds }),
+      getNoteById: (noteId) => {
+        const allNotes = get().notes.flatMap((folder) =>
+          folder.folders.flatMap((f) => f.notes)
+        );
+        return allNotes.find((note) => note.id === noteId);
+      },
+      updateNoteById: (noteId, noteData) => {
+        console.log('Updating note:', noteId, noteData);
+        const updatedNotes = get().notes.map((folder) => ({
+          ...folder,
+          folders: folder.folders.map((folder) => ({
+            ...folder,
+            notes: folder.notes.map((note) =>
+              note.id === noteId ? { ...note, ...noteData } : note
+            )
+          }))
+        }));
+        set({ notes: updatedNotes });
+      }
     }),
     {
-      name: 'use-system-5'
+      name: 'use-system-7'
     }
   )
 );
