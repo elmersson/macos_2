@@ -14,6 +14,7 @@ export interface Note {
   id: string;
   title: string;
   timeStamp: Date;
+  content: string;
 }
 
 export const starterNotes: FolderProps[] = [
@@ -24,22 +25,26 @@ export const starterNotes: FolderProps[] = [
       {
         id: 'work-meeting-notes',
         title: 'Meeting Notes',
-        timeStamp: new Date('2024-05-09')
+        timeStamp: new Date('2024-05-09'),
+        content: 'text'
       },
       {
         id: 'work-project-ideas',
         title: 'Project Ideas',
-        timeStamp: new Date('2024-05-02')
+        timeStamp: new Date('2024-05-02'),
+        content: 'text'
       },
       {
         id: 'work-cv',
         title: 'CV',
-        timeStamp: new Date('2023-04-01')
+        timeStamp: new Date('2023-04-01'),
+        content: 'text'
       },
       {
         id: 'work-personal-letter',
         title: 'Personal Letter',
-        timeStamp: new Date('2023-05-02')
+        timeStamp: new Date('2023-05-02'),
+        content: 'text'
       }
     ],
     folder: [
@@ -50,7 +55,8 @@ export const starterNotes: FolderProps[] = [
           {
             id: 'note3',
             title: 'Annual Review',
-            timeStamp: new Date('2024-05-03')
+            timeStamp: new Date('2024-05-03'),
+            content: 'text'
           }
         ]
       }
@@ -63,12 +69,14 @@ export const starterNotes: FolderProps[] = [
       {
         id: 'note4',
         title: 'Grocery List',
-        timeStamp: new Date('2024-05-04')
+        timeStamp: new Date('2024-05-04'),
+        content: 'text'
       },
       {
         id: 'note5',
         title: 'Book Recommendations',
-        timeStamp: new Date('2024-05-05')
+        timeStamp: new Date('2024-05-05'),
+        content: 'text'
       }
     ]
   }

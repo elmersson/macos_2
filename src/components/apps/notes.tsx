@@ -21,6 +21,13 @@ import {
   differenceInCalendarDays
 } from 'date-fns';
 import { Separator } from '../ui/separator';
+import { LexicalComposer } from '@lexical/react/LexicalComposer';
+import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
+import { ContentEditable } from '@lexical/react/LexicalContentEditable';
+import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
+import { $createParagraphNode, $createTextNode, $getRoot } from 'lexical';
+import { useEffect } from 'react';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 
 export function Notes({ appData }: AppProps) {
   const {
@@ -28,8 +35,12 @@ export function Notes({ appData }: AppProps) {
     selectedNotes,
     setSelectedNotes,
     selectedNote,
-    setSelectedNote
+    setSelectedNote,
+    updateNoteById,
+    getNoteById
   } = useSystem();
+
+  const note = getNoteById(selectedNote);
 
   return (
     <DraggableItem appData={appData}>
@@ -51,10 +62,11 @@ export function Notes({ appData }: AppProps) {
             <MonthList
               notes={selectedNotes}
               setSelectedNote={setSelectedNote}
+              getNoteById={getNoteById}
             />
           </ScrollArea>
           <ScrollArea className="flex w-full p-4 bg-neutral-100 dark:bg-neutral-900">
-            <Content note={selectedNote} />
+            <Content note={note} updateNoteById={updateNoteById} />
           </ScrollArea>
         </div>
       </div>
@@ -68,7 +80,7 @@ const FolderAccordion = ({
 }: {
   folders: FolderProps[];
   // eslint-disable-next-line no-unused-vars
-  setSelectedNotes: (notes: Note[]) => void;
+  setSelectedNotes: (noteIds: string[]) => void;
 }) => {
   return (
     <>
@@ -83,7 +95,9 @@ const FolderAccordion = ({
             <AccordionTrigger
               className="flex flex-row items-center space-x-1 text-sm text-neutral-300 py-2"
               chevronPosition={folder.folder ? 'left' : 'none'}
-              onClick={() => setSelectedNotes(folder.notes)}
+              onClick={() =>
+                setSelectedNotes(folder.notes.map((note) => note.id))
+              }
             >
               <div className="flex flex-row items-center justify-between w-full pr-2">
                 <div className="flex flex-row items-center space-x-2">
@@ -114,7 +128,7 @@ const Folders = ({
 }: {
   data: NoteAppProps[];
   // eslint-disable-next-line no-unused-vars
-  setSelectedNotes: (notes: Note[]) => void;
+  setSelectedNotes: (noteIds: string[]) => void;
 }) => {
   return (
     <>
@@ -146,9 +160,11 @@ const Folders = ({
 };
 
 interface MonthListProps {
-  notes: Note[];
+  notes: string[];
   // eslint-disable-next-line no-unused-vars
-  setSelectedNote: (note: Note) => void;
+  setSelectedNote: (noteId: string) => void;
+  // eslint-disable-next-line no-unused-vars
+  getNoteById: (noteId: string) => Note | undefined;
 }
 
 interface GroupedNotes {
@@ -206,8 +222,10 @@ function compareCategories(a: string, b: string): number {
   return 0;
 }
 
-const MonthList = ({ notes, setSelectedNote }: MonthListProps) => {
-  const sortedNotes = [...notes].sort(
+const MonthList = ({ notes, setSelectedNote, getNoteById }: MonthListProps) => {
+  const allNotes = notes.map((id) => getNoteById(id)).filter(Boolean) as Note[];
+
+  const sortedNotes = [...allNotes].sort(
     (a, b) => new Date(b.timeStamp).getTime() - new Date(a.timeStamp).getTime()
   );
   const groupedNotes = sortedNotes.reduce<GroupedNotes>((acc, note) => {
@@ -233,8 +251,8 @@ const MonthList = ({ notes, setSelectedNote }: MonthListProps) => {
                 key={note.id}
                 title={note.title}
                 date={format(note.timeStamp, 'yyyy-MM-dd')}
-                preview={note.id}
-                onClick={() => setSelectedNote(note)}
+                preview={note.content}
+                onClick={() => setSelectedNote(note.id)}
               />
               {index !== array.length - 1 && (
                 <Separator className="bg-neutral-400/20 mx-4 my-2" />
@@ -266,19 +284,101 @@ function NoteCard({ title, date, preview, onClick }: NoteCardProps) {
   );
 }
 
-function Content({ note }: { note: Note }) {
+interface ContentProps {
+  note: Note | undefined;
+  // eslint-disable-next-line no-unused-vars
+  updateNoteById: (noteId: string, noteData: Partial<Note>) => void;
+}
+
+function Content({ note, updateNoteById }: ContentProps) {
+  if (!note) {
+    return;
+  }
   const formattedDate = format(
     new Date(note.timeStamp),
     "d MMMM yyyy 'at' HH:mm"
   );
 
+  const initialConfig = {
+    namespace: 'NoteContent',
+    theme: {
+      paragraph: 'text-md'
+    },
+    onError: (error: Error) => {
+      console.error('Lexical editor encountered an error:', error);
+    }
+  };
+
+  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newTitle = event.target.value;
+    if (newTitle !== note.title) {
+      updateNoteById(note.id, { title: newTitle });
+    }
+  };
+
   return (
-    <div className="flex flex-col space-y-2">
-      <span className="text-neutral-400 text-sm flex justify-center">
-        {formattedDate}
-      </span>
-      <span className="text-2xl font-bold">{note.title}</span>
-      <span>{note.id}</span>
-    </div>
+    <LexicalComposer initialConfig={initialConfig}>
+      <div className="flex flex-col space-y-2 caret-yellow-400 selection:bg-yellow-400/50">
+        <span className="text-neutral-400 text-sm flex justify-center">
+          {formattedDate}
+        </span>
+        <input
+          className="text-2xl font-bold outline-none w-full bg-transparent"
+          value={note.title}
+          onChange={handleTitleChange}
+          placeholder="Enter title..."
+        />
+        <Editor note={note} updateNoteById={updateNoteById} />
+      </div>
+    </LexicalComposer>
+  );
+}
+
+interface EditorProps {
+  note: Note;
+  // eslint-disable-next-line no-unused-vars
+  updateNoteById: (noteId: string, noteData: Partial<Note>) => void;
+}
+
+function Editor({ note, updateNoteById }: EditorProps) {
+  const editor = useLexicalComposerContext()[0];
+
+  useEffect(() => {
+    editor.update(() => {
+      const root = $getRoot();
+      root.clear();
+      const paragraphNode = $createParagraphNode();
+      paragraphNode.append($createTextNode(note.content));
+      root.append(paragraphNode);
+    });
+  }, [editor, note.content]);
+
+  const handleBlur = () => {
+    editor.update(() => {
+      const editorState = editor.getEditorState();
+      editorState.read(() => {
+        const root = $getRoot();
+        const updatedContent = root.getTextContent();
+        if (updatedContent !== note.content) {
+          updateNoteById(note.id, {
+            content: updatedContent,
+            timeStamp: new Date()
+          });
+        }
+      });
+    });
+  };
+
+  return (
+    <RichTextPlugin
+      contentEditable={
+        <ContentEditable
+          className="prose prose-lg focus:outline-none"
+          onBlur={handleBlur}
+        />
+      }
+      placeholder={null}
+      ErrorBoundary={LexicalErrorBoundary}
+    />
   );
 }
