@@ -6,13 +6,14 @@ A personal website made to look like my current OS running on my Macbook. Update
 
 ## TODO
 
-- [ ] Z-index
-- [ ] Store position, scale and z-index in store
+- [x] Z-index
+- [x] Store position, scale and z-index in store
 - [ ] App function
   - [ ] Finder
-  - [ ] Launchpad
+  - [x] Launchpad
+  - [x] Notes
   - [ ] Outlook
-  - [ ] iterm2
+  - [x] iterm2
 
 ## Tech-stack
 
