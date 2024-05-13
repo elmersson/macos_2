@@ -31,6 +31,7 @@ import { HiOutlineDotsCircleHorizontal } from 'react-icons/hi';
 import { FaHardDrive } from 'react-icons/fa6';
 
 import { AppProps } from '@/data/Apps';
+import { iterm2Data } from './iterm2';
 
 export function Finder({ appData }: AppProps) {
   return (
@@ -50,20 +51,7 @@ export function Finder({ appData }: AppProps) {
 
           <div className="flex flex-col w-full h-full">
             <ScrollArea className="p-4 bg-neutral-100 dark:bg-neutral-900 w-full h-full flex">
-              <div className="grid grid-col-fit gap-4">
-                <div className="w-32 h-32 bg-white p-2 rounded shadow">
-                  File 1
-                </div>
-                <div className="w-32 h-32 bg-white p-2 rounded shadow">
-                  File 2
-                </div>
-                <div className="w-32 h-32 bg-white p-2 rounded shadow">
-                  File 3
-                </div>
-                <div className="w-32 h-32 bg-white p-2 rounded shadow">
-                  File 4
-                </div>
-              </div>
+              <Content />
             </ScrollArea>
             <div className="text-sm items-center">
               <div className="bg-neutral-900 border-t border-white/20 py-1 px-2 text-white/60 flex flex-row items-center space-x-1">
@@ -227,5 +215,30 @@ function Tags() {
         </AccordionContent>
       </AccordionItem>
     </Accordion>
+  );
+}
+
+function Content() {
+  return (
+    <div className="flex flex-row w-full space-x-8">
+      {iterm2Data[0]?.children?.map((data) => (
+        <div
+          key={data.id}
+          className="flex flex-col items-center justify-center"
+        >
+          <Item type={data.type} />
+          <span>{data.title}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function Item({ type }: { type: string }) {
+  const Icon = type === 'folder' ? BsFillFolderFill : FaHardDrive;
+  return (
+    <div className="text-[84px]">
+      <Icon />
+    </div>
   );
 }

@@ -11,7 +11,11 @@ import { Wifi } from './navbar/wifi';
 import { AppMenu } from './navbar/app-menu';
 
 export function Navbar() {
-  const { logedIn } = useSystem();
+  const { logedIn, booted } = useSystem();
+
+  if (!booted) {
+    return;
+  }
 
   return (
     <div
