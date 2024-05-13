@@ -271,7 +271,7 @@ function ListFiles({ dir }: ListFilesProps) {
   return <div>No files found.</div>;
 }
 
-const iterm2Data: iTerm2Data[] = [
+export const iterm2Data: iTerm2Data[] = [
   {
     id: 'about',
     title: 'about',
