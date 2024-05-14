@@ -8,12 +8,15 @@ A personal website made to look like my current OS running on my Macbook. Update
 
 - [x] Z-index
 - [x] Store position, scale and z-index in store
+- [ ] ShortCommand
+- [ ] Analytics
 - [ ] App function
   - [ ] Finder
   - [x] Launchpad
   - [x] Notes
   - [ ] Outlook
   - [x] iterm2
+  - [ ] Trashcan
 
 ## Tech-stack
 
