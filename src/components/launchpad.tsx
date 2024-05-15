@@ -56,7 +56,7 @@ interface LaunchpadItemProps {
   setLaunchPad(): void;
 }
 
-function LaunchpadItem({
+export function LaunchpadItem({
   appData,
   openApp,
   bringToFront,

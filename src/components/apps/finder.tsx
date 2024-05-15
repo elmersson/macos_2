@@ -30,10 +30,15 @@ import { MdOutlineIosShare } from 'react-icons/md';
 import { HiOutlineDotsCircleHorizontal } from 'react-icons/hi';
 import { FaHardDrive } from 'react-icons/fa6';
 
-import { AppProps } from '@/data/Apps';
-import { iterm2Data } from './iterm2';
+import { AppProps, iTerm2Data, apps } from '@/data/Apps';
+import { finderData } from '@/data/finderData';
+import { useSystem } from '@/hooks/useSystem';
+import { LaunchpadItem } from '../launchpad';
 
 export function Finder({ appData }: AppProps) {
+  const { selectedFinderId, setSelectedFinderId, openApp, bringToFront } =
+    useSystem();
+
   return (
     <DraggableItem
       className="bg-transparent"
@@ -44,14 +49,19 @@ export function Finder({ appData }: AppProps) {
       <div className="w-full h-full bg-transparent">
         <div className="flex h-full">
           <ScrollArea className="w-40 bg-slate-800/70 bg-clip-padding backdrop-filter backdrop-blur-xl dark:bg-slate-800/70 p-4">
-            <Favorites />
+            <Favorites setSelectedFinderId={setSelectedFinderId} />
             <ICloud />
             <Tags />
           </ScrollArea>
 
           <div className="flex flex-col w-full h-full">
             <ScrollArea className="p-4 bg-neutral-100 dark:bg-neutral-900 w-full h-full flex">
-              <Content />
+              <Content
+                selectedFinderId={selectedFinderId}
+                setSelectedFinderId={setSelectedFinderId}
+                openApp={openApp}
+                bringToFront={bringToFront}
+              />
             </ScrollArea>
             <div className="text-sm items-center">
               <div className="bg-neutral-900 border-t border-white/20 py-1 px-2 text-white/60 flex flex-row items-center space-x-1">
@@ -105,7 +115,12 @@ function barItem() {
   );
 }
 
-function Favorites() {
+function Favorites({
+  setSelectedFinderId
+}: {
+  // eslint-disable-next-line no-unused-vars
+  setSelectedFinderId: (finderId: string) => void;
+}) {
   return (
     <Accordion
       type="single"
@@ -119,27 +134,45 @@ function Favorites() {
         </AccordionTrigger>
         <AccordionContent>
           <ul className="space-y-4">
-            <li className="flex flex-row items-center space-x-1">
+            <li
+              className="flex flex-row items-center space-x-1"
+              onClick={() => setSelectedFinderId('airdrop')}
+            >
               <MdWifiTethering className=" size-[18px] text-blue-500" />
               <span>AirDrop</span>
             </li>
-            <li className="flex flex-row items-center space-x-1">
+            <li
+              className="flex flex-row items-center space-x-1"
+              onClick={() => setSelectedFinderId('recent')}
+            >
               <IoTimeOutline className=" size-[18px] text-blue-500" />
               <span>Recent</span>
             </li>
-            <li className="flex flex-row items-center space-x-1">
+            <li
+              className="flex flex-row items-center space-x-1"
+              onClick={() => setSelectedFinderId('applications')}
+            >
               <PiAppStoreLogoBold className=" size-[18px] text-blue-500" />
               <span>Applications</span>
             </li>
-            <li className="flex flex-row items-center space-x-1">
+            <li
+              className="flex flex-row items-center space-x-1"
+              onClick={() => setSelectedFinderId('desktop')}
+            >
               <BsWindowDesktop className=" size-[18px] text-blue-500" />
               <span>Desktop</span>
             </li>
-            <li className="flex flex-row items-center space-x-1">
+            <li
+              className="flex flex-row items-center space-x-1"
+              onClick={() => setSelectedFinderId('documents')}
+            >
               <HiOutlineDocument className=" size-[18px] text-blue-500" />
               <span>Documents</span>
             </li>
-            <li className="flex flex-row items-center space-x-1">
+            <li
+              className="flex flex-row items-center space-x-1"
+              onClick={() => setSelectedFinderId('downloads')}
+            >
               <MdOutlineDownloadForOffline className=" size-[18px] text-blue-500" />
               <span>Downloads</span>
             </li>
@@ -218,13 +251,77 @@ function Tags() {
   );
 }
 
-function Content() {
+interface ContentProps {
+  // eslint-disable-next-line no-unused-vars
+  setSelectedFinderId: (finderId: string) => void;
+  selectedFinderId: string;
+  // eslint-disable-next-line no-unused-vars
+  openApp: (id: string) => void;
+  // eslint-disable-next-line no-unused-vars
+  bringToFront: (id: string) => void;
+}
+function Content({
+  setSelectedFinderId,
+  selectedFinderId,
+  openApp,
+  bringToFront
+}: ContentProps) {
+  if (selectedFinderId === 'applications') {
+    return (
+      <div className="flex flex-row w-full space-x-8">
+        {apps.map((app) => (
+          <LaunchpadItem
+            key={app.id}
+            appData={app}
+            openApp={() => openApp(app.id)}
+            bringToFront={() => bringToFront(app.id)}
+            setLaunchPad={function (): void {}}
+          />
+        ))}
+      </div>
+    );
+  }
+
+  if (selectedFinderId === 'airdrop') {
+    return (
+      <div className="flex flex-col w-full h-full items-center justify-center">
+        <div className="text-[80px] text-blue-400">
+          <MdWifiTethering />
+        </div>
+        <span>AirDrop lets you share instantly with people nearby.</span>
+        <span className="text-sm text-blue-600">
+          Allow me to be discovered by: Contacts Only
+        </span>
+      </div>
+    );
+  }
+
+  const findSelectedItem = (
+    id: string,
+    items: iTerm2Data[]
+  ): iTerm2Data | undefined => {
+    for (const item of items) {
+      if (item.id === id) return item;
+      if (item.children) {
+        const found = findSelectedItem(id, item.children);
+        if (found) return found;
+      }
+    }
+    return undefined;
+  };
+
+  const selectedItem = findSelectedItem(selectedFinderId, finderData);
+
   return (
     <div className="flex flex-row w-full space-x-8">
-      {iterm2Data[0]?.children?.map((data) => (
+      {selectedItem?.children?.map((data) => (
         <div
           key={data.id}
           className="flex flex-col items-center justify-center"
+          role="button"
+          onDoubleClick={() => {
+            data.type === 'folder' ? setSelectedFinderId(data.id) : undefined;
+          }}
         >
           <Item type={data.type} />
           <span>{data.title}</span>

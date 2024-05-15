@@ -58,6 +58,8 @@ interface SystemStore {
   setSelectedNote: (note: string) => void;
   getNoteById: (noteId: string) => Note | undefined;
   updateNoteById: (noteId: string, noteData: Partial<Note>) => void;
+  selectedFinderId: string;
+  setSelectedFinderId: (finderId: string) => void;
 }
 
 export const useSystem = create<SystemStore>()(
@@ -207,10 +209,12 @@ export const useSystem = create<SystemStore>()(
           }))
         }));
         set({ notes: updatedNotes });
-      }
+      },
+      selectedFinderId: 'recent',
+      setSelectedFinderId: (id) => set({ selectedFinderId: id })
     }),
     {
-      name: 'use-system-7'
+      name: 'use-system-8'
     }
   )
 );
