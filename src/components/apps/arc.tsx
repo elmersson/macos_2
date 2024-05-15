@@ -9,8 +9,26 @@ import {
 import { BsFillFolderFill } from 'react-icons/bs';
 import { DraggableItem } from './draggable-item';
 import { AppProps } from '@/data/Apps';
+import { Dispatch, SetStateAction, useState } from 'react';
+
+interface UrlItemsData {
+  title: string;
+  url: string;
+}
+
+const UrlItems: UrlItemsData[] = [
+  { title: 'Github', url: 'https://github1s.com/elmersson' },
+  { title: 'Github', url: 'https://github1s.com/elmersson/macos_2' },
+  { title: 'Github', url: 'https://korpenstockholm.zoezi.se/serie/5284' },
+  { title: 'Github', url: 'https://github1s.com/elmersson' },
+  { title: 'Github', url: 'https://github1s.com/elmersson' },
+  { title: 'Github', url: 'https://github1s.com/elmersson' },
+  { title: 'Github', url: 'https://github1s.com/elmersson' },
+  { title: 'Github', url: 'https://github1s.com/elmersson' }
+];
+
 export function Arc({ appData }: AppProps) {
-  const items = Array.from({ length: 8 }, (_, index) => index);
+  const [url, setUrl] = useState('https://github1s.com/elmersson/macos_2');
 
   return (
     <DraggableItem appData={appData}>
@@ -18,12 +36,13 @@ export function Arc({ appData }: AppProps) {
         <div className="flex h-full space-x-2 mr-4">
           <div className="my-4 ml-2 flex justify-between flex-col">
             <div className="space-y-2">
-              <div className="text-sm p-3 rounded-xl bg-[#63879e] bg-opacity-60 hover:bg-opacity-100 text-slate-800">
-                localhost
-              </div>
+              <input
+                className="text-sm p-3 w-full rounded-xl bg-[#63879e] bg-opacity-60 hover:bg-opacity-100 text-slate-800"
+                placeholder={url}
+              />
               <div className="grid grid-cols-4 gap-4 mr-2">
-                {items.map((item, index) => (
-                  <PinnedItem key={index} />
+                {UrlItems.map((item, index) => (
+                  <PinnedItem key={index} data={item} setUrl={setUrl} />
                 ))}
               </div>
               <Saved />
@@ -41,18 +60,25 @@ export function Arc({ appData }: AppProps) {
               <FaPlus className="text-[#3f5969]" />
             </div>
           </div>
-          <div className="w-full drop-shadow-lg bg-white m-4 rounded-md">
-            <span>Arc</span>
-          </div>
+          <Content url={url} />
         </div>
       </div>
     </DraggableItem>
   );
 }
 
-function PinnedItem() {
+function PinnedItem({
+  data,
+  setUrl
+}: {
+  data: UrlItemsData;
+  setUrl: Dispatch<SetStateAction<string>>;
+}) {
   return (
-    <div className="w-14 h-14 bg-[#63879e] bg-opacity-60 hover:bg-opacity-100 rounded-xl"></div>
+    <div
+      className="w-14 h-14 bg-[#63879e] bg-opacity-60 hover:bg-opacity-100 rounded-xl"
+      onClick={() => setUrl(data.url)}
+    ></div>
   );
 }
 
@@ -82,6 +108,18 @@ function Folder() {
     <div className="text-lg flex flex-row space-x-3 items-center">
       <BsFillFolderFill />
       <span className="text-slate-900">Item</span>
+    </div>
+  );
+}
+
+function Content({ url }: { url: string }) {
+  return (
+    <div className="w-full drop-shadow-lg bg-white m-4 rounded-md">
+      <iframe
+        className="w-full h-full rounded-md"
+        title="VSCode GitHub"
+        src={url}
+      />
     </div>
   );
 }
