@@ -24,6 +24,7 @@ import {
 } from '../ui/outlook_accordion';
 import { DraggableItem } from './draggable-item';
 import { AppProps } from '@/data/Apps';
+import { useState } from 'react';
 
 const SIDE_BAR_WIDTH = 320;
 
@@ -42,15 +43,42 @@ export function Outlook({ appData }: AppProps) {
 }
 
 function TopBar() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const sendEmail = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch('/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log('Email sent successfully:', data);
+      } else {
+        console.error('Error sending email:', data);
+      }
+    } catch (error) {
+      console.error('Network error:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <div className="p-2 flex flex-row items-center justify-between">
       <div
         className={`flex flex-row items-center w-[${SIDE_BAR_WIDTH}px] space-x-2`}
       >
         <RxHamburgerMenu className="size-[1.35rem]" />
-        <button className="flex flex-row bg-blue-500 rounded-lg space-x-2 px-3 py-1 items-center">
+        <button
+          className="flex flex-row bg-blue-500 rounded-lg space-x-2 px-3 py-1 items-center"
+          onClick={sendEmail}
+          disabled={isLoading}
+        >
           <FiEdit className="size-[1.35rem]" />
-          <span className="">New Email</span>
+          <span className="">{isLoading ? 'Sending...' : 'New Email'}</span>
         </button>
       </div>
       <div className="flex flex-row items-center space-x-7">
@@ -165,7 +193,7 @@ function MailList() {
         </Accordion>
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1">
-            <AccordionTrigger className="text-lg font-bold text-white truncate">
+            <AccordionTrigger className="text-lg font-bold text-white">
               rasmus.elmersson@regent.se
             </AccordionTrigger>
             <AccordionContent>
