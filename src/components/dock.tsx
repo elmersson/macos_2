@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { DockItem } from './dock-item';
 import { useSystem } from '@/hooks/useSystem';
+import { Trashcan } from './trashcan';
+import { Separator } from './ui/separator';
 
 export default function Dock() {
   const { apps } = useSystem();
@@ -28,7 +30,7 @@ export default function Dock() {
       onMouseLeave={handleMouseLeave}
     >
       <motion.ul
-        className="bg-clip-padding backdrop-filter backdrop-blur-md bg-neutral-300/20 border border-neutral-100/20 flex rounded-3xl p-1 dark:bg-neutral-500/10 dark:border-neutral-300/20 space-x-2"
+        className="bg-clip-padding backdrop-filter backdrop-blur-md bg-neutral-300/20 border border-neutral-100/20 flex rounded-3xl p-1 dark:bg-neutral-500/10 dark:border-neutral-300/20 space-x-2 items-center"
         initial={{ y: initialY }}
         animate={{ y: animateY }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
@@ -42,6 +44,11 @@ export default function Dock() {
             isOpen={app.isOpen}
           />
         ))}
+        <Separator
+          orientation="vertical"
+          className="h-[80%] bg-neutral-400/40"
+        />
+        <Trashcan />
       </motion.ul>
     </motion.div>
   );
