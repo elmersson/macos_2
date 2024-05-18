@@ -1,3 +1,4 @@
+import { useSystem } from '@/hooks/useSystem';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,11 +13,12 @@ import {
 } from '../ui/dropdown-menu';
 
 export function AppMenu() {
+  const { activeApp } = useSystem();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <span role="button" className="text-sm drop-shadow-lg">
-          File
+          {activeApp}
         </span>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="mt-1">
