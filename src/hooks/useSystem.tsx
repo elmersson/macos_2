@@ -30,6 +30,8 @@ interface SystemStore {
   launchPad: boolean;
   setLaunchPad: (launchPad: boolean) => void;
   apps: AppData[];
+  activeApp: string;
+  setActiveApp: (id: string) => void;
   setApps: (apps: AppData[]) => void;
   bringToFront: (id: string) => void;
   closeApp: (id: string) => void;
@@ -88,6 +90,8 @@ export const useSystem = create<SystemStore>()(
       launchPad: false,
       setLaunchPad: (launchPad) => set({ launchPad }),
       apps,
+      activeApp: 'finder',
+      setActiveApp: (id) => set({ activeApp: id }),
       setApps: (apps) => set({ apps }),
       bringToFront: (id) => {
         const apps = get().apps;
@@ -95,7 +99,7 @@ export const useSystem = create<SystemStore>()(
         const newApps = apps.map((app) =>
           app.id === id ? { ...app, z: maxZ } : app
         );
-        set({ apps: newApps });
+        set({ apps: newApps, activeApp: id });
       },
       closeApp: (id) => {
         const apps = get().apps.map((app) =>
