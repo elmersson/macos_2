@@ -8,7 +8,6 @@ import {
   DropdownMenuTrigger
 } from '../ui/dropdown-menu';
 import { useNetworkState } from 'react-use';
-import { useSystem } from '@/hooks/useSystem';
 import { Switch } from '../ui/switch';
 import { IoBatteryHalf, IoCellularSharp, IoLockClosed } from 'react-icons/io5';
 import { FaLink } from 'react-icons/fa6';
@@ -18,6 +17,7 @@ import {
   AccordionItem,
   AccordionTrigger
 } from '../ui/accordion';
+import { useSystemStore } from '../providers/store-provider';
 
 const otherNetworks = [
   'Pretty Fly For a Wifi',
@@ -34,7 +34,7 @@ const otherNetworks = [
 
 export function Wifi() {
   const state = useNetworkState();
-  const { wifi, setWifi } = useSystem();
+  const { wifi, setWifi } = useSystemStore((state) => state);
 
   const wifiIcon = () => {
     switch (state.effectiveType) {

@@ -1,6 +1,5 @@
 'use client';
 
-import { useSystem } from '@/hooks/useSystem';
 import { cn } from '@/lib/utils';
 import { Battery } from './navbar/battery';
 import { AppleMenu } from './navbar/apple-menu';
@@ -9,9 +8,10 @@ import { WidgetsBar } from './navbar/widgets-bar';
 import { Hidden } from './navbar/hidden';
 import { Wifi } from './navbar/wifi';
 import { AppMenu } from './navbar/app-menu';
+import { useSystemStore } from './providers/store-provider';
 
 export function Navbar() {
-  const { logedIn, booted } = useSystem();
+  const { logedIn, booted } = useSystemStore((state) => state);
 
   if (!booted) {
     return;

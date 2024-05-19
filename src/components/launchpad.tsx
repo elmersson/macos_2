@@ -1,11 +1,12 @@
-import { useSystem } from '@/hooks/useSystem';
 import { apps, AppData } from '@/data/Apps';
 import Image from 'next/image';
 import { Input } from './ui/input';
 import { useState, ChangeEvent } from 'react';
+import { useAppStore, useSystemStore } from './providers/store-provider';
 
 export function Launchpad() {
-  const { launchPad, setLaunchPad, openApp, bringToFront } = useSystem();
+  const { launchPad, setLaunchPad } = useSystemStore((state) => state);
+  const { openApp, bringToFront } = useAppStore((state) => state);
 
   const [searchQuery, setSearchQuery] = useState('');
 

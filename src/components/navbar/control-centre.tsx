@@ -14,7 +14,7 @@ import { Display } from './display';
 import { Sound } from './sound';
 import { Music } from './music';
 import { useAudio } from '@/hooks/useAudio';
-import { useSystem } from '@/hooks/useSystem';
+import { useSystemStore } from '../providers/store-provider';
 
 function getOpacityClass(displayValue: number) {
   if (displayValue >= 90) return 'opacity-100';
@@ -27,7 +27,7 @@ function getOpacityClass(displayValue: number) {
 }
 
 export function ControlCentre() {
-  const { display } = useSystem();
+  const { display } = useSystemStore((state) => state);
 
   // eslint-disable-next-line no-unused-vars
   const [_audio, state, controls, _ref] = useAudio({

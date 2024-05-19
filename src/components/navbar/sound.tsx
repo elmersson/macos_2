@@ -1,6 +1,6 @@
-import { useSystem } from '@/hooks/useSystem';
 import { Slider } from '../ui/slider';
 import { HiSpeakerWave, HiSpeakerXMark } from 'react-icons/hi2';
+import { useSystemStore } from '../providers/store-provider';
 
 interface SoundProps {
   // eslint-disable-next-line no-unused-vars
@@ -8,7 +8,7 @@ interface SoundProps {
 }
 
 export function Sound({ setAudioVolume }: SoundProps) {
-  const { volume, setVolume } = useSystem();
+  const { volume, setVolume } = useSystemStore((state) => state);
 
   const handleDisplayChange = (value: number[]) => {
     setVolume(value[0]);

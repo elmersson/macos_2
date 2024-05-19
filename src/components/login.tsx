@@ -5,14 +5,14 @@ import useTime from '@/hooks/useTime';
 import getFullFormatDate from '@/lib/date/getFullFormatDate';
 import { useRef, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
-import { useSystem } from '@/hooks/useSystem';
+import { useSystemStore } from './providers/store-provider';
 export function Login() {
   const [inputValue, setInputValue] = useState('');
   const [isPasswordCorrect, setIsPasswordCorrect] = useState(true);
   const [showInput, setShowInput] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const { setLogedIn } = useSystem();
+  const { setLogedIn } = useSystemStore((state) => state);
   const timeHook = useTime();
   const { dayOfWeek, dayOfMonth, month, time } = getFullFormatDate(timeHook);
 

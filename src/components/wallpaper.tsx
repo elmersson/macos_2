@@ -1,9 +1,9 @@
 'use client';
-import { useSystem } from '@/hooks/useSystem';
 import { useEffect, useRef, useState } from 'react';
+import { useSystemStore } from './providers/store-provider';
 
 export default function Wallpaper() {
-  const { logedIn } = useSystem();
+  const { logedIn } = useSystemStore((state) => state);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoSource, setVideoSource] = useState<string>(

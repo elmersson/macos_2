@@ -1,10 +1,10 @@
-import { useSystem } from '@/hooks/useSystem';
 import useTime from '@/hooks/useTime';
 import getFullFormatDate from '@/lib/date/getFullFormatDate';
 import GoogleCalendarView from './GoogleCalendarView';
+import { useSystemStore } from '@/components/providers/store-provider';
 
 export default function Calendar() {
-  const { nameOfTheDay } = useSystem();
+  const { nameOfTheDay } = useSystemStore((state) => state);
 
   const currentTime = useTime();
   const forrmatedTime = getFullFormatDate(currentTime);

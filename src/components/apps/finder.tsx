@@ -32,12 +32,14 @@ import { FaHardDrive } from 'react-icons/fa6';
 
 import { AppProps, iTerm2Data, apps } from '@/data/Apps';
 import { finderData } from '@/data/finderData';
-import { useSystem } from '@/hooks/useSystem';
 import { LaunchpadItem } from '../launchpad';
+import { useAppStore, useFinderStore } from '../providers/store-provider';
 
 export function Finder({ appData }: AppProps) {
-  const { selectedFinderId, setSelectedFinderId, openApp, bringToFront } =
-    useSystem();
+  const { openApp, bringToFront } = useAppStore((state) => state);
+  const { selectedFinderId, setSelectedFinderId } = useFinderStore(
+    (state) => state
+  );
 
   return (
     <DraggableItem

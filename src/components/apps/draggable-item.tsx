@@ -4,7 +4,7 @@ import ActionButtons from './action-buttons';
 import { ResizableBox, ResizeCallbackData } from 'react-resizable';
 import 'react-resizable/css/styles.css';
 import { AppData } from '@/data/Apps';
-import { useSystem } from '@/hooks/useSystem';
+import { useAppStore } from '../providers/store-provider';
 
 interface DraggableItemProps {
   children: ReactNode;
@@ -24,7 +24,7 @@ export function DraggableItem({
   appData
 }: DraggableItemProps) {
   const { setSize, setPosition, bringToFront, closeApp, minimizeApp } =
-    useSystem();
+    useAppStore((state) => state);
   const { size, position } = appData;
 
   const [lastState, setLastState] = useState({

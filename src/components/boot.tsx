@@ -1,11 +1,11 @@
 'use client';
-import { useSystem } from '@/hooks/useSystem';
 import { WeatherData } from '@/types/Weather';
 import { useEffect, useState } from 'react';
 import { IoLogoApple } from 'react-icons/io5';
 import axios from 'axios';
 import useTime from '@/hooks/useTime';
 import getFullFormatDate from '@/lib/date/getFullFormatDate';
+import { useSystemStore } from './providers/store-provider';
 
 export function Boot() {
   const [latitude, setLatitude] = useState<number>(59.3326);
@@ -17,7 +17,7 @@ export function Boot() {
     setNameOfTheDay,
     bootProgress,
     setBootProgress
-  } = useSystem();
+  } = useSystemStore((state) => state);
 
   useEffect(() => {
     if (bootProgress < 100) {

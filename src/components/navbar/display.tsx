@@ -1,9 +1,9 @@
-import { useSystem } from '@/hooks/useSystem';
 import { Slider } from '../ui/slider';
 import { BsFillSunFill } from 'react-icons/bs';
+import { useSystemStore } from '../providers/store-provider';
 
 export function Display() {
-  const { display, setDisplay } = useSystem();
+  const { display, setDisplay } = useSystemStore((state) => state);
 
   const handleDisplayChange = (value: number[]) => {
     setDisplay(value[0]);

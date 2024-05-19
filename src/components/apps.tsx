@@ -1,12 +1,12 @@
-import { useSystem } from '@/hooks/useSystem';
 import { VSCode } from './apps/vscode';
 import { Finder } from './apps/finder';
 import { Arc } from './apps/arc';
 import { Notes } from './apps/notes';
 import { Iterm2 } from './apps/iterm2';
 import { Outlook } from './apps/outlook';
+import { useAppStore } from './providers/store-provider';
 export function Apps() {
-  const { apps } = useSystem();
+  const { apps } = useAppStore((state) => state);
 
   return (
     <div className="flex relative w-full h-full">

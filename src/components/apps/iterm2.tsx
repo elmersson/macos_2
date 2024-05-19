@@ -3,7 +3,7 @@ import { Roboto_Mono } from 'next/font/google';
 import { DraggableItem } from './draggable-item';
 import { AppProps, iTerm2Data } from '@/data/Apps';
 import { FormEvent, useState, KeyboardEvent, useRef, ReactNode } from 'react';
-import { useSystem } from '@/hooks/useSystem';
+import { useItermStore } from '../providers/store-provider';
 
 const font = Roboto_Mono({
   subsets: ['latin'],
@@ -14,7 +14,9 @@ export function Iterm2({ appData }: AppProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [historyIndex, setHistoryIndex] = useState(-1);
-  const { addHistory, setCurDir, setVisibleHistory, iterm2 } = useSystem();
+  const { addHistory, setCurDir, setVisibleHistory, iterm2 } = useItermStore(
+    (state) => state
+  );
 
   const focusInput = () => {
     if (inputRef.current) {

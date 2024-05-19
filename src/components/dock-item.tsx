@@ -7,8 +7,8 @@ import {
   TooltipArrow
 } from '@/components/ui/tooltip';
 import Image from 'next/image';
-import { useSystem } from '@/hooks/useSystem';
 import { cn } from '@/lib/utils';
+import { useAppStore, useSystemStore } from './providers/store-provider';
 
 export function DockItem({
   title,
@@ -17,7 +17,8 @@ export function DockItem({
   url,
   isOpen
 }: Omit<AppData, 'z' | 'size' | 'isMinimized' | 'position'>) {
-  const { setLaunchPad, openApp, bringToFront } = useSystem();
+  const { setLaunchPad } = useSystemStore((state) => state);
+  const { openApp, bringToFront } = useAppStore((state) => state);
 
   const handleClick = () => {
     if (title === 'Launchpad') {

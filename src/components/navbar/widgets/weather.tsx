@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { FaLocationArrow } from 'react-icons/fa';
 import { getHours } from 'date-fns';
-import { useSystem } from '@/hooks/useSystem';
+import { useSystemStore } from '@/components/providers/store-provider';
 
 const capitalizeWords = (str: string) => {
   return str
@@ -38,7 +38,7 @@ const getBackgroundColor = (weatherDescription: string) => {
   }
 };
 export function Weather() {
-  const { weather } = useSystem();
+  const { weather } = useSystemStore((state) => state);
   const weatherSlice = weather.list.slice(0, 6);
   const bgColor = getBackgroundColor(weather.list[0].weather[0].description);
 
