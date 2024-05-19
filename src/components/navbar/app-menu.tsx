@@ -1,4 +1,3 @@
-import { useSystem } from '@/hooks/useSystem';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,9 +10,10 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger
 } from '../ui/dropdown-menu';
+import { useAppStore } from '../providers/store-provider';
 
 export function AppMenu() {
-  const { activeApp } = useSystem();
+  const { activeApp } = useAppStore((state) => state);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

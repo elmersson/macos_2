@@ -11,7 +11,6 @@ import { IoFolderOutline } from 'react-icons/io5';
 import { PiUserCircleFill } from 'react-icons/pi';
 import { DraggableItem } from './draggable-item';
 import { AppProps } from '@/data/Apps';
-import { useSystem } from '@/hooks/useSystem';
 import { NoteAppProps, FolderProps, Note } from '@/data/notes';
 import {
   format,
@@ -28,6 +27,7 @@ import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { $createParagraphNode, $createTextNode, $getRoot } from 'lexical';
 import { useEffect } from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { useNoteStore } from '../providers/store-provider';
 
 export function Notes({ appData }: AppProps) {
   const {
@@ -38,7 +38,7 @@ export function Notes({ appData }: AppProps) {
     setSelectedNote,
     updateNoteById,
     getNoteById
-  } = useSystem();
+  } = useNoteStore((state) => state);
 
   const note = getNoteById(selectedNote);
 

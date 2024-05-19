@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { DockItem } from './dock-item';
-import { useSystem } from '@/hooks/useSystem';
 import { Trashcan } from './trashcan';
 import { Separator } from './ui/separator';
+import { useAppStore } from './providers/store-provider';
 
 export default function Dock() {
-  const { apps } = useSystem();
+  const { apps } = useAppStore((state) => state);
   const [isDockFocused, setIsDockFocused] = useState(false);
   const controls = useAnimation();
 

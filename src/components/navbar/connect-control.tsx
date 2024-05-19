@@ -1,4 +1,3 @@
-import { useSystem } from '@/hooks/useSystem';
 import { useNetworkState } from 'react-use';
 import { IoBluetooth } from 'react-icons/io5';
 import {
@@ -7,10 +6,11 @@ import {
   MdWifi1Bar,
   MdWifiTethering
 } from 'react-icons/md';
+import { useSystemStore } from '../providers/store-provider';
 export function ConnectControl() {
   const state = useNetworkState();
   const { wifi, setWifi, bluetooth, setBluetooth, airdrop, setAirdrop } =
-    useSystem();
+    useSystemStore((state) => state);
 
   const handleWifiClick = () => {
     setWifi(!wifi);

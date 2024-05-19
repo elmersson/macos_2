@@ -1,9 +1,9 @@
-import { useSystem } from '@/hooks/useSystem';
 import { Apps } from './apps';
 import Dock from './dock';
+import { useSystemStore } from './providers/store-provider';
 
 export function Desktop() {
-  const { launchPad } = useSystem();
+  const { launchPad } = useSystemStore((state) => state);
 
   return (
     <div className="flex overflow-hidden no-scrollbar h-screen">

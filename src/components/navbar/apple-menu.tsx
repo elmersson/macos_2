@@ -11,13 +11,24 @@ import {
   DropdownMenuPortal,
   DropdownMenuSubContent
 } from '../ui/dropdown-menu';
-import { useSystem } from '@/hooks/useSystem';
+import {
+  useAppStore,
+  useItermStore,
+  useNoteStore,
+  useSystemStore
+} from '../providers/store-provider';
 
 export function AppleMenu() {
-  const { resetStore, setLogedIn } = useSystem();
+  const { setLogedIn, resetSystemStore } = useSystemStore((state) => state);
+  const { resetAppStore } = useAppStore((state) => state);
+  const { resetNoteStore } = useNoteStore((state) => state);
+  const { resetItermStore } = useItermStore((state) => state);
 
   const handleQuit = () => {
-    resetStore();
+    resetAppStore();
+    resetItermStore();
+    resetNoteStore();
+    resetSystemStore();
   };
 
   const handleSignOut = () => {
