@@ -1,6 +1,8 @@
 import weatherJson from '../data/Weather.json';
 import { apps } from '@/data/Apps';
 import { starterNotes } from '@/data/notes';
+import { FinderStore } from './finderStore';
+import { finderData } from '@/data/finderData';
 
 export const initialSystemData = {
   bootProgress: 0,
@@ -37,3 +39,13 @@ export const initialSelectedNotes = [
 export const initialSelectedNote = 'work-meeting-notes';
 
 export const initialNotesData = [{ dir: 'ICloud', folders: starterNotes }];
+
+export const initialFinderData: Pick<
+  FinderStore,
+  'finderDataSet' | 'selectedFinderId' | 'finderHistory' | 'historyPosition'
+> = {
+  finderDataSet: finderData,
+  selectedFinderId: 'recent',
+  finderHistory: [],
+  historyPosition: -1
+};

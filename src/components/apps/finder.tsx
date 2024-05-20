@@ -25,27 +25,115 @@ import {
   IoPricetagOutline,
   IoAppsOutline
 } from 'react-icons/io5';
-import { BsLayoutThreeColumns, BsFillFolderFill } from 'react-icons/bs';
+import { BsLayoutThreeColumns } from 'react-icons/bs';
 import { MdOutlineIosShare } from 'react-icons/md';
 import { HiOutlineDotsCircleHorizontal } from 'react-icons/hi';
-import { FaHardDrive } from 'react-icons/fa6';
 
-import { AppProps, iTerm2Data, apps } from '@/data/Apps';
-import { finderData } from '@/data/finderData';
+import { AppProps, apps } from '@/data/Apps';
+import { FinderData } from '@/data/finderData';
 import { LaunchpadItem } from '../launchpad';
 import { useAppStore, useFinderStore } from '../providers/store-provider';
+import Image from 'next/image';
+
+const findSelectedItem = (
+  id: string,
+  items: FinderData[]
+): FinderData | undefined => {
+  for (const item of items) {
+    if (item.id === id) return item;
+    if (item.children) {
+      const found = findSelectedItem(id, item.children);
+      if (found) return found;
+    }
+  }
+  return undefined;
+};
+
+interface CountItemsProps {
+  item?: FinderData;
+  isApplication?: boolean;
+}
+const countItems = ({ item, isApplication }: CountItemsProps): number => {
+  if (isApplication) {
+    return apps.length;
+  }
+  return item?.children?.length || 0;
+};
+
+const tracePathToSelectedItem = (
+  id: string,
+  items: FinderData[],
+  path: FinderData[] = []
+): FinderData[] => {
+  for (const item of items) {
+    if (item.id === id) return [...path, item];
+    if (item.children) {
+      const result = tracePathToSelectedItem(id, item.children, [
+        ...path,
+        item
+      ]);
+      if (result.length > 0) return result;
+    }
+  }
+  return [];
+};
 
 export function Finder({ appData }: AppProps) {
   const { openApp, bringToFront } = useAppStore((state) => state);
-  const { selectedFinderId, setSelectedFinderId } = useFinderStore(
-    (state) => state
+  const {
+    finderDataSet,
+    selectedFinderId,
+    setSelectedFinderId,
+    finderHistory,
+    historyPosition,
+    setHistoryPosition,
+    addToHistory
+  } = useFinderStore((state) => state);
+
+  const selectedItem = findSelectedItem(selectedFinderId, finderDataSet);
+  const itemCount = countItems({
+    item: selectedItem,
+    isApplication: selectedFinderId === 'applications'
+  });
+  const pathToSelectedItem = tracePathToSelectedItem(
+    selectedFinderId,
+    finderDataSet
   );
+
+  const handleSetSelectedFinderId = (id: string) => {
+    addToHistory(selectedFinderId);
+    setSelectedFinderId(id);
+  };
+
+  const handleBack = () => {
+    if (historyPosition > 0) {
+      const newPosition = historyPosition - 1;
+      setHistoryPosition(newPosition);
+      setSelectedFinderId(finderHistory[newPosition]);
+    }
+  };
+
+  const handleForward = () => {
+    if (historyPosition < finderHistory.length - 1) {
+      const newPosition = historyPosition + 1;
+      setHistoryPosition(newPosition);
+      setSelectedFinderId(finderHistory[newPosition]);
+    }
+  };
 
   return (
     <DraggableItem
       className="bg-transparent"
       actionButtonStyle="w-[161px] bg-slate-800/70 bg-clip-padding backdrop-filter backdrop-blur-xl dark:bg-slate-800/70 h-full"
-      barItem={barItem()}
+      barItem={
+        <BarItem
+          title={selectedItem?.title}
+          finderHistory={finderHistory}
+          handleBack={handleBack}
+          handleForward={handleForward}
+          historyPosition={historyPosition}
+        />
+      }
       appData={appData}
     >
       <div className="w-full h-full bg-transparent">
@@ -57,30 +145,32 @@ export function Finder({ appData }: AppProps) {
           </ScrollArea>
 
           <div className="flex flex-col w-full h-full">
-            <ScrollArea className="p-4 bg-neutral-100 dark:bg-neutral-900 w-full h-full flex">
+            <ScrollArea className="p-4 bg-neutral-100 dark:bg-neutral-800 w-full h-full flex">
               <Content
                 selectedFinderId={selectedFinderId}
-                setSelectedFinderId={setSelectedFinderId}
+                setSelectedFinderId={handleSetSelectedFinderId}
                 openApp={openApp}
                 bringToFront={bringToFront}
+                selectedItem={selectedItem}
               />
             </ScrollArea>
             <div className="text-sm items-center">
-              <div className="bg-neutral-900 border-t border-white/20 py-1 px-2 text-white/60 flex flex-row items-center space-x-1">
-                <FaHardDrive className="text-gray-400 size-[15px]" />
-                <span>Macintosh HD</span>
-                <IoIosArrowForward />
-                <BsFillFolderFill className="text-blue-400 size-[15px]" />
-                <span>Users</span>
-                <IoIosArrowForward />
-                <BsFillFolderFill className="text-blue-400 size-[15px]" />
-                <span>rasmuselmersson</span>
-                <IoIosArrowForward />
-                <BsFillFolderFill className="text-blue-400 size-[15px]" />
-                <span>Desktop</span>
+              <div className="bg-neutral-800 border-t border-white/20 py-1 px-2 text-white/60 flex flex-row items-center space-x-1">
+                {pathToSelectedItem.map((item, index) => (
+                  <div
+                    key={item.id}
+                    onClick={() => setSelectedFinderId(item.id)}
+                    className="flex flex-row items-center space-x-1"
+                    role="button"
+                  >
+                    {index > 0 && <IoIosArrowForward />}
+                    <Image src={item.iconImg} alt="icon" className="w-4" />
+                    <span>{item.title}</span>
+                  </div>
+                ))}
               </div>
               <div className="bg-neutral-800 py-1 px-2 flex justify-center text-white/30">
-                26 items, 520,64 GB avalible
+                {itemCount} items, 520,64 GB avalible
               </div>
             </div>
           </div>
@@ -90,13 +180,44 @@ export function Finder({ appData }: AppProps) {
   );
 }
 
-function barItem() {
+interface BarItemProps {
+  title?: string;
+  finderHistory: string[];
+  handleBack: () => void;
+  handleForward: () => void;
+  historyPosition: number;
+}
+
+function BarItem({
+  finderHistory,
+  handleBack,
+  handleForward,
+  historyPosition,
+  title
+}: BarItemProps) {
   return (
     <div className="bg-neutral-800 flex flex-row w-full h-full items-center justify-between p-3">
       <div className="flex flex-row items-center space-x-3">
-        <IoIosArrowBack className="text-lg opacity-40" />
-        <IoIosArrowForward className="text-lg" />
-        <span className="font-bold">Desktop</span>
+        <div
+          className={`text-lg ${historyPosition > 0 ? 'opacity-100 cursor-pointer' : 'opacity-40 cursor-not-allowed'}`}
+          role="button"
+          onClick={() => {
+            handleBack();
+          }}
+        >
+          <IoIosArrowBack />
+        </div>
+
+        <div
+          className={`text-lg ${historyPosition < finderHistory.length - 1 ? 'opacity-100 cursor-pointer' : 'opacity-40 cursor-not-allowed'}`}
+          role="button"
+          onClick={() => {
+            handleForward();
+          }}
+        >
+          <IoIosArrowForward />
+        </div>
+        <span className="font-bold">{title}</span>
       </div>
       <div className="flex flex-row items-center space-x-10 text-xl">
         <div className="flex flex-row items-center space-x-4">
@@ -261,16 +382,18 @@ interface ContentProps {
   openApp: (id: string) => void;
   // eslint-disable-next-line no-unused-vars
   bringToFront: (id: string) => void;
+  selectedItem: FinderData | undefined;
 }
 function Content({
   setSelectedFinderId,
   selectedFinderId,
   openApp,
-  bringToFront
+  bringToFront,
+  selectedItem
 }: ContentProps) {
   if (selectedFinderId === 'applications') {
     return (
-      <div className="flex flex-row w-full space-x-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-7 gap-14">
         {apps.map((app) => (
           <LaunchpadItem
             key={app.id}
@@ -298,46 +421,39 @@ function Content({
     );
   }
 
-  const findSelectedItem = (
-    id: string,
-    items: iTerm2Data[]
-  ): iTerm2Data | undefined => {
-    for (const item of items) {
-      if (item.id === id) return item;
-      if (item.children) {
-        const found = findSelectedItem(id, item.children);
-        if (found) return found;
-      }
+  const handleDoubleClick = (data: FinderData) => {
+    if (data.id === 'car') {
+      window.open(
+        'https://www.youtube.com/watch?v=HmZm8vNHBSU',
+        '_blank',
+        'noopener,noreferrer'
+      );
+    } else if (data.type === 'folder') {
+      setSelectedFinderId(data.id);
     }
-    return undefined;
   };
 
-  const selectedItem = findSelectedItem(selectedFinderId, finderData);
-
   return (
-    <div className="flex flex-row w-full space-x-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-7 gap-14">
       {selectedItem?.children?.map((data) => (
         <div
           key={data.id}
-          className="flex flex-col items-center justify-center"
+          className={`flex flex-col items-center justify-center ${data.locked && 'opacity-40'}`}
           role="button"
-          onDoubleClick={() => {
-            data.type === 'folder' ? setSelectedFinderId(data.id) : undefined;
-          }}
+          onDoubleClick={() => handleDoubleClick(data)}
         >
-          <Item type={data.type} />
-          <span>{data.title}</span>
+          <Item data={data} />
         </div>
       ))}
     </div>
   );
 }
 
-function Item({ type }: { type: string }) {
-  const Icon = type === 'folder' ? BsFillFolderFill : FaHardDrive;
+function Item({ data }: { data: FinderData }) {
   return (
-    <div className="text-[84px]">
-      <Icon />
+    <div className="flex justify-center items-center flex-col">
+      <Image src={data.iconImg} alt="icon" className="w-20" />
+      <span className="text-sm">{data.title}</span>
     </div>
   );
 }
