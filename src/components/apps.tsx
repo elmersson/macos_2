@@ -5,6 +5,7 @@ import { Notes } from './apps/notes';
 import { Iterm2 } from './apps/iterm2';
 import { Outlook } from './apps/outlook';
 import { useAppStore } from './providers/store-provider';
+import { Fragment } from 'react';
 export function Apps() {
   const { apps } = useAppStore((state) => state);
 
@@ -14,7 +15,7 @@ export function Apps() {
         (app) =>
           app.isOpen &&
           !app.isMinimized && (
-            <>
+            <Fragment key={app.id}>
               {app.id === 'visual_studio_code' ? (
                 <VSCode key={app.id} appData={app} />
               ) : app.id === 'finder' ? (
@@ -28,7 +29,7 @@ export function Apps() {
               ) : app.id === 'mail' ? (
                 <Outlook key={app.id} appData={app} />
               ) : null}
-            </>
+            </Fragment>
           )
       )}
     </div>

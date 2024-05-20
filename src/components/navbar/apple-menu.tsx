@@ -13,6 +13,7 @@ import {
 } from '../ui/dropdown-menu';
 import {
   useAppStore,
+  useFinderStore,
   useItermStore,
   useNoteStore,
   useSystemStore
@@ -23,12 +24,14 @@ export function AppleMenu() {
   const { resetAppStore } = useAppStore((state) => state);
   const { resetNoteStore } = useNoteStore((state) => state);
   const { resetItermStore } = useItermStore((state) => state);
+  const { resetFinderStore } = useFinderStore((state) => state);
 
   const handleQuit = () => {
     resetAppStore();
     resetItermStore();
     resetNoteStore();
     resetSystemStore();
+    resetFinderStore();
   };
 
   const handleSignOut = () => {

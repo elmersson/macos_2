@@ -42,7 +42,6 @@ export function Boot() {
         );
         const weatherData: WeatherData = response.data;
         setWeather(weatherData);
-        console.log(response.data);
       } catch (err) {
         console.error(err);
       }
