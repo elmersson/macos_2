@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { finderData, FinderData } from '@/data/finderData';
+import { FinderData } from '@/data/finderData';
 import { create, StoreApi } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { initialFinderData } from './initialData';
@@ -26,13 +26,17 @@ export const createFinderStore = (): StoreApi<FinderStore> => {
             return { selectedFinderId: id };
           }),
         addToHistory: (id: string) =>
-          set((state) => ({
-            finderHistory: [...state.finderHistory, id],
-            historyPosition: state.historyPosition + 1
-          })),
+          set((state) => {
+            if (state.historyPosition < state.finderHistory.length - 1) {
+              state.finderHistory.splice(state.historyPosition + 1);
+            }
+            return {
+              finderHistory: [...state.finderHistory, id]
+            };
+          }),
         setHistoryPosition: (position: number) =>
-          set((state) => ({
-            historyPosition: state.historyPosition + position
+          set(() => ({
+            historyPosition: position
           })),
         resetFinderStore: () => set({ ...initialFinderData })
       }),
