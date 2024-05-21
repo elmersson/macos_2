@@ -101,6 +101,8 @@ export function Finder({ appData }: AppProps) {
   );
 
   const handleSetSelectedFinderId = (id: string) => {
+    const newPosition = historyPosition + 1;
+    setHistoryPosition(newPosition);
     addToHistory(selectedFinderId);
     setSelectedFinderId(id);
   };
@@ -139,7 +141,7 @@ export function Finder({ appData }: AppProps) {
       <div className="w-full h-full bg-transparent">
         <div className="flex h-full">
           <ScrollArea className="w-40 bg-slate-800/70 bg-clip-padding backdrop-filter backdrop-blur-xl dark:bg-slate-800/70 p-4">
-            <Favorites setSelectedFinderId={setSelectedFinderId} />
+            <Favorites setSelectedFinderId={handleSetSelectedFinderId} />
             <ICloud />
             <Tags />
           </ScrollArea>
@@ -159,7 +161,7 @@ export function Finder({ appData }: AppProps) {
                 {pathToSelectedItem.map((item, index) => (
                   <div
                     key={item.id}
-                    onClick={() => setSelectedFinderId(item.id)}
+                    onClick={() => handleSetSelectedFinderId(item.id)}
                     className="flex flex-row items-center space-x-1"
                     role="button"
                   >
@@ -434,7 +436,7 @@ function Content({
   };
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-7 gap-14">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-7 gap-14 px-8">
       {selectedItem?.children?.map((data) => (
         <div
           key={data.id}

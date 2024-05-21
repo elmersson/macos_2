@@ -47,5 +47,5 @@ export const initialFinderData: Pick<
   finderDataSet: finderData,
   selectedFinderId: 'recent',
   finderHistory: [],
-  historyPosition: -1
+  historyPosition: 0
 };
