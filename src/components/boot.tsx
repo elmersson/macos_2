@@ -1,15 +1,15 @@
 'use client';
-import { WeatherData } from '@/types/Weather';
 import { useEffect, useState } from 'react';
 import { IoLogoApple } from 'react-icons/io5';
-import axios from 'axios';
-import useTime from '@/hooks/useTime';
-import getFullFormatDate from '@/lib/date/getFullFormatDate';
 import { useSystemStore } from './providers/store-provider';
+import useWeatherData from '@/hooks/useWeatherData';
+import useNameOfTheDay from '@/hooks/useNameOfTheDay';
 
 export function Boot() {
   const [latitude, setLatitude] = useState<number>(59.3326);
   const [longitude, setLongitude] = useState<number>(18.0649);
+  const [isGeolocationLoaded, setIsGeolocationLoaded] = useState(false);
+
   const {
     booted,
     setBooted,
@@ -18,6 +18,25 @@ export function Boot() {
     bootProgress,
     setBootProgress
   } = useSystemStore((state) => state);
+
+  const { data: weatherData } = useWeatherData(
+    latitude,
+    longitude,
+    isGeolocationLoaded
+  );
+  const { data: nameOfTheDay } = useNameOfTheDay();
+
+  useEffect(() => {
+    if (weatherData) {
+      setWeather(weatherData);
+    }
+  }, [weatherData, setWeather]);
+
+  useEffect(() => {
+    if (nameOfTheDay) {
+      setNameOfTheDay(nameOfTheDay);
+    }
+  }, [nameOfTheDay, setNameOfTheDay]);
 
   useEffect(() => {
     if (bootProgress < 100) {
@@ -34,66 +53,24 @@ export function Boot() {
   }, [bootProgress, setBooted, setBootProgress]);
 
   useEffect(() => {
-    const fetchWeatherData = async () => {
-      try {
-        const apiKey = process.env.NEXT_PUBLIC_OPEN_WEATHER;
-        const response = await axios.get(
-          `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
-        );
-        const weatherData: WeatherData = response.data;
-        setWeather(weatherData);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          console.log(latitude, longitude);
           setLatitude(latitude);
           setLongitude(longitude);
-          fetchWeatherData();
+          setIsGeolocationLoaded(true);
         },
         (error) => {
-          console.error(error);
+          console.error('Geolocation error:', error.message);
+          setIsGeolocationLoaded(true);
         }
       );
     } else {
-      fetchWeatherData();
+      console.warn('Geolocation is not supported by this browser.');
+      setIsGeolocationLoaded(true);
     }
-  }, [latitude, longitude, setWeather]);
-
-  const currentTime = useTime();
-  const forrmatedTime = getFullFormatDate(currentTime);
-
-  const currentDate =
-    currentTime.getFullYear() +
-    '/' +
-    (currentTime.getMonth() + 1) +
-    '/' +
-    forrmatedTime.dayOfMonth;
-
-  const apiUrl = `http://sholiday.faboul.se/dagar/v2.1/${currentDate}`;
-
-  useEffect(() => {
-    axios
-      .get(apiUrl)
-      .then((response) => {
-        if (
-          response.data &&
-          response.data.dagar &&
-          response.data.dagar.length > 0
-        ) {
-          const namesForToday = response.data.dagar[0].namnsdag;
-          setNameOfTheDay(namesForToday);
-        }
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }, [apiUrl, setNameOfTheDay]);
+  }, []);
 
   if (booted) {
     return;
