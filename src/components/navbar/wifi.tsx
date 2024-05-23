@@ -32,7 +32,7 @@ const otherNetworks = [
   '404 Network Unavailable'
 ];
 
-export function Wifi() {
+export function Wifi({ logedIn }: { logedIn: boolean }) {
   const state = useNetworkState();
   const { wifi, setWifi } = useSystemStore((state) => state);
 
@@ -53,7 +53,7 @@ export function Wifi() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild disabled={!logedIn}>
         <div role="button" className="flex items-center px-2.5 py-1 rounded-md">
           {wifiIcon()}
         </div>

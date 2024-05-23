@@ -52,14 +52,14 @@ export function Login() {
   return (
     <div className="h-full flex flex-col" onClick={handleClickOnScreen}>
       <div className="flex flex-col items-center mt-10">
-        <span className="text-[2rem] font-bold text-teal-100 mix-blend-overlay text-shadow">
+        <span className="text-[2rem] font-semibold text-teal-100 mix-blend-overlay text-shadow">
           {dayOfWeek}, {dayOfMonth} {month}
         </span>
-        <span className="text-[8rem] font-black text-teal-100 mix-blend-overlay -mt-8 text-shadow">
+        <span className="text-[9rem] font-bold text-teal-100 mix-blend-overlay -mt-9 text-shadow">
           {time}
         </span>
       </div>
-      <div className="flex flex-col items-center mt-[55vh] space-y-4">
+      <div className="flex flex-col items-center mt-[60vh] space-y-4">
         <div className="w-24 h-24 bg-slate-700 bg-clip-padding backdrop-filter backdrop-blur-3xl bg-opacity-30 rounded-full p-2">
           <Image
             src={ProfileImage}

@@ -11,12 +11,12 @@ import BatteryLevelIndicator from './battery-level-indicator';
 import Charging from '@/assets/icons/charging.svg';
 import Image from 'next/image';
 
-export function Battery() {
+export function Battery({ logedIn }: { logedIn: boolean }) {
   const batteryState = useBattery();
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild disabled={!logedIn}>
         <div role="button" className={'flex items-center px-2 py-1 rounded-md'}>
           <p className="text-xs text-shadow">
             {(batteryState.level * 100).toFixed(0)} %
