@@ -35,10 +35,10 @@ export function Navbar() {
       </div>
       <div className="flex flex-row items-center px-3">
         {logedIn && <Hidden />}
-        <Battery />
-        <Wifi />
+        <Battery logedIn={logedIn} />
+        <Wifi logedIn={logedIn} />
         {logedIn && <ControlCentre />}
-        <WidgetsBar />
+        <WidgetsBar logedIn={logedIn} />
       </div>
     </div>
   );
