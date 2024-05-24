@@ -11,7 +11,7 @@ A personal website made to look like my current OS running on my Macbook. Update
 - [ ] ShortCommand
 - [ ] Analytics
 - [ ] App function
-  - [ ] Finder
+  - [x] Finder
   - [x] Launchpad
   - [x] Notes
   - [ ] Outlook
