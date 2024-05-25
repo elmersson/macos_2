@@ -36,7 +36,7 @@ export const createAppStore = (): StoreApi<AppStore> => {
         },
         closeApp: (id) => {
           const apps = get().apps.map((app) =>
-            app.id === id ? { ...app, isOpen: false } : app
+            app.id === id ? { ...app, isOpen: false, isMinimized: false } : app
           );
           set({ apps });
         },

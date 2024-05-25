@@ -23,6 +23,16 @@ export default function Dock() {
     setIsDockFocused(false);
   };
 
+  const initialApps = apps.slice(0, 8);
+
+  const openApps = apps.filter(
+    (app) => app.isOpen && !initialApps.includes(app)
+  );
+
+  const dockApps = [...initialApps, ...openApps];
+
+  const minimizedApps = apps.filter((app) => app.isMinimized);
+
   return (
     <motion.div
       className="fixed bottom-2 left-0 w-full flex justify-center"
@@ -35,7 +45,7 @@ export default function Dock() {
         animate={{ y: animateY }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       >
-        {apps.slice(0, 8).map((app) => (
+        {dockApps.map((app) => (
           <DockItem
             key={app.id}
             title={app.title}
@@ -48,6 +58,19 @@ export default function Dock() {
           orientation="vertical"
           className="h-[80%] bg-neutral-400/40"
         />
+        {minimizedApps.map((app) => {
+          if (app.miniImg) {
+            return (
+              <DockItem
+                key={app.id}
+                title={app.title}
+                img={app.miniImg}
+                id={app.id}
+                isOpen={false}
+              />
+            );
+          }
+        })}
         <Trashcan />
       </motion.ul>
     </motion.div>
