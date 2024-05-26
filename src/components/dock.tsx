@@ -40,7 +40,7 @@ export default function Dock() {
       onMouseLeave={handleMouseLeave}
     >
       <motion.ul
-        className="bg-clip-padding backdrop-filter backdrop-blur-md bg-neutral-300/20 border border-neutral-100/20 flex rounded-3xl p-1 dark:bg-neutral-500/10 dark:border-neutral-300/20 space-x-2 items-center"
+        className="bg-clip-padding backdrop-filter backdrop-blur-md bg-neutral-300/20 border border-neutral-100/20 dark:bg-neutral-500/10 dark:border-neutral-300/20 flex rounded-3xl p-1 space-x-2 items-center"
         initial={{ y: initialY }}
         animate={{ y: animateY }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
