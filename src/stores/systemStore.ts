@@ -31,13 +31,17 @@ export interface SystemStore {
   setNameOfTheDay: (names: string[]) => void;
   launchPad: boolean;
   setLaunchPad: (launchPad: boolean) => void;
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+  toggle: () => void;
   resetSystemStore: () => void;
 }
 
 export const createSystemStore = (): StoreApi<SystemStore> => {
   return create<SystemStore>()(
     persist(
-      (set) => ({
+      (set, get) => ({
         ...initialSystemData,
         weather: initialWeatherData,
         nameOfTheDay: initialNameOfTheDay,
@@ -52,6 +56,10 @@ export const createSystemStore = (): StoreApi<SystemStore> => {
         setWeather: (weather) => set({ weather }),
         setNameOfTheDay: (nameOfTheDay) => set({ nameOfTheDay }),
         setLaunchPad: (launchPad) => set({ launchPad }),
+        isOpen: false,
+        onOpen: () => set({ isOpen: true }),
+        onClose: () => set({ isOpen: false }),
+        toggle: () => set({ isOpen: !get().isOpen }),
         resetSystemStore: () =>
           set({
             ...initialSystemData,
