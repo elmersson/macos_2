@@ -12,6 +12,7 @@ export interface FinderStore {
   addToHistory: (id: string) => void;
   historyPosition: number;
   setHistoryPosition: (position: number) => void;
+  removeById: (id: string) => void;
   resetFinderStore: () => void;
 }
 
@@ -38,6 +39,20 @@ export const createFinderStore = (): StoreApi<FinderStore> => {
           set(() => ({
             historyPosition: position
           })),
+        removeById: (id: string) =>
+          set((state) => {
+            const removeNodeById = (data: FinderData[]): FinderData[] => {
+              return data
+                .filter((item) => item.id !== id)
+                .map((item) => ({
+                  ...item,
+                  children: item.children ? removeNodeById(item.children) : []
+                }));
+            };
+            return {
+              finderDataSet: removeNodeById(state.finderDataSet)
+            };
+          }),
         resetFinderStore: () => set({ ...initialFinderData })
       }),
       { name: 'finder-store-2' }

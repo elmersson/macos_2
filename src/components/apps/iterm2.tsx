@@ -1,9 +1,10 @@
 import { cn } from '@/lib/utils';
 import { Roboto_Mono } from 'next/font/google';
 import { DraggableItem } from './draggable-item';
-import { AppProps, iTerm2Data } from '@/data/Apps';
+import { AppProps } from '@/data/Apps';
 import { FormEvent, useState, KeyboardEvent, useRef, ReactNode } from 'react';
-import { useItermStore } from '../providers/store-provider';
+import { useFinderStore, useItermStore } from '../providers/store-provider';
+import { FinderData } from '@/data/finderData';
 
 const font = Roboto_Mono({
   subsets: ['latin'],
@@ -12,6 +13,7 @@ const font = Roboto_Mono({
 export function Iterm2({ appData }: AppProps) {
   const [input, setInput] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
+  const { finderDataSet } = useFinderStore((state) => state);
 
   const [historyIndex, setHistoryIndex] = useState(-1);
   const { addHistory, setCurDir, setVisibleHistory, iterm2 } = useItermStore(
@@ -105,19 +107,19 @@ export function Iterm2({ appData }: AppProps) {
   };
 
   const findDirectory = (currentDir: string, dirId: string) => {
-    const directory = iterm2Data.find((item) => item.id === currentDir);
+    const directory = finderDataSet.find((item) => item.id === currentDir);
     if (directory && directory.children) {
       return directory.children.find((child) => child.id === dirId);
     } else if (!currentDir) {
-      return iterm2Data.find((item) => item.id === dirId);
+      return finderDataSet.find((item) => item.id === dirId);
     }
     return null;
   };
 
   const findItemByTitle = (
     title: string,
-    data: iTerm2Data[] = iterm2Data
-  ): iTerm2Data | null => {
+    data: FinderData[] = finderDataSet
+  ): FinderData | null => {
     for (let item of data) {
       if (item.title === title) {
         return item;
@@ -162,7 +164,9 @@ export function Iterm2({ appData }: AppProps) {
                   <span className="text-sm">{entry.command}</span>
                 </div>
                 {entry.command === 'help' && <Help />}
-                {entry.command === 'ls' && <ListFiles dir={entry.dir} />}
+                {entry.command === 'ls' && (
+                  <ListFiles dir={entry.dir} data={finderDataSet} />
+                )}
                 {entry.command.startsWith('cat') && (
                   <div className="text-white text-sm mt-2">
                     {renderContent(entry.command.split(' ')[1])}
@@ -230,18 +234,20 @@ function Help() {
 
 interface ListFilesProps {
   dir?: string;
+  data: FinderData[];
 }
 
-function ListFiles({ dir }: ListFilesProps) {
+function ListFiles({ dir, data }: ListFilesProps) {
+  console.log(dir);
   if (!dir) {
     return (
       <div className="w-full flex flex-row space-x-2">
-        {iterm2Data.map((item) => (
+        {data.map((item) => (
           <div
             key={item.id}
             className={cn(
               'text-sm',
-              item.type === 'folder' && 'font-bold text-teal-300'
+              item.type !== 'file' && 'font-bold text-teal-300'
             )}
           >
             {item.title}
@@ -251,7 +257,7 @@ function ListFiles({ dir }: ListFilesProps) {
     );
   }
 
-  const directory = iterm2Data.find((item) => item.id === dir && item.children);
+  const directory = data.find((item) => item.id === dir && item.children);
   if (directory && directory.children) {
     return (
       <div className="w-full flex flex-row space-x-2">
@@ -260,7 +266,7 @@ function ListFiles({ dir }: ListFilesProps) {
             key={child.id}
             className={cn(
               'text-sm',
-              child.type === 'folder' && 'font-bold text-teal-300'
+              child.type !== 'file' && 'font-bold text-teal-300'
             )}
           >
             {child.title}
@@ -272,85 +278,3 @@ function ListFiles({ dir }: ListFilesProps) {
 
   return <div>No files found.</div>;
 }
-
-export const iterm2Data: iTerm2Data[] = [
-  {
-    id: 'about',
-    title: 'about',
-    type: 'folder',
-    children: [
-      {
-        id: 'about-bio',
-        title: 'bio.txt',
-        type: 'file',
-        content: (
-          <div className="py-1">
-            <div>
-              Hi, im Rasmus Elmersson. A Frontend developer from Stockholm
-              currently working on Regent Ab
-            </div>
-          </div>
-        )
-      },
-      {
-        id: 'about-interests',
-        title: 'interests.txt',
-        type: 'file',
-        content: 'Machine Learning / Fotball / Craftmanship'
-      },
-      {
-        id: 'about-contact',
-        title: 'contact.txt',
-        type: 'file',
-        content: (
-          <ul className="list-disc ml-6">
-            <li>
-              Email:{' '}
-              <a
-                className="text-blue-300"
-                href="mailto:elmerssonrasmus@gmail.com"
-                target="_blank"
-                rel="noreferrer"
-              >
-                elmerssonrasmus@gmail.com
-              </a>
-            </li>
-            <li>
-              Github:{' '}
-              <a
-                className="text-blue-300"
-                href="https://github.com/elmersson"
-                target="_blank"
-                rel="noreferrer"
-              >
-                @elmersson
-              </a>
-            </li>
-            <li>
-              Linkedin:{' '}
-              <a
-                className="text-blue-300"
-                href="https://www.linkedin.com/in/rasmus-elmersson-79a161174/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                rasmus-elmersson
-              </a>
-            </li>
-            <li>
-              Personal Website:{' '}
-              <a
-                className="text-blue-300"
-                href="https://rasmuselmersson.se"
-                target="_blank"
-                rel="noreferrer"
-              >
-                https://rasmuselmersson.se
-              </a>
-            </li>
-          </ul>
-        )
-      }
-    ]
-  }
-];
