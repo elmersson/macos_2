@@ -81,23 +81,31 @@ export function Iterm2({ appData }: AppProps) {
   };
 
   const changeDirectory = (dir: string) => {
-    if (!dir) {
-      setCurDir('');
+    const currentDir = iterm2.curDir ?? 'macintosh-hd';
+
+    if (!dir || dir === '~') {
+      setCurDir('macintosh-hd');
       return;
     }
 
     if (dir === '..') {
-      const currentPath = iterm2.curDir ? iterm2.curDir.split('/') : [];
-      if (currentPath.length > 1) {
-        currentPath.pop();
-        setCurDir(currentPath.join('/'));
+      const currentDirectory = findDirectoryById(currentDir, finderDataSet);
+      const parentDirectory = currentDirectory
+        ? findParentDirectory(currentDirectory.id, finderDataSet)
+        : null;
+
+      if (parentDirectory) {
+        setCurDir(parentDirectory.id);
       } else {
-        setCurDir('');
+        console.log('No parent directory found');
       }
-    } else if (dir === '~') {
-      setCurDir('');
     } else {
-      const newDir = findDirectory(iterm2.curDir || '', dir);
+      const currentDirectory = findDirectoryById(currentDir, finderDataSet);
+      const newDir =
+        currentDirectory && currentDirectory.children
+          ? findDirectoryByTitle(dir, currentDirectory.children)
+          : findDirectoryByTitle(dir, finderDataSet);
+
       if (newDir) {
         setCurDir(newDir.id);
       } else {
@@ -106,38 +114,76 @@ export function Iterm2({ appData }: AppProps) {
     }
   };
 
-  const findDirectory = (currentDir: string, dirId: string) => {
-    const directory = finderDataSet.find((item) => item.id === currentDir);
-    if (directory && directory.children) {
-      return directory.children.find((child) => child.id === dirId);
-    } else if (!currentDir) {
-      return finderDataSet.find((item) => item.id === dirId);
+  const findDirectoryById = (
+    id: string,
+    nodes: FinderData[]
+  ): FinderData | null => {
+    for (const node of nodes) {
+      if (node.id === id) return node;
+      if (node.children) {
+        const found = findDirectoryById(id, node.children);
+        if (found) return found;
+      }
     }
     return null;
   };
 
-  const findItemByTitle = (
+  const findDirectoryByTitle = (
     title: string,
-    data: FinderData[] = finderDataSet
+    nodes: FinderData[]
   ): FinderData | null => {
-    for (let item of data) {
-      if (item.title === title) {
-        return item;
+    for (const node of nodes) {
+      if (node.title.toLowerCase() === title.toLowerCase()) return node;
+      if (node.children) {
+        const found = findDirectoryByTitle(title, node.children);
+        if (found) return found;
       }
-      if (item.children) {
-        const found = findItemByTitle(title, item.children);
-        if (found) {
-          return found;
+    }
+    return null;
+  };
+
+  const findParentDirectory = (
+    currentDirId: string,
+    nodes: FinderData[]
+  ): FinderData | null => {
+    for (const node of nodes) {
+      if (node.children) {
+        for (const child of node.children) {
+          if (child.id === currentDirId) {
+            return node;
+          }
+        }
+        const foundInChildren = findParentDirectory(
+          currentDirId,
+          node.children
+        );
+        if (foundInChildren) return foundInChildren;
+      }
+    }
+    return null;
+  };
+
+  const renderContent = (fileTitle: string): ReactNode => {
+    const findFileByTitle = (
+      title: string,
+      nodes: FinderData[]
+    ): FinderData | null => {
+      for (const node of nodes) {
+        if (
+          node.title.toLowerCase() === title.toLowerCase() &&
+          node.type === 'file'
+        )
+          return node;
+        if (node.children) {
+          const found = findFileByTitle(title, node.children);
+          if (found) return found;
         }
       }
-    }
-    return null;
-  };
+      return null;
+    };
 
-  const renderContent = (fileId: string): ReactNode => {
-    const item = findItemByTitle(fileId);
-
-    return item && item.type === 'file' ? item.content : 'File not found.';
+    const file = findFileByTitle(fileTitle, finderDataSet);
+    return file && file.content ? file.content : 'File not found.';
   };
 
   return (
@@ -238,26 +284,22 @@ interface ListFilesProps {
 }
 
 function ListFiles({ dir, data }: ListFilesProps) {
-  console.log(dir);
-  if (!dir) {
-    return (
-      <div className="w-full flex flex-row space-x-2">
-        {data.map((item) => (
-          <div
-            key={item.id}
-            className={cn(
-              'text-sm',
-              item.type !== 'file' && 'font-bold text-teal-300'
-            )}
-          >
-            {item.title}
-          </div>
-        ))}
-      </div>
-    );
-  }
+  const findDirectoryById = (
+    id: string,
+    nodes: FinderData[]
+  ): FinderData | null => {
+    for (const node of nodes) {
+      if (node.id === id) return node;
+      if (node.children) {
+        const found = findDirectoryById(id, node.children);
+        if (found) return found;
+      }
+    }
+    return null;
+  };
 
-  const directory = data.find((item) => item.id === dir && item.children);
+  const directory = dir ? findDirectoryById(dir, data) : { children: data };
+
   if (directory && directory.children) {
     return (
       <div className="w-full flex flex-row space-x-2">
