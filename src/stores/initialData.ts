@@ -24,7 +24,7 @@ export const initialAppData = apps;
 
 export const initialIterm2Data = {
   history: [],
-  curDir: undefined,
+  curDir: 'rasmuselmersson',
   curCommand: undefined,
   visibleHistory: 0
 };
