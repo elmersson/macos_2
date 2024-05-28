@@ -16,6 +16,7 @@ A personal website made to look like my current OS running on my Macbook. Update
   - [x] Notes
   - [ ] Outlook
   - [x] iterm2
+  - [ ] System
   - [ ] Trashcan
 
 ## Tech-stack
