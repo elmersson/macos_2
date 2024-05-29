@@ -17,6 +17,37 @@ export interface Note {
   content: string;
 }
 
+const profile = `PROFILE
+Experienced Lead Frontend/Full Stack Developer with extensive expertise in React and React Native. Currently leading the development of a major app for Sweden’s largest wholesaler using Expo and React Native with Redux, machine learning, mentoring junior developers, and driving innovative solutions. Adept at working both independently and as part of a team to deliver high-quality, user-centric applications.
+
+EXPERIENCE
+Lead Frontend/Full Stack Developer
+Regent
+February 2023 – Present
+Leading the creation of the company's first app using Expo and React Native with Redux. Collaborating with cross-functional teams to ensure seamless integration and high performance. Working with machine learning to enhance app functionalities. Mentoring junior developers and conducting code reviews to maintain code quality.
+
+React Frontend Developer
+Springpixel
+August 2020 – February 2023
+Led a team of three developers, bridging the gap between
+developers and customers. Implemented functionalities
+using React and Typescript. Created user design,
+conducted user interviews, and managed the entire UX
+flow. Utilized tools such as Adobe XD, Illustrator, After Effects,
+and Blender for design and animations.
+
+Frontend Developer (React, React Native)
+We Know IT
+August 2019 – February 2020
+Developed multiple business websites and mobile apps
+using React and React Native. Engaged with businesses to
+discuss code requirements and project estimations.
+Collaborated closely with another developer in pair
+programming setups.
+`;
+
+const personalLetter = `Born 1995 in Örebro`;
+
 export const starterNotes: FolderProps[] = [
   {
     id: 'folder1',
@@ -38,13 +69,13 @@ export const starterNotes: FolderProps[] = [
         id: 'work-cv',
         title: 'CV',
         timeStamp: new Date('2023-04-01'),
-        content: 'text'
+        content: profile
       },
       {
         id: 'work-personal-letter',
         title: 'Personal Letter',
         timeStamp: new Date('2023-05-02'),
-        content: 'text'
+        content: personalLetter
       }
     ],
     folder: [
