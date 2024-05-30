@@ -5,10 +5,9 @@
 A personal website made to look like my current OS running on my Macbook. Updated version from last try ([﻿MacOs](https://github.com/elmersson/MacOS)).
 
 ## TODO
-
-- [x] Z-index
-- [x] Store position, scale and z-index in store
 - [ ] ShortCommand
+- [ ] CI/CD
+- [ ] Deplyment
 - [ ] Analytics
 - [ ] App function
   - [x] Finder
