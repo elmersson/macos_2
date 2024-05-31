@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { create, StoreApi } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { NoteAppProps, Note } from '@/data/notes';
+import { NoteAppProps, Note, FolderProps } from '@/data/notes';
 import {
   initialNotesData,
   initialSelectedNotes,
@@ -19,6 +19,26 @@ export interface NoteStore {
   resetNoteStore: () => void;
 }
 
+const findNoteById = (
+  folders: FolderProps[],
+  noteId: string
+): Note | undefined => {
+  for (const folder of folders) {
+    for (const note of folder.notes) {
+      if (note.id === noteId) {
+        return note;
+      }
+    }
+    if (folder.folder && folder.folder.length > 0) {
+      const foundNote = findNoteById(folder.folder, noteId);
+      if (foundNote) {
+        return foundNote;
+      }
+    }
+  }
+  return undefined;
+};
+
 export const createNoteStore = (): StoreApi<NoteStore> => {
   return create<NoteStore>()(
     persist(
@@ -29,10 +49,13 @@ export const createNoteStore = (): StoreApi<NoteStore> => {
         setSelectedNotes: (notes) => set({ selectedNotes: notes }),
         setSelectedNote: (note) => set({ selectedNote: note }),
         getNoteById: (noteId) => {
-          const allNotes = get().notes.flatMap((folder) =>
-            folder.folders.flatMap((f) => f.notes)
-          );
-          return allNotes.find((note) => note.id === noteId);
+          for (const appProps of get().notes) {
+            const foundNote = findNoteById(appProps.folders, noteId);
+            if (foundNote) {
+              return foundNote;
+            }
+          }
+          return undefined;
         },
         updateNoteById: (noteId, noteData) => {
           const updatedNotes = get().notes.map((folder) => ({
