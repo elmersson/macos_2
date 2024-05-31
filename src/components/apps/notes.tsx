@@ -37,7 +37,8 @@ export function Notes({ appData }: AppProps) {
     selectedNote,
     setSelectedNote,
     updateNoteById,
-    getNoteById
+    getNoteById,
+    resetNoteStore
   } = useNoteStore((state) => state);
 
   const note = getNoteById(selectedNote);
@@ -47,7 +48,10 @@ export function Notes({ appData }: AppProps) {
       <div className="w-full h-full bg-transparent">
         <div className="flex h-full">
           <ScrollArea className="w-80 bg-slate-800/90 bg-clip-padding backdrop-filter backdrop-blur-xl dark:bg-slate-800/90 py-4">
-            <div className="flex flex-row items-center justify-between py-2 px-4">
+            <div
+              className="flex flex-row items-center justify-between py-2 px-4"
+              onClick={resetNoteStore}
+            >
               <div className="flex flex-row items-center space-x-2">
                 <PiUserCircleFill className="text-yellow-500" />
                 <span>Shared</span>
@@ -95,9 +99,10 @@ const FolderAccordion = ({
             <AccordionTrigger
               className="flex flex-row items-center space-x-1 text-sm text-neutral-300 py-2"
               chevronPosition={folder.folder ? 'left' : 'none'}
-              onClick={() =>
-                setSelectedNotes(folder.notes.map((note) => note.id))
-              }
+              onClick={() => {
+                console.log(folder.notes);
+                setSelectedNotes(folder.notes.map((note) => note.id));
+              }}
             >
               <div className="flex flex-row items-center justify-between w-full pr-2">
                 <div className="flex flex-row items-center space-x-2">

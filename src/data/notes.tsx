@@ -17,6 +17,11 @@ export interface Note {
   content: string;
 }
 
+const workMeet = `- What should we do next with the competence group
+  - Focus on security and AI
+- How should we train our model for object detaction?
+  - Our products or general`;
+
 const profile = `PROFILE
 Experienced Lead Frontend/Full Stack Developer with extensive expertise in React and React Native. Currently leading the development of a major app for Sweden’s largest wholesaler using Expo and React Native with Redux, machine learning, mentoring junior developers, and driving innovative solutions. Adept at working both independently and as part of a team to deliver high-quality, user-centric applications.
 
@@ -48,22 +53,43 @@ programming setups.
 
 const personalLetter = `Born 1995 in Örebro`;
 
+const grocery = `- Havregryn
+- Ris
+- Brillat savarin
+- Bullens korv`;
+
+const project = `- Build a sofa for the balcony that can function both as a sofa and a sun chair.
+- Home server that keeps everything local
+- Personal website that looks like my Macbook`;
+
+const xi = `         Buffon
+Lahm Cannavaro Mellberg Maldini
+            Busquets
+          Iniesta Xavi 
+      Messi Ibra Ronaldo`;
+
+const books = `- Ålevangeliet : berättelsen om världens mest gåtfulla fisk
+- Leonardo Da Vinci: The Biography
+- Atomic Habits
+- `;
+
+const movies = `- City of God
+- The Pianist
+- Millennium Trilogy
+- Game Night
+- Kopps
+- Den bästa sommaren`;
+
 export const starterNotes: FolderProps[] = [
   {
-    id: 'folder1',
+    id: 'work',
     title: 'Work',
     notes: [
       {
         id: 'work-meeting-notes',
         title: 'Meeting Notes',
         timeStamp: new Date('2024-05-09'),
-        content: 'text'
-      },
-      {
-        id: 'work-project-ideas',
-        title: 'Project Ideas',
-        timeStamp: new Date('2024-05-02'),
-        content: 'text'
+        content: workMeet
       },
       {
         id: 'work-cv',
@@ -77,37 +103,49 @@ export const starterNotes: FolderProps[] = [
         timeStamp: new Date('2023-05-02'),
         content: personalLetter
       }
-    ],
-    folder: [
-      {
-        id: 'subfolder1',
-        title: 'Reviews',
-        notes: [
-          {
-            id: 'note3',
-            title: 'Annual Review',
-            timeStamp: new Date('2024-05-03'),
-            content: 'text'
-          }
-        ]
-      }
     ]
   },
   {
-    id: 'folder2',
+    id: 'personal',
     title: 'Personal',
     notes: [
       {
-        id: 'note4',
+        id: 'grocery',
         title: 'Grocery List',
         timeStamp: new Date('2024-05-04'),
-        content: 'text'
+        content: grocery
       },
       {
-        id: 'note5',
-        title: 'Book Recommendations',
-        timeStamp: new Date('2024-05-05'),
-        content: 'text'
+        id: 'project-ideas',
+        title: 'Project Ideas',
+        timeStamp: new Date('2024-05-02'),
+        content: project
+      },
+      {
+        id: 'xi',
+        title: 'XI',
+        timeStamp: new Date('2024-05-02'),
+        content: xi
+      }
+    ],
+    folder: [
+      {
+        id: 'recommendations',
+        title: 'Recommendations',
+        notes: [
+          {
+            id: 'books',
+            title: 'Books',
+            timeStamp: new Date('2024-05-02'),
+            content: books
+          },
+          {
+            id: 'movies',
+            title: 'Movies',
+            timeStamp: new Date('2024-05-01'),
+            content: movies
+          }
+        ]
       }
     ]
   }
