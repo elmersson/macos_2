@@ -5,7 +5,7 @@
 A personal website made to look like my current OS running on my Macbook. Updated version from last try ([﻿MacOs](https://github.com/elmersson/MacOS)).
 
 ## TODO
-- [ ] ShortCommand
+- [x] ShortCommand
 - [ ] CI/CD
 - [ ] Deplyment
 - [ ] Analytics
