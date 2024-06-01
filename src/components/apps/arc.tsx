@@ -9,17 +9,28 @@ import {
 import { BsFillFolderFill } from 'react-icons/bs';
 import { DraggableItem } from './draggable-item';
 import { AppProps } from '@/data/Apps';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, ReactNode, SetStateAction, useState } from 'react';
+import { GrDocumentMissing } from 'react-icons/gr';
+import { FaGithub, FaApple, FaYoutube } from 'react-icons/fa';
 
 interface UrlItemsData {
   title: string;
   url: string;
+  icon?: ReactNode;
 }
 
 const UrlItems: UrlItemsData[] = [
-  { title: 'Github', url: 'https://github1s.com/elmersson' },
-  { title: 'Github', url: 'https://github1s.com/elmersson/macos_2' },
-  { title: 'Github', url: 'https://korpenstockholm.zoezi.se/serie/5284' },
+  { title: 'Github', url: 'https://github.com/elmersson', icon: <FaGithub /> },
+  {
+    title: 'MacOS 2.0',
+    url: 'https://github1s.com/elmersson/macos_2',
+    icon: <FaApple />
+  },
+  {
+    title: 'Youtube',
+    url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1',
+    icon: <FaYoutube className="text-red-500" />
+  },
   { title: 'Github', url: 'https://github1s.com/elmersson' },
   { title: 'Github', url: 'https://github1s.com/elmersson' },
   { title: 'Github', url: 'https://github1s.com/elmersson' },
@@ -76,9 +87,11 @@ function PinnedItem({
 }) {
   return (
     <div
-      className="w-14 h-14 bg-[#63879e] bg-opacity-60 hover:bg-opacity-100 rounded-xl"
+      className="w-14 h-14 bg-[#63879e] bg-opacity-60 hover:bg-opacity-100 rounded-xl flex justify-center items-center text-xl"
       onClick={() => setUrl(data.url)}
-    ></div>
+    >
+      {data.icon ? data.icon : <GrDocumentMissing />}
+    </div>
   );
 }
 
