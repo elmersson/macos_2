@@ -11,7 +11,10 @@ import { DraggableItem } from './draggable-item';
 import { AppProps } from '@/data/Apps';
 import { Dispatch, ReactNode, SetStateAction, useState } from 'react';
 import { GrDocumentMissing } from 'react-icons/gr';
-import { FaGithub, FaApple, FaYoutube } from 'react-icons/fa';
+import { FaGithub, FaApple, FaYoutube, FaSpotify } from 'react-icons/fa';
+import Lotion from '@/assets/apps/lotion.png';
+import Liro from '@/assets/apps/liro.png';
+import Image from 'next/image';
 
 interface UrlItemsData {
   title: string;
@@ -20,7 +23,11 @@ interface UrlItemsData {
 }
 
 const UrlItems: UrlItemsData[] = [
-  { title: 'Github', url: 'https://github.com/elmersson', icon: <FaGithub /> },
+  {
+    title: 'Github',
+    url: 'https://gist.github.com/jweir/2719090',
+    icon: <FaGithub className="text-purple-500" />
+  },
   {
     title: 'MacOS 2.0',
     url: 'https://github1s.com/elmersson/macos_2',
@@ -31,10 +38,22 @@ const UrlItems: UrlItemsData[] = [
     url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1',
     icon: <FaYoutube className="text-red-500" />
   },
-  { title: 'Github', url: 'https://github1s.com/elmersson' },
-  { title: 'Github', url: 'https://github1s.com/elmersson' },
-  { title: 'Github', url: 'https://github1s.com/elmersson' },
-  { title: 'Github', url: 'https://github1s.com/elmersson' },
+  {
+    title: 'Lotion',
+    url: 'https://lotion.rasmuselmersson.se/',
+    icon: <Image alt="Lotion" src={Lotion} />
+  },
+  {
+    title: 'Liro',
+    url: 'https://liro.rasmuselmersson.se/',
+    icon: <Image alt="Liro" src={Liro} />
+  },
+  {
+    title: 'Spotify',
+    url: 'https://open.spotify.com/embed/iframe-api/v1',
+    icon: <FaSpotify className="text-green-500" />
+  },
+  { title: 'Regent', url: 'https://regent.se/' },
   { title: 'Github', url: 'https://github1s.com/elmersson' }
 ];
 
