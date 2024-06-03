@@ -3,7 +3,7 @@ import { type PlaywrightTestConfig, devices } from '@playwright/test';
 const config: PlaywrightTestConfig = {
   testDir: './__e2e__',
   /* Run tests in files in parallel */
-  fullyParallel: false,
+  fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
@@ -21,48 +21,60 @@ const config: PlaywrightTestConfig = {
     trace: 'on-first-retry'
   },
 
-  /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] }
+      name: 'Chrome',
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: {
+          width: 1920,
+          height: 1080
+        }
+      }
     },
-
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] }
+      name: 'Firefox',
+      use: {
+        ...devices['Desktop Firefox'],
+        viewport: {
+          width: 1920,
+          height: 1080
+        }
+      }
+    },
+    {
+      name: 'Safari',
+      use: {
+        ...devices['Desktop Safari'],
+        viewport: {
+          width: 1920,
+          height: 1080
+        }
+      }
     }
-
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
-
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
   ],
 
   webServer: {
     command: 'npm run dev',
     port: 3000,
     reuseExistingServer: !process.env.CI
-  }
+  },
+  reporter: [
+    ['dot'],
+
+    [
+      'json',
+      {
+        outputFile: 'jsonReports/jsonReport.json'
+      }
+    ],
+
+    [
+      'html',
+      {
+        open: 'on-failure'
+      }
+    ]
+  ]
 };
 export default config;
