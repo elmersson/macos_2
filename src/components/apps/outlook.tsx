@@ -30,10 +30,10 @@ const SIDE_BAR_WIDTH = 320;
 
 export function Outlook({ appData }: AppProps) {
   return (
-    <DraggableItem appData={appData}>
+    <DraggableItem appData={appData} minHeight={700} minWidth={1200}>
       <div className="w-full h-full bg-slate-800/70 bg-clip-padding backdrop-filter backdrop-blur-xl flex flex-row">
         <AppBar />
-        <div className="w-full">
+        <div className="w-full flex flex-col">
           <TopBar />
           <MainPane />
         </div>
@@ -154,11 +154,10 @@ function AppBar() {
 
 function MainPane() {
   return (
-    <ResizablePanelGroup
-      direction="horizontal"
-      className="w-full px-2 h-screen"
-    >
+    <ResizablePanelGroup direction="horizontal" className="w-full px-2 flex-1">
       <MailList />
+      <ResizableHandle />
+      <Mails />
       <ResizableHandle />
       <MailContent />
       <ResizableHandle />
@@ -169,12 +168,12 @@ function MainPane() {
 
 function MailList() {
   return (
-    <ResizablePanel defaultSize={50}>
+    <ResizablePanel defaultSize={25}>
       <div className="p-2 h-full rounded-md">
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1">
             <AccordionTrigger className="text-lg font-bold text-white">
-              Favorites
+              <span className="line-clamp-1">Favorites</span>
             </AccordionTrigger>
             <AccordionContent>
               <div>Content</div>
@@ -226,6 +225,16 @@ function MailList() {
   );
 }
 
+function Mails() {
+  return (
+    <ResizablePanel defaultSize={20}>
+      <div className="p-2 h-full rounded-md bg-neutral-800">
+        <span className="font-semibold">First</span>
+      </div>
+    </ResizablePanel>
+  );
+}
+
 function MailContent() {
   return (
     <ResizablePanel defaultSize={50}>
@@ -241,7 +250,7 @@ function MailContent() {
 
 function Agenda() {
   return (
-    <ResizablePanel defaultSize={25}>
+    <ResizablePanel defaultSize={15}>
       <div className="p-2 h-full rounded-md bg-neutral-800">
         <span className="font-semibold">Three</span>
       </div>
