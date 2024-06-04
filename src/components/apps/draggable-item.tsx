@@ -12,6 +12,8 @@ interface DraggableItemProps {
   className?: React.ComponentProps<'div'>['className'];
   actionButtonStyle?: React.ComponentProps<'div'>['className'];
   appData: AppData;
+  minWidth?: number;
+  minHeight?: number;
 }
 
 export const NAVBAR_HEIGHT = 40;
@@ -21,7 +23,9 @@ export function DraggableItem({
   barItem,
   className,
   actionButtonStyle,
-  appData
+  appData,
+  minWidth = 100,
+  minHeight = 100
 }: DraggableItemProps) {
   const { setSize, setPosition, bringToFront, closeApp, minimizeApp } =
     useAppStore((state) => state);
@@ -121,6 +125,7 @@ export function DraggableItem({
               />
             )}
             resizeHandles={['n', 'ne', 'e', 'se', 's', 'sw', 'w', 'nw']}
+            minConstraints={[minWidth, minHeight]}
           >
             <div className="flex flex-col w-full h-full shadow-lg">
               <div
