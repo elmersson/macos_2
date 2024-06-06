@@ -15,7 +15,7 @@ A personal website made to look like my current OS running on my Macbook. Update
   - [x] Launchpad
   - [x] Notes
   - [x] Arc
-  - [ ] Outlook
+  - [x] Outlook
   - [x] iterm2
   - [ ] System
   - [ ] Trashcan
