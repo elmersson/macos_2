@@ -6,17 +6,10 @@ A personal website made to look like my current OS running on my Macbook. Update
 
 ## TODO
 
-- [x] ShortCommand
 - [ ] CI/CD
 - [ ] Deplyment
 - [ ] Analytics
 - [ ] App function
-  - [x] Finder
-  - [x] Launchpad
-  - [x] Notes
-  - [x] Arc
-  - [x] Outlook
-  - [x] iterm2
   - [ ] System
   - [ ] Trashcan
 
