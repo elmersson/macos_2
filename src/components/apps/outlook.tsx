@@ -25,6 +25,13 @@ import {
 import { DraggableItem } from './draggable-item';
 import { AppProps } from '@/data/Apps';
 import { useState } from 'react';
+import { useOutlookStore } from '../providers/store-provider';
+import { EmailProps } from '@/data/emails';
+import { format } from 'date-fns';
+import { cn } from '@/lib/utils';
+import { Separator } from '../ui/separator';
+import { getColorClassFromString } from '@/lib/color/color';
+import { BiSolidInbox } from 'react-icons/bi';
 
 const SIDE_BAR_WIDTH = 320;
 
@@ -167,6 +174,9 @@ function MainPane() {
 }
 
 function MailList() {
+  const { setSelectedAccount, selectedAccount } = useOutlookStore(
+    (state) => state
+  );
   return (
     <ResizablePanel defaultSize={25}>
       <div className="p-2 h-full rounded-md">
@@ -176,7 +186,17 @@ function MailList() {
               <span className="line-clamp-1">Favorites</span>
             </AccordionTrigger>
             <AccordionContent>
-              <div>Content</div>
+              <div
+                role="button"
+                className={cn(
+                  'flex flex-row items-center space-x-2 pl-6 rounded-lg',
+                  selectedAccount === 'favorites' &&
+                    'text-blue-500 bg-neutral-700'
+                )}
+                onClick={() => setSelectedAccount('favorites')}
+              >
+                <BiSolidInbox /> <span>Inbox</span>
+              </div>
             </AccordionContent>
           </AccordionItem>
         </Accordion>
@@ -186,7 +206,16 @@ function MailList() {
               All Accounts
             </AccordionTrigger>
             <AccordionContent>
-              <div>Content</div>
+              <div
+                role="button"
+                className={cn(
+                  'flex flex-row items-center space-x-2 pl-6 rounded-lg',
+                  selectedAccount === 'all' && 'text-blue-500 bg-neutral-700'
+                )}
+                onClick={() => setSelectedAccount('all')}
+              >
+                <BiSolidInbox /> <span>Inbox</span>
+              </div>
             </AccordionContent>
           </AccordionItem>
         </Accordion>
@@ -196,7 +225,17 @@ function MailList() {
               rasmus.elmersson@regent.se
             </AccordionTrigger>
             <AccordionContent>
-              <div>Content</div>
+              <div
+                role="button"
+                className={cn(
+                  'flex flex-row items-center space-x-2 pl-6 rounded-lg',
+                  selectedAccount === 'rasmus.elmersson@regent.se' &&
+                    'text-blue-500 bg-neutral-700'
+                )}
+                onClick={() => setSelectedAccount('rasmus.elmersson@regent.se')}
+              >
+                <BiSolidInbox /> <span>Inbox</span>
+              </div>
             </AccordionContent>
           </AccordionItem>
         </Accordion>
@@ -206,7 +245,19 @@ function MailList() {
               rasmus.elmersson@martinservera.se
             </AccordionTrigger>
             <AccordionContent>
-              <div>Content</div>
+              <div
+                role="button"
+                className={cn(
+                  'flex flex-row items-center space-x-2 pl-6 rounded-lg',
+                  selectedAccount === 'rasmus.elmersson@martinservera.se' &&
+                    'text-blue-500 bg-neutral-700'
+                )}
+                onClick={() =>
+                  setSelectedAccount('rasmus.elmersson@martinservera.se')
+                }
+              >
+                <BiSolidInbox /> <span>Inbox</span>
+              </div>
             </AccordionContent>
           </AccordionItem>
         </Accordion>
@@ -226,25 +277,139 @@ function MailList() {
 }
 
 function Mails() {
+  const { getEmailsForSelectedAccount, selectedEmail, setSelectedEmail } =
+    useOutlookStore((state) => state);
+
+  const emails = getEmailsForSelectedAccount();
   return (
     <ResizablePanel defaultSize={20}>
-      <div className="p-2 h-full rounded-md bg-neutral-800">
-        <span className="font-semibold">First</span>
+      <div className="h-full rounded-md bg-neutral-800 flex flex-col">
+        {emails.map((email) => {
+          const isSelected = email.id === selectedEmail;
+          return (
+            <EmailListItem
+              key={email.id}
+              email={email}
+              isSelected={isSelected}
+              setSelectedEmail={setSelectedEmail}
+            />
+          );
+        })}
       </div>
     </ResizablePanel>
   );
 }
 
-function MailContent() {
+function EmailListItem({
+  email,
+  isSelected,
+  setSelectedEmail
+}: {
+  email: EmailProps;
+  isSelected: boolean;
+  // eslint-disable-next-line no-unused-vars
+  setSelectedEmail: (id: string) => void;
+}) {
+  const date = format(email.receivedDate, 'yyyy-mm-dd');
+  const randomColorClass = getColorClassFromString(email.from);
+
   return (
-    <ResizablePanel defaultSize={50}>
-      <div className="p-2 h-full rounded-md bg-neutral-800">
-        <div className="flex flex-col justify-center items-center space-y-2">
-          <span className="text-lg">No Conversation Selected</span>
-          <span className="text-sm">Select a conversation to read.</span>
+    <div
+      className={cn(isSelected && 'bg-white/20 rounded-t-md')}
+      onClick={() => setSelectedEmail(email.id)}
+    >
+      <div className="flex flex-row w-full py-2 px-2">
+        <div className="w-[20%]">
+          <div className="flex flex-row space-x-2 items-center">
+            <div
+              className={cn(
+                'w-2 h-2 rounded-full',
+                !email.read && 'bg-blue-500'
+              )}
+            />
+            <div
+              className={`${randomColorClass} w-7 h-7 rounded-full items-center justify-center flex`}
+            >
+              <span>{email.from.slice(0, 1).toUpperCase()}</span>
+            </div>
+          </div>
+        </div>
+        <div className="w-full">
+          <span
+            className={cn('line-clamp-1 text-lg', !email.read && 'font-bold')}
+          >
+            {email.from}
+          </span>
+          <div
+            className={cn(
+              'flex flex-row space-x-1 text-sm',
+              !email.read && 'text-blue-500'
+            )}
+          >
+            <span className="line-clamp-1">{email.subject}</span>
+            <span>{date}</span>
+          </div>
+          <span className="line-clamp-1 text-sm">{email.body}</span>
         </div>
       </div>
+      <Separator className="bg-neutral-400/20" />
+    </div>
+  );
+}
+
+function MailContent() {
+  const { getSelectedEmail } = useOutlookStore((state) => state);
+
+  const email = getSelectedEmail();
+  return (
+    <ResizablePanel defaultSize={50}>
+      <div className="p-6 h-full rounded-md bg-neutral-800">
+        {email ? (
+          <EmailContent email={email} />
+        ) : (
+          <div className="flex flex-col justify-center items-center space-y-2">
+            <span className="text-lg">No Conversation Selected</span>
+            <span className="text-sm">Select a conversation to read.</span>
+          </div>
+        )}
+      </div>
     </ResizablePanel>
+  );
+}
+
+function EmailContent({ email }: { email: EmailProps }) {
+  const randomColorClass = getColorClassFromString(email.from);
+  return (
+    <div className="flex flex-col h-full space-y-4">
+      <span className="text-lg">{email.subject}</span>
+      <div className="flex flex-row space-x-4">
+        <div
+          className={`${randomColorClass} w-12 h-12 rounded-full items-center justify-center flex`}
+        >
+          <span className="text-lg">
+            {email.from.slice(0, 1).toUpperCase()}
+          </span>
+        </div>
+        <div className="flex flex-col space-y-1">
+          <div className="flex flex-row items-center space-x-2">
+            <div className="w-3 h-3 rounded-full border border-white " />
+            <span className="text-lg">{email.from}</span>
+          </div>
+          <div className="space-x-2 text-sm">
+            <span className="font-bold">To:</span>
+            {email.to.map((email) => (
+              <span key={email} className="text-neutral-400">
+                {email}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white p-4 rounded-lg h-full">
+        <span className="text-black">{email.body}</span>
+      </div>
+    </div>
   );
 }
 
