@@ -16,6 +16,7 @@ import {
   useFinderStore,
   useItermStore,
   useNoteStore,
+  useOutlookStore,
   useSystemStore
 } from '../providers/store-provider';
 
@@ -25,6 +26,7 @@ export function AppleMenu() {
   const { resetNoteStore } = useNoteStore((state) => state);
   const { resetItermStore } = useItermStore((state) => state);
   const { resetFinderStore } = useFinderStore((state) => state);
+  const { resetOutlookStore } = useOutlookStore((state) => state);
 
   const handleQuit = () => {
     resetAppStore();
@@ -32,6 +34,7 @@ export function AppleMenu() {
     resetNoteStore();
     resetSystemStore();
     resetFinderStore();
+    resetOutlookStore();
   };
 
   const handleSignOut = () => {

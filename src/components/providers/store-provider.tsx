@@ -8,12 +8,14 @@ import { createAppStore, AppStore } from '@/stores/appStore';
 import { createItermStore, ItermStore } from '@/stores/itermStore';
 import { createNoteStore, NoteStore } from '@/stores/noteStore';
 import { FinderStore, createFinderStore } from '@/stores/finderStore';
+import { OutlookStore, createOutlookStore } from '@/stores/outlookStore';
 
 const SystemStoreContext = createContext<StoreApi<SystemStore> | null>(null);
 const AppStoreContext = createContext<StoreApi<AppStore> | null>(null);
 const ItermStoreContext = createContext<StoreApi<ItermStore> | null>(null);
 const NoteStoreContext = createContext<StoreApi<NoteStore> | null>(null);
 const FinderStoreContext = createContext<StoreApi<FinderStore> | null>(null);
+const OutlookStoreContext = createContext<StoreApi<OutlookStore> | null>(null);
 
 interface StoreProviderProps {
   children: ReactNode;
@@ -25,6 +27,7 @@ export const StoreProvider = ({ children }: StoreProviderProps) => {
   const itermStoreRef = useRef<StoreApi<ItermStore>>();
   const noteStoreRef = useRef<StoreApi<NoteStore>>();
   const finderStoreRef = useRef<StoreApi<FinderStore>>();
+  const outlookStoreRef = useRef<StoreApi<OutlookStore>>();
 
   if (!systemStoreRef.current) {
     systemStoreRef.current = createSystemStore();
@@ -46,13 +49,19 @@ export const StoreProvider = ({ children }: StoreProviderProps) => {
     finderStoreRef.current = createFinderStore();
   }
 
+  if (!outlookStoreRef.current) {
+    outlookStoreRef.current = createOutlookStore();
+  }
+
   return (
     <SystemStoreContext.Provider value={systemStoreRef.current}>
       <AppStoreContext.Provider value={appStoreRef.current}>
         <ItermStoreContext.Provider value={itermStoreRef.current}>
           <NoteStoreContext.Provider value={noteStoreRef.current}>
             <FinderStoreContext.Provider value={finderStoreRef.current}>
-              {children}
+              <OutlookStoreContext.Provider value={outlookStoreRef.current}>
+                {children}
+              </OutlookStoreContext.Provider>
             </FinderStoreContext.Provider>
           </NoteStoreContext.Provider>
         </ItermStoreContext.Provider>
@@ -97,6 +106,16 @@ export const useFinderStore = <T,>(selector: (state: FinderStore) => T): T => {
   const context = useContext(FinderStoreContext);
   if (!context) {
     throw new Error('useFinderStore must be used within a StoreProvider');
+  }
+  return useStore(context, selector);
+};
+
+export const useOutlookStore = <T,>(
+  selector: (state: OutlookStore) => T
+): T => {
+  const context = useContext(OutlookStoreContext);
+  if (!context) {
+    throw new Error('useOutlookStore must be used within a StoreProvider');
   }
   return useStore(context, selector);
 };
