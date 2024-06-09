@@ -87,10 +87,14 @@ export function Finder({ appData }: AppProps) {
     finderHistory,
     historyPosition,
     setHistoryPosition,
-    addToHistory
+    addToHistory,
+    bin
   } = useFinderStore((state) => state);
 
-  const selectedItem = findSelectedItem(selectedFinderId, finderDataSet);
+  const selectedItem =
+    selectedFinderId === 'bin'
+      ? bin
+      : findSelectedItem(selectedFinderId, finderDataSet);
   const itemCount = countItems({
     item: selectedItem,
     isApplication: selectedFinderId === 'applications'
