@@ -9,17 +9,29 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import Empty from '@/assets/apps/empty-trashcan.png';
 import TrashcanImage from '@/assets/apps/trashcan.png';
+import { useAppStore, useFinderStore } from './providers/store-provider';
 
 export function Trashcan() {
-  const isOpen = false;
-  const isEmpty = true;
+  const { bringToFront, openApp } = useAppStore((state) => state);
+  const { setSelectedFinderId, selectedFinderId, bin } = useFinderStore(
+    (state) => state
+  );
+
+  const isOpen = selectedFinderId === 'bin';
+  const isEmpty = !bin.children?.length;
 
   const img = isEmpty ? Empty : TrashcanImage;
+
+  const handleClick = () => {
+    openApp('finder');
+    bringToFront('finder');
+    setSelectedFinderId('bin');
+  };
 
   return (
     <TooltipProvider delayDuration={100}>
       <Tooltip>
-        <TooltipTrigger>
+        <TooltipTrigger onClick={handleClick}>
           <li className="flex flex-col justify-center items-center relative overflow-hidden no-scrollbar">
             <Image src={img} alt="trashcan" className=" w-[4.2rem]" />
             <div
