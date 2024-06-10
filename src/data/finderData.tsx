@@ -130,7 +130,68 @@ export const finderData: FinderData[] = [
                 title: 'Desktop',
                 type: 'folder',
                 iconImg: Folder,
-                children: []
+                children: [
+                  {
+                    id: 'pdf-llm-chat',
+                    title: 'pdf-llm-chat',
+                    type: 'folder',
+                    iconImg: Folder,
+                    children: []
+                  },
+                  {
+                    id: '3d-print',
+                    title: '3D Print',
+                    type: 'folder',
+                    iconImg: Folder,
+                    children: [
+                      {
+                        id: 'molecule-lamp',
+                        title: 'molecule lamp table',
+                        type: 'folder',
+                        iconImg: Folder,
+                        children: [
+                          {
+                            id: '757832-molecule-table-lamp-60652a2d-b0c0-4fe1-b905-be38cdd8d535',
+                            title:
+                              '757832-molecule-table-lamp-60652a2d-b0c0-4fe1-b905-be38cdd8d535.pdf',
+                            type: 'file',
+                            iconImg: File
+                          },
+                          {
+                            id: 'molecule-lamp-main-part',
+                            title: 'molecule-lamp-main-part.stl',
+                            type: 'file',
+                            iconImg: File
+                          },
+                          {
+                            id: 'molecule-lamp-cable-fix',
+                            title: 'molecule-lamp-cable-fix.stl',
+                            type: 'file',
+                            iconImg: File
+                          },
+                          {
+                            id: 'molecule-lamp-connector-outer-part',
+                            title: 'molecule-lamp-connector-outer-part.stl',
+                            type: 'file',
+                            iconImg: File
+                          },
+                          {
+                            id: 'molecule-lamp-stand',
+                            title: 'molecule-lamp-stand.stl',
+                            type: 'file',
+                            iconImg: File
+                          },
+                          {
+                            id: 'molecule-lamp-connector-inner-part',
+                            title: 'molecule-lamp-connector-inner-part.stl',
+                            type: 'file',
+                            iconImg: File
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
               },
               {
                 id: 'documents',
