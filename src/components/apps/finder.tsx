@@ -79,7 +79,6 @@ const tracePathToSelectedItem = (
 };
 
 export function Finder({ appData }: AppProps) {
-  const { openApp, bringToFront } = useAppStore((state) => state);
   const {
     finderDataSet,
     selectedFinderId,
@@ -145,20 +144,14 @@ export function Finder({ appData }: AppProps) {
       <div className="w-full h-full bg-transparent">
         <div className="flex h-full">
           <ScrollArea className="w-40 bg-slate-800/70 bg-clip-padding backdrop-filter backdrop-blur-xl dark:bg-slate-800/70 p-4">
-            <Favorites setSelectedFinderId={handleSetSelectedFinderId} />
+            <Favorites />
             <ICloud />
             <Tags />
           </ScrollArea>
 
           <div className="flex flex-col w-full h-full">
             <ScrollArea className="p-4 bg-neutral-100 dark:bg-neutral-800 w-full h-full flex">
-              <Content
-                selectedFinderId={selectedFinderId}
-                setSelectedFinderId={handleSetSelectedFinderId}
-                openApp={openApp}
-                bringToFront={bringToFront}
-                selectedItem={selectedItem}
-              />
+              <Content selectedItem={selectedItem} />
             </ScrollArea>
             <div className="text-sm items-center">
               <div className="bg-neutral-800 border-t border-white/20 py-1 px-2 text-white/60 flex flex-row items-center space-x-1">
@@ -244,12 +237,9 @@ function BarItem({
   );
 }
 
-function Favorites({
-  setSelectedFinderId
-}: {
-  // eslint-disable-next-line no-unused-vars
-  setSelectedFinderId: (finderId: string) => void;
-}) {
+function Favorites() {
+  const { setSelectedFinderId } = useFinderStore((state) => state);
+
   return (
     <Accordion
       type="single"
@@ -381,22 +371,26 @@ function Tags() {
 }
 
 interface ContentProps {
-  // eslint-disable-next-line no-unused-vars
-  setSelectedFinderId: (finderId: string) => void;
-  selectedFinderId: string;
-  // eslint-disable-next-line no-unused-vars
-  openApp: (id: string) => void;
-  // eslint-disable-next-line no-unused-vars
-  bringToFront: (id: string) => void;
   selectedItem: FinderData | undefined;
 }
-function Content({
-  setSelectedFinderId,
-  selectedFinderId,
-  openApp,
-  bringToFront,
-  selectedItem
-}: ContentProps) {
+function Content({ selectedItem }: ContentProps) {
+  const { openApp, bringToFront } = useAppStore((state) => state);
+  const { selectedFinderId, setSelectedFinderId, recent, addToRecent } =
+    useFinderStore((state) => state);
+
+  const handleDoubleClick = (data: FinderData) => {
+    if (data.id === 'car') {
+      window.open(
+        'https://www.youtube.com/watch?v=HmZm8vNHBSU',
+        '_blank',
+        'noopener,noreferrer'
+      );
+    } else if (data.type === 'folder') {
+      setSelectedFinderId(data.id);
+      addToRecent(data);
+    }
+  };
+
   if (selectedFinderId === 'applications') {
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-7 gap-14">
@@ -427,17 +421,22 @@ function Content({
     );
   }
 
-  const handleDoubleClick = (data: FinderData) => {
-    if (data.id === 'car') {
-      window.open(
-        'https://www.youtube.com/watch?v=HmZm8vNHBSU',
-        '_blank',
-        'noopener,noreferrer'
-      );
-    } else if (data.type === 'folder') {
-      setSelectedFinderId(data.id);
-    }
-  };
+  if (selectedFinderId === 'recent') {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-7 gap-14 px-8">
+        {recent.map((data) => (
+          <div
+            key={data.id}
+            className={`flex flex-col items-center justify-center ${data.locked && 'opacity-40'}`}
+            role="button"
+            onDoubleClick={() => handleDoubleClick(data)}
+          >
+            <Item data={data} />
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-7 gap-14 px-8">

@@ -13,6 +13,8 @@ export interface FinderStore {
   addToHistory: (id: string) => void;
   historyPosition: number;
   setHistoryPosition: (position: number) => void;
+  recent: FinderData[];
+  addToRecent: (data: FinderData) => void;
   bin: FinderData;
   removeById: (id: string) => void;
   restoreFromBin: (id: string) => void;
@@ -43,6 +45,19 @@ export const createFinderStore = (): StoreApi<FinderStore> => {
           set(() => ({
             historyPosition: position
           })),
+        recent: [],
+        addToRecent: (data: FinderData) =>
+          set((state) => {
+            const existingIndex = state.recent.findIndex(
+              (item) => item.id === data.id
+            );
+            if (existingIndex !== -1) {
+              state.recent.splice(existingIndex, 1);
+            }
+            return {
+              recent: [data, ...state.recent]
+            };
+          }),
         bin: {
           id: 'bin',
           title: 'Bin',
