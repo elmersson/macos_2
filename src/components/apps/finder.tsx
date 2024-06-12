@@ -6,7 +6,7 @@ import {
   AccordionTrigger
 } from '../ui/apple_accordion';
 import { ScrollArea } from '../ui/scroll-area';
-import { IoTimeOutline } from 'react-icons/io5';
+import { IoCloseSharp, IoTimeOutline } from 'react-icons/io5';
 import { PiAppStoreLogoBold, PiFolderSimpleUserFill } from 'react-icons/pi';
 import { BsWindowDesktop } from 'react-icons/bs';
 import { HiOutlineDocument } from 'react-icons/hi2';
@@ -34,8 +34,9 @@ import { FinderData } from '@/data/finderData';
 import { LaunchpadItem } from '../launchpad';
 import { useAppStore, useFinderStore } from '../providers/store-provider';
 import Image from 'next/image';
+import { SetStateAction, useEffect, useRef, useState } from 'react';
 
-const findSelectedItem = (
+export const findSelectedItem = (
   id: string,
   items: FinderData[]
 ): FinderData | undefined => {
@@ -49,18 +50,20 @@ const findSelectedItem = (
   return undefined;
 };
 
-interface CountItemsProps {
+export const countItems = ({
+  item,
+  isApplication
+}: {
   item?: FinderData;
   isApplication?: boolean;
-}
-const countItems = ({ item, isApplication }: CountItemsProps): number => {
+}): number => {
   if (isApplication) {
-    return apps.length;
+    return item?.children?.length || 0;
   }
   return item?.children?.length || 0;
 };
 
-const tracePathToSelectedItem = (
+export const tracePathToSelectedItem = (
   id: string,
   items: FinderData[],
   path: FinderData[] = []
@@ -78,6 +81,28 @@ const tracePathToSelectedItem = (
   return [];
 };
 
+export const filteredItems = (
+  items: FinderData[],
+  searchInput: string
+): FinderData[] => {
+  if (!searchInput) return items;
+  const lowercasedFilter = searchInput.toLowerCase();
+
+  const filterRecursive = (items: FinderData[]): FinderData[] => {
+    return items.reduce((acc: FinderData[], item: FinderData) => {
+      if (item.title.toLowerCase().includes(lowercasedFilter)) {
+        acc.push(item);
+      }
+      if (item.children) {
+        acc = acc.concat(filterRecursive(item.children));
+      }
+      return acc;
+    }, []);
+  };
+
+  return filterRecursive(items);
+};
+
 export function Finder({ appData }: AppProps) {
   const {
     finderDataSet,
@@ -89,6 +114,9 @@ export function Finder({ appData }: AppProps) {
     addToHistory,
     bin
   } = useFinderStore((state) => state);
+
+  const [searchInput, setSearchInput] = useState<string>('');
+  const [isSearching, setIsSearching] = useState<boolean>(false);
 
   const selectedItem =
     selectedFinderId === 'bin'
@@ -126,6 +154,18 @@ export function Finder({ appData }: AppProps) {
     }
   };
 
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(e.target.value);
+  };
+
+  const handleSearchToggle = () => {
+    setIsSearching(!isSearching);
+    setSearchInput('');
+  };
+
+  const displayedItems = isSearching
+    ? filteredItems(finderDataSet, searchInput)
+    : selectedItem?.children || [];
   return (
     <DraggableItem
       className="bg-transparent"
@@ -137,6 +177,11 @@ export function Finder({ appData }: AppProps) {
           handleBack={handleBack}
           handleForward={handleForward}
           historyPosition={historyPosition}
+          isSearching={isSearching}
+          searchInput={searchInput}
+          setSearchInput={setSearchInput}
+          handleSearchChange={handleSearchChange}
+          handleSearchToggle={handleSearchToggle}
         />
       }
       appData={appData}
@@ -151,7 +196,10 @@ export function Finder({ appData }: AppProps) {
 
           <div className="flex flex-col w-full h-full">
             <ScrollArea className="p-4 bg-neutral-100 dark:bg-neutral-800 w-full h-full flex">
-              <Content selectedItem={selectedItem} />
+              <Content
+                displayedItems={displayedItems}
+                selectedFinderId={selectedFinderId}
+              />
             </ScrollArea>
             <div className="text-sm items-center">
               <div className="bg-neutral-800 border-t border-white/20 py-1 px-2 text-white/60 flex flex-row items-center space-x-1">
@@ -185,6 +233,13 @@ interface BarItemProps {
   handleBack: () => void;
   handleForward: () => void;
   historyPosition: number;
+  isSearching: boolean;
+  handleSearchToggle: () => void;
+  // eslint-disable-next-line no-unused-vars
+  setSearchInput: (value: SetStateAction<string>) => void;
+  searchInput: string;
+  // eslint-disable-next-line no-unused-vars
+  handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function BarItem({
@@ -192,8 +247,41 @@ function BarItem({
   handleBack,
   handleForward,
   historyPosition,
-  title
+  title,
+  isSearching,
+  handleSearchToggle,
+  setSearchInput,
+  searchInput,
+  handleSearchChange
 }: BarItemProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        inputRef.current &&
+        !inputRef.current.contains(event.target as Node)
+      ) {
+        handleSearchToggle();
+      }
+    };
+
+    if (isSearching) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isSearching, handleSearchToggle]);
+
+  const handleClearSearch = () => {
+    setSearchInput('');
+    handleSearchToggle();
+  };
+
   return (
     <div className="bg-neutral-800 flex flex-row w-full h-full items-center justify-between p-3">
       <div className="flex flex-row items-center space-x-3">
@@ -216,7 +304,9 @@ function BarItem({
         >
           <IoIosArrowForward />
         </div>
-        <span className="font-bold">{title}</span>
+        <span className="font-bold line-clamp-1">
+          {isSearching ? 'Searching This Mac' : title}
+        </span>
       </div>
       <div className="flex flex-row items-center space-x-10 text-xl">
         <div className="flex flex-row items-center space-x-4">
@@ -231,7 +321,30 @@ function BarItem({
           <IoPricetagOutline />
           <HiOutlineDotsCircleHorizontal />
         </div>
-        <IoSearchSharp />
+        <div className="flex flex-row relative items-center">
+          {isSearching && (
+            <div className="relative">
+              <IoSearchSharp className="absolute left-2 top-1/2 transform -translate-y-1/2 text-white" />
+              <input
+                ref={inputRef}
+                type="text"
+                className="transition-transform transform scale-x-100 origin-right w-64 bg-neutral-700 text-white border border-neutral-500 rounded p-1 pl-8 pr-8 shadow-lg text-sm"
+                value={searchInput}
+                onChange={handleSearchChange}
+                placeholder="Search..."
+                style={{ transform: isSearching ? 'scaleX(1)' : 'scaleX(0)' }}
+              />
+              <IoCloseSharp
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-neutral-500 cursor-pointer"
+                role="button"
+                onClick={handleClearSearch}
+              />
+            </div>
+          )}
+          {!isSearching && (
+            <IoSearchSharp role="button" onClick={handleSearchToggle} />
+          )}
+        </div>
       </div>
     </div>
   );
@@ -256,6 +369,7 @@ function Favorites() {
             <li
               className="flex flex-row items-center space-x-1"
               onClick={() => setSelectedFinderId('airdrop')}
+              role="button"
             >
               <MdWifiTethering className=" size-[18px] text-blue-500" />
               <span>AirDrop</span>
@@ -263,6 +377,7 @@ function Favorites() {
             <li
               className="flex flex-row items-center space-x-1"
               onClick={() => setSelectedFinderId('recent')}
+              role="button"
             >
               <IoTimeOutline className=" size-[18px] text-blue-500" />
               <span>Recent</span>
@@ -270,6 +385,7 @@ function Favorites() {
             <li
               className="flex flex-row items-center space-x-1"
               onClick={() => setSelectedFinderId('applications')}
+              role="button"
             >
               <PiAppStoreLogoBold className=" size-[18px] text-blue-500" />
               <span>Applications</span>
@@ -277,6 +393,7 @@ function Favorites() {
             <li
               className="flex flex-row items-center space-x-1"
               onClick={() => setSelectedFinderId('desktop')}
+              role="button"
             >
               <BsWindowDesktop className=" size-[18px] text-blue-500" />
               <span>Desktop</span>
@@ -284,6 +401,7 @@ function Favorites() {
             <li
               className="flex flex-row items-center space-x-1"
               onClick={() => setSelectedFinderId('documents')}
+              role="button"
             >
               <HiOutlineDocument className=" size-[18px] text-blue-500" />
               <span>Documents</span>
@@ -291,6 +409,7 @@ function Favorites() {
             <li
               className="flex flex-row items-center space-x-1"
               onClick={() => setSelectedFinderId('downloads')}
+              role="button"
             >
               <MdOutlineDownloadForOffline className=" size-[18px] text-blue-500" />
               <span>Downloads</span>
@@ -371,12 +490,15 @@ function Tags() {
 }
 
 interface ContentProps {
-  selectedItem: FinderData | undefined;
+  displayedItems: FinderData[];
+  selectedFinderId: string;
 }
-function Content({ selectedItem }: ContentProps) {
+
+function Content({ displayedItems, selectedFinderId }: ContentProps) {
   const { openApp, bringToFront } = useAppStore((state) => state);
-  const { selectedFinderId, setSelectedFinderId, recent, addToRecent } =
-    useFinderStore((state) => state);
+  const { setSelectedFinderId, addToRecent, recent } = useFinderStore(
+    (state) => state
+  );
 
   const handleDoubleClick = (data: FinderData) => {
     if (data.id === 'car') {
@@ -407,20 +529,6 @@ function Content({ selectedItem }: ContentProps) {
     );
   }
 
-  if (selectedFinderId === 'airdrop') {
-    return (
-      <div className="flex flex-col w-full h-full items-center justify-center">
-        <div className="text-[80px] text-blue-400">
-          <MdWifiTethering />
-        </div>
-        <span>AirDrop lets you share instantly with people nearby.</span>
-        <span className="text-sm text-blue-600">
-          Allow me to be discovered by: Contacts Only
-        </span>
-      </div>
-    );
-  }
-
   if (selectedFinderId === 'recent') {
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-7 gap-14 px-8">
@@ -440,7 +548,7 @@ function Content({ selectedItem }: ContentProps) {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-7 gap-14 px-8">
-      {selectedItem?.children?.map((data) => (
+      {displayedItems.map((data) => (
         <div
           key={data.id}
           className={`flex flex-col items-center justify-center ${data.locked && 'opacity-40'}`}

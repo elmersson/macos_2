@@ -15,10 +15,7 @@
     },
     "preserveOutput": "always",
     "reporter": [
-      [
-        "dot",
-        null
-      ],
+      ["dot", null],
       [
         "json",
         {
@@ -46,9 +43,7 @@
         "name": "Chrome",
         "testDir": "/Users/rasmuselmersson/Documents/Github/macos_2/__e2e__",
         "testIgnore": [],
-        "testMatch": [
-          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
-        ],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
         "timeout": 30000
       },
       {
@@ -59,9 +54,7 @@
         "name": "Firefox",
         "testDir": "/Users/rasmuselmersson/Documents/Github/macos_2/__e2e__",
         "testIgnore": [],
-        "testMatch": [
-          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
-        ],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
         "timeout": 30000
       },
       {
@@ -72,9 +65,7 @@
         "name": "Safari",
         "testDir": "/Users/rasmuselmersson/Documents/Github/macos_2/__e2e__",
         "testIgnore": [],
-        "testMatch": [
-          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
-        ],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
         "timeout": 30000
       }
     ],
