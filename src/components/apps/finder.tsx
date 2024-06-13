@@ -35,6 +35,22 @@ import { LaunchpadItem } from '../launchpad';
 import { useAppStore, useFinderStore } from '../providers/store-provider';
 import Image from 'next/image';
 import { SetStateAction, useEffect, useRef, useState } from 'react';
+import {
+  ContextMenu,
+  ContextMenuCheckboxItem,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuLabel,
+  ContextMenuRadioGroup,
+  ContextMenuRadioItem,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+  ContextMenuTrigger
+} from '../ui/context-menu';
+import { cn } from '@/lib/utils';
 
 export const findSelectedItem = (
   id: string,
@@ -499,6 +515,7 @@ function Content({ displayedItems, selectedFinderId }: ContentProps) {
   const { setSelectedFinderId, addToRecent, recent } = useFinderStore(
     (state) => state
   );
+  const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
 
   const handleDoubleClick = (data: FinderData) => {
     if (data.id === 'car') {
@@ -511,6 +528,10 @@ function Content({ displayedItems, selectedFinderId }: ContentProps) {
       setSelectedFinderId(data.id);
       addToRecent(data);
     }
+  };
+
+  const handleItemClick = (id: string) => {
+    setSelectedItemId(id);
   };
 
   if (selectedFinderId === 'applications') {
@@ -531,16 +552,15 @@ function Content({ displayedItems, selectedFinderId }: ContentProps) {
 
   if (selectedFinderId === 'recent') {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-7 gap-14 px-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-7 gap-2 px-2">
         {recent.map((data) => (
-          <div
+          <Item
             key={data.id}
-            className={`flex flex-col items-center justify-center ${data.locked && 'opacity-40'}`}
-            role="button"
-            onDoubleClick={() => handleDoubleClick(data)}
-          >
-            <Item data={data} />
-          </div>
+            data={data}
+            selectedItemId={selectedItemId}
+            handleItemClick={handleItemClick}
+            handleDoubleClick={handleDoubleClick}
+          />
         ))}
       </div>
     );
@@ -549,24 +569,104 @@ function Content({ displayedItems, selectedFinderId }: ContentProps) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-7 gap-14 px-8">
       {displayedItems.map((data) => (
-        <div
+        <Item
           key={data.id}
-          className={`flex flex-col items-center justify-center ${data.locked && 'opacity-40'}`}
-          role="button"
-          onDoubleClick={() => handleDoubleClick(data)}
-        >
-          <Item data={data} />
-        </div>
+          data={data}
+          selectedItemId={selectedItemId}
+          handleItemClick={handleItemClick}
+          handleDoubleClick={handleDoubleClick}
+        />
       ))}
     </div>
   );
 }
 
-function Item({ data }: { data: FinderData }) {
+function Item({
+  data,
+  selectedItemId,
+  handleItemClick,
+  handleDoubleClick
+}: {
+  data: FinderData;
+  selectedItemId: string | null;
+  // eslint-disable-next-line no-unused-vars
+  handleItemClick: (id: string) => void;
+  // eslint-disable-next-line no-unused-vars
+  handleDoubleClick: (data: FinderData) => void;
+}) {
   return (
-    <div className="flex justify-center items-center flex-col">
-      <Image src={data.iconImg} alt="icon" className="w-20" />
-      <span className="text-sm">{data.title}</span>
-    </div>
+    <ContextMenu>
+      <ContextMenuTrigger asChild>
+        <div
+          className={`flex flex-col items-center justify-center ${data.locked && 'opacity-40'}`}
+          role="button"
+          onClick={() => handleItemClick(data.id)}
+          onDoubleClick={() => handleDoubleClick(data)}
+        >
+          <div className="flex justify-center items-center flex-col w-24 space-y-0.5">
+            <Image
+              src={data.iconImg}
+              alt="icon"
+              className={cn(
+                'w-20 p-1',
+                data.id === selectedItemId && 'bg-white/10 rounded'
+              )}
+            />
+            <div className="min-h-12">
+              <span
+                className={cn(
+                  'text-sm text-center line-clamp-2 px-1',
+                  data.id === selectedItemId && 'bg-blue-700 rounded'
+                )}
+              >
+                {data.title}
+              </span>
+            </div>
+          </div>
+        </div>
+      </ContextMenuTrigger>
+      <ContextMenuContent className="w-64">
+        <ContextMenuItem inset>
+          Back
+          <ContextMenuShortcut>⌘[</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem inset disabled>
+          Forward
+          <ContextMenuShortcut>⌘]</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem inset>
+          Reload
+          <ContextMenuShortcut>⌘R</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuSub>
+          <ContextMenuSubTrigger inset>More Tools</ContextMenuSubTrigger>
+          <ContextMenuSubContent className="w-48">
+            <ContextMenuItem>
+              Save Page As...
+              <ContextMenuShortcut>⇧⌘S</ContextMenuShortcut>
+            </ContextMenuItem>
+            <ContextMenuItem>Create Shortcut...</ContextMenuItem>
+            <ContextMenuItem>Name Window...</ContextMenuItem>
+            <ContextMenuSeparator />
+            <ContextMenuItem>Developer Tools</ContextMenuItem>
+          </ContextMenuSubContent>
+        </ContextMenuSub>
+        <ContextMenuSeparator />
+        <ContextMenuCheckboxItem checked>
+          Show Bookmarks Bar
+          <ContextMenuShortcut>⌘⇧B</ContextMenuShortcut>
+        </ContextMenuCheckboxItem>
+        <ContextMenuCheckboxItem>Show Full URLs</ContextMenuCheckboxItem>
+        <ContextMenuSeparator />
+        <ContextMenuRadioGroup value="pedro">
+          <ContextMenuLabel inset>People</ContextMenuLabel>
+          <ContextMenuSeparator />
+          <ContextMenuRadioItem value="pedro">
+            Pedro Duarte
+          </ContextMenuRadioItem>
+          <ContextMenuRadioItem value="colm">Colm Tuite</ContextMenuRadioItem>
+        </ContextMenuRadioGroup>
+      </ContextMenuContent>
+    </ContextMenu>
   );
 }
