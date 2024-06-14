@@ -31,10 +31,15 @@ import { HiOutlineDotsCircleHorizontal } from 'react-icons/hi';
 
 import { AppProps, apps } from '@/data/Apps';
 import { FinderData } from '@/data/finderData';
-import { LaunchpadItem } from '../launchpad';
 import { useAppStore, useFinderStore } from '../providers/store-provider';
 import Image from 'next/image';
-import { SetStateAction, useEffect, useRef, useState } from 'react';
+import {
+  HTMLAttributes,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
 import {
   ContextMenu,
   ContextMenuCheckboxItem,
@@ -530,20 +535,26 @@ function Content({ displayedItems, selectedFinderId }: ContentProps) {
     }
   };
 
-  const handleItemClick = (id: string) => {
-    setSelectedItemId(id);
+  const handleApplicationClick = (id: string) => {
+    openApp(id);
+    bringToFront(id);
   };
 
   if (selectedFinderId === 'applications') {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-7 gap-14">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-7 gap-2 px-2">
         {apps.map((app) => (
-          <LaunchpadItem
+          <Item
             key={app.id}
-            appData={app}
-            openApp={() => openApp(app.id)}
-            bringToFront={() => bringToFront(app.id)}
-            setLaunchPad={function (): void {}}
+            data={{
+              id: app.id,
+              iconImg: app.img,
+              title: app.title,
+              type: 'file'
+            }}
+            selectedItemId={selectedItemId}
+            onClick={() => setSelectedItemId(app.id)}
+            onDoubleClick={() => handleApplicationClick(app.id)}
           />
         ))}
       </div>
@@ -558,8 +569,8 @@ function Content({ displayedItems, selectedFinderId }: ContentProps) {
             key={data.id}
             data={data}
             selectedItemId={selectedItemId}
-            handleItemClick={handleItemClick}
-            handleDoubleClick={handleDoubleClick}
+            onClick={() => setSelectedItemId(data.id)}
+            onDoubleClick={() => handleDoubleClick(data)}
           />
         ))}
       </div>
@@ -567,41 +578,34 @@ function Content({ displayedItems, selectedFinderId }: ContentProps) {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-7 gap-14 px-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-7 gap-2 px-2">
       {displayedItems.map((data) => (
         <Item
           key={data.id}
           data={data}
           selectedItemId={selectedItemId}
-          handleItemClick={handleItemClick}
-          handleDoubleClick={handleDoubleClick}
+          onClick={() => setSelectedItemId(data.id)}
+          onDoubleClick={() => handleDoubleClick(data)}
         />
       ))}
     </div>
   );
 }
 
-function Item({
-  data,
-  selectedItemId,
-  handleItemClick,
-  handleDoubleClick
-}: {
+interface ItemProps extends HTMLAttributes<HTMLDivElement> {
   data: FinderData;
   selectedItemId: string | null;
-  // eslint-disable-next-line no-unused-vars
-  handleItemClick: (id: string) => void;
-  // eslint-disable-next-line no-unused-vars
-  handleDoubleClick: (data: FinderData) => void;
-}) {
+}
+
+function Item({ data, selectedItemId, ...props }: ItemProps) {
   return (
     <ContextMenu>
       <ContextMenuTrigger asChild>
         <div
-          className={`flex flex-col items-center justify-center ${data.locked && 'opacity-40'}`}
-          role="button"
-          onClick={() => handleItemClick(data.id)}
-          onDoubleClick={() => handleDoubleClick(data)}
+          {...props}
+          className={cn(`flex flex-col items-center justify-center`, {
+            'opacity-40': data.locked
+          })}
         >
           <div className="flex justify-center items-center flex-col w-24 space-y-0.5">
             <Image
