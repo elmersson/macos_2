@@ -540,6 +540,20 @@ function Content({ displayedItems, selectedFinderId }: ContentProps) {
     bringToFront(id);
   };
 
+  if (selectedFinderId === 'airdrop') {
+    return (
+      <div className="flex flex-col w-full h-full items-center justify-center mt-[50%]">
+        <div className="text-[80px] text-blue-400">
+          <MdWifiTethering />
+        </div>
+        <span>AirDrop lets you share instantly with people nearby.</span>
+        <div className="text-sm text-blue-600">
+          <span>Allow me to be discovered by: Contacts Only</span>
+        </div>
+      </div>
+    );
+  }
+
   if (selectedFinderId === 'applications') {
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-7 gap-2 px-2">
