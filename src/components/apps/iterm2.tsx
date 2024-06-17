@@ -13,7 +13,7 @@ const font = Roboto_Mono({
 export function Iterm2({ appData }: AppProps) {
   const [input, setInput] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
-  const { finderDataSet } = useFinderStore((state) => state);
+  const { finderDataSet, removeById } = useFinderStore((state) => state);
 
   const [historyIndex, setHistoryIndex] = useState(-1);
   const { addHistory, setCurDir, setVisibleHistory, iterm2 } = useItermStore(
@@ -45,6 +45,9 @@ export function Iterm2({ appData }: AppProps) {
         changeDirectory(argument);
         break;
       case 'cat':
+        break;
+      case 'rm':
+        removeByTitleInCurrentDir(argument);
         break;
       case 'help':
         break;
@@ -163,6 +166,25 @@ export function Iterm2({ appData }: AppProps) {
     return null;
   };
 
+  const removeByTitleInCurrentDir = (title: string) => {
+    const currentDir = iterm2.curDir ?? 'macintosh-hd';
+    const currentDirectory = findDirectoryById(currentDir, finderDataSet);
+    if (!currentDirectory) {
+      console.log('Current directory not found');
+      return;
+    }
+
+    const fileToRemove = currentDirectory.children?.find(
+      (child) => child.title.toLowerCase() === title.toLowerCase()
+    );
+
+    if (fileToRemove) {
+      removeById(fileToRemove.id);
+    } else {
+      console.log('File not found in the current directory');
+    }
+  };
+
   const renderContent = (fileTitle: string): ReactNode => {
     const findFileByTitle = (
       title: string,
@@ -267,6 +289,9 @@ function Help() {
       </li>
       <li>
         <span>clear</span> - Clear the screen
+      </li>
+      <li>
+        <span>rm {'<file>'}</span> - Remove the specified file
       </li>
       <li>
         <span>help</span> - Display this help menu

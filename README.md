@@ -11,7 +11,7 @@ A personal website made to look like my current OS running on my Macbook. Update
 - [ ] Analytics
 - [ ] App layout
   - [ ] System
-- [ ] App function 
+- [ ] App function
   - [ ] System
   - [x] Trashcan
 
