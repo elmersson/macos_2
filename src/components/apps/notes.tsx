@@ -25,7 +25,7 @@ import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { $createParagraphNode, $createTextNode, $getRoot } from 'lexical';
-import { useEffect } from 'react';
+import { RefObject, useEffect, useRef } from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { useNoteStore } from '../providers/store-provider';
 
@@ -42,6 +42,8 @@ export function Notes({ appData }: AppProps) {
   } = useNoteStore((state) => state);
 
   const note = getNoteById(selectedNote);
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   return (
     <DraggableItem appData={appData}>
@@ -69,8 +71,15 @@ export function Notes({ appData }: AppProps) {
               getNoteById={getNoteById}
             />
           </ScrollArea>
-          <ScrollArea className="flex w-full p-4 bg-neutral-100 dark:bg-neutral-900">
-            <Content note={note} updateNoteById={updateNoteById} />
+          <ScrollArea
+            className="flex w-full p-4 bg-neutral-100 dark:bg-neutral-900"
+            onClick={() => inputRef.current?.focus()}
+          >
+            <Content
+              note={note}
+              updateNoteById={updateNoteById}
+              inputRef={inputRef}
+            />
           </ScrollArea>
         </div>
       </div>
@@ -293,9 +302,10 @@ interface ContentProps {
   note: Note | undefined;
   // eslint-disable-next-line no-unused-vars
   updateNoteById: (noteId: string, noteData: Partial<Note>) => void;
+  inputRef: RefObject<HTMLInputElement>;
 }
 
-function Content({ note, updateNoteById }: ContentProps) {
+function Content({ note, updateNoteById, inputRef }: ContentProps) {
   if (!note) {
     return;
   }
@@ -323,7 +333,7 @@ function Content({ note, updateNoteById }: ContentProps) {
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
-      <div className="flex flex-col space-y-2 caret-yellow-400 selection:bg-yellow-400/50">
+      <div className="flex flex-col h-full space-y-2 caret-yellow-400 selection:bg-yellow-400/50">
         <span className="text-neutral-400 text-sm flex justify-center">
           {formattedDate}
         </span>
@@ -332,6 +342,7 @@ function Content({ note, updateNoteById }: ContentProps) {
           value={note.title}
           onChange={handleTitleChange}
           placeholder="Enter title..."
+          ref={inputRef}
         />
         <Editor note={note} updateNoteById={updateNoteById} />
       </div>
