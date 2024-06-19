@@ -16,6 +16,21 @@ import MiniNotes from '@/assets/apps/minimized/notes-minimized.png';
 import Lotion from '@/assets/apps/lotion.png';
 import Liro from '@/assets/apps/liro.png';
 
+export interface MenuItem {
+  id: string;
+  title: string;
+  shortcut?: string;
+  action: () => void;
+  subMenu?: MenuItem[];
+  separator?: boolean;
+}
+
+export interface Trigger {
+  id: string;
+  label: string;
+  menu: MenuItem[];
+}
+
 export interface AppData {
   id: string;
   title: string;
@@ -27,6 +42,7 @@ export interface AppData {
   z: number;
   size: { width: number; height: number };
   position: { x: number; y: number };
+  triggers: Trigger[];
 }
 
 export interface AppProps {
@@ -43,7 +59,133 @@ export const apps: AppData[] = [
     miniImg: MiniFinder,
     z: 0,
     size: { width: 640, height: 400 },
-    position: { x: 0, y: 0 }
+    position: { x: 0, y: 0 },
+    triggers: [
+      {
+        id: 'title',
+        label: 'Finder',
+        menu: [
+          {
+            id: 'about',
+            title: 'About Finder',
+            action: () => console.log('About Finder')
+          },
+          {
+            id: 'settings',
+            title: 'Settings...',
+            action: () => console.log('Open Settings')
+          },
+          {
+            id: 'separator1',
+            title: '',
+            action: () => {},
+            separator: true
+          },
+          {
+            id: 'quit',
+            title: 'Quit Finder',
+            shortcut: '⌘Q',
+            action: () => console.log('Quit Finder')
+          }
+        ]
+      },
+      {
+        id: 'file',
+        label: 'File',
+        menu: [
+          {
+            id: 'general',
+            title: 'General',
+            action: () => console.log('General Preferences')
+          },
+          {
+            id: 'appearance',
+            title: 'Appearance',
+            action: () => console.log('Appearance Preferences')
+          }
+        ]
+      },
+      {
+        id: 'edit',
+        label: 'Edit',
+        menu: [
+          {
+            id: 'general',
+            title: 'General',
+            action: () => console.log('General Preferences')
+          },
+          {
+            id: 'appearance',
+            title: 'Appearance',
+            action: () => console.log('Appearance Preferences')
+          }
+        ]
+      },
+      {
+        id: 'view',
+        label: 'View',
+        menu: [
+          {
+            id: 'general',
+            title: 'General',
+            action: () => console.log('General Preferences')
+          },
+          {
+            id: 'appearance',
+            title: 'Appearance',
+            action: () => console.log('Appearance Preferences')
+          }
+        ]
+      },
+      {
+        id: 'go',
+        label: 'Go',
+        menu: [
+          {
+            id: 'general',
+            title: 'General',
+            action: () => console.log('General Preferences')
+          },
+          {
+            id: 'appearance',
+            title: 'Appearance',
+            action: () => console.log('Appearance Preferences')
+          }
+        ]
+      },
+      {
+        id: 'window',
+        label: 'Window',
+        menu: [
+          {
+            id: 'general',
+            title: 'General',
+            action: () => console.log('General Preferences')
+          },
+          {
+            id: 'appearance',
+            title: 'Appearance',
+            action: () => console.log('Appearance Preferences')
+          }
+        ]
+      },
+      {
+        id: 'help',
+        label: 'Help',
+        menu: [
+          {
+            id: 'general',
+            title: 'General',
+            action: () => console.log('General Preferences')
+          },
+          {
+            id: 'appearance',
+            title: 'Appearance',
+            action: () => console.log('Appearance Preferences')
+          }
+        ]
+      }
+    ]
   },
   {
     id: 'launchpad',
@@ -53,7 +195,47 @@ export const apps: AppData[] = [
     img: LaunchPad,
     z: 0,
     size: { width: 640, height: 400 },
-    position: { x: 0, y: 0 }
+    position: { x: 0, y: 0 },
+    triggers: [
+      {
+        id: 'title',
+        label: 'Finder',
+        menu: [
+          {
+            id: 'about',
+            title: 'About Finder',
+            action: () => console.log('About Finder')
+          },
+          {
+            id: 'settings',
+            title: 'Settings...',
+            action: () => console.log('Open Settings')
+          },
+          {
+            id: 'quit',
+            title: 'Quit Finder',
+            shortcut: '⌘Q',
+            action: () => console.log('Quit Finder')
+          }
+        ]
+      },
+      {
+        id: 'preferences',
+        label: 'Preferences',
+        menu: [
+          {
+            id: 'general',
+            title: 'General',
+            action: () => console.log('General Preferences')
+          },
+          {
+            id: 'appearance',
+            title: 'Appearance',
+            action: () => console.log('Appearance Preferences')
+          }
+        ]
+      }
+    ]
   },
   {
     id: 'arc',
@@ -64,7 +246,47 @@ export const apps: AppData[] = [
     miniImg: MiniArc,
     z: 0,
     size: { width: 640, height: 400 },
-    position: { x: 0, y: 0 }
+    position: { x: 0, y: 0 },
+    triggers: [
+      {
+        id: 'title',
+        label: 'Finder',
+        menu: [
+          {
+            id: 'about',
+            title: 'About Finder',
+            action: () => console.log('About Finder')
+          },
+          {
+            id: 'settings',
+            title: 'Settings...',
+            action: () => console.log('Open Settings')
+          },
+          {
+            id: 'quit',
+            title: 'Quit Finder',
+            shortcut: '⌘Q',
+            action: () => console.log('Quit Finder')
+          }
+        ]
+      },
+      {
+        id: 'preferences',
+        label: 'Preferences',
+        menu: [
+          {
+            id: 'general',
+            title: 'General',
+            action: () => console.log('General Preferences')
+          },
+          {
+            id: 'appearance',
+            title: 'Appearance',
+            action: () => console.log('Appearance Preferences')
+          }
+        ]
+      }
+    ]
   },
   {
     id: 'mail',
@@ -75,7 +297,47 @@ export const apps: AppData[] = [
     miniImg: MiniMail,
     z: 0,
     size: { width: 640, height: 400 },
-    position: { x: 0, y: 0 }
+    position: { x: 0, y: 0 },
+    triggers: [
+      {
+        id: 'title',
+        label: 'Finder',
+        menu: [
+          {
+            id: 'about',
+            title: 'About Finder',
+            action: () => console.log('About Finder')
+          },
+          {
+            id: 'settings',
+            title: 'Settings...',
+            action: () => console.log('Open Settings')
+          },
+          {
+            id: 'quit',
+            title: 'Quit Finder',
+            shortcut: '⌘Q',
+            action: () => console.log('Quit Finder')
+          }
+        ]
+      },
+      {
+        id: 'preferences',
+        label: 'Preferences',
+        menu: [
+          {
+            id: 'general',
+            title: 'General',
+            action: () => console.log('General Preferences')
+          },
+          {
+            id: 'appearance',
+            title: 'Appearance',
+            action: () => console.log('Appearance Preferences')
+          }
+        ]
+      }
+    ]
   },
   {
     id: 'iterm2',
@@ -86,7 +348,47 @@ export const apps: AppData[] = [
     miniImg: MiniIterm2,
     z: 0,
     size: { width: 640, height: 400 },
-    position: { x: 0, y: 0 }
+    position: { x: 0, y: 0 },
+    triggers: [
+      {
+        id: 'title',
+        label: 'Finder',
+        menu: [
+          {
+            id: 'about',
+            title: 'About Finder',
+            action: () => console.log('About Finder')
+          },
+          {
+            id: 'settings',
+            title: 'Settings...',
+            action: () => console.log('Open Settings')
+          },
+          {
+            id: 'quit',
+            title: 'Quit Finder',
+            shortcut: '⌘Q',
+            action: () => console.log('Quit Finder')
+          }
+        ]
+      },
+      {
+        id: 'preferences',
+        label: 'Preferences',
+        menu: [
+          {
+            id: 'general',
+            title: 'General',
+            action: () => console.log('General Preferences')
+          },
+          {
+            id: 'appearance',
+            title: 'Appearance',
+            action: () => console.log('Appearance Preferences')
+          }
+        ]
+      }
+    ]
   },
   {
     id: 'visual_studio_code',
@@ -97,7 +399,47 @@ export const apps: AppData[] = [
     miniImg: MiniVsCode,
     z: 0,
     size: { width: 640, height: 400 },
-    position: { x: 0, y: 0 }
+    position: { x: 0, y: 0 },
+    triggers: [
+      {
+        id: 'title',
+        label: 'Finder',
+        menu: [
+          {
+            id: 'about',
+            title: 'About Finder',
+            action: () => console.log('About Finder')
+          },
+          {
+            id: 'settings',
+            title: 'Settings...',
+            action: () => console.log('Open Settings')
+          },
+          {
+            id: 'quit',
+            title: 'Quit Finder',
+            shortcut: '⌘Q',
+            action: () => console.log('Quit Finder')
+          }
+        ]
+      },
+      {
+        id: 'preferences',
+        label: 'Preferences',
+        menu: [
+          {
+            id: 'general',
+            title: 'General',
+            action: () => console.log('General Preferences')
+          },
+          {
+            id: 'appearance',
+            title: 'Appearance',
+            action: () => console.log('Appearance Preferences')
+          }
+        ]
+      }
+    ]
   },
   {
     id: 'github',
@@ -108,7 +450,47 @@ export const apps: AppData[] = [
     url: 'https://github.com/elmersson',
     z: 0,
     size: { width: 640, height: 400 },
-    position: { x: 0, y: 0 }
+    position: { x: 0, y: 0 },
+    triggers: [
+      {
+        id: 'title',
+        label: 'Finder',
+        menu: [
+          {
+            id: 'about',
+            title: 'About Finder',
+            action: () => console.log('About Finder')
+          },
+          {
+            id: 'settings',
+            title: 'Settings...',
+            action: () => console.log('Open Settings')
+          },
+          {
+            id: 'quit',
+            title: 'Quit Finder',
+            shortcut: '⌘Q',
+            action: () => console.log('Quit Finder')
+          }
+        ]
+      },
+      {
+        id: 'preferences',
+        label: 'Preferences',
+        menu: [
+          {
+            id: 'general',
+            title: 'General',
+            action: () => console.log('General Preferences')
+          },
+          {
+            id: 'appearance',
+            title: 'Appearance',
+            action: () => console.log('Appearance Preferences')
+          }
+        ]
+      }
+    ]
   },
   {
     id: 'notes',
@@ -119,7 +501,47 @@ export const apps: AppData[] = [
     miniImg: MiniNotes,
     z: 0,
     size: { width: 640, height: 400 },
-    position: { x: 0, y: 0 }
+    position: { x: 0, y: 0 },
+    triggers: [
+      {
+        id: 'title',
+        label: 'Finder',
+        menu: [
+          {
+            id: 'about',
+            title: 'About Finder',
+            action: () => console.log('About Finder')
+          },
+          {
+            id: 'settings',
+            title: 'Settings...',
+            action: () => console.log('Open Settings')
+          },
+          {
+            id: 'quit',
+            title: 'Quit Finder',
+            shortcut: '⌘Q',
+            action: () => console.log('Quit Finder')
+          }
+        ]
+      },
+      {
+        id: 'preferences',
+        label: 'Preferences',
+        menu: [
+          {
+            id: 'general',
+            title: 'General',
+            action: () => console.log('General Preferences')
+          },
+          {
+            id: 'appearance',
+            title: 'Appearance',
+            action: () => console.log('Appearance Preferences')
+          }
+        ]
+      }
+    ]
   },
   {
     id: 'lotion',
@@ -130,7 +552,47 @@ export const apps: AppData[] = [
     url: 'https://lotion.rasmuselmersson.se/',
     z: 0,
     size: { width: 640, height: 400 },
-    position: { x: 0, y: 0 }
+    position: { x: 0, y: 0 },
+    triggers: [
+      {
+        id: 'title',
+        label: 'Finder',
+        menu: [
+          {
+            id: 'about',
+            title: 'About Finder',
+            action: () => console.log('About Finder')
+          },
+          {
+            id: 'settings',
+            title: 'Settings...',
+            action: () => console.log('Open Settings')
+          },
+          {
+            id: 'quit',
+            title: 'Quit Finder',
+            shortcut: '⌘Q',
+            action: () => console.log('Quit Finder')
+          }
+        ]
+      },
+      {
+        id: 'preferences',
+        label: 'Preferences',
+        menu: [
+          {
+            id: 'general',
+            title: 'General',
+            action: () => console.log('General Preferences')
+          },
+          {
+            id: 'appearance',
+            title: 'Appearance',
+            action: () => console.log('Appearance Preferences')
+          }
+        ]
+      }
+    ]
   },
   {
     id: 'liro',
@@ -141,7 +603,47 @@ export const apps: AppData[] = [
     url: 'https://liro.rasmuselmersson.se/',
     z: 0,
     size: { width: 640, height: 400 },
-    position: { x: 0, y: 0 }
+    position: { x: 0, y: 0 },
+    triggers: [
+      {
+        id: 'title',
+        label: 'Finder',
+        menu: [
+          {
+            id: 'about',
+            title: 'About Finder',
+            action: () => console.log('About Finder')
+          },
+          {
+            id: 'settings',
+            title: 'Settings...',
+            action: () => console.log('Open Settings')
+          },
+          {
+            id: 'quit',
+            title: 'Quit Finder',
+            shortcut: '⌘Q',
+            action: () => console.log('Quit Finder')
+          }
+        ]
+      },
+      {
+        id: 'preferences',
+        label: 'Preferences',
+        menu: [
+          {
+            id: 'general',
+            title: 'General',
+            action: () => console.log('General Preferences')
+          },
+          {
+            id: 'appearance',
+            title: 'Appearance',
+            action: () => console.log('Appearance Preferences')
+          }
+        ]
+      }
+    ]
   }
 ] as const;
 
