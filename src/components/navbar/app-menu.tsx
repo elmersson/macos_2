@@ -26,7 +26,7 @@ export function AppMenu() {
     return menuItems.map((item) => (
       <Fragment key={item.id}>
         <DropdownMenuItem onSelect={item.action}>
-          <p className="text-s">{item.title}</p>
+          <p className="text-s mr-6">{item.title}</p>
           {item.shortcut && (
             <DropdownMenuShortcut>{item.shortcut}</DropdownMenuShortcut>
           )}
