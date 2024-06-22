@@ -742,41 +742,170 @@ export const apps: AppData[] = [
     position: { x: 0, y: 0 },
     triggers: [
       {
-        id: 'title',
-        label: 'Finder',
+        id: 'notes',
+        label: 'Notes',
         menu: [
+          { id: 'about-notes', title: 'About Notes' },
+          { id: 'settings', title: 'Settings...', shortcut: '⌘,' },
+          { id: 'accounts', title: 'Accounts...' },
+          { id: 'close-all-locked-notes', title: 'Close All Locked Notes' },
+          { id: 'services', title: 'Services', subMenu: [] },
+          { id: 'hide-notes', title: 'Hide Notes', shortcut: '⌘H' },
+          { id: 'hide-others', title: 'Hide Others', shortcut: '⌥⌘H' },
+          { id: 'show-all', title: 'Show All' },
+          { id: 'quit-notes', title: 'Quit Notes', shortcut: '⌘Q' }
+        ]
+      },
+      {
+        id: 'file',
+        label: 'File',
+        menu: [
+          { id: 'new-note', title: 'New Note', shortcut: '⌘N' },
+          { id: 'new-folder', title: 'New Folder', shortcut: '⇧⌘N' },
+          { id: 'new-smart-folder', title: 'New Smart Folder' },
+          { id: 'share', title: 'Share', subMenu: [] },
           {
-            id: 'about',
-            title: 'About Finder',
-            action: () => console.log('About Finder')
+            id: 'new-smart-folder-with-tag-selection',
+            title: 'New Smart Folder with Tag Selection'
           },
+          { id: 'close', title: 'Close', shortcut: '⌘W' },
           {
-            id: 'settings',
-            title: 'Settings...',
-            action: () => console.log('Open Settings')
+            id: 'import-from-iphone',
+            title: 'Import from iPhone',
+            subMenu: []
           },
+          { id: 'import-to-notes', title: 'Import to Notes...' },
+          { id: 'export-as-pdf', title: 'Export as PDF...' },
+          { id: 'open-in-pages', title: 'Open in Pages' },
+          { id: 'pin-note', title: 'Pin Note' },
+          { id: 'lock-note', title: 'Lock Note' },
+          { id: 'duplicate-note', title: 'Duplicate Note', shortcut: '⌘D' },
+          { id: 'print', title: 'Print...', shortcut: '⌘P' }
+        ]
+      },
+      {
+        id: 'edit',
+        label: 'Edit',
+        menu: [
+          { id: 'undo', title: 'Undo', shortcut: '⌘Z' },
+          { id: 'redo', title: 'Redo', shortcut: '⇧⌘Z' },
+          { id: 'cut', title: 'Cut', shortcut: '⌘X' },
+          { id: 'copy', title: 'Copy', shortcut: '⌘C' },
+          { id: 'paste', title: 'Paste', shortcut: '⌘V' },
           {
-            id: 'quit',
-            title: 'Quit Finder',
-            shortcut: '⌘Q',
-            action: () => console.log('Quit Finder')
+            id: 'paste-match-style',
+            title: 'Paste and Match Style',
+            shortcut: '⌥⇧⌘V'
+          },
+          { id: 'paste-retain-style', title: 'Paste and Retain Style' },
+          { id: 'select-all', title: 'Select All', shortcut: '⌘A' },
+          { id: 'attach-file', title: 'Attach File...', shortcut: '⇧⌘A' },
+          { id: 'add-link', title: 'Add Link...', shortcut: '⌘K' },
+          { id: 'rename-attachment', title: 'Rename Attachment...' },
+          { id: 'find', title: 'Find', subMenu: [] },
+          {
+            id: 'spelling-grammar',
+            title: 'Spelling and Grammar',
+            subMenu: []
+          },
+          { id: 'substitutions', title: 'Substitutions', subMenu: [] },
+          { id: 'transformations', title: 'Transformations', subMenu: [] },
+          { id: 'speech', title: 'Speech', subMenu: [] },
+          { id: 'autofill', title: 'AutoFill', subMenu: [] },
+          { id: 'start-dictation', title: 'Start Dictation...' },
+          { id: 'emoji-symbols', title: 'Emoji & Symbols' }
+        ]
+      },
+      {
+        id: 'format',
+        label: 'Format',
+        menu: [
+          { id: 'title', title: 'Title', shortcut: '⇧⌘T' },
+          { id: 'heading', title: 'Heading', shortcut: '⇧⌘H' },
+          { id: 'subheading', title: 'Subheading', shortcut: '⇧⌘J' },
+          { id: 'body', title: 'Body', shortcut: '⇧⌘B' },
+          { id: 'monostyled', title: 'Monostyled', shortcut: '⌃⌘M' },
+          { id: 'bulleted-list', title: 'Bulleted List', shortcut: '⇧⌘7' },
+          { id: 'dashed-list', title: 'Dashed List', shortcut: '⇧⌘8' },
+          { id: 'numbered-list', title: 'Numbered List', shortcut: '⇧⌘9' },
+          { id: 'block-quote', title: 'Block Quote', shortcut: '⌘’' },
+          { id: 'checklist', title: 'Checklist', shortcut: '⇧⌘L' },
+          { id: 'mark-as-ticked', title: 'Mark as Ticked', shortcut: '⌃⌘U' },
+          { id: 'more', title: 'More', subMenu: [] },
+          { id: 'move-list-item', title: 'Move List Item', subMenu: [] },
+          { id: 'table', title: 'Table', shortcut: '⌃⌘T' },
+          { id: 'convert-to-text', title: 'Convert to Text' },
+          {
+            id: 'show-note-light-background',
+            title: 'Show Note with Light Background'
+          },
+          { id: 'font', title: 'Font', subMenu: [] },
+          { id: 'text', title: 'Text', subMenu: [] },
+          { id: 'indentation', title: 'Indentation', subMenu: [] }
+        ]
+      },
+      {
+        id: 'view',
+        label: 'View',
+        menu: [
+          { id: 'as-list', title: 'as List', shortcut: '⌘1' },
+          { id: 'as-gallery', title: 'as Gallery', shortcut: '⌘2' },
+          { id: 'sort-by', title: 'Sort By', subMenu: [] },
+          { id: 'group-by-date', title: 'Group By Date' },
+          { id: 'hide-folders', title: 'Hide Folders', shortcut: '⌥⌘S' },
+          { id: 'hide-note-count', title: 'Hide Note Count' },
+          { id: 'attachment-view', title: 'Attachment View', subMenu: [] },
+          {
+            id: 'show-attachments-browser',
+            title: 'Show Attachments Browser',
+            shortcut: '⌘3'
+          },
+          { id: 'show-in-note', title: 'Show in Note' },
+          { id: 'show-highlights', title: 'Show Highlights', shortcut: '⌃⌘I' },
+          {
+            id: 'show-note-activity',
+            title: 'Show Note Activity',
+            shortcut: '⌃⌘K'
+          },
+          { id: 'show-folder-activity', title: 'Show Folder Activity' },
+          { id: 'zoom-in', title: 'Zoom In', shortcut: '⌃⌘.' },
+          { id: 'zoom-out', title: 'Zoom Out', shortcut: '⌃⌘,' },
+          { id: 'actual-size', title: 'Actual Size', shortcut: '⌃⌘0' },
+          { id: 'previous-note', title: 'Previous Note', shortcut: '⌥⌘Ö' },
+          { id: 'next-note', title: 'Next Note', shortcut: '⌥⌘Ä' },
+          { id: 'hide-toolbar', title: 'Hide Toolbar' },
+          { id: 'customize-toolbar', title: 'Customize Toolbar...' },
+          {
+            id: 'enter-full-screen',
+            title: 'Enter Full Screen',
+            shortcut: '⌃⌘F'
           }
         ]
       },
       {
-        id: 'preferences',
-        label: 'Preferences',
+        id: 'window',
+        label: 'Window',
         menu: [
-          {
-            id: 'general',
-            title: 'General',
-            action: () => console.log('General Preferences')
-          },
-          {
-            id: 'appearance',
-            title: 'Appearance',
-            action: () => console.log('Appearance Preferences')
-          }
+          { id: 'minimise', title: 'Minimise', shortcut: '⌘M' },
+          { id: 'zoom', title: 'Zoom', shortcut: '⌥⌘Z' },
+          { id: 'tile-window-left', title: 'Tile Window to Left of Screen' },
+          { id: 'tile-window-right', title: 'Tile Window to Right of Screen' },
+          { id: 'replace-tiled-window', title: 'Replace Tiled Window' },
+          { id: 'remove-window-from-set', title: 'Remove Window from Set' },
+          { id: 'open-note-in-new-window', title: 'Open Note in New Window' },
+          { id: 'notes', title: 'Notes', shortcut: '⌘0' },
+          { id: 'photo-browser', title: 'Photo Browser' },
+          { id: 'bring-all-to-front', title: 'Bring All to Front' }
+        ]
+      },
+      {
+        id: 'help',
+        label: 'Help',
+        menu: [
+          { id: 'search', title: 'Search' },
+          { id: 'notes-help', title: 'Notes Help' },
+          { id: 'using-tags', title: 'Using Tags' },
+          { id: 'using-smart-folders', title: 'Using Smart Folders' }
         ]
       }
     ]
