@@ -527,8 +527,8 @@ export const apps: AppData[] = [
     ]
   },
   {
-    id: 'mail',
-    title: 'Mail',
+    id: 'outlook',
+    title: 'Outlook',
     isOpen: false,
     isMinimized: false,
     img: Mail,
@@ -538,41 +538,219 @@ export const apps: AppData[] = [
     position: { x: 0, y: 0 },
     triggers: [
       {
-        id: 'title',
-        label: 'Finder',
+        id: 'outlook',
+        label: 'Outlook',
         menu: [
+          { id: 'about-outlook', title: 'About Outlook' },
+          { id: 'legacy-outlook', title: 'Legacy Outlook' },
+          { id: 'settings', title: 'Settings...', shortcut: '⌘,' },
+          { id: 'work-offline', title: 'Work Offline' },
+          { id: 'turn-off-reminders', title: 'Turn Off Reminders' },
+          { id: 'services', title: 'Services', subMenu: [] },
+          { id: 'hide-outlook', title: 'Hide Outlook', shortcut: '⌘H' },
+          { id: 'hide-others', title: 'Hide Others', shortcut: '⌥⌘H' },
+          { id: 'show-all', title: 'Show All' },
+          { id: 'quit-outlook', title: 'Quit Outlook', shortcut: '⌘Q' }
+        ]
+      },
+      {
+        id: 'file',
+        label: 'File',
+        menu: [
+          { id: 'new', title: 'New', subMenu: [] },
+          { id: 'open', title: 'Open', subMenu: [] },
+          { id: 'close', title: 'Close', shortcut: '⌘W' },
+          { id: 'save', title: 'Save', shortcut: '⌘S' },
+          { id: 'save-as', title: 'Save As...', shortcut: '⇧⌘S' },
+          { id: 'save-as-template', title: 'Save As Template...' },
+          { id: 'folder', title: 'Folder', subMenu: [] },
+          { id: 'import', title: 'Import...' },
+          { id: 'export', title: 'Export...' },
+          { id: 'page-setup', title: 'Page Setup...' },
+          { id: 'print', title: 'Print...', shortcut: '⌘P' }
+        ]
+      },
+      {
+        id: 'edit',
+        label: 'Edit',
+        menu: [
+          { id: 'undo-send', title: 'Undo Send', shortcut: '⌥⌘⏎' },
+          { id: 'undo', title: 'Undo', shortcut: '⌘Z' },
+          { id: 'redo', title: 'Redo', shortcut: '⇧⌘Z' },
+          { id: 'cut', title: 'Cut', shortcut: '⌘X' },
+          { id: 'copy', title: 'Copy', shortcut: '⌘C' },
+          { id: 'copy-formatting', title: 'Copy Formatting' },
+          { id: 'paste', title: 'Paste', shortcut: '⌘V' },
           {
-            id: 'about',
-            title: 'About Finder',
-            action: () => console.log('About Finder')
+            id: 'paste-match-style',
+            title: 'Paste and Match Style',
+            shortcut: '⌥⇧⌘V'
           },
+          { id: 'paste-formatting', title: 'Paste Formatting' },
+          { id: 'clear-formatting', title: 'Clear Formatting' },
+          { id: 'select-all', title: 'Select All', shortcut: '⌘A' },
+          { id: 'duplicate', title: 'Duplicate' },
+          { id: 'delete', title: 'Delete', shortcut: '⌘⌫' },
           {
-            id: 'settings',
-            title: 'Settings...',
-            action: () => console.log('Open Settings')
+            id: 'permanently-delete',
+            title: 'Permanently Delete',
+            shortcut: '⇧⌘⌫'
           },
+          { id: 'delete-all', title: 'Delete All' },
+          { id: 'find', title: 'Find', subMenu: [] },
           {
-            id: 'quit',
-            title: 'Quit Finder',
-            shortcut: '⌘Q',
-            action: () => console.log('Quit Finder')
+            id: 'spelling-grammar',
+            title: 'Spelling and Grammar',
+            subMenu: []
+          },
+          { id: 'check-accessibility', title: 'Check Accessibility...' },
+          { id: 'change-case', title: 'Change Case', shortcut: '⌥⇧⌘C' },
+          { id: 'speech', title: 'Speech', subMenu: [] },
+          { id: 'autofill', title: 'AutoFill', subMenu: [] },
+          { id: 'start-dictation', title: 'Start Dictation...' },
+          { id: 'emoji-symbols', title: 'Emoji & Symbols' }
+        ]
+      },
+      {
+        id: 'view',
+        label: 'View',
+        menu: [
+          { id: 'previous', title: 'Previous', shortcut: '⌃⌥Ö' },
+          { id: 'next', title: 'Next', shortcut: '⌃⌥Ä' },
+          { id: 'previous-pane', title: 'Previous Pane', shortcut: '⌃⇧Ö' },
+          { id: 'next-pane', title: 'Next Pane', shortcut: '⌃⇧Ä' },
+          { id: 'go-to', title: 'Go To', subMenu: [] },
+          { id: 'today', title: 'Today', shortcut: '⌘T' },
+          { id: 'next-week', title: 'Next Week', shortcut: '⌥⌘▶' },
+          { id: 'previous-week', title: 'Previous Week', shortcut: '⌥⌘◀' },
+          { id: 'day', title: 'Day', shortcut: '⌃⌘1' },
+          { id: 'work-week', title: 'Work Week', shortcut: '⌃⌘2' },
+          { id: 'week', title: 'Week', shortcut: '⌃⌘3' },
+          { id: 'month', title: 'Month', shortcut: '⌃⌘4' },
+          { id: 'three-day', title: 'Three Day', shortcut: '⌃⌘5' },
+          { id: 'time-scale', title: 'Time Scale', subMenu: [] },
+          { id: 'filter', title: 'Filter', subMenu: [] },
+          { id: 'colour', title: 'Colour', subMenu: [] },
+          { id: 'overlay', title: 'Overlay', shortcut: '⌘0' },
+          { id: 'list', title: 'List', shortcut: '⌃⌘0' },
+          {
+            id: 'manage-additional-time-zones',
+            title: 'Manage Additional Time Zones'
+          },
+          { id: 'customize-toolbar', title: 'Customize Toolbar...' },
+          { id: 'sidebar', title: 'Sidebar', shortcut: '⌃⌘S' },
+          { id: 'task-pane', title: 'Task Pane' },
+          {
+            id: 'enter-full-screen',
+            title: 'Enter Full Screen',
+            shortcut: '⌃⌘F'
           }
         ]
       },
       {
-        id: 'preferences',
-        label: 'Preferences',
+        id: 'event',
+        label: 'Event',
         menu: [
           {
-            id: 'general',
-            title: 'General',
-            action: () => console.log('General Preferences')
+            id: 'invite-attendees',
+            title: 'Invite Attendees',
+            shortcut: '⇧⌘I'
+          },
+          { id: 'time-zones', title: 'Time Zones' },
+          { id: 'signatures', title: 'Signatures', subMenu: [] },
+          { id: 'show-as', title: 'Show As', subMenu: [] },
+          { id: 'private', title: 'Private' },
+          { id: 'categorize', title: 'Categorize', subMenu: [] },
+          { id: 'join-online-meeting', title: 'Join Online Meeting' },
+          { id: 'move', title: 'Move', subMenu: [] }
+        ]
+      },
+      {
+        id: 'format',
+        label: 'Format',
+        menu: [
+          { id: 'font', title: 'Font...', shortcut: '⌘D' },
+          {
+            id: 'increase-font-size',
+            title: 'Increase Font Size',
+            shortcut: '⌘+'
           },
           {
-            id: 'appearance',
-            title: 'Appearance',
-            action: () => console.log('Appearance Preferences')
+            id: 'decrease-font-size',
+            title: 'Decrease Font Size',
+            shortcut: '⌘-'
+          },
+          { id: 'alignment', title: 'Alignment', subMenu: [] },
+          { id: 'numbered-list', title: 'Numbered List' },
+          { id: 'bulleted-list', title: 'Bulleted List' },
+          { id: 'increase-indent', title: 'Increase Indent', shortcut: '⌘Ä' },
+          { id: 'decrease-indent', title: 'Decrease Indent', shortcut: '⌘Ö' },
+          { id: 'insert-table', title: 'Insert Table...' },
+          { id: 'link', title: 'Link...', shortcut: '⌘K' },
+          { id: 'edit-alt-text', title: 'Edit Alt Text...', shortcut: '⇧⌘2' },
+          { id: 'insert-picture', title: 'Insert Picture...', shortcut: '⇧⌘1' },
+          { id: 'format-picture', title: 'Format Picture...' },
+          { id: 'zoom', title: 'Zoom', shortcut: '⌥⌘Z' }
+        ]
+      },
+      {
+        id: 'profiles',
+        label: 'Profiles',
+        menu: [
+          { id: 'all-accounts', title: 'All Accounts' },
+          { id: 'create-profile', title: 'Create Profile' },
+          { id: 'manage-profiles', title: 'Manage Profiles' }
+        ]
+      },
+      {
+        id: 'tools',
+        label: 'Tools',
+        menu: [
+          { id: 'sync', title: 'Sync', shortcut: '⌥⌘K' },
+          { id: 'automatic-replies', title: 'Automatic Replies...' },
+          { id: 'rules', title: 'Rules...' },
+          { id: 'junk-email-preferences', title: 'Junk Email Preferences' },
+          { id: 'accounts', title: 'Accounts...' },
+          { id: 'get-add-ins', title: 'Get Add-ins' },
+          {
+            id: 'keyboard-shortcuts',
+            title: 'Keyboard Shortcuts',
+            shortcut: '⌘.'
           }
+        ]
+      },
+      {
+        id: 'window',
+        label: 'Window',
+        menu: [
+          { id: 'minimise', title: 'Minimise', shortcut: '⌘M' },
+          { id: 'zoom', title: 'Zoom' },
+          { id: 'tile-window-left', title: 'Tile Window to Left of Screen' },
+          { id: 'tile-window-right', title: 'Tile Window to Right of Screen' },
+          { id: 'replace-tiled-window', title: 'Replace Tiled Window' },
+          {
+            id: 'enter-full-screen',
+            title: 'Enter Full Screen',
+            shortcut: '⌃⌘F'
+          },
+          { id: 'remove-window-from-set', title: 'Remove Window from Set' },
+          { id: 'reminders', title: 'Reminders', shortcut: '⌘9' },
+          { id: 'media-browser', title: 'Media Browser', subMenu: [] },
+          { id: 'calendar', title: 'Calendar' }
+        ]
+      },
+      {
+        id: 'help',
+        label: 'Help',
+        menu: [
+          { id: 'search', title: 'Search' },
+          { id: 'outlook-help', title: 'Outlook Help' },
+          { id: 'contact-support', title: 'Contact Support' },
+          { id: 'feedback', title: 'Feedback', subMenu: [] },
+          { id: 'collect-diagnostics', title: 'Collect Diagnostics' },
+          { id: 'whats-new', title: "What's New" },
+          { id: 'revert-to-legacy-outlook', title: 'Revert to Legacy Outlook' },
+          { id: 'clear-application-data', title: 'Clear Application Data' }
         ]
       }
     ]
