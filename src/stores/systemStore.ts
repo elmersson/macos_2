@@ -35,6 +35,10 @@ export interface SystemStore {
   onOpen: () => void;
   onClose: () => void;
   toggle: () => void;
+  systemHistory: string[];
+  addToHistory: (id: string) => void;
+  historyPosition: number;
+  setHistoryPosition: (position: number) => void;
   resetSystemStore: () => void;
 }
 
@@ -60,6 +64,21 @@ export const createSystemStore = (): StoreApi<SystemStore> => {
         onOpen: () => set({ isOpen: true }),
         onClose: () => set({ isOpen: false }),
         toggle: () => set({ isOpen: !get().isOpen }),
+        systemHistory: [],
+        addToHistory: (id: string) =>
+          set((state) => {
+            if (state.historyPosition < state.systemHistory.length - 1) {
+              state.systemHistory.splice(state.historyPosition + 1);
+            }
+            return {
+              systemHistory: [...state.systemHistory, id]
+            };
+          }),
+        setHistoryPosition: (position: number) =>
+          set(() => ({
+            historyPosition: position
+          })),
+        historyPosition: 0,
         resetSystemStore: () =>
           set({
             ...initialSystemData,

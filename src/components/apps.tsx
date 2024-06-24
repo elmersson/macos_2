@@ -6,6 +6,7 @@ import { Iterm2 } from './apps/iterm2';
 import { Outlook } from './apps/outlook';
 import { useAppStore } from './providers/store-provider';
 import { Fragment } from 'react';
+import { System } from './apps/system';
 export function Apps() {
   const { apps } = useAppStore((state) => state);
 
@@ -28,6 +29,8 @@ export function Apps() {
                 <Iterm2 key={app.id} appData={app} />
               ) : app.id === 'mail' ? (
                 <Outlook key={app.id} appData={app} />
+              ) : app.id === 'system' ? (
+                <System key={app.id} appData={app} />
               ) : null}
             </Fragment>
           )
