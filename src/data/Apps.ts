@@ -15,6 +15,7 @@ import Notes from '@/assets/apps/notes.png';
 import MiniNotes from '@/assets/apps/minimized/notes-minimized.png';
 import Lotion from '@/assets/apps/lotion.png';
 import Liro from '@/assets/apps/liro.png';
+import System from '@/assets/apps/system.png';
 
 export interface MenuItem {
   id: string;
@@ -1189,6 +1190,17 @@ export const apps: AppData[] = [
         ]
       }
     ]
+  },
+  {
+    id: 'system',
+    title: 'System Settings',
+    isOpen: false,
+    isMinimized: false,
+    img: System,
+    z: 0,
+    size: { width: 640, height: 400 },
+    position: { x: 0, y: 0 },
+    triggers: []
   }
 ] as const;
 
