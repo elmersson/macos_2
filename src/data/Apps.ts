@@ -822,38 +822,305 @@ export const apps: AppData[] = [
         id: 'title',
         label: 'Finder',
         menu: [
+          { id: 'about', title: 'About Visual Studio Code' },
+          { id: 'downloading-update', title: 'Downloading Update...' },
+          { id: 'settings', title: 'Settings...', subMenu: [] },
+          { id: 'services', title: 'Services', subMenu: [] },
+          { id: 'hide', title: 'Hide Visual Studio Code', shortcut: '⌘H' },
+          { id: 'hide-others', title: 'Hide Others', shortcut: '⌥⌘H' },
+          { id: 'show-all', title: 'Show All' },
+          { id: 'quit', title: 'Quit Visual Studio Code', shortcut: '⌘Q' }
+        ]
+      },
+      {
+        id: 'file',
+        label: 'File',
+        menu: [
+          { id: 'new-text-file', title: 'New Text File', shortcut: '⌘N' },
+          { id: 'new-file', title: 'New File...', shortcut: '⇧⌥⌘N' },
+          { id: 'new-window', title: 'New Window', shortcut: '⇧⌘N' },
+          { id: 'open', title: 'Open...', shortcut: '⌘O' },
+          { id: 'open-folder', title: 'Open Folder...' },
+          { id: 'open-workspace', title: 'Open Workspace from File...' },
+          { id: 'open-recent', title: 'Open Recent', subMenu: [] },
+          { id: 'add-folder', title: 'Add Folder to Workspace...' },
+          { id: 'save', title: 'Save', shortcut: '⌘S' },
+          { id: 'save-as', title: 'Save As...', shortcut: '⌥⌘S' },
+          { id: 'save-all', title: 'Save All', shortcut: '⌥⌘S' },
+          { id: 'share', title: 'Share', subMenu: [] },
+          { id: 'auto-save', title: 'Auto Save', shortcut: '⌘S' },
+          { id: 'revert-file', title: 'Revert File' },
+          { id: 'close-editor', title: 'Close Editor', shortcut: '⌘W' },
+          { id: 'close-window', title: 'Close Window', shortcut: '⌥⌘W' }
+        ]
+      },
+      {
+        id: 'edit',
+        label: 'Edit',
+        menu: [
+          { id: 'undo', title: 'Undo', shortcut: '⌘Z' },
+          { id: 'redo', title: 'Redo', shortcut: '⇧⌘Z' },
+          { id: 'cut', title: 'Cut', shortcut: '⌘X' },
+          { id: 'copy', title: 'Copy', shortcut: '⌘C' },
+          { id: 'paste', title: 'Paste', shortcut: '⌘V' },
+          { id: 'find', title: 'Find', shortcut: '⌘F' },
+          { id: 'replace', title: 'Replace', shortcut: '⇧⌘F' },
+          { id: 'find-in-files', title: 'Find in Files', shortcut: '⇧⌘F' },
           {
-            id: 'about',
-            title: 'About Finder',
-            action: () => console.log('About Finder')
+            id: 'replace-in-files',
+            title: 'Replace in Files',
+            shortcut: '⌥⇧⌘H'
           },
           {
-            id: 'settings',
-            title: 'Settings...',
-            action: () => console.log('Open Settings')
+            id: 'toggle-line-comment',
+            title: 'Toggle Line Comment',
+            shortcut: '⌘/'
           },
           {
-            id: 'quit',
-            title: 'Quit Finder',
-            shortcut: '⌘Q',
-            action: () => console.log('Quit Finder')
+            id: 'toggle-block-comment',
+            title: 'Toggle Block Comment',
+            shortcut: '⇧⌘A'
+          },
+          {
+            id: 'emmet-expand-abbreviation',
+            title: 'Emmet: Expand Abbreviation'
+          },
+          { id: 'autofill', title: 'AutoFill', subMenu: [] },
+          { id: 'start-dictation', title: 'Start Dictation...' },
+          { id: 'emoji-symbols', title: 'Emoji & Symbols' }
+        ]
+      },
+      {
+        id: 'selection',
+        label: 'Selection',
+        menu: [
+          { id: 'select-all', title: 'Select All', shortcut: '⌘A' },
+          {
+            id: 'expand-selection',
+            title: 'Expand Selection',
+            shortcut: '⇧⌘→'
+          },
+          {
+            id: 'shrink-selection',
+            title: 'Shrink Selection',
+            shortcut: '⇧⌘←'
+          },
+          { id: 'copy-line-up', title: 'Copy Line Up', shortcut: '⇧⌥↑' },
+          { id: 'copy-line-down', title: 'Copy Line Down', shortcut: '⇧⌥↓' },
+          { id: 'move-line-up', title: 'Move Line Up', shortcut: '⌥↑' },
+          { id: 'move-line-down', title: 'Move Line Down', shortcut: '⌥↓' },
+          { id: 'duplicate-selection', title: 'Duplicate Selection' },
+          {
+            id: 'add-cursor-above',
+            title: 'Add Cursor Above',
+            shortcut: '⌥⌘↑'
+          },
+          {
+            id: 'add-cursor-below',
+            title: 'Add Cursor Below',
+            shortcut: '⌥⌘↓'
+          },
+          {
+            id: 'add-cursors-to-line-ends',
+            title: 'Add Cursors to Line Ends',
+            shortcut: '⇧⌘I'
+          },
+          {
+            id: 'add-next-occurrence',
+            title: 'Add Next Occurrence',
+            shortcut: '⌘D'
+          },
+          {
+            id: 'add-previous-occurrence',
+            title: 'Add Previous Occurrence',
+            shortcut: '⇧⌘D'
+          },
+          {
+            id: 'select-all-occurrences',
+            title: 'Select All Occurrences',
+            shortcut: '⌘L'
+          },
+          {
+            id: 'cmd-click-multi-cursor',
+            title: 'Switch to Cmd+Click for Multi-Cursor'
+          },
+          { id: 'column-selection-mode', title: 'Column Selection Mode' }
+        ]
+      },
+      {
+        id: 'view',
+        label: 'View',
+        menu: [
+          {
+            id: 'command-palette',
+            title: 'Command Palette...',
+            shortcut: '⇧⌘P'
+          },
+          { id: 'open-view', title: 'Open View...', subMenu: [] },
+          { id: 'appearance', title: 'Appearance', subMenu: [] },
+          { id: 'editor-layout', title: 'Editor Layout', subMenu: [] },
+          { id: 'explorer', title: 'Explorer', shortcut: '⇧⌘E' },
+          { id: 'search', title: 'Search', shortcut: '⇧⌘F' },
+          { id: 'source-control', title: 'Source Control', shortcut: '⌃⇧G' },
+          { id: 'run', title: 'Run', shortcut: '⌘D' },
+          { id: 'extensions', title: 'Extensions', shortcut: '⇧⌘X' },
+          { id: 'testing', title: 'Testing' },
+          { id: 'problems', title: 'Problems', shortcut: '⇧⌘M' },
+          { id: 'output', title: 'Output', shortcut: '⌃⇧U' },
+          { id: 'debug-console', title: 'Debug Console', shortcut: '⌃⇧Y' },
+          { id: 'terminal', title: 'Terminal', shortcut: '⌃`' },
+          { id: 'word-wrap', title: 'Word Wrap', shortcut: '⌥Z' }
+        ]
+      },
+      {
+        id: 'go',
+        label: 'Go',
+        menu: [
+          { id: 'back', title: 'Back', shortcut: '⌃-' },
+          { id: 'forward', title: 'Forward', shortcut: '⌃+' },
+          {
+            id: 'last-edit-location',
+            title: 'Last Edit Location',
+            shortcut: '⌃K ⌃Q'
+          },
+          { id: 'switch-editor', title: 'Switch Editor', subMenu: [] },
+          { id: 'switch-group', title: 'Switch Group', subMenu: [] },
+          { id: 'go-to-file', title: 'Go to File...', shortcut: '⌘P' },
+          {
+            id: 'go-to-symbol-in-workspace',
+            title: 'Go to Symbol in Workspace...',
+            shortcut: '⌘T'
+          },
+          {
+            id: 'go-to-symbol-in-editor',
+            title: 'Go to Symbol in Editor...',
+            shortcut: '⌥⌘O'
+          },
+          {
+            id: 'go-to-definition',
+            title: 'Go to Definition',
+            shortcut: 'F12'
+          },
+          { id: 'go-to-declaration', title: 'Go to Declaration' },
+          { id: 'go-to-type-definition', title: 'Go to Type Definition' },
+          {
+            id: 'go-to-implementations',
+            title: 'Go to Implementations',
+            shortcut: '⌘F12'
+          },
+          {
+            id: 'go-to-references',
+            title: 'Go to References',
+            shortcut: '⇧⌘F12'
+          },
+          { id: 'go-to-line', title: 'Go to Line/Column...', shortcut: '⌃G' },
+          { id: 'go-to-bracket', title: 'Go to Bracket', shortcut: '⌘]' },
+          { id: 'next-problem', title: 'Next Problem', shortcut: 'F8' },
+          {
+            id: 'previous-problem',
+            title: 'Previous Problem',
+            shortcut: '⇧F8'
+          },
+          { id: 'next-change', title: 'Next Change', shortcut: '⌃F3' },
+          { id: 'previous-change', title: 'Previous Change', shortcut: '⇧⌃F3' }
+        ]
+      },
+      {
+        id: 'run',
+        label: 'Run',
+        menu: [
+          { id: 'start-debugging', title: 'Start Debugging', shortcut: 'F5' },
+          {
+            id: 'run-without-debugging',
+            title: 'Run Without Debugging',
+            shortcut: '⇧F5'
+          },
+          { id: 'stop-debugging', title: 'Stop Debugging', shortcut: '⇧⌘F5' },
+          {
+            id: 'restart-debugging',
+            title: 'Restart Debugging',
+            shortcut: '⇧⌘F5'
+          },
+          { id: 'open-configurations', title: 'Open Configurations' },
+          { id: 'add-configuration', title: 'Add Configuration...' },
+          { id: 'step-over', title: 'Step Over', shortcut: 'F10' },
+          { id: 'step-into', title: 'Step Into', shortcut: 'F11' },
+          { id: 'step-out', title: 'Step Out', shortcut: '⇧F11' },
+          { id: 'continue', title: 'Continue', shortcut: 'F5' },
+          {
+            id: 'toggle-breakpoint',
+            title: 'Toggle Breakpoint',
+            shortcut: 'F9'
+          },
+          { id: 'new-breakpoint', title: 'New Breakpoint', subMenu: [] },
+          { id: 'enable-all-breakpoints', title: 'Enable All Breakpoints' },
+          { id: 'disable-all-breakpoints', title: 'Disable All Breakpoints' },
+          { id: 'remove-all-breakpoints', title: 'Remove All Breakpoints' },
+          { id: 'install-debuggers', title: 'Install Additional Debuggers...' }
+        ]
+      },
+      {
+        id: 'terminal',
+        label: 'Terminal',
+        menu: [
+          { id: 'new-terminal', title: 'New Terminal', shortcut: '⌃`' },
+          { id: 'split-terminal', title: 'Split Terminal', shortcut: '⌥⌘' },
+          { id: 'run-task', title: 'Run Task...' },
+          { id: 'run-build-task', title: 'Run Build Task...', shortcut: '⌘B' },
+          { id: 'run-active-file', title: 'Run Active File' },
+          { id: 'run-selected-text', title: 'Run Selected Text' },
+          { id: 'show-running-tasks', title: 'Show Running Tasks...' },
+          { id: 'restart-running-task', title: 'Restart Running Task...' },
+          { id: 'terminate-task', title: 'Terminate Task...' },
+          { id: 'configure-tasks', title: 'Configure Tasks...' },
+          {
+            id: 'configure-default-build-task',
+            title: 'Configure Default Build Task...'
           }
         ]
       },
       {
-        id: 'preferences',
-        label: 'Preferences',
+        id: 'window',
+        label: 'Window',
         menu: [
+          { id: 'minimize', title: 'Minimize', shortcut: '⌘M' },
+          { id: 'zoom', title: 'Zoom' },
+          { id: 'tile-window-left', title: 'Tile Window to Left of Screen' },
+          { id: 'tile-window-right', title: 'Tile Window to Right of Screen' },
+          { id: 'replace-tiled-window', title: 'Replace Tiled Window' },
+          { id: 'remove-window-from-set', title: 'Remove Window from Set' },
+          { id: 'move-to-ipad', title: 'Move to iPad' },
+          { id: 'switch-window', title: 'Switch Window...' },
+          { id: 'bring-all-to-front', title: 'Bring All to Front' },
+          { id: 'navigation-tsx', title: 'navigation.tsx' }
+        ]
+      },
+      {
+        id: 'help',
+        label: 'Help',
+        menu: [
+          { id: 'welcome', title: 'Welcome' },
           {
-            id: 'general',
-            title: 'General',
-            action: () => console.log('General Preferences')
+            id: 'show-all-commands',
+            title: 'Show All Commands',
+            shortcut: '⇧⌘P'
           },
+          { id: 'documentation', title: 'Documentation' },
+          { id: 'editor-playground', title: 'Editor Playground' },
+          { id: 'show-release-notes', title: 'Show Release Notes' },
           {
-            id: 'appearance',
-            title: 'Appearance',
-            action: () => console.log('Appearance Preferences')
-          }
+            id: 'keyboard-shortcuts',
+            title: 'Keyboard Shortcuts Reference [⌘K ⌘R]'
+          },
+          { id: 'video-tutorials', title: 'Video Tutorials' },
+          { id: 'tips-and-tricks', title: 'Tips and Tricks' },
+          { id: 'join-us-on-youtube', title: 'Join Us on YouTube' },
+          { id: 'search-feature-requests', title: 'Search Feature Requests' },
+          { id: 'report-issue', title: 'Report Issue' },
+          { id: 'view-license', title: 'View License' },
+          { id: 'privacy-statement', title: 'Privacy Statement' },
+          { id: 'toggle-developer-tools', title: 'Toggle Developer Tools' },
+          { id: 'open-process-explorer', title: 'Open Process Explorer' }
         ]
       }
     ]
