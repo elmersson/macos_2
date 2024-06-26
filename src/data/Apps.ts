@@ -768,40 +768,279 @@ export const apps: AppData[] = [
     position: { x: 0, y: 0 },
     triggers: [
       {
-        id: 'title',
-        label: 'Finder',
+        id: 'main-menu',
+        label: 'iTerm2',
         menu: [
+          { id: 'about-iterm2', title: 'About iTerm2' },
+          { id: 'show-tip-of-the-day', title: 'Show Tip of the Day' },
+          { id: 'check-for-updates', title: 'Check For Updates...' },
+          { id: 'toggle-debug-logging', title: 'Toggle Debug Logging' },
+          { id: 'copy-performance-stats', title: 'Copy Performance Stats' },
+          { id: 'capture-gpu-frame', title: 'Capture GPU Frame' },
+          { id: 'settings', title: 'Settings...', shortcut: '⌘,' },
+          { id: 'services', title: 'Services', subMenu: [] },
+          { id: 'hide-iterm2', title: 'Hide iTerm2', shortcut: '⌘H' },
+          { id: 'hide-others', title: 'Hide Others', shortcut: '⌥⌘H' },
+          { id: 'show-all', title: 'Show All' },
+          { id: 'secure-keyboard-entry', title: 'Secure Keyboard Entry' },
+          { id: 'make-iterm2-default-term', title: 'Make iTerm2 Default Term' },
           {
-            id: 'about',
-            title: 'About Finder',
-            action: () => console.log('About Finder')
+            id: 'install-shell-integration',
+            title: 'Install Shell Integration'
           },
-          {
-            id: 'settings',
-            title: 'Settings...',
-            action: () => console.log('Open Settings')
-          },
-          {
-            id: 'quit',
-            title: 'Quit Finder',
-            shortcut: '⌘Q',
-            action: () => console.log('Quit Finder')
-          }
+          { id: 'quit-iterm2', title: 'Quit iTerm2', shortcut: '⌘Q' }
         ]
       },
       {
-        id: 'preferences',
-        label: 'Preferences',
+        id: 'file',
+        label: 'File',
         menu: [
+          { id: 'new-window', title: 'New Window', shortcut: '⌘N' },
           {
-            id: 'general',
-            title: 'General',
-            action: () => console.log('General Preferences')
+            id: 'new-window-with-current-profile',
+            title: 'New Window with Current Profile'
+          },
+          { id: 'new-tab', title: 'New Tab', shortcut: '⌘T' },
+          {
+            id: 'new-tab-with-current-profile',
+            title: 'New Tab with Current Profile'
+          },
+          { id: 'duplicate-tab', title: 'Duplicate Tab' },
+          {
+            id: 'split-horizontally-with-current-profile',
+            title: 'Split Horizontally with Current Profile'
           },
           {
-            id: 'appearance',
-            title: 'Appearance',
-            action: () => console.log('Appearance Preferences')
+            id: 'split-vertically-with-current-profile',
+            title: 'Split Vertically with Current Profile'
+          },
+          { id: 'split-horizontally', title: 'Split Horizontally...' },
+          { id: 'split-vertically', title: 'Split Vertically...' },
+          { id: 'save-selected-text', title: 'Save Selected Text...' },
+          { id: 'close', title: 'Close', shortcut: '⌘W' },
+          { id: 'close-terminal-window', title: 'Close Terminal Window' },
+          { id: 'close-all-panes-in-tab', title: 'Close All Panes in Tab' },
+          { id: 'undo-close', title: 'Undo Close' },
+          { id: 'broadcast-input', title: 'Broadcast Input', subMenu: [] },
+          { id: 'tmux', title: 'tmux', subMenu: [] },
+          { id: 'page-setup', title: 'Page Setup...', shortcut: '⌘P' },
+          { id: 'print', title: 'Print...', shortcut: '⌘P' }
+        ]
+      },
+      {
+        id: 'edit',
+        label: 'Edit',
+        menu: [
+          {
+            id: 'undo-close-session',
+            title: 'Undo Close Session',
+            shortcut: '⌘Z'
+          },
+          { id: 'redo', title: 'Redo', shortcut: '⇧⌘Z' },
+          { id: 'cut', title: 'Cut', shortcut: '⌘X' },
+          { id: 'copy', title: 'Copy', shortcut: '⌘C' },
+          {
+            id: 'copy-with-control-sequences',
+            title: 'Copy with Control Sequences'
+          },
+          { id: 'copy-mode', title: 'Copy Mode' },
+          { id: 'paste', title: 'Paste', shortcut: '⌘V' },
+          { id: 'paste-special', title: 'Paste Special', subMenu: [] },
+          { id: 'snippets', title: 'Snippets', subMenu: [] },
+          { id: 'actions', title: 'Actions', subMenu: [] },
+          { id: 'open-selection', title: 'Open Selection', shortcut: '⌘O' },
+          {
+            id: 'jump-to-selection',
+            title: 'Jump to Selection',
+            shortcut: '⌘J'
+          },
+          { id: 'select-all', title: 'Select All', shortcut: '⌘A' },
+          {
+            id: 'selection-respects-soft-boundaries',
+            title: 'Selection Respects Soft Boundaries'
+          },
+          {
+            id: 'select-output-of-last-command',
+            title: 'Select Output of Last Command'
+          },
+          { id: 'select-current-command', title: 'Select Current Command' },
+          { id: 'find', title: 'Find' },
+          { id: 'marks-and-annotations', title: 'Marks and Annotations' },
+          { id: 'clear-buffer', title: 'Clear Buffer' },
+          { id: 'clear-scrollback-buffer', title: 'Clear Scrollback Buffer' },
+          {
+            id: 'clear-to-start-of-selection',
+            title: 'Clear to Start of Selection'
+          },
+          { id: 'clear-to-last-mark', title: 'Clear to Last Mark' },
+          { id: 'autofill', title: 'AutoFill', subMenu: [] },
+          { id: 'start-dictation', title: 'Start Dictation...' },
+          { id: 'emoji-symbols', title: 'Emoji & Symbols' }
+        ]
+      },
+      {
+        id: 'view',
+        label: 'View',
+        menu: [
+          { id: 'show-tabs-in-fullscreen', title: 'Show Tabs in Fullscreen' },
+          {
+            id: 'toggle-full-screen',
+            title: 'Toggle Full Screen',
+            shortcut: '⌘F'
+          },
+          { id: 'use-transparency', title: 'Use Transparency' },
+          { id: 'zoom-in-on-selection', title: 'Zoom In on Selection' },
+          { id: 'zoom-out', title: 'Zoom Out' },
+          { id: 'find-cursor', title: 'Find Cursor', shortcut: '⌘/' },
+          { id: 'show-cursor-guide', title: 'Show Cursor Guide' },
+          { id: 'show-timestamps', title: 'Show Timestamps' },
+          { id: 'show-annotations', title: 'Show Annotations' },
+          { id: 'auto-command-completion', title: 'Auto Command Completion' },
+          { id: 'composer', title: 'Composer' },
+          { id: 'open-quickly', title: 'Open Quickly', shortcut: '⌘O' },
+          { id: 'maximize-active-pane', title: 'Maximize Active Pane' },
+          { id: 'make-text-bigger', title: 'Make Text Bigger', shortcut: '⌘+' },
+          {
+            id: 'make-text-normal-size',
+            title: 'Make Text Normal Size',
+            shortcut: '⌘0'
+          },
+          {
+            id: 'make-text-smaller',
+            title: 'Make Text Smaller',
+            shortcut: '⌘-'
+          },
+          {
+            id: 'size-changes-update-profile',
+            title: 'Size Changes Update Profile'
+          },
+          { id: 'start-instant-replay', title: 'Start Instant Replay' },
+          { id: 'tab-color', title: 'Tab Color', subMenu: [] }
+        ]
+      },
+      {
+        id: 'session',
+        label: 'Session',
+        menu: [
+          { id: 'edit-session', title: 'Edit Session...', shortcut: '⌘I' },
+          { id: 'run-coprocess', title: 'Run Coprocess...' },
+          { id: 'stop-coprocess', title: 'Stop Coprocess' },
+          { id: 'restart-session', title: 'Restart Session' },
+          { id: 'open-autocomplete', title: 'Open Autocomplete...' },
+          { id: 'open-command-history', title: 'Open Command History...' },
+          {
+            id: 'open-recent-directories',
+            title: 'Open Recent Directories...'
+          },
+          { id: 'open-paste-history', title: 'Open Paste History...' },
+          { id: 'triggers', title: 'Triggers', subMenu: [] },
+          { id: 'reset', title: 'Reset' },
+          { id: 'reset-character-set', title: 'Reset Character Set' },
+          { id: 'log', title: 'Log', subMenu: [] },
+          { id: 'terminal-state', title: 'Terminal State' },
+          { id: 'bury-session', title: 'Bury Session' },
+          { id: 'buried-sessions', title: 'Buried Sessions' }
+        ]
+      },
+      {
+        id: 'profiles',
+        label: 'Profiles',
+        menu: [
+          { id: 'manage', title: 'Manage', subMenu: [] },
+          { id: 'open-profiles', title: 'Open Profiles...', shortcut: '⌘O' },
+          { id: 'default', title: 'Default' },
+          { id: 'open-all', title: 'Open All' }
+        ]
+      },
+      {
+        id: 'toolbelt',
+        label: 'Toolbelt',
+        menu: [
+          { id: 'show-toolbelt', title: 'Show Toolbelt', shortcut: '⌘B' },
+          { id: 'set-default-width', title: 'Set Default Width' },
+          { id: 'actions', title: 'Actions' },
+          { id: 'captured-output', title: 'Captured Output' },
+          { id: 'command-history', title: 'Command History' },
+          { id: 'jobs', title: 'Jobs' },
+          { id: 'notes', title: 'Notes' },
+          { id: 'paste-history', title: 'Paste History' },
+          { id: 'profiles', title: 'Profiles' },
+          { id: 'recent-directories', title: 'Recent Directories' },
+          { id: 'snippets', title: 'Snippets' }
+        ]
+      },
+      {
+        id: 'window',
+        label: 'Window',
+        menu: [
+          { id: 'minimize', title: 'Minimize', shortcut: '⌘M' },
+          { id: 'minimize-all', title: 'Minimize All' },
+          { id: 'zoom', title: 'Zoom' },
+          {
+            id: 'tile-window-to-left-of-screen',
+            title: 'Tile Window to Left of Screen'
+          },
+          {
+            id: 'tile-window-to-right-of-screen',
+            title: 'Tile Window to Right of Screen'
+          },
+          { id: 'replace-tiled-window', title: 'Replace Tiled Window' },
+          { id: 'remove-window-from-set', title: 'Remove Window from Set' },
+          { id: 'move-to-ipad', title: 'Move to iPad' },
+          { id: 'edit-tab-title', title: 'Edit Tab Title' },
+          { id: 'edit-window-title', title: 'Edit Window Title' },
+          { id: 'window-style', title: 'Window Style', subMenu: [] },
+          { id: 'merge-all-windows', title: 'Merge All Windows' },
+          {
+            id: 'arrange-windows-horizontally',
+            title: 'Arrange Windows Horizontally'
+          },
+          {
+            id: 'arrange-split-panes-evenly',
+            title: 'Arrange Split Panes Evenly'
+          },
+          { id: 'move-session-to-window', title: 'Move Session to Window' },
+          {
+            id: 'save-window-arrangement',
+            title: 'Save Window Arrangement',
+            shortcut: '⌘S'
+          },
+          {
+            id: 'restore-window-arrangement',
+            title: 'Restore Window Arrangement'
+          },
+          {
+            id: 'restore-window-arrangement-as-tabs',
+            title: 'Restore Window Arrangement as Tabs'
+          },
+          { id: 'select-split-pane', title: 'Select Split Pane' },
+          { id: 'resize-split-pane', title: 'Resize Split Pane' },
+          { id: 'resize-window', title: 'Resize Window' },
+          { id: 'select-next-tab', title: 'Select Next Tab', shortcut: '⌘]' },
+          {
+            id: 'select-previous-tab',
+            title: 'Select Previous Tab',
+            shortcut: '⌘['
+          },
+          { id: 'select-tab', title: 'Select Tab' },
+          { id: 'move-tab-left', title: 'Move Tab Left' },
+          { id: 'move-tab-right', title: 'Move Tab Right' },
+          { id: 'password-manager', title: 'Password Manager' },
+          { id: 'pin-hotkey-window', title: 'Pin Hotkey Window' },
+          { id: 'bring-all-to-front', title: 'Bring All To Front' },
+          { id: 'session-name', title: '[Session Name]' }
+        ]
+      },
+      {
+        id: 'help',
+        label: 'Help',
+        menu: [
+          { id: 'iterm2-help', title: 'iTerm2 Help' },
+          { id: 'copy-mode-shortcuts', title: 'Copy Mode Shortcuts' },
+          { id: 'open-source-licenses', title: 'Open Source Licenses' },
+          {
+            id: 'gpu-renderer-availability',
+            title: 'GPU Renderer Availability'
           }
         ]
       }
