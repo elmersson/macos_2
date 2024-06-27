@@ -24,12 +24,15 @@ export interface MenuItem {
   action?: () => void;
   subMenu?: MenuItem[];
   separator?: boolean;
+  disabled?: boolean;
+  checked?: boolean;
 }
 
 export interface Trigger {
   id: string;
   label: string;
   menu: MenuItem[];
+  checklist?: boolean;
 }
 
 export interface AppData {
@@ -260,34 +263,44 @@ export const apps: AppData[] = [
       {
         id: 'arc',
         label: 'Arc',
+        checklist: true,
         menu: [
-          { id: 'about-arc', title: 'About Arc' },
+          { id: 'about-arc', title: 'About Arc', separator: true },
           { id: 'settings', title: 'Settings...', shortcut: '⌘,' },
           { id: 'share-arc', title: 'Share Arc' },
           {
             id: 'set-as-default-browser',
             title: 'Set as Default Browser',
-            shortcut: '⌘♥'
+            shortcut: '⌘♥',
+            disabled: true,
+            checked: true
           },
           {
             id: 'import-from-another-browser',
-            title: 'Import from Another Browser...'
+            title: 'Import from Another Browser...',
+            separator: true
           },
           {
             id: 'update-available',
             title: 'Update Available...',
-            subMenu: [{ id: 'update', title: '1 update' }]
+            subMenu: [{ id: 'update', title: '1 update' }],
+            separator: true
           },
           { id: 'services', title: 'Services', subMenu: [] },
-          { id: 'privacy-policy', title: 'Privacy Policy' },
+          { id: 'privacy-policy', title: 'Privacy Policy', separator: true },
           { id: 'hide-arc', title: 'Hide Arc', shortcut: '⌘H' },
           {
             id: 'hide-other-windows',
             title: 'Hide Other Windows',
             shortcut: '⌥⌘H'
           },
-          { id: 'show-all', title: 'Show All' },
-          { id: 'sign-out', title: 'Sign Out' },
+          {
+            id: 'show-all',
+            title: 'Show All',
+            disabled: true,
+            separator: true
+          },
+          { id: 'sign-out', title: 'Sign Out', separator: true },
           { id: 'quit-arc', title: 'Quit Arc', shortcut: '⌘Q' }
         ]
       },
@@ -311,13 +324,30 @@ export const apps: AppData[] = [
           {
             id: 'restore-last-closed-tab',
             title: 'Restore Last Closed Tab',
-            shortcut: '⇧⌘T'
+            shortcut: '⇧⌘T',
+            disabled: true,
+            separator: true
           },
-          { id: 'open-command-bar', title: 'Open Command Bar', shortcut: '⌘L' },
-          { id: 'new-easel', title: 'New Easel', shortcut: '⌃⌘E' },
+          {
+            id: 'open-command-bar',
+            title: 'Open Command Bar',
+            shortcut: '⌘L',
+            separator: true
+          },
+          {
+            id: 'new-easel',
+            title: 'New Easel',
+            shortcut: '⌃⌘E',
+            separator: true
+          },
           { id: 'close-window', title: 'Close Window', shortcut: '⇧⌘W' },
-          { id: 'archive-tab', title: 'Archive Tab', shortcut: '⌘W' },
-          { id: 'share', title: 'Share...', subMenu: [] },
+          {
+            id: 'archive-tab',
+            title: 'Archive Tab',
+            shortcut: '⌘W',
+            separator: true
+          },
+          { id: 'share', title: 'Share...', disabled: true },
           { id: 'capture', title: 'Capture...', shortcut: '⌃⌘2' },
           { id: 'capture-full-page', title: 'Capture Full Page' },
           { id: 'capture-portrait-mode', title: 'Capture in Portrait Mode' },
@@ -330,7 +360,7 @@ export const apps: AppData[] = [
         label: 'Edit',
         menu: [
           { id: 'undo', title: 'Undo', shortcut: '⌘Z' },
-          { id: 'redo', title: 'Redo', shortcut: '⇧⌘Z' },
+          { id: 'redo', title: 'Redo', shortcut: '⇧⌘Z', separator: true },
           { id: 'cut', title: 'Cut', shortcut: '⌘X' },
           { id: 'copy', title: 'Copy', shortcut: '⌘C' },
           { id: 'copy-url', title: 'Copy URL', shortcut: '⌥⌘C' },
@@ -342,7 +372,8 @@ export const apps: AppData[] = [
           {
             id: 'copy-url-as-quote',
             title: 'Copy URL as Quote',
-            shortcut: '⌃⌘C'
+            shortcut: '⌃⌘C',
+            disabled: true
           },
           { id: 'paste', title: 'Paste', shortcut: '⌘V' },
           {
@@ -351,7 +382,12 @@ export const apps: AppData[] = [
             shortcut: '⌥⇧⌘V'
           },
           { id: 'delete', title: 'Delete' },
-          { id: 'select-all', title: 'Select All', shortcut: '⌘A' },
+          {
+            id: 'select-all',
+            title: 'Select All',
+            shortcut: '⌘A',
+            separator: true
+          },
           { id: 'find', title: 'Find', subMenu: [] },
           {
             id: 'spelling-and-grammar',
@@ -361,7 +397,7 @@ export const apps: AppData[] = [
           { id: 'substitutions', title: 'Substitutions', subMenu: [] },
           { id: 'transformations', title: 'Transformations', subMenu: [] },
           { id: 'speech', title: 'Speech', subMenu: [] },
-          { id: 'format', title: 'Format', subMenu: [] },
+          { id: 'format', title: 'Format', subMenu: [], separator: true },
           { id: 'autofill', title: 'AutoFill', subMenu: [] },
           { id: 'start-dictation', title: 'Start Dictation...' },
           { id: 'emoji-symbols', title: 'Emoji & Symbols' }
@@ -490,6 +526,7 @@ export const apps: AppData[] = [
       {
         id: 'window',
         label: 'Window',
+        checklist: true,
         menu: [
           { id: 'stay-on-top', title: 'Stay On Top' },
           { id: 'minimize-window', title: 'Minimize Window', shortcut: '⌘M' },
@@ -505,7 +542,7 @@ export const apps: AppData[] = [
           { id: 'view-boosts', title: 'View Boosts...' },
           { id: 'bring-all-to-front', title: 'Bring All to Front' },
           { id: 'localhost-3000', title: 'localhost:3000' },
-          { id: 'rasmus-elmersson', title: 'Rasmus Elmersson', shortcut: '✓' }
+          { id: 'rasmus-elmersson', title: 'Rasmus Elmersson', checked: true }
         ]
       },
       {
