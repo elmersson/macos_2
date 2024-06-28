@@ -26,7 +26,7 @@ export function AppMenu() {
   const renderMenuItems = (menuItems: MenuItem[], checklist?: boolean) => {
     return menuItems.map((item) => (
       <Fragment key={item.id}>
-        {!item.subMenu && (
+        {!item.subMenu && !item.input && (
           <DropdownMenuItem onSelect={item.action} disabled={item.disabled}>
             <div className="flex items-center mr-6">
               {checklist && (
@@ -41,9 +41,16 @@ export function AppMenu() {
             )}
           </DropdownMenuItem>
         )}
+        {item.input && (
+          <input
+            type="text"
+            className="w-full bg-transparent text-white border border-neutral-500 rounded p-1 px-2 shadow-lg text-sm"
+            placeholder={item.title}
+          />
+        )}
         {item.subMenu && (
           <DropdownMenuSub>
-            <DropdownMenuSubTrigger>
+            <DropdownMenuSubTrigger disabled={item.disabled}>
               <div className="flex items-center">
                 {checklist && (
                   <span className="w-4 h-4 mr-1 flex items-center justify-center">

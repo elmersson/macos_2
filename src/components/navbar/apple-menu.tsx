@@ -53,7 +53,7 @@ export function AppleMenu() {
         <DropdownMenuItem>
           <p className="text-s">About this Mac</p>
         </DropdownMenuItem>
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator className="bg-white/20" />
         <DropdownMenuItem className="flex justify-between">
           <p className="text-s">System Settings...</p>
           <div className="items-center px-3 rounded-xl bg-slate-400/50">
@@ -66,7 +66,7 @@ export function AppleMenu() {
             <p className="text-xs ">11 Updates</p>
           </div>
         </DropdownMenuItem>
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator className="bg-white/20" />
         <DropdownMenuSub>
           <DropdownMenuSubTrigger>
             <p className="text-s">Recent Items</p>
@@ -94,12 +94,12 @@ export function AppleMenu() {
             </DropdownMenuSubContent>
           </DropdownMenuPortal>
         </DropdownMenuSub>
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator className="bg-white/20" />
         <DropdownMenuItem>
           <p className="text-s">Force Quit</p>
           <DropdownMenuShortcut>⌥⌘⎋</DropdownMenuShortcut>
         </DropdownMenuItem>
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator className="bg-white/20" />
         <DropdownMenuItem>
           <p className="text-s" onClick={handleSignOut}>
             Sleep
@@ -111,7 +111,7 @@ export function AppleMenu() {
         <DropdownMenuItem onClick={handleQuit}>
           <p className="text-s">Shut Down...</p>
         </DropdownMenuItem>
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator className="bg-white/20" />
         <DropdownMenuItem>
           <p className="text-s" onClick={handleSignOut}>
             Lock Screen
