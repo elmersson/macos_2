@@ -1782,38 +1782,77 @@ export const apps: AppData[] = [
     position: { x: 0, y: 0 },
     triggers: [
       {
-        id: 'title',
-        label: 'Finder',
+        id: 'code',
+        label: 'Code',
         menu: [
           { id: 'about', title: 'About Visual Studio Code' },
-          { id: 'downloading-update', title: 'Downloading Update...' },
-          { id: 'settings', title: 'Settings...', subMenu: [] },
-          { id: 'services', title: 'Services', subMenu: [] },
+          {
+            id: 'downloading-update',
+            title: 'Downloading Update...',
+            separator: true
+          },
+          {
+            id: 'settings',
+            title: 'Settings...',
+            subMenu: [],
+            separator: true
+          },
+          { id: 'services', title: 'Services', subMenu: [], separator: true },
           { id: 'hide', title: 'Hide Visual Studio Code', shortcut: '⌘H' },
           { id: 'hide-others', title: 'Hide Others', shortcut: '⌥⌘H' },
-          { id: 'show-all', title: 'Show All' },
+          {
+            id: 'show-all',
+            title: 'Show All',
+            disabled: true,
+            separator: true
+          },
           { id: 'quit', title: 'Quit Visual Studio Code', shortcut: '⌘Q' }
         ]
       },
       {
         id: 'file',
         label: 'File',
+        checklist: true,
         menu: [
           { id: 'new-text-file', title: 'New Text File', shortcut: '⌘N' },
           { id: 'new-file', title: 'New File...', shortcut: '⇧⌥⌘N' },
-          { id: 'new-window', title: 'New Window', shortcut: '⇧⌘N' },
+          {
+            id: 'new-window',
+            title: 'New Window',
+            shortcut: '⇧⌘N',
+            separator: true
+          },
           { id: 'open', title: 'Open...', shortcut: '⌘O' },
           { id: 'open-folder', title: 'Open Folder...' },
           { id: 'open-workspace', title: 'Open Workspace from File...' },
-          { id: 'open-recent', title: 'Open Recent', subMenu: [] },
+          {
+            id: 'open-recent',
+            title: 'Open Recent',
+            subMenu: [],
+            separator: true
+          },
           { id: 'add-folder', title: 'Add Folder to Workspace...' },
+          { id: 'save-workspace', title: 'Save Workspace As...' },
+          { id: 'dublicate', title: 'Duplicate Workspace', separator: true },
           { id: 'save', title: 'Save', shortcut: '⌘S' },
           { id: 'save-as', title: 'Save As...', shortcut: '⌥⌘S' },
-          { id: 'save-all', title: 'Save All', shortcut: '⌥⌘S' },
-          { id: 'share', title: 'Share', subMenu: [] },
-          { id: 'auto-save', title: 'Auto Save', shortcut: '⌘S' },
+          {
+            id: 'save-all',
+            title: 'Save All',
+            shortcut: '⌥⌘S',
+            separator: true
+          },
+          { id: 'share', title: 'Share', subMenu: [], separator: true },
+          {
+            id: 'auto-save',
+            title: 'Auto Save',
+            shortcut: '⌘S',
+            checked: true,
+            separator: true
+          },
           { id: 'revert-file', title: 'Revert File' },
           { id: 'close-editor', title: 'Close Editor', shortcut: '⌘W' },
+          { id: 'close-folder', title: 'Close Folder[⌘R F]' },
           { id: 'close-window', title: 'Close Window', shortcut: '⌥⌘W' }
         ]
       },
@@ -1822,17 +1861,18 @@ export const apps: AppData[] = [
         label: 'Edit',
         menu: [
           { id: 'undo', title: 'Undo', shortcut: '⌘Z' },
-          { id: 'redo', title: 'Redo', shortcut: '⇧⌘Z' },
+          { id: 'redo', title: 'Redo', shortcut: '⇧⌘Z', separator: true },
           { id: 'cut', title: 'Cut', shortcut: '⌘X' },
           { id: 'copy', title: 'Copy', shortcut: '⌘C' },
-          { id: 'paste', title: 'Paste', shortcut: '⌘V' },
+          { id: 'paste', title: 'Paste', shortcut: '⌘V', separator: true },
           { id: 'find', title: 'Find', shortcut: '⌘F' },
-          { id: 'replace', title: 'Replace', shortcut: '⇧⌘F' },
+          { id: 'replace', title: 'Replace', shortcut: '⇧⌘F', separator: true },
           { id: 'find-in-files', title: 'Find in Files', shortcut: '⇧⌘F' },
           {
             id: 'replace-in-files',
             title: 'Replace in Files',
-            shortcut: '⌥⇧⌘H'
+            shortcut: '⌥⇧⌘H',
+            separator: true
           },
           {
             id: 'toggle-line-comment',
@@ -1846,7 +1886,8 @@ export const apps: AppData[] = [
           },
           {
             id: 'emmet-expand-abbreviation',
-            title: 'Emmet: Expand Abbreviation'
+            title: 'Emmet: Expand Abbreviation',
+            separator: true
           },
           { id: 'autofill', title: 'AutoFill', subMenu: [] },
           { id: 'start-dictation', title: 'Start Dictation...' },
@@ -1866,13 +1907,18 @@ export const apps: AppData[] = [
           {
             id: 'shrink-selection',
             title: 'Shrink Selection',
-            shortcut: '⇧⌘←'
+            shortcut: '⇧⌘←',
+            separator: true
           },
           { id: 'copy-line-up', title: 'Copy Line Up', shortcut: '⇧⌥↑' },
           { id: 'copy-line-down', title: 'Copy Line Down', shortcut: '⇧⌥↓' },
           { id: 'move-line-up', title: 'Move Line Up', shortcut: '⌥↑' },
           { id: 'move-line-down', title: 'Move Line Down', shortcut: '⌥↓' },
-          { id: 'duplicate-selection', title: 'Duplicate Selection' },
+          {
+            id: 'duplicate-selection',
+            title: 'Duplicate Selection',
+            separator: true
+          },
           {
             id: 'add-cursor-above',
             title: 'Add Cursor Above',
@@ -1901,7 +1947,8 @@ export const apps: AppData[] = [
           {
             id: 'select-all-occurrences',
             title: 'Select All Occurrences',
-            shortcut: '⌘L'
+            shortcut: '⌘L',
+            separator: true
           },
           {
             id: 'cmd-click-multi-cursor',
@@ -1919,19 +1966,29 @@ export const apps: AppData[] = [
             title: 'Command Palette...',
             shortcut: '⇧⌘P'
           },
-          { id: 'open-view', title: 'Open View...', subMenu: [] },
+          {
+            id: 'open-view',
+            title: 'Open View...',
+            subMenu: [],
+            separator: true
+          },
           { id: 'appearance', title: 'Appearance', subMenu: [] },
-          { id: 'editor-layout', title: 'Editor Layout', subMenu: [] },
+          {
+            id: 'editor-layout',
+            title: 'Editor Layout',
+            subMenu: [],
+            separator: true
+          },
           { id: 'explorer', title: 'Explorer', shortcut: '⇧⌘E' },
           { id: 'search', title: 'Search', shortcut: '⇧⌘F' },
           { id: 'source-control', title: 'Source Control', shortcut: '⌃⇧G' },
           { id: 'run', title: 'Run', shortcut: '⌘D' },
           { id: 'extensions', title: 'Extensions', shortcut: '⇧⌘X' },
-          { id: 'testing', title: 'Testing' },
+          { id: 'testing', title: 'Testing', separator: true },
           { id: 'problems', title: 'Problems', shortcut: '⇧⌘M' },
           { id: 'output', title: 'Output', shortcut: '⌃⇧U' },
           { id: 'debug-console', title: 'Debug Console', shortcut: '⌃⇧Y' },
-          { id: 'terminal', title: 'Terminal', shortcut: '⌃`' },
+          { id: 'terminal', title: 'Terminal [⌃⇧´]', separator: true },
           { id: 'word-wrap', title: 'Word Wrap', shortcut: '⌥Z' }
         ]
       },
@@ -1940,19 +1997,26 @@ export const apps: AppData[] = [
         label: 'Go',
         menu: [
           { id: 'back', title: 'Back', shortcut: '⌃-' },
-          { id: 'forward', title: 'Forward', shortcut: '⌃+' },
+          { id: 'forward', title: 'Forward', shortcut: '⌃+', disabled: true },
           {
             id: 'last-edit-location',
             title: 'Last Edit Location',
-            shortcut: '⌃K ⌃Q'
+            shortcut: '⌃K ⌃Q',
+            separator: true
           },
           { id: 'switch-editor', title: 'Switch Editor', subMenu: [] },
-          { id: 'switch-group', title: 'Switch Group', subMenu: [] },
+          {
+            id: 'switch-group',
+            title: 'Switch Group',
+            subMenu: [],
+            separator: true
+          },
           { id: 'go-to-file', title: 'Go to File...', shortcut: '⌘P' },
           {
             id: 'go-to-symbol-in-workspace',
             title: 'Go to Symbol in Workspace...',
-            shortcut: '⌘T'
+            shortcut: '⌘T',
+            separator: true
           },
           {
             id: 'go-to-symbol-in-editor',
@@ -1974,15 +2038,22 @@ export const apps: AppData[] = [
           {
             id: 'go-to-references',
             title: 'Go to References',
-            shortcut: '⇧⌘F12'
+            shortcut: '⇧⌘F12',
+            separator: true
           },
           { id: 'go-to-line', title: 'Go to Line/Column...', shortcut: '⌃G' },
-          { id: 'go-to-bracket', title: 'Go to Bracket', shortcut: '⌘]' },
+          {
+            id: 'go-to-bracket',
+            title: 'Go to Bracket',
+            shortcut: '⌘]',
+            separator: true
+          },
           { id: 'next-problem', title: 'Next Problem', shortcut: 'F8' },
           {
             id: 'previous-problem',
             title: 'Previous Problem',
-            shortcut: '⇧F8'
+            shortcut: '⇧F8',
+            separator: true
           },
           { id: 'next-change', title: 'Next Change', shortcut: '⌃F3' },
           { id: 'previous-change', title: 'Previous Change', shortcut: '⇧⌃F3' }
@@ -2002,23 +2073,63 @@ export const apps: AppData[] = [
           {
             id: 'restart-debugging',
             title: 'Restart Debugging',
-            shortcut: '⇧⌘F5'
+            shortcut: '⇧⌘F5',
+            disabled: true,
+            separator: true
           },
-          { id: 'open-configurations', title: 'Open Configurations' },
-          { id: 'add-configuration', title: 'Add Configuration...' },
-          { id: 'step-over', title: 'Step Over', shortcut: 'F10' },
-          { id: 'step-into', title: 'Step Into', shortcut: 'F11' },
-          { id: 'step-out', title: 'Step Out', shortcut: '⇧F11' },
-          { id: 'continue', title: 'Continue', shortcut: 'F5' },
+          {
+            id: 'open-configurations',
+            title: 'Open Configurations',
+            disabled: true
+          },
+          {
+            id: 'add-configuration',
+            title: 'Add Configuration...',
+            separator: true
+          },
+          {
+            id: 'step-over',
+            title: 'Step Over',
+            shortcut: 'F10',
+            disabled: true
+          },
+          {
+            id: 'step-into',
+            title: 'Step Into',
+            shortcut: 'F11',
+            disabled: true
+          },
+          {
+            id: 'step-out',
+            title: 'Step Out',
+            shortcut: '⇧F11',
+            disabled: true
+          },
+          {
+            id: 'continue',
+            title: 'Continue',
+            shortcut: 'F5',
+            disabled: true,
+            separator: true
+          },
           {
             id: 'toggle-breakpoint',
             title: 'Toggle Breakpoint',
             shortcut: 'F9'
           },
-          { id: 'new-breakpoint', title: 'New Breakpoint', subMenu: [] },
+          {
+            id: 'new-breakpoint',
+            title: 'New Breakpoint',
+            subMenu: [],
+            separator: true
+          },
           { id: 'enable-all-breakpoints', title: 'Enable All Breakpoints' },
           { id: 'disable-all-breakpoints', title: 'Disable All Breakpoints' },
-          { id: 'remove-all-breakpoints', title: 'Remove All Breakpoints' },
+          {
+            id: 'remove-all-breakpoints',
+            title: 'Remove All Breakpoints',
+            separator: true
+          },
           { id: 'install-debuggers', title: 'Install Additional Debuggers...' }
         ]
       },
@@ -2027,14 +2138,36 @@ export const apps: AppData[] = [
         label: 'Terminal',
         menu: [
           { id: 'new-terminal', title: 'New Terminal', shortcut: '⌃`' },
-          { id: 'split-terminal', title: 'Split Terminal', shortcut: '⌥⌘' },
+          {
+            id: 'split-terminal',
+            title: 'Split Terminal',
+            shortcut: '⌥⌘',
+            separator: true
+          },
           { id: 'run-task', title: 'Run Task...' },
           { id: 'run-build-task', title: 'Run Build Task...', shortcut: '⌘B' },
           { id: 'run-active-file', title: 'Run Active File' },
-          { id: 'run-selected-text', title: 'Run Selected Text' },
-          { id: 'show-running-tasks', title: 'Show Running Tasks...' },
-          { id: 'restart-running-task', title: 'Restart Running Task...' },
-          { id: 'terminate-task', title: 'Terminate Task...' },
+          {
+            id: 'run-selected-text',
+            title: 'Run Selected Text',
+            separator: true
+          },
+          {
+            id: 'show-running-tasks',
+            title: 'Show Running Tasks...',
+            disabled: true
+          },
+          {
+            id: 'restart-running-task',
+            title: 'Restart Running Task...',
+            disabled: true
+          },
+          {
+            id: 'terminate-task',
+            title: 'Terminate Task...',
+            disabled: true,
+            separator: true
+          },
           { id: 'configure-tasks', title: 'Configure Tasks...' },
           {
             id: 'configure-default-build-task',
@@ -2045,23 +2178,39 @@ export const apps: AppData[] = [
       {
         id: 'window',
         label: 'Window',
+        checklist: true,
         menu: [
           { id: 'minimize', title: 'Minimize', shortcut: '⌘M' },
           { id: 'zoom', title: 'Zoom' },
           { id: 'tile-window-left', title: 'Tile Window to Left of Screen' },
           { id: 'tile-window-right', title: 'Tile Window to Right of Screen' },
-          { id: 'replace-tiled-window', title: 'Replace Tiled Window' },
-          { id: 'remove-window-from-set', title: 'Remove Window from Set' },
-          { id: 'move-to-ipad', title: 'Move to iPad' },
-          { id: 'switch-window', title: 'Switch Window...' },
-          { id: 'bring-all-to-front', title: 'Bring All to Front' },
-          { id: 'navigation-tsx', title: 'navigation.tsx' }
+          {
+            id: 'replace-tiled-window',
+            title: 'Replace Tiled Window',
+            disabled: true,
+            separator: true
+          },
+          {
+            id: 'remove-window-from-set',
+            title: 'Remove Window from Set',
+            disabled: true,
+            separator: true
+          },
+          { id: 'move-to-ipad', title: 'Move to iPad', separator: true },
+          { id: 'switch-window', title: 'Switch Window...', separator: true },
+          {
+            id: 'bring-all-to-front',
+            title: 'Bring All to Front',
+            separator: true
+          },
+          { id: 'navigation-tsx', title: 'navigation.tsx', checked: true }
         ]
       },
       {
         id: 'help',
         label: 'Help',
         menu: [
+          { id: 'search', title: 'Search', input: true },
           { id: 'welcome', title: 'Welcome' },
           {
             id: 'show-all-commands',
@@ -2070,18 +2219,26 @@ export const apps: AppData[] = [
           },
           { id: 'documentation', title: 'Documentation' },
           { id: 'editor-playground', title: 'Editor Playground' },
-          { id: 'show-release-notes', title: 'Show Release Notes' },
+          {
+            id: 'show-release-notes',
+            title: 'Show Release Notes',
+            separator: true
+          },
           {
             id: 'keyboard-shortcuts',
             title: 'Keyboard Shortcuts Reference [⌘K ⌘R]'
           },
           { id: 'video-tutorials', title: 'Video Tutorials' },
-          { id: 'tips-and-tricks', title: 'Tips and Tricks' },
+          { id: 'tips-and-tricks', title: 'Tips and Tricks', separator: true },
           { id: 'join-us-on-youtube', title: 'Join Us on YouTube' },
           { id: 'search-feature-requests', title: 'Search Feature Requests' },
-          { id: 'report-issue', title: 'Report Issue' },
+          { id: 'report-issue', title: 'Report Issue', separator: true },
           { id: 'view-license', title: 'View License' },
-          { id: 'privacy-statement', title: 'Privacy Statement' },
+          {
+            id: 'privacy-statement',
+            title: 'Privacy Statement',
+            separator: true
+          },
           { id: 'toggle-developer-tools', title: 'Toggle Developer Tools' },
           { id: 'open-process-explorer', title: 'Open Process Explorer' }
         ]
@@ -2098,46 +2255,7 @@ export const apps: AppData[] = [
     z: 0,
     size: { width: 640, height: 400 },
     position: { x: 0, y: 0 },
-    triggers: [
-      {
-        id: 'title',
-        label: 'Finder',
-        menu: [
-          {
-            id: 'about',
-            title: 'About Finder',
-            action: () => console.log('About Finder')
-          },
-          {
-            id: 'settings',
-            title: 'Settings...',
-            action: () => console.log('Open Settings')
-          },
-          {
-            id: 'quit',
-            title: 'Quit Finder',
-            shortcut: '⌘Q',
-            action: () => console.log('Quit Finder')
-          }
-        ]
-      },
-      {
-        id: 'preferences',
-        label: 'Preferences',
-        menu: [
-          {
-            id: 'general',
-            title: 'General',
-            action: () => console.log('General Preferences')
-          },
-          {
-            id: 'appearance',
-            title: 'Appearance',
-            action: () => console.log('Appearance Preferences')
-          }
-        ]
-      }
-    ]
+    triggers: []
   },
   {
     id: 'notes',
@@ -2154,14 +2272,24 @@ export const apps: AppData[] = [
         id: 'notes',
         label: 'Notes',
         menu: [
-          { id: 'about-notes', title: 'About Notes' },
+          { id: 'about-notes', title: 'About Notes', separator: true },
           { id: 'settings', title: 'Settings...', shortcut: '⌘,' },
-          { id: 'accounts', title: 'Accounts...' },
-          { id: 'close-all-locked-notes', title: 'Close All Locked Notes' },
-          { id: 'services', title: 'Services', subMenu: [] },
+          { id: 'accounts', title: 'Accounts...', separator: true },
+          {
+            id: 'close-all-locked-notes',
+            title: 'Close All Locked Notes',
+            disabled: true,
+            separator: true
+          },
+          { id: 'services', title: 'Services', subMenu: [], separator: true },
           { id: 'hide-notes', title: 'Hide Notes', shortcut: '⌘H' },
           { id: 'hide-others', title: 'Hide Others', shortcut: '⌥⌘H' },
-          { id: 'show-all', title: 'Show All' },
+          {
+            id: 'show-all',
+            title: 'Show All',
+            disabled: true,
+            separator: true
+          },
           { id: 'quit-notes', title: 'Quit Notes', shortcut: '⌘Q' }
         ]
       },
@@ -2171,24 +2299,39 @@ export const apps: AppData[] = [
         menu: [
           { id: 'new-note', title: 'New Note', shortcut: '⌘N' },
           { id: 'new-folder', title: 'New Folder', shortcut: '⇧⌘N' },
-          { id: 'new-smart-folder', title: 'New Smart Folder' },
-          { id: 'share', title: 'Share', subMenu: [] },
+          {
+            id: 'new-smart-folder',
+            title: 'New Smart Folder',
+            separator: true
+          },
+          { id: 'share', title: 'Share', subMenu: [], separator: true },
           {
             id: 'new-smart-folder-with-tag-selection',
-            title: 'New Smart Folder with Tag Selection'
+            title: 'New Smart Folder with Tag Selection',
+            disabled: true,
+            separator: true
           },
-          { id: 'close', title: 'Close', shortcut: '⌘W' },
+          { id: 'close', title: 'Close', shortcut: '⌘W', separator: true },
           {
             id: 'import-from-iphone',
             title: 'Import from iPhone',
             subMenu: []
           },
-          { id: 'import-to-notes', title: 'Import to Notes...' },
+          {
+            id: 'import-to-notes',
+            title: 'Import to Notes...',
+            separator: true
+          },
           { id: 'export-as-pdf', title: 'Export as PDF...' },
-          { id: 'open-in-pages', title: 'Open in Pages' },
+          { id: 'open-in-pages', title: 'Open in Pages', separator: true },
           { id: 'pin-note', title: 'Pin Note' },
           { id: 'lock-note', title: 'Lock Note' },
-          { id: 'duplicate-note', title: 'Duplicate Note', shortcut: '⌘D' },
+          {
+            id: 'duplicate-note',
+            title: 'Duplicate Note',
+            shortcut: '⌘D',
+            separator: true
+          },
           { id: 'print', title: 'Print...', shortcut: '⌘P' }
         ]
       },
@@ -2196,21 +2339,53 @@ export const apps: AppData[] = [
         id: 'edit',
         label: 'Edit',
         menu: [
-          { id: 'undo', title: 'Undo', shortcut: '⌘Z' },
-          { id: 'redo', title: 'Redo', shortcut: '⇧⌘Z' },
-          { id: 'cut', title: 'Cut', shortcut: '⌘X' },
-          { id: 'copy', title: 'Copy', shortcut: '⌘C' },
-          { id: 'paste', title: 'Paste', shortcut: '⌘V' },
+          { id: 'undo', title: 'Undo', shortcut: '⌘Z', disabled: true },
+          {
+            id: 'redo',
+            title: 'Redo',
+            shortcut: '⇧⌘Z',
+            disabled: true,
+            separator: true
+          },
+          { id: 'cut', title: 'Cut', shortcut: '⌘X', disabled: true },
+          { id: 'copy', title: 'Copy', shortcut: '⌘C', disabled: true },
+          { id: 'paste', title: 'Paste', shortcut: '⌘V', disabled: true },
           {
             id: 'paste-match-style',
             title: 'Paste and Match Style',
-            shortcut: '⌥⇧⌘V'
+            shortcut: '⌥⇧⌘V',
+            disabled: true
           },
-          { id: 'paste-retain-style', title: 'Paste and Retain Style' },
-          { id: 'select-all', title: 'Select All', shortcut: '⌘A' },
-          { id: 'attach-file', title: 'Attach File...', shortcut: '⇧⌘A' },
-          { id: 'add-link', title: 'Add Link...', shortcut: '⌘K' },
-          { id: 'rename-attachment', title: 'Rename Attachment...' },
+          {
+            id: 'paste-retain-style',
+            title: 'Paste and Retain Style',
+            disabled: true
+          },
+          {
+            id: 'select-all',
+            title: 'Select All',
+            shortcut: '⌘A',
+            disabled: true,
+            separator: true
+          },
+          {
+            id: 'attach-file',
+            title: 'Attach File...',
+            shortcut: '⇧⌘A',
+            disabled: true
+          },
+          {
+            id: 'add-link',
+            title: 'Add Link...',
+            shortcut: '⌘K',
+            disabled: true
+          },
+          {
+            id: 'rename-attachment',
+            title: 'Rename Attachment...',
+            disabled: true,
+            separator: true
+          },
           { id: 'find', title: 'Find', subMenu: [] },
           {
             id: 'spelling-grammar',
@@ -2219,7 +2394,7 @@ export const apps: AppData[] = [
           },
           { id: 'substitutions', title: 'Substitutions', subMenu: [] },
           { id: 'transformations', title: 'Transformations', subMenu: [] },
-          { id: 'speech', title: 'Speech', subMenu: [] },
+          { id: 'speech', title: 'Speech', subMenu: [], separator: true },
           { id: 'autofill', title: 'AutoFill', subMenu: [] },
           { id: 'start-dictation', title: 'Start Dictation...' },
           { id: 'emoji-symbols', title: 'Emoji & Symbols' }
@@ -2229,24 +2404,71 @@ export const apps: AppData[] = [
         id: 'format',
         label: 'Format',
         menu: [
-          { id: 'title', title: 'Title', shortcut: '⇧⌘T' },
-          { id: 'heading', title: 'Heading', shortcut: '⇧⌘H' },
-          { id: 'subheading', title: 'Subheading', shortcut: '⇧⌘J' },
-          { id: 'body', title: 'Body', shortcut: '⇧⌘B' },
-          { id: 'monostyled', title: 'Monostyled', shortcut: '⌃⌘M' },
-          { id: 'bulleted-list', title: 'Bulleted List', shortcut: '⇧⌘7' },
-          { id: 'dashed-list', title: 'Dashed List', shortcut: '⇧⌘8' },
-          { id: 'numbered-list', title: 'Numbered List', shortcut: '⇧⌘9' },
-          { id: 'block-quote', title: 'Block Quote', shortcut: '⌘’' },
+          { id: 'title', title: 'Title', shortcut: '⇧⌘T', disabled: true },
+          { id: 'heading', title: 'Heading', shortcut: '⇧⌘H', disabled: true },
+          {
+            id: 'subheading',
+            title: 'Subheading',
+            shortcut: '⇧⌘J',
+            disabled: true
+          },
+          { id: 'body', title: 'Body', shortcut: '⇧⌘B', disabled: true },
+          {
+            id: 'monostyled',
+            title: 'Monostyled',
+            shortcut: '⌃⌘M',
+            disabled: true
+          },
+          {
+            id: 'bulleted-list',
+            title: 'Bulleted List',
+            shortcut: '⇧⌘7',
+            disabled: true
+          },
+          {
+            id: 'dashed-list',
+            title: 'Dashed List',
+            shortcut: '⇧⌘8',
+            disabled: true
+          },
+          {
+            id: 'numbered-list',
+            title: 'Numbered List',
+            shortcut: '⇧⌘9',
+            disabled: true
+          },
+          {
+            id: 'block-quote',
+            title: 'Block Quote',
+            shortcut: '⌘’',
+            disabled: true,
+            separator: true
+          },
           { id: 'checklist', title: 'Checklist', shortcut: '⇧⌘L' },
-          { id: 'mark-as-ticked', title: 'Mark as Ticked', shortcut: '⌃⌘U' },
-          { id: 'more', title: 'More', subMenu: [] },
-          { id: 'move-list-item', title: 'Move List Item', subMenu: [] },
-          { id: 'table', title: 'Table', shortcut: '⌃⌘T' },
-          { id: 'convert-to-text', title: 'Convert to Text' },
+          {
+            id: 'mark-as-ticked',
+            title: 'Mark as Ticked',
+            shortcut: '⌃⌘U',
+            disabled: true
+          },
+          { id: 'more', title: 'More', subMenu: [], separator: true },
+          {
+            id: 'move-list-item',
+            title: 'Move List Item',
+            subMenu: [],
+            separator: true
+          },
+          { id: 'table', title: 'Table', shortcut: '⌃⌘T', disabled: true },
+          {
+            id: 'convert-to-text',
+            title: 'Convert to Text',
+            disabled: true,
+            separator: true
+          },
           {
             id: 'show-note-light-background',
-            title: 'Show Note with Light Background'
+            title: 'Show Note with Light Background',
+            separator: true
           },
           { id: 'font', title: 'Font', subMenu: [] },
           { id: 'text', title: 'Text', subMenu: [] },
@@ -2256,32 +2478,70 @@ export const apps: AppData[] = [
       {
         id: 'view',
         label: 'View',
+        checklist: true,
         menu: [
-          { id: 'as-list', title: 'as List', shortcut: '⌘1' },
-          { id: 'as-gallery', title: 'as Gallery', shortcut: '⌘2' },
+          { id: 'as-list', title: 'as List', shortcut: '⌘1', checked: true },
+          {
+            id: 'as-gallery',
+            title: 'as Gallery',
+            shortcut: '⌘2',
+            separator: true
+          },
           { id: 'sort-by', title: 'Sort By', subMenu: [] },
-          { id: 'group-by-date', title: 'Group By Date' },
+          { id: 'group-by-date', title: 'Group By Date', separator: true },
           { id: 'hide-folders', title: 'Hide Folders', shortcut: '⌥⌘S' },
-          { id: 'hide-note-count', title: 'Hide Note Count' },
-          { id: 'attachment-view', title: 'Attachment View', subMenu: [] },
+          { id: 'hide-note-count', title: 'Hide Note Count', separator: true },
+          {
+            id: 'attachment-view',
+            title: 'Attachment View',
+            subMenu: [],
+            separator: true
+          },
           {
             id: 'show-attachments-browser',
             title: 'Show Attachments Browser',
             shortcut: '⌘3'
           },
-          { id: 'show-in-note', title: 'Show in Note' },
-          { id: 'show-highlights', title: 'Show Highlights', shortcut: '⌃⌘I' },
+          {
+            id: 'show-in-note',
+            title: 'Show in Note',
+            disabled: true,
+            separator: true
+          },
+          {
+            id: 'show-highlights',
+            title: 'Show Highlights',
+            shortcut: '⌃⌘I',
+            disabled: true
+          },
           {
             id: 'show-note-activity',
             title: 'Show Note Activity',
-            shortcut: '⌃⌘K'
+            shortcut: '⌃⌘K',
+            disabled: true
           },
-          { id: 'show-folder-activity', title: 'Show Folder Activity' },
+          {
+            id: 'show-folder-activity',
+            title: 'Show Folder Activity',
+            disabled: true,
+            separator: true
+          },
           { id: 'zoom-in', title: 'Zoom In', shortcut: '⌃⌘.' },
           { id: 'zoom-out', title: 'Zoom Out', shortcut: '⌃⌘,' },
-          { id: 'actual-size', title: 'Actual Size', shortcut: '⌃⌘0' },
+          {
+            id: 'actual-size',
+            title: 'Actual Size',
+            shortcut: '⌃⌘0',
+            separator: true
+          },
           { id: 'previous-note', title: 'Previous Note', shortcut: '⌥⌘Ö' },
-          { id: 'next-note', title: 'Next Note', shortcut: '⌥⌘Ä' },
+          {
+            id: 'next-note',
+            title: 'Next Note',
+            shortcut: '⌥⌘Ä',
+            disabled: true,
+            separator: true
+          },
           { id: 'hide-toolbar', title: 'Hide Toolbar' },
           { id: 'customize-toolbar', title: 'Customize Toolbar...' },
           {
@@ -2299,11 +2559,25 @@ export const apps: AppData[] = [
           { id: 'zoom', title: 'Zoom', shortcut: '⌥⌘Z' },
           { id: 'tile-window-left', title: 'Tile Window to Left of Screen' },
           { id: 'tile-window-right', title: 'Tile Window to Right of Screen' },
-          { id: 'replace-tiled-window', title: 'Replace Tiled Window' },
-          { id: 'remove-window-from-set', title: 'Remove Window from Set' },
-          { id: 'open-note-in-new-window', title: 'Open Note in New Window' },
+          {
+            id: 'replace-tiled-window',
+            title: 'Replace Tiled Window',
+            disabled: true,
+            separator: true
+          },
+          {
+            id: 'remove-window-from-set',
+            title: 'Remove Window from Set',
+            disabled: true,
+            separator: true
+          },
+          {
+            id: 'open-note-in-new-window',
+            title: 'Open Note in New Window',
+            separator: true
+          },
           { id: 'notes', title: 'Notes', shortcut: '⌘0' },
-          { id: 'photo-browser', title: 'Photo Browser' },
+          { id: 'photo-browser', title: 'Photo Browser', separator: true },
           { id: 'bring-all-to-front', title: 'Bring All to Front' }
         ]
       },
@@ -2311,8 +2585,8 @@ export const apps: AppData[] = [
         id: 'help',
         label: 'Help',
         menu: [
-          { id: 'search', title: 'Search' },
-          { id: 'notes-help', title: 'Notes Help' },
+          { id: 'search', title: 'Search', input: true },
+          { id: 'notes-help', title: 'Notes Help', separator: true },
           { id: 'using-tags', title: 'Using Tags' },
           { id: 'using-smart-folders', title: 'Using Smart Folders' }
         ]
@@ -2352,7 +2626,158 @@ export const apps: AppData[] = [
     z: 0,
     size: { width: 640, height: 400 },
     position: { x: 0, y: 0 },
-    triggers: []
+    triggers: [
+      {
+        id: 'system',
+        label: 'System Settings',
+        menu: [
+          { id: 'about-system-settings', title: 'About System Settings' },
+          { id: 'services', title: 'Services', subMenu: [], separator: true },
+          {
+            id: 'hide-system-settings',
+            title: 'Hide System Settings',
+            shortcut: '⌘H'
+          },
+          { id: 'hide-others', title: 'Hide Others', shortcut: '⌥⌘H' },
+          {
+            id: 'show-all',
+            title: 'Show All',
+            disabled: true,
+            separator: true
+          },
+          {
+            id: 'quit-system-settings',
+            title: 'Quit System Settings',
+            shortcut: '⌘Q'
+          }
+        ]
+      },
+      {
+        id: 'file',
+        label: 'File',
+        menu: [{ id: 'close', title: 'Close', shortcut: '⌘W' }]
+      },
+      {
+        id: 'edit',
+        label: 'Edit',
+        menu: [
+          { id: 'undo', title: 'Undo', shortcut: '⌘Z' },
+          { id: 'redo', title: 'Redo', shortcut: '⇧⌘Z', separator: true },
+          { id: 'cut', title: 'Cut', shortcut: '⌘X' },
+          { id: 'copy', title: 'Copy', shortcut: '⌘C' },
+          { id: 'paste', title: 'Paste', shortcut: '⌘V' },
+          { id: 'delete', title: 'Delete' },
+          {
+            id: 'select-all',
+            title: 'Select All',
+            shortcut: '⌘A',
+            separator: true
+          },
+          { id: 'autofill', title: 'AutoFill', subMenu: [] },
+          { id: 'start-dictation', title: 'Start Dictation...' },
+          { id: 'emoji-symbols', title: 'Emoji & Symbols' }
+        ]
+      },
+      {
+        id: 'view',
+        label: 'View',
+        checklist: true,
+        menu: [
+          { id: 'back', title: 'Back', shortcut: '⌘Ö', disabled: true },
+          { id: 'forward', title: 'Forward', shortcut: '⌘Ä', disabled: true },
+          { id: 'search', title: 'Search', shortcut: '⌘F', separator: true },
+
+          { id: 'about', title: 'About' },
+          { id: 'accessibility', title: 'Accessibility' },
+          { id: 'airdrop-handoff', title: 'AirDrop & Handoff' },
+          { id: 'appearance', title: 'Appearance', checked: true },
+          { id: 'apple-id', title: 'Apple ID' },
+          { id: 'applecare-warranty', title: 'AppleCare & Warranty' },
+          { id: 'battery', title: 'Battery' },
+          { id: 'bluetooth', title: 'Bluetooth' },
+          { id: 'control-centre', title: 'Control Centre' },
+          { id: 'date-time', title: 'Date & Time' },
+          { id: 'desktop-dock', title: 'Desktop & Dock' },
+          { id: 'displays', title: 'Displays' },
+          { id: 'extensions', title: 'Extensions' },
+          { id: 'focus', title: 'Focus' },
+          { id: 'game-center', title: 'Game Center' },
+          { id: 'internet-accounts', title: 'Internet Accounts' },
+          { id: 'keyboard', title: 'Keyboard' },
+          { id: 'language-region', title: 'Language & Region' },
+          { id: 'lock-screen', title: 'Lock Screen' },
+          { id: 'login-items', title: 'Login Items' },
+          { id: 'mouse', title: 'Mouse' },
+          { id: 'network', title: 'Network' },
+          { id: 'notifications', title: 'Notifications' },
+          { id: 'passwords', title: 'Passwords' },
+          { id: 'printers-scanners', title: 'Printers & Scanners' },
+          { id: 'privacy-security', title: 'Privacy & Security' },
+          { id: 'profiles', title: 'Profiles' },
+          { id: 'screen-saver', title: 'Screen Saver' },
+          { id: 'screen-time', title: 'Screen Time' },
+          { id: 'sharing', title: 'Sharing' },
+          { id: 'siri-spotlight', title: 'Siri & Spotlight' },
+          { id: 'software-update', title: 'Software Update' },
+          { id: 'sound', title: 'Sound' },
+          { id: 'startup-disk', title: 'Startup Disk' },
+          { id: 'storage', title: 'Storage' },
+          { id: 'time-machine', title: 'Time Machine' },
+          { id: 'touch-id-password', title: 'Touch ID & Password' },
+          { id: 'trackpad', title: 'Trackpad' },
+          { id: 'transfer-reset', title: 'Transfer or Reset' },
+          { id: 'users-groups', title: 'Users & Groups' },
+          { id: 'wallet-apple-pay', title: 'Wallet & Apple Pay' },
+          { id: 'wallpaper', title: 'Wallpaper' },
+          { id: 'wi-fi', title: 'Wi-Fi' }
+        ]
+      },
+      {
+        id: 'window',
+        label: 'Window',
+        menu: [
+          { id: 'minimise', title: 'Minimise', shortcut: '⌘M' },
+          { id: 'zoom', title: 'Zoom' },
+          {
+            id: 'move-window-to-left',
+            title: 'Move Window to Left Side of Screen'
+          },
+          {
+            id: 'move-window-to-right',
+            title: 'Move Window to Right Side of Screen',
+            separator: true
+          },
+          {
+            id: 'replace-tiled-window',
+            title: 'Replace Tiled Window',
+            disabled: true
+          },
+          { id: 'remove-window-from-set', title: 'Remove Window from Set' },
+          {
+            id: 'move-to-built-in-retina-display',
+            title: 'Move to Built-in Retina Display'
+          },
+          { id: 'move-to-ipad', title: 'Move to iPad', separator: true },
+          { id: 'bring-all-to-front', title: 'Bring All to Front' }
+        ]
+      },
+      {
+        id: 'help',
+        label: 'Help',
+        menu: [
+          { id: 'search', title: 'Search' },
+          { id: 'system-settings-help', title: 'System Settings Help' },
+          { id: 'macos-help', title: 'macOS Help' },
+          { id: 'user-manual', title: 'User Manual' },
+          { id: 'macos-support', title: 'macOS Support', separator: true },
+          {
+            id: 'macbook-pro-specifications',
+            title: 'MacBook Pro Specifications'
+          },
+          { id: 'hardware-support', title: 'Hardware Support' }
+        ]
+      }
+    ]
   }
 ] as const;
 
