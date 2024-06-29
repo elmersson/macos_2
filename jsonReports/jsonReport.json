@@ -101,12 +101,12 @@
                 {
                   "workerIndex": 0,
                   "status": "passed",
-                  "duration": 12382,
+                  "duration": 13178,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2024-06-11T18:05:41.952Z",
+                  "startTime": "2024-06-28T17:20:47.391Z",
                   "attachments": []
                 }
               ],
@@ -133,12 +133,12 @@
                 {
                   "workerIndex": 1,
                   "status": "passed",
-                  "duration": 17833,
+                  "duration": 18208,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2024-06-11T18:05:41.953Z",
+                  "startTime": "2024-06-28T17:20:47.390Z",
                   "attachments": []
                 }
               ],
@@ -165,12 +165,12 @@
                 {
                   "workerIndex": 2,
                   "status": "passed",
-                  "duration": 12339,
+                  "duration": 13177,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2024-06-11T18:05:41.949Z",
+                  "startTime": "2024-06-28T17:20:47.391Z",
                   "attachments": []
                 }
               ],
@@ -197,12 +197,12 @@
                 {
                   "workerIndex": 3,
                   "status": "passed",
-                  "duration": 13577,
+                  "duration": 13846,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2024-06-11T18:05:41.949Z",
+                  "startTime": "2024-06-28T17:20:47.394Z",
                   "attachments": []
                 }
               ],
@@ -216,7 +216,7 @@
         },
         {
           "title": "has boot",
-          "ok": false,
+          "ok": true,
           "tags": [],
           "tests": [
             {
@@ -228,33 +228,17 @@
               "results": [
                 {
                   "workerIndex": 4,
-                  "status": "timedOut",
-                  "duration": 30006,
-                  "error": {
-                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
-                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
-                  },
-                  "errors": [
-                    {
-                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
-                    },
-                    {
-                      "location": {
-                        "file": "/Users/rasmuselmersson/Documents/Github/macos_2/__e2e__/page.spec.ts",
-                        "column": 14,
-                        "line": 15
-                      },
-                      "message": "Error: page.waitForFunction: Test timeout of 30000ms exceeded.\n\n\u001b[0m \u001b[90m 13 |\u001b[39m   expect(progressBar)\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoBeNull()\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 14 |\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 15 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForFunction(() \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 16 |\u001b[39m     \u001b[36mconst\u001b[39m progress \u001b[33m=\u001b[39m document\u001b[33m.\u001b[39mquerySelector(\u001b[32m'.h-1'\u001b[39m) \u001b[36mas\u001b[39m \u001b[33mHTMLElement\u001b[39m\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 17 |\u001b[39m     \u001b[36mreturn\u001b[39m progress\u001b[33m.\u001b[39mstyle\u001b[33m.\u001b[39mwidth \u001b[33m===\u001b[39m \u001b[32m'100%'\u001b[39m\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 18 |\u001b[39m   })\u001b[33m;\u001b[39m\u001b[0m\n\n\u001b[2m    at /Users/rasmuselmersson/Documents/Github/macos_2/__e2e__/page.spec.ts:15:14\u001b[22m"
-                    }
-                  ],
+                  "status": "passed",
+                  "duration": 19560,
+                  "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2024-06-11T18:05:41.949Z",
+                  "startTime": "2024-06-28T17:20:47.393Z",
                   "attachments": []
                 }
               ],
-              "status": "unexpected"
+              "status": "expected"
             }
           ],
           "id": "ea7f5a6ac9463218d2f1-3b1d57d810b2f12f2bad",
@@ -277,12 +261,12 @@
                 {
                   "workerIndex": 5,
                   "status": "passed",
-                  "duration": 13052,
+                  "duration": 13809,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2024-06-11T18:05:41.948Z",
+                  "startTime": "2024-06-28T17:20:47.395Z",
                   "attachments": []
                 }
               ],
@@ -309,12 +293,12 @@
                 {
                   "workerIndex": 6,
                   "status": "passed",
-                  "duration": 5400,
+                  "duration": 9832,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2024-06-11T18:05:55.017Z",
+                  "startTime": "2024-06-28T17:21:01.296Z",
                   "attachments": []
                 }
               ],
@@ -341,12 +325,12 @@
                 {
                   "workerIndex": 7,
                   "status": "passed",
-                  "duration": 10377,
+                  "duration": 15221,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2024-06-11T18:05:55.016Z",
+                  "startTime": "2024-06-28T17:21:01.288Z",
                   "attachments": []
                 }
               ],
@@ -373,12 +357,12 @@
                 {
                   "workerIndex": 8,
                   "status": "passed",
-                  "duration": 4128,
+                  "duration": 8784,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2024-06-11T18:05:56.108Z",
+                  "startTime": "2024-06-28T17:21:02.466Z",
                   "attachments": []
                 }
               ],
@@ -395,11 +379,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2024-06-11T18:05:40.900Z",
-    "duration": 31952.72,
-    "expected": 8,
+    "startTime": "2024-06-28T17:20:46.296Z",
+    "duration": 30513.27,
+    "expected": 9,
     "skipped": 0,
-    "unexpected": 1,
+    "unexpected": 0,
     "flaky": 0
   }
 }

@@ -27,7 +27,7 @@ export function Apps() {
                 <Notes key={app.id} appData={app} />
               ) : app.id === 'iterm2' ? (
                 <Iterm2 key={app.id} appData={app} />
-              ) : app.id === 'mail' ? (
+              ) : app.id === 'outlook' ? (
                 <Outlook key={app.id} appData={app} />
               ) : app.id === 'system' ? (
                 <System key={app.id} appData={app} />
