@@ -14,6 +14,7 @@ import { useAppStore } from '../providers/store-provider';
 import { Fragment } from 'react';
 import { AppData, MenuItem, Trigger } from '@/data/Apps';
 import { FaCheck } from 'react-icons/fa6';
+import { cn } from '@/lib/utils';
 
 export function AppMenu() {
   const { activeApp, apps } = useAppStore((state) => state);
@@ -51,7 +52,12 @@ export function AppMenu() {
         {item.subMenu && (
           <DropdownMenuSub>
             <DropdownMenuSubTrigger disabled={item.disabled}>
-              <div className="flex items-center">
+              <div
+                className={cn(
+                  'flex items-center',
+                  item.disabled && 'opacity-50'
+                )}
+              >
                 {checklist && (
                   <span className="w-4 h-4 mr-1 flex items-center justify-center">
                     {item.checked && <FaCheck />}
