@@ -7,6 +7,7 @@ import {
   initialNameOfTheDay
 } from './initialData';
 import { WeatherData } from '@/types/Weather';
+import { SystemData, SystemPage } from '@/components/apps/system';
 
 export interface SystemStore {
   bootProgress: number;
@@ -35,6 +36,8 @@ export interface SystemStore {
   onOpen: () => void;
   onClose: () => void;
   toggle: () => void;
+  activePage: SystemPage;
+  setActivePage: (page: SystemPage) => void;
   systemHistory: string[];
   addToHistory: (id: string) => void;
   historyPosition: number;
@@ -64,6 +67,11 @@ export const createSystemStore = (): StoreApi<SystemStore> => {
         onOpen: () => set({ isOpen: true }),
         onClose: () => set({ isOpen: false }),
         toggle: () => set({ isOpen: !get().isOpen }),
+        activePage: SystemData[0],
+        setActivePage: (page: SystemPage) =>
+          set((state) => {
+            return { ...state, activePage: page };
+          }),
         systemHistory: [],
         addToHistory: (id: string) =>
           set((state) => {
