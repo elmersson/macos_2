@@ -19,7 +19,7 @@ import {
 } from '../ui/accordion';
 import { useSystemStore } from '../providers/store-provider';
 
-const otherNetworks = [
+export const otherNetworks = [
   'Pretty Fly For a Wifi',
   'Wu-Tang LAN',
   'I am watching you',

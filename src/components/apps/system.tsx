@@ -1,24 +1,60 @@
 import { ScrollArea } from '../ui/scroll-area';
 import { DraggableItem } from './draggable-item';
-import { IoIosArrowBack, IoIosArrowForward, IoIosCloud } from 'react-icons/io';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 import { AppProps } from '@/data/Apps';
 import { ReactNode, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
-import { Separator } from '../ui/separator';
 import { useSystemStore } from '../providers/store-provider';
 import { IconType } from 'react-icons';
 import { IoIosWifi, IoIosBluetooth, IoIosGlobe } from 'react-icons/io';
 import { IoCloseSharp, IoSearchSharp } from 'react-icons/io5';
 import Image from 'next/image';
 import ProfileImage from '@/assets/images/ProfileImage.png';
-import { Button } from '../ui/button';
-import { MdContactMail } from 'react-icons/md';
-import { ChevronRight } from 'lucide-react';
-import { AiFillSecurityScan } from 'react-icons/ai';
-import { IoCard } from 'react-icons/io5';
-import { SiAppstore } from 'react-icons/si';
-import { IoIosPeople, IoMdContact } from 'react-icons/io';
+import Profile from '../systemPages/Profile';
+import Wifi from '../systemPages/Wi-Fi';
+
+type TailwindBgColor =
+  | 'bg-blue-500'
+  | 'bg-red-500'
+  | 'bg-green-500'
+  | 'bg-yellow-500'
+  | 'bg-purple-500'
+  | 'bg-pink-500';
+
+export interface SystemPage {
+  id: string;
+  name: string;
+  icon: { type: IconType; bg: TailwindBgColor };
+  page(): React.JSX.Element;
+}
+
+export const SystemData: SystemPage[] = [
+  {
+    id: 'profile',
+    name: 'Profile',
+    icon: { type: IoIosWifi, bg: 'bg-blue-500' },
+    page: Profile
+  },
+  {
+    id: 'wi-fi',
+    name: 'Wi-Fi',
+    icon: { type: IoIosWifi, bg: 'bg-blue-500' },
+    page: Wifi
+  },
+  {
+    id: 'bluetooth',
+    name: 'Bluetooth',
+    icon: { type: IoIosBluetooth, bg: 'bg-blue-500' },
+    page: Wifi
+  },
+  {
+    id: 'network',
+    name: 'Network',
+    icon: { type: IoIosGlobe, bg: 'bg-blue-500' },
+    page: Wifi
+  }
+];
 
 export function System({ appData }: AppProps) {
   return (
@@ -93,6 +129,7 @@ function SideBar() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [searchInput, setSearchInput] = useState<string>('');
   const [isSearching, setIsSearching] = useState<boolean>(false);
+  const { setActivePage } = useSystemStore((state) => state);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value);
@@ -106,6 +143,10 @@ function SideBar() {
   const handleClearSearch = () => {
     setSearchInput('');
     handleSearchToggle();
+  };
+
+  const setPage = (page: SystemPage) => {
+    setActivePage(page);
   };
 
   return (
@@ -128,7 +169,10 @@ function SideBar() {
           />
         </div>
       </div>
-      <div className="flex flex-row space-x-2">
+      <div
+        className="flex flex-row space-x-2"
+        onClick={() => setPage(SystemData[0])}
+      >
         <div className="w-12 h-12 bg-slate-700 bg-clip-padding backdrop-filter backdrop-blur-3xl bg-opacity-30 rounded-full p-2">
           <Image
             src={ProfileImage}
@@ -143,9 +187,14 @@ function SideBar() {
         </div>
       </div>
       <div className="flex flex-col space-y-2">
-        <SideBarItem title="Wi-Fi" icon={IoIosWifi} />
-        <SideBarItem title="Bluetooth" icon={IoIosBluetooth} />
-        <SideBarItem title="Network" icon={IoIosGlobe} />
+        {SystemData.slice(1, 4).map((item) => (
+          <SideBarItem
+            key={item.id}
+            title={item.name}
+            icon={item.icon}
+            onClick={() => setPage(item)}
+          />
+        ))}
       </div>
       <div className="flex flex-col">
         <span>Notifications</span>
@@ -193,7 +242,31 @@ function SideBar() {
   );
 }
 
-function ContentBox({
+interface SideBarItemProps extends React.HTMLAttributes<HTMLDivElement> {
+  title: string;
+  icon: { type: IconType; bg: TailwindBgColor };
+}
+
+function SideBarItem({
+  title,
+  icon: { type: Icon, bg },
+  ...props
+}: SideBarItemProps) {
+  return (
+    <div
+      role="button"
+      className="flex flex-row items-center space-x-1"
+      onClick={props.onClick}
+    >
+      <div className={cn('rounded-lg p-0.5 bg-blue-500', props.className, bg)}>
+        <Icon className=" size-5" />
+      </div>
+      <span>{title}</span>
+    </div>
+  );
+}
+
+export function ContentBox({
   children,
   title,
   ...divProps
@@ -217,153 +290,13 @@ function ContentBox({
 }
 
 function Content() {
+  const {
+    activePage: { id }
+  } = useSystemStore((state) => state);
   return (
     <div className="w-full space-y-3">
-      <div className="flex flex-col justify-center items-center text-center space-y-1 py-3">
-        <div className="w-28 h-28 bg-slate-700 bg-clip-padding backdrop-filter backdrop-blur-3xl bg-opacity-30 rounded-full p-2">
-          <Image
-            src={ProfileImage}
-            alt="account image"
-            className="rounded-full drop-shadow object-cover object-center"
-            fill
-          />
-        </div>
-        <div className="flex flex-col">
-          <span className="text-lg font-bold">Rasmus Elmersson</span>
-          <span className="text-lg">elmerssonrasmus@gmail.com</span>
-        </div>
-      </div>
-      <ContentBox className="p-3">
-        <div className="flex flex-col space-y-2">
-          <div className="flex flex-row items-center justify-between">
-            <div className="flex flex-row items-center space-x-3">
-              <span className="bg-neutral-500 p-0.5 rounded-sm">
-                <MdContactMail />
-              </span>
-              <span>Personal information</span>
-            </div>
-            <ChevronRight className="text-white/20 size-5" />
-          </div>
-          <Separator className="bg-white/10" />
-          <div className="flex flex-row items-center justify-between">
-            <div className="flex flex-row items-center space-x-3">
-              <span className="bg-neutral-500 p-0.5 rounded-sm">
-                <AiFillSecurityScan />
-              </span>
-              <span>Sign-In & Security</span>
-            </div>
-            <ChevronRight className="text-white/20 size-5" />
-          </div>
-          <Separator className="bg-white/10" />
-          <div className="flex flex-row items-center justify-between">
-            <div className="flex flex-row items-center space-x-3">
-              <span className="bg-neutral-500 p-0.5 rounded-sm">
-                <IoCard />
-              </span>
-              <span>Payment & Shipping</span>
-            </div>
-            <ChevronRight className="text-white/20 size-5" />
-          </div>
-        </div>
-      </ContentBox>
-
-      <ContentBox className="p-3 mb-8">
-        <div className="flex flex-col space-y-2">
-          <div className="flex flex-row items-center justify-between">
-            <div className="flex flex-row items-center space-x-3">
-              <span className="bg-white text-blue-500 p-0.5 rounded-sm">
-                <IoIosCloud />
-              </span>
-              <span>iCloud</span>
-            </div>
-            <ChevronRight className="text-white/20 size-5" />
-          </div>
-          <Separator className="bg-white/10" />
-          <div className="flex flex-row items-center justify-between">
-            <div className="flex flex-row items-center space-x-3">
-              <span className="bg-blue-500 p-0.5 rounded-sm">
-                <SiAppstore />
-              </span>
-              <span>Media & Purchases</span>
-            </div>
-            <ChevronRight className="text-white/20 size-5" />
-          </div>
-          <Separator className="bg-white/10" />
-          <div className="flex flex-row items-center justify-between">
-            <div className="flex flex-row items-center space-x-3">
-              <span className="bg-white text-blue-500 p-0.5 rounded-sm">
-                <IoIosPeople />
-              </span>
-              <span>Family Sharing</span>
-            </div>
-            <div className="flex flex-row space-x-2">
-              <span className="text-sm text-white/60">Set Up</span>
-              <ChevronRight className="text-white/20 size-5" />
-            </div>
-          </div>
-        </div>
-      </ContentBox>
-
-      <ContentBox className="p-3" title="Devices">
-        <div className="flex flex-col space-y-2">
-          <div className="flex flex-col">
-            <span>Rasmus´s MacBook Pro</span>
-            <span className="text-sm text-white/50">
-              This Macbook Pro 16&quot;
-            </span>
-          </div>
-          <Separator className="bg-white/10" />
-          <div className="flex flex-col">
-            <span>iPad</span>
-            <span className="text-sm text-white/50">iPad</span>
-          </div>
-          <Separator className="bg-white/10" />
-          <div className="flex flex-col">
-            <span>Rasmus´s Apple Watch</span>
-            <span className="text-sm text-white/50">Apple Watch SE</span>
-          </div>
-        </div>
-      </ContentBox>
-      <ContentBox>
-        <div className="flex flex-row items-center justify-between">
-          <div className="flex flex-row items-center space-x-3">
-            <span className="bg-neutral-500 p-0.5 rounded-sm">
-              <IoMdContact />
-            </span>
-            <span>Contact Key Verification</span>
-          </div>
-          <ChevronRight className="text-white/20 size-5" />
-        </div>
-      </ContentBox>
-      <div className="flex flex-row justify-between pt-3">
-        <Button className="bg-neutral-500 text-white p-3 h-3">
-          Sign Out...
-        </Button>
-        <div className="flex flex-row items-center space-x-3">
-          <Button className="bg-neutral-500 text-white p-3 h-3">
-            About Apple ID & Privacy
-          </Button>
-          <Button className="bg-neutral-500 text-white px-2 h-6 text-lg rounded-full">
-            ?
-          </Button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-interface SideBarItemProps extends React.HTMLAttributes<HTMLDivElement> {
-  title: string;
-  icon: IconType;
-}
-
-function SideBarItem({ title, icon: Icon, ...props }: SideBarItemProps) {
-  return (
-    <div className="flex flex-row items-center space-x-1">
-      <div className={cn('rounded-lg p-0.5 bg-blue-500', props.className)}>
-        <Icon className=" size-5" />
-      </div>
-      <span>{title}</span>
+      {id === 'profile' && <Profile />}
+      {id === 'wi-fi' && <Wifi />}
     </div>
   );
 }
