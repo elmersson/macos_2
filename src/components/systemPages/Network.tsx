@@ -1,11 +1,14 @@
 import { cn } from '@/lib/utils';
 import { ContentBox } from '../apps/system';
 import { useSystemStore } from '../providers/store-provider';
-import { ChevronRight } from 'lucide-react';
+import { ChevronDown, ChevronRight } from 'lucide-react';
 import { MdWifi } from 'react-icons/md';
 import { IconType } from 'react-icons';
 import { Button } from '../ui/button';
 import { Separator } from '../ui/separator';
+import { BsLightningFill } from 'react-icons/bs';
+import { TbDots } from 'react-icons/tb';
+import { CgArrowsH } from 'react-icons/cg';
 
 export function Network() {
   const { wifi } = useSystemStore((state) => state);
@@ -32,37 +35,38 @@ export function Network() {
         <ContentBox title="Other Services">
           <NetworkItem
             name="Dell Universal Dock D6000"
-            icon={{ type: MdWifi, bg: 'bg-gray-400' }}
+            icon={{ type: CgArrowsH, bg: 'bg-gray-400' }}
             connected={false}
           />
           <Separator className="bg-white/10 my-2" />
           <NetworkItem
             name="USB 10/100/1000 LAN"
-            icon={{ type: MdWifi, bg: 'bg-gray-400' }}
+            icon={{ type: CgArrowsH, bg: 'bg-gray-400' }}
             connected={false}
           />
           <Separator className="bg-white/10 my-2" />
           <NetworkItem
             name="DL-Dock"
-            icon={{ type: MdWifi, bg: 'bg-gray-400' }}
+            icon={{ type: CgArrowsH, bg: 'bg-gray-400' }}
             connected={false}
           />
           <Separator className="bg-white/10 my-2" />
           <NetworkItem
             name="Thunderbolt Bridge"
-            icon={{ type: MdWifi, bg: 'bg-gray-400' }}
+            icon={{ type: BsLightningFill, bg: 'bg-gray-400' }}
             connected={false}
           />
           <Separator className="bg-white/10 my-2" />
           <NetworkItem
             name="Iphone USB"
-            icon={{ type: MdWifi, bg: 'bg-gray-400' }}
+            icon={{ type: CgArrowsH, bg: 'bg-gray-400' }}
             connected={false}
           />
         </ContentBox>
         <div className="flex flex-row justify-end  items-center space-x-3 mt-3">
-          <Button className="bg-neutral-500 text-white p-3 h-3">
-            Advanced...
+          <Button className="bg-neutral-500 text-white py-3 px-2 h-3 space-x-1">
+            <TbDots className="size-4" />
+            <ChevronDown className="size-3" />
           </Button>
           <Button className="bg-neutral-500 text-white px-2 h-6 text-lg rounded-full">
             ?
