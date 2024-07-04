@@ -14,6 +14,7 @@ import ProfileImage from '@/assets/images/ProfileImage.png';
 import Profile from '../systemPages/Profile';
 import Wifi from '../systemPages/Wi-Fi';
 import { Network } from '../systemPages/Network';
+import Bluetooth from '../systemPages/Bluetooth';
 
 type TailwindBgColor =
   | 'bg-blue-500'
@@ -272,7 +273,7 @@ export function ContentBox({
   title,
   ...divProps
 }: {
-  children: ReactNode;
+  children?: ReactNode;
   title?: string;
 } & React.HTMLAttributes<HTMLDivElement>) {
   return (
@@ -298,6 +299,7 @@ function Content() {
     <div className="w-full space-y-3">
       {id === 'profile' && <Profile />}
       {id === 'wi-fi' && <Wifi />}
+      {id === 'bluetooth' && <Bluetooth />}
       {id === 'network' && <Network />}
     </div>
   );
