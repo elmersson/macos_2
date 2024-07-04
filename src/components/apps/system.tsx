@@ -13,6 +13,7 @@ import Image from 'next/image';
 import ProfileImage from '@/assets/images/ProfileImage.png';
 import Profile from '../systemPages/Profile';
 import Wifi from '../systemPages/Wi-Fi';
+import { Network } from '../systemPages/Network';
 
 type TailwindBgColor =
   | 'bg-blue-500'
@@ -297,6 +298,7 @@ function Content() {
     <div className="w-full space-y-3">
       {id === 'profile' && <Profile />}
       {id === 'wi-fi' && <Wifi />}
+      {id === 'network' && <Network />}
     </div>
   );
 }
