@@ -15,6 +15,8 @@ import Profile from '../systemPages/Profile';
 import Wifi from '../systemPages/Wi-Fi';
 import { Network } from '../systemPages/Network';
 import Bluetooth from '../systemPages/Bluetooth';
+import { Notifications } from '../systemPages/Notifications';
+import { IoNotificationsSharp } from 'react-icons/io5';
 
 type TailwindBgColor =
   | 'bg-blue-500'
@@ -54,6 +56,12 @@ export const SystemData: SystemPage[] = [
     id: 'network',
     name: 'Network',
     icon: { type: IoIosGlobe, bg: 'bg-blue-500' },
+    page: Wifi
+  },
+  {
+    id: 'notifications',
+    name: 'Notifications',
+    icon: { type: IoNotificationsSharp, bg: 'bg-red-500' },
     page: Wifi
   }
 ];
@@ -199,6 +207,14 @@ function SideBar() {
         ))}
       </div>
       <div className="flex flex-col">
+        {SystemData.slice(4, 5).map((item) => (
+          <SideBarItem
+            key={item.id}
+            title={item.name}
+            icon={item.icon}
+            onClick={() => setPage(item)}
+          />
+        ))}
         <span>Notifications</span>
         <span>Sound</span>
         <span>Focus</span>
@@ -301,6 +317,7 @@ function Content() {
       {id === 'wi-fi' && <Wifi />}
       {id === 'bluetooth' && <Bluetooth />}
       {id === 'network' && <Network />}
+      {id === 'notifications' && <Notifications />}
     </div>
   );
 }
