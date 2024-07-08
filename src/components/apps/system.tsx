@@ -17,6 +17,8 @@ import { Network } from '../systemPages/Network';
 import Bluetooth from '../systemPages/Bluetooth';
 import { Notifications } from '../systemPages/Notifications';
 import { IoNotificationsSharp } from 'react-icons/io5';
+import { Sound } from '../systemPages/Sound';
+import { HiSpeakerWave } from 'react-icons/hi2';
 
 type TailwindBgColor =
   | 'bg-blue-500'
@@ -63,6 +65,12 @@ export const SystemData: SystemPage[] = [
     name: 'Notifications',
     icon: { type: IoNotificationsSharp, bg: 'bg-red-500' },
     page: Wifi
+  },
+  {
+    id: 'sound',
+    name: 'Sound',
+    icon: { type: HiSpeakerWave, bg: 'bg-red-500' },
+    page: Sound
   }
 ];
 
@@ -206,8 +214,8 @@ function SideBar() {
           />
         ))}
       </div>
-      <div className="flex flex-col">
-        {SystemData.slice(4, 5).map((item) => (
+      <div className="flex flex-col space-y-2">
+        {SystemData.slice(4, 6).map((item) => (
           <SideBarItem
             key={item.id}
             title={item.name}
@@ -215,8 +223,6 @@ function SideBar() {
             onClick={() => setPage(item)}
           />
         ))}
-        <span>Notifications</span>
-        <span>Sound</span>
         <span>Focus</span>
         <span>Screen Time</span>
       </div>
@@ -318,6 +324,7 @@ function Content() {
       {id === 'bluetooth' && <Bluetooth />}
       {id === 'network' && <Network />}
       {id === 'notifications' && <Notifications />}
+      {id === 'sound' && <Sound />}
     </div>
   );
 }
