@@ -19,6 +19,8 @@ import { Notifications } from '../systemPages/Notifications';
 import { IoNotificationsSharp } from 'react-icons/io5';
 import { Sound } from '../systemPages/Sound';
 import { HiSpeakerWave } from 'react-icons/hi2';
+import { IoIosMoon } from 'react-icons/io';
+import { Focus } from '../systemPages/Focus';
 
 type TailwindBgColor =
   | 'bg-blue-500'
@@ -71,6 +73,12 @@ export const SystemData: SystemPage[] = [
     name: 'Sound',
     icon: { type: HiSpeakerWave, bg: 'bg-red-500' },
     page: Sound
+  },
+  {
+    id: 'focus',
+    name: 'Focus',
+    icon: { type: IoIosMoon, bg: 'bg-purple-500' },
+    page: Focus
   }
 ];
 
@@ -215,7 +223,7 @@ function SideBar() {
         ))}
       </div>
       <div className="flex flex-col space-y-2">
-        {SystemData.slice(4, 6).map((item) => (
+        {SystemData.slice(4, 7).map((item) => (
           <SideBarItem
             key={item.id}
             title={item.name}
@@ -223,7 +231,6 @@ function SideBar() {
             onClick={() => setPage(item)}
           />
         ))}
-        <span>Focus</span>
         <span>Screen Time</span>
       </div>
 
@@ -325,6 +332,7 @@ function Content() {
       {id === 'network' && <Network />}
       {id === 'notifications' && <Notifications />}
       {id === 'sound' && <Sound />}
+      {id === 'focus' && <Focus />}
     </div>
   );
 }
