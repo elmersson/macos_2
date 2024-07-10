@@ -64,7 +64,7 @@ export function Focus() {
         <div className="flex flex-row justify-between space-x-8">
           <div className="flex flex-col">
             <span>Share across devices</span>
-            <span className="text-xs text-neutral-400">
+            <span className="text-sm text-neutral-400">
               Focus is shared across your devices, and turning one on for this
               device will turn it on for all of them.
             </span>

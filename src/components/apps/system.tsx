@@ -16,11 +16,12 @@ import Wifi from '../systemPages/Wi-Fi';
 import { Network } from '../systemPages/Network';
 import Bluetooth from '../systemPages/Bluetooth';
 import { Notifications } from '../systemPages/Notifications';
-import { IoNotificationsSharp } from 'react-icons/io5';
+import { IoNotificationsSharp, IoHourglassOutline } from 'react-icons/io5';
 import { Sound } from '../systemPages/Sound';
 import { HiSpeakerWave } from 'react-icons/hi2';
 import { IoIosMoon } from 'react-icons/io';
 import { Focus } from '../systemPages/Focus';
+import { ScreenTime } from '../systemPages/Screen-Time';
 
 type TailwindBgColor =
   | 'bg-blue-500'
@@ -79,6 +80,12 @@ export const SystemData: SystemPage[] = [
     name: 'Focus',
     icon: { type: IoIosMoon, bg: 'bg-purple-500' },
     page: Focus
+  },
+  {
+    id: 'screen-time',
+    name: 'Screen Time',
+    icon: { type: IoHourglassOutline, bg: 'bg-purple-500' },
+    page: ScreenTime
   }
 ];
 
@@ -223,7 +230,7 @@ function SideBar() {
         ))}
       </div>
       <div className="flex flex-col space-y-2">
-        {SystemData.slice(4, 7).map((item) => (
+        {SystemData.slice(4, 8).map((item) => (
           <SideBarItem
             key={item.id}
             title={item.name}
@@ -231,7 +238,6 @@ function SideBar() {
             onClick={() => setPage(item)}
           />
         ))}
-        <span>Screen Time</span>
       </div>
 
       <div className="flex flex-col">
@@ -333,6 +339,7 @@ function Content() {
       {id === 'notifications' && <Notifications />}
       {id === 'sound' && <Sound />}
       {id === 'focus' && <Focus />}
+      {id === 'screen-time' && <ScreenTime />}
     </div>
   );
 }
