@@ -16,12 +16,18 @@ import Wifi from '../systemPages/Wi-Fi';
 import { Network } from '../systemPages/Network';
 import Bluetooth from '../systemPages/Bluetooth';
 import { Notifications } from '../systemPages/Notifications';
-import { IoNotificationsSharp, IoHourglassOutline } from 'react-icons/io5';
+import {
+  IoNotificationsSharp,
+  IoHourglassOutline,
+  IoCog
+} from 'react-icons/io5';
 import { Sound } from '../systemPages/Sound';
 import { HiSpeakerWave } from 'react-icons/hi2';
 import { IoIosMoon } from 'react-icons/io';
 import { Focus } from '../systemPages/Focus';
 import { ScreenTime } from '../systemPages/Screen-Time';
+import { General } from '../systemPages/General';
+import { ChevronRight } from 'lucide-react';
 
 type TailwindBgColor =
   | 'bg-blue-500'
@@ -29,7 +35,19 @@ type TailwindBgColor =
   | 'bg-green-500'
   | 'bg-yellow-500'
   | 'bg-purple-500'
-  | 'bg-pink-500';
+  | 'bg-pink-500'
+  | 'bg-neutral-400'
+  | 'bg-white';
+
+type TailwindTextColor =
+  | 'text-blue-500'
+  | 'text-red-500'
+  | 'text-green-500'
+  | 'text-yellow-500'
+  | 'text-purple-500'
+  | 'text-pink-500'
+  | 'text-neutral-400'
+  | 'text-white';
 
 export interface SystemPage {
   id: string;
@@ -86,6 +104,12 @@ export const SystemData: SystemPage[] = [
     name: 'Screen Time',
     icon: { type: IoHourglassOutline, bg: 'bg-purple-500' },
     page: ScreenTime
+  },
+  {
+    id: 'general',
+    name: 'General',
+    icon: { type: IoCog, bg: 'bg-neutral-400' },
+    page: General
   }
 ];
 
@@ -115,10 +139,9 @@ export function System({ appData }: AppProps) {
 }
 
 function BarItem() {
-  const { historyPosition, setHistoryPosition, systemHistory } = useSystemStore(
-    (state) => state
-  );
-  const title = systemHistory[historyPosition];
+  const { historyPosition, setHistoryPosition, systemHistory, activePage } =
+    useSystemStore((state) => state);
+  const title = activePage.name;
 
   const handleBack = () => {
     if (historyPosition > 0) {
@@ -240,7 +263,15 @@ function SideBar() {
         ))}
       </div>
 
-      <div className="flex flex-col">
+      <div className="flex flex-col space-y-2">
+        {SystemData.slice(8, 9).map((item) => (
+          <SideBarItem
+            key={item.id}
+            title={item.name}
+            icon={item.icon}
+            onClick={() => setPage(item)}
+          />
+        ))}
         <span>General</span>
         <span>Appearance</span>
         <span>Accessibility</span>
@@ -326,6 +357,36 @@ export function ContentBox({
   );
 }
 
+export function ContentBoxItem({
+  Icon,
+  title,
+  bg,
+  iconColor
+}: {
+  Icon: IconType;
+  title: string;
+  bg?: TailwindBgColor;
+  iconColor?: TailwindTextColor;
+}) {
+  return (
+    <div className="flex flex-row items-center justify-between">
+      <div className="flex flex-row items-center space-x-3">
+        <span
+          className={cn(
+            'bg-neutral-400 text-white w-6 h-6 flex items-center justify-center rounded',
+            bg,
+            iconColor
+          )}
+        >
+          <Icon />
+        </span>
+        <span>{title}</span>
+      </div>
+      <ChevronRight className="text-white/20 size-5" />
+    </div>
+  );
+}
+
 function Content() {
   const {
     activePage: { id }
@@ -340,6 +401,7 @@ function Content() {
       {id === 'sound' && <Sound />}
       {id === 'focus' && <Focus />}
       {id === 'screen-time' && <ScreenTime />}
+      {id === 'general' && <General />}
     </div>
   );
 }
