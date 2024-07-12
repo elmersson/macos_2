@@ -8,7 +8,11 @@ import { cn } from '@/lib/utils';
 import { useSystemStore } from '../providers/store-provider';
 import { IconType } from 'react-icons';
 import { IoIosWifi, IoIosBluetooth, IoIosGlobe } from 'react-icons/io';
-import { IoCloseSharp, IoSearchSharp } from 'react-icons/io5';
+import {
+  IoCloseSharp,
+  IoSearchSharp,
+  IoInvertModeOutline
+} from 'react-icons/io5';
 import Image from 'next/image';
 import ProfileImage from '@/assets/images/ProfileImage.png';
 import Profile from '../systemPages/Profile';
@@ -28,6 +32,7 @@ import { Focus } from '../systemPages/Focus';
 import { ScreenTime } from '../systemPages/Screen-Time';
 import { General } from '../systemPages/General';
 import { ChevronRight } from 'lucide-react';
+import { Appearance } from '../systemPages/Appearance';
 
 type TailwindBgColor =
   | 'bg-blue-500'
@@ -37,7 +42,8 @@ type TailwindBgColor =
   | 'bg-purple-500'
   | 'bg-pink-500'
   | 'bg-neutral-400'
-  | 'bg-white';
+  | 'bg-white'
+  | 'bg-black';
 
 type TailwindTextColor =
   | 'text-blue-500'
@@ -110,6 +116,12 @@ export const SystemData: SystemPage[] = [
     name: 'General',
     icon: { type: IoCog, bg: 'bg-neutral-400' },
     page: General
+  },
+  {
+    id: 'appearance',
+    name: 'Appearance',
+    icon: { type: IoInvertModeOutline, bg: 'bg-black' },
+    page: Appearance
   }
 ];
 
@@ -264,7 +276,7 @@ function SideBar() {
       </div>
 
       <div className="flex flex-col space-y-2">
-        {SystemData.slice(8, 9).map((item) => (
+        {SystemData.slice(8, 10).map((item) => (
           <SideBarItem
             key={item.id}
             title={item.name}
@@ -402,6 +414,7 @@ function Content() {
       {id === 'focus' && <Focus />}
       {id === 'screen-time' && <ScreenTime />}
       {id === 'general' && <General />}
+      {id === 'appearance' && <Appearance />}
     </div>
   );
 }
