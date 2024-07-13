@@ -9,6 +9,9 @@ A personal website made to look like my current OS running on my Macbook. Update
 - [ ] CI/CD
 - [ ] Deployment
 - [ ] Analytics
+- [ ] Tests
+  - [ ] Unit tests
+  - [ ] E2E test
 - [ ] App layout
   - [ ] System
 - [ ] App function
