@@ -33,6 +33,8 @@ import { ScreenTime } from '../systemPages/Screen-Time';
 import { General } from '../systemPages/General';
 import { ChevronRight } from 'lucide-react';
 import { Appearance } from '../systemPages/Appearance';
+import { BsUniversalAccessCircle } from 'react-icons/bs';
+import { Accessibility } from '../systemPages/Accessibility';
 
 type TailwindBgColor =
   | 'bg-blue-500'
@@ -122,6 +124,12 @@ export const SystemData: SystemPage[] = [
     name: 'Appearance',
     icon: { type: IoInvertModeOutline, bg: 'bg-black' },
     page: Appearance
+  },
+  {
+    id: 'accessibility',
+    name: 'Accessibility',
+    icon: { type: BsUniversalAccessCircle, bg: 'bg-blue-500' },
+    page: Accessibility
   }
 ];
 
@@ -276,7 +284,7 @@ function SideBar() {
       </div>
 
       <div className="flex flex-col space-y-2">
-        {SystemData.slice(8, 10).map((item) => (
+        {SystemData.slice(8, 11).map((item) => (
           <SideBarItem
             key={item.id}
             title={item.name}
@@ -284,9 +292,6 @@ function SideBar() {
             onClick={() => setPage(item)}
           />
         ))}
-        <span>General</span>
-        <span>Appearance</span>
-        <span>Accessibility</span>
         <span>Control Centre</span>
         <span>Siri & Spotlight</span>
         <span>Privacy & Security</span>
@@ -415,6 +420,7 @@ function Content() {
       {id === 'screen-time' && <ScreenTime />}
       {id === 'general' && <General />}
       {id === 'appearance' && <Appearance />}
+      {id === 'accessibility' && <Accessibility />}
     </div>
   );
 }
