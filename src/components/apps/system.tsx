@@ -11,7 +11,8 @@ import { IoIosWifi, IoIosBluetooth, IoIosGlobe } from 'react-icons/io';
 import {
   IoCloseSharp,
   IoSearchSharp,
-  IoInvertModeOutline
+  IoInvertModeOutline,
+  IoScale
 } from 'react-icons/io5';
 import Image from 'next/image';
 import ProfileImage from '@/assets/images/ProfileImage.png';
@@ -35,11 +36,13 @@ import { ChevronRight } from 'lucide-react';
 import { Appearance } from '../systemPages/Appearance';
 import { BsUniversalAccessCircle } from 'react-icons/bs';
 import { Accessibility } from '../systemPages/Accessibility';
+import { ControlCentre } from '../systemPages/Control-Centre';
 
-type TailwindBgColor =
+export type TailwindBgColor =
   | 'bg-blue-500'
   | 'bg-red-500'
   | 'bg-green-500'
+  | 'bg-teal-300'
   | 'bg-yellow-500'
   | 'bg-purple-500'
   | 'bg-pink-500'
@@ -47,7 +50,7 @@ type TailwindBgColor =
   | 'bg-white'
   | 'bg-black';
 
-type TailwindTextColor =
+export type TailwindTextColor =
   | 'text-blue-500'
   | 'text-red-500'
   | 'text-green-500'
@@ -130,6 +133,12 @@ export const SystemData: SystemPage[] = [
     name: 'Accessibility',
     icon: { type: BsUniversalAccessCircle, bg: 'bg-blue-500' },
     page: Accessibility
+  },
+  {
+    id: 'control-centre',
+    name: 'Control Centre',
+    icon: { type: IoScale, bg: 'bg-neutral-400' },
+    page: ControlCentre
   }
 ];
 
@@ -147,7 +156,7 @@ export function System({ appData }: AppProps) {
             <SideBar />
           </ScrollArea>
 
-          <div className="flex flex-col w-full h-full">
+          <div className="flex flex-col w-full h-full overflow-hidden">
             <ScrollArea className="p-6 bg-neutral-100 dark:bg-neutral-800 w-full h-full flex">
               <Content />
             </ScrollArea>
@@ -284,7 +293,7 @@ function SideBar() {
       </div>
 
       <div className="flex flex-col space-y-2">
-        {SystemData.slice(8, 11).map((item) => (
+        {SystemData.slice(8, 12).map((item) => (
           <SideBarItem
             key={item.id}
             title={item.name}
@@ -292,7 +301,6 @@ function SideBar() {
             onClick={() => setPage(item)}
           />
         ))}
-        <span>Control Centre</span>
         <span>Siri & Spotlight</span>
         <span>Privacy & Security</span>
       </div>
@@ -354,14 +362,21 @@ function SideBarItem({
 export function ContentBox({
   children,
   title,
+  subTitle,
   ...divProps
 }: {
   children?: ReactNode;
   title?: string;
+  subTitle?: string;
 } & React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div className="space-y-3">
-      {title && <span className="font-bold m-3">{title}</span>}
+      <div className={cn('flex flex-col', title && 'm-3')}>
+        {title && <span className="font-bold">{title}</span>}
+        {subTitle && (
+          <span className="text-sm text-neutral-400">{subTitle}</span>
+        )}
+      </div>
       <div
         className={cn(
           'w-full border border-white/30 bg-neutral-500/10 rounded p-3',
@@ -409,7 +424,7 @@ function Content() {
     activePage: { id }
   } = useSystemStore((state) => state);
   return (
-    <div className="w-full space-y-3">
+    <div className="w-full space-y-3 overflow-hidden">
       {id === 'profile' && <Profile />}
       {id === 'wi-fi' && <Wifi />}
       {id === 'bluetooth' && <Bluetooth />}
@@ -421,6 +436,7 @@ function Content() {
       {id === 'general' && <General />}
       {id === 'appearance' && <Appearance />}
       {id === 'accessibility' && <Accessibility />}
+      {id === 'control-centre' && <ControlCentre />}
     </div>
   );
 }
