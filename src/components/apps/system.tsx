@@ -37,6 +37,8 @@ import { Appearance } from '../systemPages/Appearance';
 import { BsUniversalAccessCircle } from 'react-icons/bs';
 import { Accessibility } from '../systemPages/Accessibility';
 import { ControlCentre } from '../systemPages/Control-Centre';
+import { FcGlobe } from 'react-icons/fc';
+import { Siri } from '../systemPages/Siri';
 
 export type TailwindBgColor =
   | 'bg-blue-500'
@@ -139,6 +141,12 @@ export const SystemData: SystemPage[] = [
     name: 'Control Centre',
     icon: { type: IoScale, bg: 'bg-neutral-400' },
     page: ControlCentre
+  },
+  {
+    id: 'siri-spotlight',
+    name: 'Siri & Spotlight',
+    icon: { type: FcGlobe, bg: 'bg-black' },
+    page: Siri
   }
 ];
 
@@ -293,7 +301,7 @@ function SideBar() {
       </div>
 
       <div className="flex flex-col space-y-2">
-        {SystemData.slice(8, 12).map((item) => (
+        {SystemData.slice(8, 13).map((item) => (
           <SideBarItem
             key={item.id}
             title={item.name}
@@ -301,7 +309,6 @@ function SideBar() {
             onClick={() => setPage(item)}
           />
         ))}
-        <span>Siri & Spotlight</span>
         <span>Privacy & Security</span>
       </div>
 
@@ -437,6 +444,7 @@ function Content() {
       {id === 'appearance' && <Appearance />}
       {id === 'accessibility' && <Accessibility />}
       {id === 'control-centre' && <ControlCentre />}
+      {id === 'siri-spotlight' && <Siri />}
     </div>
   );
 }
