@@ -39,6 +39,7 @@ import { Accessibility } from '../systemPages/Accessibility';
 import { ControlCentre } from '../systemPages/Control-Centre';
 import { FcGlobe } from 'react-icons/fc';
 import { Siri } from '../systemPages/Siri';
+import { Privacy } from '../systemPages/Privacy';
 
 export type TailwindBgColor =
   | 'bg-blue-500'
@@ -147,6 +148,12 @@ export const SystemData: SystemPage[] = [
     name: 'Siri & Spotlight',
     icon: { type: FcGlobe, bg: 'bg-black' },
     page: Siri
+  },
+  {
+    id: 'privacy-security',
+    name: 'Privacy & Security',
+    icon: { type: FcGlobe, bg: 'bg-blue-500' },
+    page: Privacy
   }
 ];
 
@@ -154,13 +161,13 @@ export function System({ appData }: AppProps) {
   return (
     <DraggableItem
       className="bg-transparent"
-      actionButtonStyle="w-[260px] bg-slate-800/70 bg-clip-padding backdrop-filter backdrop-blur-xl dark:bg-slate-800/70 h-full"
+      actionButtonStyle="w-[258px] bg-slate-800/70 bg-clip-padding backdrop-filter backdrop-blur-xl dark:bg-slate-800/70 h-full"
       barItem={<BarItem />}
       appData={appData}
     >
       <div className="w-full h-full bg-transparent">
         <div className="flex h-full">
-          <ScrollArea className="w-64 bg-slate-800/70 bg-clip-padding backdrop-filter backdrop-blur-xl dark:bg-slate-800/70 p-4">
+          <ScrollArea className="w-[254px] bg-slate-800/70 bg-clip-padding backdrop-filter backdrop-blur-xl dark:bg-slate-800/70 p-4">
             <SideBar />
           </ScrollArea>
 
@@ -243,7 +250,7 @@ function SideBar() {
   };
 
   return (
-    <div className="flex flex-col space-y-3">
+    <div className="flex flex-col space-y-6">
       <div className="flex flex-row relative items-center">
         <div className="relative">
           <IoSearchSharp className="absolute left-2 top-1/2 transform -translate-y-1/2 text-white" />
@@ -301,7 +308,7 @@ function SideBar() {
       </div>
 
       <div className="flex flex-col space-y-2">
-        {SystemData.slice(8, 13).map((item) => (
+        {SystemData.slice(8, 14).map((item) => (
           <SideBarItem
             key={item.id}
             title={item.name}
@@ -309,7 +316,6 @@ function SideBar() {
             onClick={() => setPage(item)}
           />
         ))}
-        <span>Privacy & Security</span>
       </div>
 
       <div className="flex flex-col">
@@ -399,11 +405,13 @@ export function ContentBox({
 export function ContentBoxItem({
   Icon,
   title,
+  chevronText,
   bg,
   iconColor
 }: {
   Icon: IconType;
   title: string;
+  chevronText?: string;
   bg?: TailwindBgColor;
   iconColor?: TailwindTextColor;
 }) {
@@ -421,7 +429,10 @@ export function ContentBoxItem({
         </span>
         <span>{title}</span>
       </div>
-      <ChevronRight className="text-white/20 size-5" />
+      <div className="flex flex-row space-x-2 items-center">
+        {chevronText && <span className="text-neutral-400">{chevronText}</span>}
+        <ChevronRight className="text-white/20 size-5" />
+      </div>
     </div>
   );
 }
@@ -445,6 +456,7 @@ function Content() {
       {id === 'accessibility' && <Accessibility />}
       {id === 'control-centre' && <ControlCentre />}
       {id === 'siri-spotlight' && <Siri />}
+      {id === 'privacy-security' && <Privacy />}
     </div>
   );
 }

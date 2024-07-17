@@ -325,11 +325,11 @@ interface ContentBoxSelectItemProps {
   title: string;
   values: ValuesProps[];
   defaultValue: number;
-  Icon: IconType;
+  Icon?: IconType;
   bg?: TailwindBgColor;
   iconColor?: TailwindTextColor;
 }
-function ContentBoxSelectItem({
+export function ContentBoxSelectItem({
   title,
   values,
   defaultValue,
@@ -340,15 +340,17 @@ function ContentBoxSelectItem({
   return (
     <div className="flex flex-row justify-between items-center">
       <div className="flex flex-row items-center space-x-3">
-        <span
-          className={cn(
-            'bg-neutral-400 text-white w-6 h-6 flex items-center justify-center rounded',
-            bg,
-            iconColor
-          )}
-        >
-          <Icon />
-        </span>
+        {Icon && (
+          <span
+            className={cn(
+              'bg-neutral-400 text-white w-6 h-6 flex items-center justify-center rounded',
+              bg,
+              iconColor
+            )}
+          >
+            <Icon />
+          </span>
+        )}
         <span>{title}</span>
       </div>
       <Select>
