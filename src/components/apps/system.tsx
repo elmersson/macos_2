@@ -40,6 +40,8 @@ import { ControlCentre } from '../systemPages/Control-Centre';
 import { FcGlobe } from 'react-icons/fc';
 import { Siri } from '../systemPages/Siri';
 import { Privacy } from '../systemPages/Privacy';
+import { Desktop } from '../systemPages/Desktop';
+import { PiDesktopFill } from 'react-icons/pi';
 
 export type TailwindBgColor =
   | 'bg-blue-500'
@@ -154,6 +156,12 @@ export const SystemData: SystemPage[] = [
     name: 'Privacy & Security',
     icon: { type: FcGlobe, bg: 'bg-blue-500' },
     page: Privacy
+  },
+  {
+    id: 'desktop',
+    name: 'Desktop & Dock',
+    icon: { type: PiDesktopFill, bg: 'bg-black' },
+    page: Desktop
   }
 ];
 
@@ -318,8 +326,15 @@ function SideBar() {
         ))}
       </div>
 
-      <div className="flex flex-col">
-        <span>Desktop & Dock</span>
+      <div className="flex flex-col space-y-2">
+        {SystemData.slice(14, 15).map((item) => (
+          <SideBarItem
+            key={item.id}
+            title={item.name}
+            icon={item.icon}
+            onClick={() => setPage(item)}
+          />
+        ))}
         <span>Displays</span>
         <span>Wallpaper</span>
         <span>Screen Saver</span>
@@ -385,7 +400,7 @@ export function ContentBox({
   return (
     <div className="space-y-3">
       <div className={cn('flex flex-col', title && 'm-3')}>
-        {title && <span className="font-bold">{title}</span>}
+        {title && <span className="font-bold text-lg">{title}</span>}
         {subTitle && (
           <span className="text-sm text-neutral-400">{subTitle}</span>
         )}
@@ -457,6 +472,7 @@ function Content() {
       {id === 'control-centre' && <ControlCentre />}
       {id === 'siri-spotlight' && <Siri />}
       {id === 'privacy-security' && <Privacy />}
+      {id === 'desktop' && <Desktop />}
     </div>
   );
 }

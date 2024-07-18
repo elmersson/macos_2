@@ -206,7 +206,7 @@ interface SliderProps {
   disabled?: boolean;
 }
 
-function Slider({
+export function Slider({
   LeftIcon,
   RightIcon,
   numberOfMarks,
