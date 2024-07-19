@@ -24,7 +24,8 @@ import { Notifications } from '../systemPages/Notifications';
 import {
   IoNotificationsSharp,
   IoHourglassOutline,
-  IoCog
+  IoCog,
+  IoSunny
 } from 'react-icons/io5';
 import { Sound } from '../systemPages/Sound';
 import { HiSpeakerWave } from 'react-icons/hi2';
@@ -42,6 +43,7 @@ import { Siri } from '../systemPages/Siri';
 import { Privacy } from '../systemPages/Privacy';
 import { Desktop } from '../systemPages/Desktop';
 import { PiDesktopFill } from 'react-icons/pi';
+import { Displays } from '../systemPages/Displays';
 
 export type TailwindBgColor =
   | 'bg-blue-500'
@@ -162,6 +164,12 @@ export const SystemData: SystemPage[] = [
     name: 'Desktop & Dock',
     icon: { type: PiDesktopFill, bg: 'bg-black' },
     page: Desktop
+  },
+  {
+    id: 'displays',
+    name: 'Displays',
+    icon: { type: IoSunny, bg: 'bg-blue-500' },
+    page: Displays
   }
 ];
 
@@ -327,7 +335,7 @@ function SideBar() {
       </div>
 
       <div className="flex flex-col space-y-2">
-        {SystemData.slice(14, 15).map((item) => (
+        {SystemData.slice(14, 16).map((item) => (
           <SideBarItem
             key={item.id}
             title={item.name}
@@ -473,6 +481,7 @@ function Content() {
       {id === 'siri-spotlight' && <Siri />}
       {id === 'privacy-security' && <Privacy />}
       {id === 'desktop' && <Desktop />}
+      {id === 'displays' && <Displays />}
     </div>
   );
 }
