@@ -7,6 +7,12 @@ const nextConfig = {
         hostname: 'openweathermap.org',
         port: '',
         pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.pexels.com',
+        port: '',
+        pathname: '/**'
       }
     ]
   }

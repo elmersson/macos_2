@@ -25,7 +25,8 @@ import {
   IoNotificationsSharp,
   IoHourglassOutline,
   IoCog,
-  IoSunny
+  IoSunny,
+  IoFlowerOutline
 } from 'react-icons/io5';
 import { Sound } from '../systemPages/Sound';
 import { HiSpeakerWave } from 'react-icons/hi2';
@@ -44,6 +45,7 @@ import { Privacy } from '../systemPages/Privacy';
 import { Desktop } from '../systemPages/Desktop';
 import { PiDesktopFill } from 'react-icons/pi';
 import { Displays } from '../systemPages/Displays';
+import { Wallpaper } from '../systemPages/Wallpaper';
 
 export type TailwindBgColor =
   | 'bg-blue-500'
@@ -170,6 +172,12 @@ export const SystemData: SystemPage[] = [
     name: 'Displays',
     icon: { type: IoSunny, bg: 'bg-blue-500' },
     page: Displays
+  },
+  {
+    id: 'wallpaper',
+    name: 'Wallpaper',
+    icon: { type: IoFlowerOutline, bg: 'bg-teal-300' },
+    page: Wallpaper
   }
 ];
 
@@ -335,7 +343,7 @@ function SideBar() {
       </div>
 
       <div className="flex flex-col space-y-2">
-        {SystemData.slice(14, 16).map((item) => (
+        {SystemData.slice(14, 17).map((item) => (
           <SideBarItem
             key={item.id}
             title={item.name}
@@ -343,8 +351,6 @@ function SideBar() {
             onClick={() => setPage(item)}
           />
         ))}
-        <span>Displays</span>
-        <span>Wallpaper</span>
         <span>Screen Saver</span>
         <span>Battery</span>
       </div>
@@ -482,6 +488,7 @@ function Content() {
       {id === 'privacy-security' && <Privacy />}
       {id === 'desktop' && <Desktop />}
       {id === 'displays' && <Displays />}
+      {id === 'wallpaper' && <Wallpaper />}
     </div>
   );
 }
