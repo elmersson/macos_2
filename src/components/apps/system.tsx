@@ -43,9 +43,10 @@ import { FcGlobe } from 'react-icons/fc';
 import { Siri } from '../systemPages/Siri';
 import { Privacy } from '../systemPages/Privacy';
 import { Desktop } from '../systemPages/Desktop';
-import { PiDesktopFill } from 'react-icons/pi';
+import { PiDesktopFill, PiMoonStarsFill } from 'react-icons/pi';
 import { Displays } from '../systemPages/Displays';
 import { Wallpaper } from '../systemPages/Wallpaper';
+import { ScreenSaver } from '../systemPages/Screen-Saver';
 
 export type TailwindBgColor =
   | 'bg-blue-500'
@@ -178,6 +179,12 @@ export const SystemData: SystemPage[] = [
     name: 'Wallpaper',
     icon: { type: IoFlowerOutline, bg: 'bg-teal-300' },
     page: Wallpaper
+  },
+  {
+    id: 'screen-saver',
+    name: 'Screen Saver',
+    icon: { type: PiMoonStarsFill, bg: 'bg-teal-300' },
+    page: ScreenSaver
   }
 ];
 
@@ -343,7 +350,7 @@ function SideBar() {
       </div>
 
       <div className="flex flex-col space-y-2">
-        {SystemData.slice(14, 17).map((item) => (
+        {SystemData.slice(14, 18).map((item) => (
           <SideBarItem
             key={item.id}
             title={item.name}
@@ -351,7 +358,6 @@ function SideBar() {
             onClick={() => setPage(item)}
           />
         ))}
-        <span>Screen Saver</span>
         <span>Battery</span>
       </div>
 
@@ -489,6 +495,7 @@ function Content() {
       {id === 'desktop' && <Desktop />}
       {id === 'displays' && <Displays />}
       {id === 'wallpaper' && <Wallpaper />}
+      {id === 'screen-saver' && <ScreenSaver />}
     </div>
   );
 }
