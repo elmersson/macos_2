@@ -36,7 +36,7 @@ import { ScreenTime } from '../systemPages/Screen-Time';
 import { General } from '../systemPages/General';
 import { ChevronRight } from 'lucide-react';
 import { Appearance } from '../systemPages/Appearance';
-import { BsUniversalAccessCircle } from 'react-icons/bs';
+import { BsBatteryFull, BsUniversalAccessCircle } from 'react-icons/bs';
 import { Accessibility } from '../systemPages/Accessibility';
 import { ControlCentre } from '../systemPages/Control-Centre';
 import { FcGlobe } from 'react-icons/fc';
@@ -47,6 +47,7 @@ import { PiDesktopFill, PiMoonStarsFill } from 'react-icons/pi';
 import { Displays } from '../systemPages/Displays';
 import { Wallpaper } from '../systemPages/Wallpaper';
 import { ScreenSaver } from '../systemPages/Screen-Saver';
+import { Battery } from '../systemPages/Battery';
 
 export type TailwindBgColor =
   | 'bg-blue-500'
@@ -185,6 +186,12 @@ export const SystemData: SystemPage[] = [
     name: 'Screen Saver',
     icon: { type: PiMoonStarsFill, bg: 'bg-teal-300' },
     page: ScreenSaver
+  },
+  {
+    id: 'battery',
+    name: 'Battery',
+    icon: { type: BsBatteryFull, bg: 'bg-green-500' },
+    page: Battery
   }
 ];
 
@@ -350,7 +357,7 @@ function SideBar() {
       </div>
 
       <div className="flex flex-col space-y-2">
-        {SystemData.slice(14, 18).map((item) => (
+        {SystemData.slice(14, 19).map((item) => (
           <SideBarItem
             key={item.id}
             title={item.name}
@@ -358,7 +365,6 @@ function SideBar() {
             onClick={() => setPage(item)}
           />
         ))}
-        <span>Battery</span>
       </div>
 
       <div className="flex flex-col">
@@ -496,6 +502,7 @@ function Content() {
       {id === 'displays' && <Displays />}
       {id === 'wallpaper' && <Wallpaper />}
       {id === 'screen-saver' && <ScreenSaver />}
+      {id === 'battery' && <Battery />}
     </div>
   );
 }

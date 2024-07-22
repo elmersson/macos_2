@@ -323,6 +323,7 @@ type ValuesProps = { value: string; title: string };
 
 interface ContentBoxSelectItemProps {
   title: string;
+  description?: string;
   values: ValuesProps[];
   defaultValue: number;
   Icon?: IconType;
@@ -331,6 +332,7 @@ interface ContentBoxSelectItemProps {
 }
 export function ContentBoxSelectItem({
   title,
+  description,
   values,
   defaultValue,
   Icon,
@@ -351,7 +353,12 @@ export function ContentBoxSelectItem({
             <Icon />
           </span>
         )}
-        <span>{title}</span>
+        <div className="flex flex-col">
+          <span>{title}</span>
+          {description && (
+            <span className="text-sm text-neutral-400">{description}</span>
+          )}
+        </div>
       </div>
       <Select>
         <SelectTrigger className="w-[220px] bg-transparent border-none">
