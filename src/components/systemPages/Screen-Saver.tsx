@@ -30,7 +30,7 @@ export function ScreenSaver() {
           </ContentBox>
           <ContentBox className="py-1 space-y-2">
             <div className="flex flex-row justify-between items-center">
-              <span>Show pn all Spaces</span>
+              <span>Show on all Spaces</span>
               <Switch />
             </div>
           </ContentBox>

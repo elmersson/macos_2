@@ -7,7 +7,12 @@ import { ReactNode, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { useSystemStore } from '../providers/store-provider';
 import { IconType } from 'react-icons';
-import { IoIosWifi, IoIosBluetooth, IoIosGlobe } from 'react-icons/io';
+import {
+  IoIosWifi,
+  IoIosBluetooth,
+  IoIosGlobe,
+  IoMdLock
+} from 'react-icons/io';
 import {
   IoCloseSharp,
   IoSearchSharp,
@@ -48,6 +53,7 @@ import { Displays } from '../systemPages/Displays';
 import { Wallpaper } from '../systemPages/Wallpaper';
 import { ScreenSaver } from '../systemPages/Screen-Saver';
 import { Battery } from '../systemPages/Battery';
+import { LockScreen } from '../systemPages/Lock-Screen';
 
 export type TailwindBgColor =
   | 'bg-blue-500'
@@ -192,6 +198,12 @@ export const SystemData: SystemPage[] = [
     name: 'Battery',
     icon: { type: BsBatteryFull, bg: 'bg-green-500' },
     page: Battery
+  },
+  {
+    id: 'lock-screen',
+    name: 'Lock Screen',
+    icon: { type: IoMdLock, bg: 'bg-black' },
+    page: LockScreen
   }
 ];
 
@@ -367,8 +379,15 @@ function SideBar() {
         ))}
       </div>
 
-      <div className="flex flex-col">
-        <span>Lock Screen</span>
+      <div className="flex flex-col space-y-2">
+        {SystemData.slice(19, 20).map((item) => (
+          <SideBarItem
+            key={item.id}
+            title={item.name}
+            icon={item.icon}
+            onClick={() => setPage(item)}
+          />
+        ))}
         <span>Touch ID & Password</span>
         <span>Users & Groups</span>
       </div>
@@ -503,6 +522,7 @@ function Content() {
       {id === 'wallpaper' && <Wallpaper />}
       {id === 'screen-saver' && <ScreenSaver />}
       {id === 'battery' && <Battery />}
+      {id === 'lock-screen' && <LockScreen />}
     </div>
   );
 }
