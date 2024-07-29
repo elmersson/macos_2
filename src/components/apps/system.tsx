@@ -11,13 +11,20 @@ import {
   IoIosWifi,
   IoIosBluetooth,
   IoIosGlobe,
-  IoMdLock
+  IoMdLock,
+  IoIosFingerPrint,
+  IoIosMoon
 } from 'react-icons/io';
 import {
   IoCloseSharp,
   IoSearchSharp,
   IoInvertModeOutline,
-  IoScale
+  IoScale,
+  IoNotificationsSharp,
+  IoHourglassOutline,
+  IoCog,
+  IoSunny,
+  IoFlowerOutline
 } from 'react-icons/io5';
 import Image from 'next/image';
 import ProfileImage from '@/assets/images/ProfileImage.png';
@@ -26,16 +33,8 @@ import Wifi from '../systemPages/Wi-Fi';
 import { Network } from '../systemPages/Network';
 import Bluetooth from '../systemPages/Bluetooth';
 import { Notifications } from '../systemPages/Notifications';
-import {
-  IoNotificationsSharp,
-  IoHourglassOutline,
-  IoCog,
-  IoSunny,
-  IoFlowerOutline
-} from 'react-icons/io5';
 import { Sound } from '../systemPages/Sound';
 import { HiSpeakerWave } from 'react-icons/hi2';
-import { IoIosMoon } from 'react-icons/io';
 import { Focus } from '../systemPages/Focus';
 import { ScreenTime } from '../systemPages/Screen-Time';
 import { General } from '../systemPages/General';
@@ -54,6 +53,7 @@ import { Wallpaper } from '../systemPages/Wallpaper';
 import { ScreenSaver } from '../systemPages/Screen-Saver';
 import { Battery } from '../systemPages/Battery';
 import { LockScreen } from '../systemPages/Lock-Screen';
+import { TouchId } from '../systemPages/Touch-Id';
 
 export type TailwindBgColor =
   | 'bg-blue-500'
@@ -80,7 +80,7 @@ export type TailwindTextColor =
 export interface SystemPage {
   id: string;
   name: string;
-  icon: { type: IconType; bg: TailwindBgColor };
+  icon: { type: IconType; bg: TailwindBgColor; color?: TailwindTextColor };
   page(): React.JSX.Element;
 }
 
@@ -204,6 +204,12 @@ export const SystemData: SystemPage[] = [
     name: 'Lock Screen',
     icon: { type: IoMdLock, bg: 'bg-black' },
     page: LockScreen
+  },
+  {
+    id: 'touch-id',
+    name: 'Touch ID & Password',
+    icon: { type: IoIosFingerPrint, bg: 'bg-white', color: 'text-red-500' },
+    page: TouchId
   }
 ];
 
@@ -380,7 +386,7 @@ function SideBar() {
       </div>
 
       <div className="flex flex-col space-y-2">
-        {SystemData.slice(19, 20).map((item) => (
+        {SystemData.slice(19, 21).map((item) => (
           <SideBarItem
             key={item.id}
             title={item.name}
@@ -388,7 +394,6 @@ function SideBar() {
             onClick={() => setPage(item)}
           />
         ))}
-        <span>Touch ID & Password</span>
         <span>Users & Groups</span>
       </div>
 
@@ -410,12 +415,12 @@ function SideBar() {
 
 interface SideBarItemProps extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
-  icon: { type: IconType; bg: TailwindBgColor };
+  icon: { type: IconType; bg: TailwindBgColor; color?: TailwindTextColor };
 }
 
 function SideBarItem({
   title,
-  icon: { type: Icon, bg },
+  icon: { type: Icon, bg, color },
   ...props
 }: SideBarItemProps) {
   return (
@@ -424,8 +429,15 @@ function SideBarItem({
       className="flex flex-row items-center space-x-1"
       onClick={props.onClick}
     >
-      <div className={cn('rounded-lg p-0.5 bg-blue-500', props.className, bg)}>
-        <Icon className=" size-5" />
+      <div
+        className={cn(
+          'rounded-lg p-0.5 bg-blue-500',
+          props.className,
+          bg,
+          color
+        )}
+      >
+        <Icon className="size-5" />
       </div>
       <span>{title}</span>
     </div>
@@ -523,6 +535,7 @@ function Content() {
       {id === 'screen-saver' && <ScreenSaver />}
       {id === 'battery' && <Battery />}
       {id === 'lock-screen' && <LockScreen />}
+      {id === 'touch-id' && <TouchId />}
     </div>
   );
 }
