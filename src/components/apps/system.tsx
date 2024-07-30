@@ -54,6 +54,8 @@ import { ScreenSaver } from '../systemPages/Screen-Saver';
 import { Battery } from '../systemPages/Battery';
 import { LockScreen } from '../systemPages/Lock-Screen';
 import { TouchId } from '../systemPages/Touch-Id';
+import { Users } from '../systemPages/Users';
+import { HiUsers } from 'react-icons/hi';
 
 export type TailwindBgColor =
   | 'bg-blue-500'
@@ -210,6 +212,12 @@ export const SystemData: SystemPage[] = [
     name: 'Touch ID & Password',
     icon: { type: IoIosFingerPrint, bg: 'bg-white', color: 'text-red-500' },
     page: TouchId
+  },
+  {
+    id: 'users',
+    name: 'Users & Groups',
+    icon: { type: HiUsers, bg: 'bg-blue-500' },
+    page: Users
   }
 ];
 
@@ -343,58 +351,24 @@ function SideBar() {
         </div>
       </div>
       <div className="flex flex-col space-y-2">
-        {SystemData.slice(1, 4).map((item) => (
-          <SideBarItem
-            key={item.id}
-            title={item.name}
-            icon={item.icon}
-            onClick={() => setPage(item)}
-          />
-        ))}
-      </div>
-      <div className="flex flex-col space-y-2">
-        {SystemData.slice(4, 8).map((item) => (
-          <SideBarItem
-            key={item.id}
-            title={item.name}
-            icon={item.icon}
-            onClick={() => setPage(item)}
-          />
-        ))}
-      </div>
+        {SystemData.map((item, index) => {
+          if (index === 0) {
+            return;
+          }
 
-      <div className="flex flex-col space-y-2">
-        {SystemData.slice(8, 14).map((item) => (
-          <SideBarItem
-            key={item.id}
-            title={item.name}
-            icon={item.icon}
-            onClick={() => setPage(item)}
-          />
-        ))}
-      </div>
-
-      <div className="flex flex-col space-y-2">
-        {SystemData.slice(14, 19).map((item) => (
-          <SideBarItem
-            key={item.id}
-            title={item.name}
-            icon={item.icon}
-            onClick={() => setPage(item)}
-          />
-        ))}
-      </div>
-
-      <div className="flex flex-col space-y-2">
-        {SystemData.slice(19, 21).map((item) => (
-          <SideBarItem
-            key={item.id}
-            title={item.name}
-            icon={item.icon}
-            onClick={() => setPage(item)}
-          />
-        ))}
-        <span>Users & Groups</span>
+          const isSpace = [3, 7, 13, 18, 21].includes(index);
+          return (
+            <>
+              <SideBarItem
+                key={item.id}
+                title={item.name}
+                icon={item.icon}
+                onClick={() => setPage(item)}
+              />
+              {isSpace && <div className="h-3" />}
+            </>
+          );
+        })}
       </div>
 
       <div className="flex flex-col">
@@ -536,6 +510,7 @@ function Content() {
       {id === 'battery' && <Battery />}
       {id === 'lock-screen' && <LockScreen />}
       {id === 'touch-id' && <TouchId />}
+      {id === 'users' && <Users />}
     </div>
   );
 }
