@@ -9,5 +9,55 @@
     "javascriptreact",
     "typescript",
     "typescriptreact"
-  ]
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    { "before": ["i"], "commands": ["extension.vim_insert"] },
+    { "before": ["a"], "commands": ["extension.vim_insert_after"] },
+    { "before": ["A"], "commands": ["extension.vim_insert_at_eol"] },
+    { "before": ["o"], "commands": ["extension.vim_open_below"] },
+    { "before": ["O"], "commands": ["extension.vim_open_above"] },
+    { "before": ["v"], "commands": ["extension.vim_visual"] },
+    { "before": ["<C-v>"], "commands": ["extension.vim_visual_block"] },
+    { "before": [":"], "commands": ["workbench.action.showCommands"] },
+    { "before": ["R"], "commands": ["extension.vim_replace"] },
+    { "before": ["<Esc>"], "commands": ["extension.vim_normal"] }
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    { "before": ["h"], "commands": ["extension.vim_left"] },
+    { "before": ["j"], "commands": ["extension.vim_down"] },
+    { "before": ["k"], "commands": ["extension.vim_up"] },
+    { "before": ["l"], "commands": ["extension.vim_right"] }
+  ],
+  "vim.insertModeKeyBindingsNonRecursive": [
+    { "before": ["<Esc>"], "commands": ["extension.vim_normal"] }
+  ],
+  "vim.otherModesKeyBindingsNonRecursive": [
+    { "before": ["<Esc>"], "commands": ["extension.vim_normal"] }
+  ],
+  "vim.visualBlockModeKeyBindingsNonRecursive": [
+    { "before": ["<Esc>"], "commands": ["extension.vim_normal"] }
+  ],
+  "vim.insertModeKeyBindingsNonRecursive": [
+    { "before": ["<Esc>"], "commands": ["extension.vim_normal"] }
+  ],
+  "vim.handleKeys": {
+    "<C-e>": false,
+    "<C-y>": false,
+    "<C-u>": false,
+    "<C-d>": false,
+    "<C-f>": false,
+    "<C-b>": false,
+    "<C-o>": false,
+    "<C-i>": false
+  },
+  "vim.useSystemClipboard": true,
+  "vim.hlsearch": true,
+  "vim.incsearch": true,
+  "vim.ignorecase": true,
+  "vim.smartcase": true,
+  "vim.autoindent": true,
+  "vim.hlsearch": true,
+  "vim.incsearch": true,
+  "vim.visualstar": true,
+  "vim.useCtrlKeys": true
 }
