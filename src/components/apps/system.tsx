@@ -24,7 +24,8 @@ import {
   IoHourglassOutline,
   IoCog,
   IoSunny,
-  IoFlowerOutline
+  IoFlowerOutline,
+  IoKey
 } from 'react-icons/io5';
 import Image from 'next/image';
 import ProfileImage from '@/assets/images/ProfileImage.png';
@@ -56,6 +57,7 @@ import { LockScreen } from '../systemPages/Lock-Screen';
 import { TouchId } from '../systemPages/Touch-Id';
 import { Users } from '../systemPages/Users';
 import { HiUsers } from 'react-icons/hi';
+import { Passwords } from '../systemPages/Passwords';
 
 export type TailwindBgColor =
   | 'bg-blue-500'
@@ -218,6 +220,12 @@ export const SystemData: SystemPage[] = [
     name: 'Users & Groups',
     icon: { type: HiUsers, bg: 'bg-blue-500' },
     page: Users
+  },
+  {
+    id: 'passwords',
+    name: 'Passwords',
+    icon: { type: IoKey, bg: 'bg-neutral-400' },
+    page: Passwords
   }
 ];
 
@@ -488,7 +496,7 @@ function Content() {
     activePage: { id }
   } = useSystemStore((state) => state);
   return (
-    <div className="w-full space-y-3 overflow-hidden">
+    <div className="w-full space-y-3 overflow-hidden h-full">
       {id === 'profile' && <Profile />}
       {id === 'wi-fi' && <Wifi />}
       {id === 'bluetooth' && <Bluetooth />}
@@ -511,6 +519,7 @@ function Content() {
       {id === 'lock-screen' && <LockScreen />}
       {id === 'touch-id' && <TouchId />}
       {id === 'users' && <Users />}
+      {id === 'passwords' && <Passwords />}
     </div>
   );
 }
