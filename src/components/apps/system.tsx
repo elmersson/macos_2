@@ -58,6 +58,8 @@ import { TouchId } from '../systemPages/Touch-Id';
 import { Users } from '../systemPages/Users';
 import { HiUsers } from 'react-icons/hi';
 import { Passwords } from '../systemPages/Passwords';
+import { InternetAccount } from '../systemPages/Internet-Account';
+import { LuAtSign } from 'react-icons/lu';
 
 export type TailwindBgColor =
   | 'bg-blue-500'
@@ -226,6 +228,12 @@ export const SystemData: SystemPage[] = [
     name: 'Passwords',
     icon: { type: IoKey, bg: 'bg-neutral-400' },
     page: Passwords
+  },
+  {
+    id: 'internet-account',
+    name: 'Internet Account',
+    icon: { type: LuAtSign, bg: 'bg-blue-500' },
+    page: InternetAccount
   }
 ];
 
@@ -520,6 +528,7 @@ function Content() {
       {id === 'touch-id' && <TouchId />}
       {id === 'users' && <Users />}
       {id === 'passwords' && <Passwords />}
+      {id === 'internet-account' && <InternetAccount />}
     </div>
   );
 }
