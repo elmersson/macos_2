@@ -44,7 +44,7 @@ import { Appearance } from '../systemPages/Appearance';
 import { BsBatteryFull, BsUniversalAccessCircle } from 'react-icons/bs';
 import { Accessibility } from '../systemPages/Accessibility';
 import { ControlCentre } from '../systemPages/Control-Centre';
-import { FcGlobe } from 'react-icons/fc';
+import { FcGlobe, FcInTransit } from 'react-icons/fc';
 import { Siri } from '../systemPages/Siri';
 import { Privacy } from '../systemPages/Privacy';
 import { Desktop } from '../systemPages/Desktop';
@@ -60,6 +60,7 @@ import { HiUsers } from 'react-icons/hi';
 import { Passwords } from '../systemPages/Passwords';
 import { InternetAccount } from '../systemPages/Internet-Account';
 import { LuAtSign } from 'react-icons/lu';
+import { GameCenter } from '../systemPages/Game-Center';
 
 export type TailwindBgColor =
   | 'bg-blue-500'
@@ -234,6 +235,12 @@ export const SystemData: SystemPage[] = [
     name: 'Internet Account',
     icon: { type: LuAtSign, bg: 'bg-blue-500' },
     page: InternetAccount
+  },
+  {
+    id: 'game-center',
+    name: 'Game Center',
+    icon: { type: FcInTransit, bg: 'bg-white' },
+    page: GameCenter
   }
 ];
 
@@ -386,19 +393,6 @@ function SideBar() {
           );
         })}
       </div>
-
-      <div className="flex flex-col">
-        <span>Passwords</span>
-        <span>Internet Accounts</span>
-        <span>Game Center</span>
-        <span>Wallet & Apple Pay</span>
-      </div>
-
-      <div className="flex flex-col">
-        <span>Keyboard</span>
-        <span>Trackpad Accounts</span>
-        <span>Printers & Scanners</span>
-      </div>
     </div>
   );
 }
@@ -529,6 +523,7 @@ function Content() {
       {id === 'users' && <Users />}
       {id === 'passwords' && <Passwords />}
       {id === 'internet-account' && <InternetAccount />}
+      {id === 'game-center' && <GameCenter />}
     </div>
   );
 }
