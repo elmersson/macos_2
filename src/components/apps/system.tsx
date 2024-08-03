@@ -61,6 +61,7 @@ import { Passwords } from '../systemPages/Passwords';
 import { InternetAccount } from '../systemPages/Internet-Account';
 import { LuAtSign } from 'react-icons/lu';
 import { GameCenter } from '../systemPages/Game-Center';
+import { Wallet } from '../systemPages/Wallet';
 
 export type TailwindBgColor =
   | 'bg-blue-500'
@@ -241,6 +242,12 @@ export const SystemData: SystemPage[] = [
     name: 'Game Center',
     icon: { type: FcInTransit, bg: 'bg-white' },
     page: GameCenter
+  },
+  {
+    id: 'wallet',
+    name: 'Wallet & Apple Pay',
+    icon: { type: FcInTransit, bg: 'bg-black' },
+    page: Wallet
   }
 ];
 
@@ -524,6 +531,7 @@ function Content() {
       {id === 'passwords' && <Passwords />}
       {id === 'internet-account' && <InternetAccount />}
       {id === 'game-center' && <GameCenter />}
+      {id === 'wallet' && <Wallet />}
     </div>
   );
 }
