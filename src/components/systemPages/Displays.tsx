@@ -8,8 +8,11 @@ import { IoSunny } from 'react-icons/io5';
 import { useSystemStore } from '../providers/store-provider';
 import { Switch } from '../ui/switch';
 import { cn } from '@/lib/utils';
+import { IconType } from 'react-icons';
 
 export function Displays() {
+  const { display, setDisplay } = useSystemStore((state) => state);
+
   return (
     <div>
       <div className="flex flex-row justify-between">
@@ -47,7 +50,12 @@ export function Displays() {
       <ContentBox className="space-y-2">
         <div className="flex flex-row justify-between items-center">
           <span>Brightness</span>
-          <BrightnessSlider />
+          <IconSlider
+            LeftIcon={IoMdSunny}
+            RightIcon={IoSunny}
+            value={display}
+            setValue={setDisplay}
+          />
         </div>
         <Separator className="bg-white/10" />
         <div className="flex flex-row justify-between">
@@ -109,18 +117,29 @@ export function Displays() {
   );
 }
 
-const BrightnessSlider = () => {
-  const { display, setDisplay } = useSystemStore((state) => state);
+interface IconSliderProps {
+  LeftIcon: IconType;
+  RightIcon: IconType;
+  value: number;
+  // eslint-disable-next-line no-unused-vars
+  setValue: (value: number) => void;
+}
 
+export const IconSlider = ({
+  LeftIcon,
+  RightIcon,
+  value,
+  setValue
+}: IconSliderProps) => {
   return (
     <div className="flex items-center space-x-2">
       <span className="text-gray-400">
-        <IoMdSunny />
+        <LeftIcon />
       </span>
       <Slider.Root
         className="relative flex items-center select-none touch-none w-52 h-5"
-        value={[display]}
-        onValueChange={(newValue) => setDisplay(newValue[0])}
+        value={[value]}
+        onValueChange={(newValue) => setValue(newValue[0])}
         max={100}
         step={1}
         aria-label="Brightness"
@@ -131,7 +150,7 @@ const BrightnessSlider = () => {
         <Slider.Thumb className="block w-5 h-5 bg-gray-400 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-75" />
       </Slider.Root>
       <span className="text-gray-400 text-lg">
-        <IoSunny />
+        <RightIcon />
       </span>
     </div>
   );

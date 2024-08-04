@@ -44,7 +44,7 @@ import { Appearance } from '../systemPages/Appearance';
 import { BsBatteryFull, BsUniversalAccessCircle } from 'react-icons/bs';
 import { Accessibility } from '../systemPages/Accessibility';
 import { ControlCentre } from '../systemPages/Control-Centre';
-import { FcGlobe, FcInTransit } from 'react-icons/fc';
+import { FcGlobe, FcInTransit, FcInvite } from 'react-icons/fc';
 import { Siri } from '../systemPages/Siri';
 import { Privacy } from '../systemPages/Privacy';
 import { Desktop } from '../systemPages/Desktop';
@@ -62,6 +62,8 @@ import { InternetAccount } from '../systemPages/Internet-Account';
 import { LuAtSign } from 'react-icons/lu';
 import { GameCenter } from '../systemPages/Game-Center';
 import { Wallet } from '../systemPages/Wallet';
+import { Keyboard } from '../systemPages/Keyboard';
+import { FaKeyboard } from 'react-icons/fa6';
 
 export type TailwindBgColor =
   | 'bg-blue-500'
@@ -246,8 +248,14 @@ export const SystemData: SystemPage[] = [
   {
     id: 'wallet',
     name: 'Wallet & Apple Pay',
-    icon: { type: FcInTransit, bg: 'bg-black' },
+    icon: { type: FcInvite, bg: 'bg-black' },
     page: Wallet
+  },
+  {
+    id: 'keyboard',
+    name: 'Keyboard',
+    icon: { type: FaKeyboard, bg: 'bg-neutral-400' },
+    page: Keyboard
   }
 ];
 
@@ -532,6 +540,7 @@ function Content() {
       {id === 'internet-account' && <InternetAccount />}
       {id === 'game-center' && <GameCenter />}
       {id === 'wallet' && <Wallet />}
+      {id === 'keyboard' && <Keyboard />}
     </div>
   );
 }
