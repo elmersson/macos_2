@@ -41,7 +41,11 @@ import { ScreenTime } from '../systemPages/Screen-Time';
 import { General } from '../systemPages/General';
 import { ChevronRight } from 'lucide-react';
 import { Appearance } from '../systemPages/Appearance';
-import { BsBatteryFull, BsUniversalAccessCircle } from 'react-icons/bs';
+import {
+  BsBatteryFull,
+  BsMouseFill,
+  BsUniversalAccessCircle
+} from 'react-icons/bs';
 import { Accessibility } from '../systemPages/Accessibility';
 import { ControlCentre } from '../systemPages/Control-Centre';
 import { FcGlobe, FcInTransit, FcInvite } from 'react-icons/fc';
@@ -64,6 +68,7 @@ import { GameCenter } from '../systemPages/Game-Center';
 import { Wallet } from '../systemPages/Wallet';
 import { Keyboard } from '../systemPages/Keyboard';
 import { FaKeyboard } from 'react-icons/fa6';
+import { Mouse } from '../systemPages/Mouse';
 
 export type TailwindBgColor =
   | 'bg-blue-500'
@@ -256,6 +261,12 @@ export const SystemData: SystemPage[] = [
     name: 'Keyboard',
     icon: { type: FaKeyboard, bg: 'bg-neutral-400' },
     page: Keyboard
+  },
+  {
+    id: 'mouse',
+    name: 'Mouse',
+    icon: { type: BsMouseFill, bg: 'bg-neutral-400' },
+    page: Mouse
   }
 ];
 
@@ -541,6 +552,7 @@ function Content() {
       {id === 'game-center' && <GameCenter />}
       {id === 'wallet' && <Wallet />}
       {id === 'keyboard' && <Keyboard />}
+      {id === 'mouse' && <Mouse />}
     </div>
   );
 }
