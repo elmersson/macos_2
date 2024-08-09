@@ -71,6 +71,7 @@ import { FaKeyboard } from 'react-icons/fa6';
 import { Mouse } from '../systemPages/Mouse';
 import { Printers } from '../systemPages/Printers';
 import { RiPrinterFill } from 'react-icons/ri';
+import { TrackPad } from '../systemPages/TrackPad';
 
 export type TailwindBgColor =
   | 'bg-blue-500'
@@ -269,6 +270,12 @@ export const SystemData: SystemPage[] = [
     name: 'Mouse',
     icon: { type: BsMouseFill, bg: 'bg-neutral-400' },
     page: Mouse
+  },
+  {
+    id: 'trackpad',
+    name: 'Trackpad',
+    icon: { type: BsMouseFill, bg: 'bg-neutral-400' },
+    page: TrackPad
   },
   {
     id: 'printers-scanners',
@@ -561,6 +568,7 @@ function Content() {
       {id === 'wallet' && <Wallet />}
       {id === 'keyboard' && <Keyboard />}
       {id === 'mouse' && <Mouse />}
+      {id === 'trackpad' && <TrackPad />}
       {id === 'printers-scanners' && <Printers />}
     </div>
   );
