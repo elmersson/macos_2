@@ -12,11 +12,8 @@ A personal website made to look like my current OS running on my Macbook. Update
 - [ ] Tests
   - [ ] Unit tests
   - [ ] E2E test
-- [ ] App layout
-  - [ ] System
-- [ ] App function
-  - [ ] System
 - [ ] Bugs
+  - [ ] App sizing  
 
 ## Tech-stack
 
