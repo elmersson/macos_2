@@ -12,8 +12,13 @@ A personal website made to look like my current OS running on my Macbook. Update
 - [ ] Tests
   - [ ] Unit tests
   - [ ] E2E test
+- [ ] App features
+  - [ ] Notes
+    - [ ] Presentation styles
+  - [ ] Settings
+    - [ ] Save choices 
 - [ ] Bugs
-  - [ ] App sizing  
+  - [ ] App sizing
 
 ## Tech-stack
 
