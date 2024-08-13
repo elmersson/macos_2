@@ -22,7 +22,9 @@ import {
 
 export function AppleMenu() {
   const { setLogedIn, resetSystemStore } = useSystemStore((state) => state);
-  const { resetAppStore } = useAppStore((state) => state);
+  const { resetAppStore, openApp, bringToFront } = useAppStore(
+    (state) => state
+  );
   const { resetNoteStore } = useNoteStore((state) => state);
   const { resetItermStore } = useItermStore((state) => state);
   const { resetFinderStore } = useFinderStore((state) => state);
@@ -40,6 +42,12 @@ export function AppleMenu() {
   const handleSignOut = () => {
     setLogedIn(false);
   };
+
+  const handleSystemSettings = () => {
+    openApp('system');
+    bringToFront('system');
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -54,7 +62,10 @@ export function AppleMenu() {
           <p className="text-s">About this Mac</p>
         </DropdownMenuItem>
         <DropdownMenuSeparator className="bg-white/20" />
-        <DropdownMenuItem className="flex justify-between">
+        <DropdownMenuItem
+          className="flex justify-between"
+          onClick={handleSystemSettings}
+        >
           <p className="text-s">System Settings...</p>
           <div className="items-center px-3 rounded-xl bg-slate-400/50">
             <p className="text-xs ">1 Update</p>

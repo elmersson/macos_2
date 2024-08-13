@@ -16,7 +16,7 @@ A personal website made to look like my current OS running on my Macbook. Update
   - [ ] Notes
     - [ ] Presentation styles
   - [ ] Settings
-    - [ ] Save choices 
+    - [ ] Save choices
 - [ ] Bugs
   - [ ] App sizing
 
