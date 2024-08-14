@@ -4,6 +4,7 @@ import { ThemeProvider } from '@/components/providers/theme-provider';
 import QueryProvider from '@/components/providers/query-client';
 import { SFPRO } from '../assets/fonts/SFPRO';
 import { StoreProvider } from '@/components/providers/store-provider';
+import { Analytics } from '@vercel/analytics/react';
 
 const sfpro = SFPRO;
 
@@ -29,6 +30,7 @@ export default function RootLayout({
               storageKey="macos-theme"
             >
               {children}
+              <Analytics mode={'development'} />;
             </ThemeProvider>
           </StoreProvider>
         </body>
