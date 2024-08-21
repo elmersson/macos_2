@@ -11,7 +11,7 @@
     "grepInvert": null,
     "maxFailures": 0,
     "metadata": {
-      "actualWorkers": 6
+      "actualWorkers": 1
     },
     "preserveOutput": "always",
     "reporter": [
@@ -45,28 +45,6 @@
         "testIgnore": [],
         "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
         "timeout": 30000
-      },
-      {
-        "outputDir": "/Users/rasmuselmersson/Documents/Github/macos_2/test-results",
-        "repeatEach": 1,
-        "retries": 0,
-        "id": "Firefox",
-        "name": "Firefox",
-        "testDir": "/Users/rasmuselmersson/Documents/Github/macos_2/__e2e__",
-        "testIgnore": [],
-        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
-        "timeout": 30000
-      },
-      {
-        "outputDir": "/Users/rasmuselmersson/Documents/Github/macos_2/test-results",
-        "repeatEach": 1,
-        "retries": 0,
-        "id": "Safari",
-        "name": "Safari",
-        "testDir": "/Users/rasmuselmersson/Documents/Github/macos_2/__e2e__",
-        "testIgnore": [],
-        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
-        "timeout": 30000
       }
     ],
     "shard": null,
@@ -85,303 +63,56 @@
       "file": "page.spec.ts",
       "column": 0,
       "line": 0,
-      "specs": [
+      "specs": [],
+      "suites": [
         {
-          "title": "has title",
-          "ok": true,
-          "tags": [],
-          "tests": [
+          "title": "E2E Tests for Website",
+          "file": "page.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
             {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "Chrome",
-              "projectName": "Chrome",
-              "results": [
+              "title": "Verify Homepage Title and Content",
+              "ok": true,
+              "tags": [],
+              "tests": [
                 {
-                  "workerIndex": 0,
-                  "status": "passed",
-                  "duration": 12041,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2024-08-01T15:34:38.152Z",
-                  "attachments": []
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Chrome",
+                  "projectName": "Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 10926,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2024-08-21T14:34:14.147Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
-              "status": "expected"
+              "id": "ea7f5a6ac9463218d2f1-ba43ee62948190e89db4",
+              "file": "page.spec.ts",
+              "line": 5,
+              "column": 7
             }
-          ],
-          "id": "ea7f5a6ac9463218d2f1-56a6af02ef53b4415f64",
-          "file": "page.spec.ts",
-          "line": 7,
-          "column": 5
-        },
-        {
-          "title": "has boot",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "Chrome",
-              "projectName": "Chrome",
-              "results": [
-                {
-                  "workerIndex": 1,
-                  "status": "passed",
-                  "duration": 17240,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2024-08-01T15:34:38.153Z",
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "ea7f5a6ac9463218d2f1-843360fd9111f265778e",
-          "file": "page.spec.ts",
-          "line": 11,
-          "column": 5
-        },
-        {
-          "title": "has booted",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "Chrome",
-              "projectName": "Chrome",
-              "results": [
-                {
-                  "workerIndex": 2,
-                  "status": "passed",
-                  "duration": 12026,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2024-08-01T15:34:38.155Z",
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "ea7f5a6ac9463218d2f1-2dc5747cdae0ae0a348b",
-          "file": "page.spec.ts",
-          "line": 21,
-          "column": 5
-        },
-        {
-          "title": "has title",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "Firefox",
-              "projectName": "Firefox",
-              "results": [
-                {
-                  "workerIndex": 3,
-                  "status": "passed",
-                  "duration": 13059,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2024-08-01T15:34:38.155Z",
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "ea7f5a6ac9463218d2f1-a52da390963b5dafe2d0",
-          "file": "page.spec.ts",
-          "line": 7,
-          "column": 5
-        },
-        {
-          "title": "has boot",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "Firefox",
-              "projectName": "Firefox",
-              "results": [
-                {
-                  "workerIndex": 4,
-                  "status": "passed",
-                  "duration": 18522,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2024-08-01T15:34:38.154Z",
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "ea7f5a6ac9463218d2f1-3b1d57d810b2f12f2bad",
-          "file": "page.spec.ts",
-          "line": 11,
-          "column": 5
-        },
-        {
-          "title": "has booted",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "Firefox",
-              "projectName": "Firefox",
-              "results": [
-                {
-                  "workerIndex": 5,
-                  "status": "passed",
-                  "duration": 13044,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2024-08-01T15:34:38.154Z",
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "ea7f5a6ac9463218d2f1-920dd1df1e49ee5a3ca9",
-          "file": "page.spec.ts",
-          "line": 21,
-          "column": 5
-        },
-        {
-          "title": "has title",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "Safari",
-              "projectName": "Safari",
-              "results": [
-                {
-                  "workerIndex": 6,
-                  "status": "passed",
-                  "duration": 7041,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2024-08-01T15:34:50.980Z",
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "ea7f5a6ac9463218d2f1-0ff2535c99bab9cdb104",
-          "file": "page.spec.ts",
-          "line": 7,
-          "column": 5
-        },
-        {
-          "title": "has boot",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "Safari",
-              "projectName": "Safari",
-              "results": [
-                {
-                  "workerIndex": 7,
-                  "status": "passed",
-                  "duration": 12301,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2024-08-01T15:34:50.982Z",
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "ea7f5a6ac9463218d2f1-3b6877df1dd31a3e7494",
-          "file": "page.spec.ts",
-          "line": 11,
-          "column": 5
-        },
-        {
-          "title": "has booted",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "Safari",
-              "projectName": "Safari",
-              "results": [
-                {
-                  "workerIndex": 8,
-                  "status": "passed",
-                  "duration": 5766,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2024-08-01T15:34:52.354Z",
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "ea7f5a6ac9463218d2f1-60368e1002729c748547",
-          "file": "page.spec.ts",
-          "line": 21,
-          "column": 5
+          ]
         }
       ]
     }
   ],
   "errors": [],
   "stats": {
-    "startTime": "2024-08-01T15:34:37.959Z",
-    "duration": 25649.12,
-    "expected": 9,
+    "startTime": "2024-08-21T14:34:13.130Z",
+    "duration": 12150.369999999999,
+    "expected": 1,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
