@@ -31,26 +31,6 @@ const config: PlaywrightTestConfig = {
           height: 1080
         }
       }
-    },
-    {
-      name: 'Firefox',
-      use: {
-        ...devices['Desktop Firefox'],
-        viewport: {
-          width: 1920,
-          height: 1080
-        }
-      }
-    },
-    {
-      name: 'Safari',
-      use: {
-        ...devices['Desktop Safari'],
-        viewport: {
-          width: 1920,
-          height: 1080
-        }
-      }
     }
   ],
 

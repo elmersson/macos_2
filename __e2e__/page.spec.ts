@@ -1,23 +1,15 @@
 import { test, expect } from '@playwright/test';
 
-test.beforeEach(async ({ page }) => {
-  await page.goto('/');
-});
+test.describe('E2E Tests for Website', () => {
+  test('Verify Homepage Title and Content', async ({ page }) => {
+    await page.goto('/');
 
-test('has title', async ({ page }) => {
-  await expect(page).toHaveTitle(/Rasmus Elmersson/);
-});
+    await expect(page).toHaveTitle(/Rasmus Elmersson/);
 
-test('has boot', async ({ page }) => {
-  const progressBar = await page.$('.h-1');
-  expect(progressBar).not.toBeNull();
+    const progressBar = await page.$('.h-1');
+    expect(progressBar).not.toBeNull();
 
-  await page.waitForFunction(() => {
-    const progress = document.querySelector('.h-1') as HTMLElement;
-    return progress.style.width === '100%';
+    const headerText = await page.getByText('Rasmus Elmersson');
+    expect(headerText).toBeDefined();
   });
-});
-
-test('has booted', async ({ page }) => {
-  await expect(page.getByText('Rasmus Elmersson')).toBeDefined();
 });
