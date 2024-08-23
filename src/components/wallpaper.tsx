@@ -1,26 +1,28 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { useSystemStore } from './providers/store-provider';
+import Image from 'next/image';
+import BG from '@/assets/images/bg.jpg';
 
 export default function Wallpaper() {
   const { logedIn } = useSystemStore((state) => state);
 
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [videoSource, setVideoSource] = useState<string>(
-    // 'https://sylvan.apple.com/Videos/P001_C005_UHD_SDR_2K_AVC.mov'
-    './videos/bg.mov'
-  );
+  const [videoCanPlay, setVideoCanPlay] = useState<boolean>(false);
 
   useEffect(() => {
-    const handleVideoError = () => {
-      setVideoSource(
-        'http://sylvan.apple.com/Videos/P001_C005_UHD_SDR_2K_AVC.mov'
-      );
+    const video = videoRef.current;
+
+    const handleVideoCanPlay = () => {
+      setVideoCanPlay(true);
     };
 
-    if (videoRef.current) {
-      const video = videoRef.current;
+    const handleVideoError = () => {
+      setVideoCanPlay(false);
+    };
 
+    if (video) {
+      video.oncanplay = handleVideoCanPlay;
       video.onerror = handleVideoError;
 
       if (!logedIn) {
@@ -34,23 +36,44 @@ export default function Wallpaper() {
         }, 2000);
       }
     }
+
+    return () => {
+      if (video) {
+        video.oncanplay = null;
+        video.onerror = null;
+      }
+    };
   }, [logedIn]);
 
   return (
     <div className={`absolute inset-0 -z-50 bg-black`}>
-      <video
-        ref={videoRef}
-        src={videoSource}
-        style={{
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover'
-        }}
-        autoPlay
-        loop
-        playsInline
-        muted
-      />
+      {videoCanPlay ? (
+        <video
+          ref={videoRef}
+          src={'https://sylvan.apple.com/Videos/P001_C005_UHD_SDR_2K_AVC.mov'}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover'
+          }}
+          autoPlay
+          loop
+          playsInline
+          muted
+        />
+      ) : (
+        <Image
+          src={BG}
+          alt="Background image"
+          layout="fill"
+          objectFit="cover"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover'
+          }}
+        />
+      )}
     </div>
   );
 }
