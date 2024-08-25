@@ -17,7 +17,7 @@ A personal website made to look like my current OS running on my Macbook. Update
   - [ ] Settings
     - [ ] Save choices
 - [ ] Bugs
-  - [ ] App sizing
+  - [ ] App sizing dynamically
 
 ## Tech-stack
 
