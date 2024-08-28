@@ -12,7 +12,26 @@ A personal website made to look like my current OS running on my Macbook. Update
   - [ ] Unit tests
   - [ ] E2E test
 - [ ] Add prompt for phones and tablets
-- [ ] App features
+- [ ] Apps
+  - [ ] Finder
+    - [ ] AirDrop design
+    - [ ] Can push same place twice by press down below
+    - [ ] Forward Arrow dosent disable when at front
+    - [ ] Disable default arrow press
+    - [ ] History gets wrong
+    - [ ] Scroll when larger the window size
+    - [ ] ICloud
+    - [ ] Shared
+    - [ ] Tags
+    - [ ] Amount of items choosen
+    - [ ] Choose multiple items
+    - [ ] Sort By
+    - [ ] List type
+    - [ ] Distant between menus in sidebar
+    - [ ] Rightclick
+    - [ ] Open terminal here
+    - [ ] Search design
+    - [ ] Min & Max Size
   - [ ] Raycast
     - [ ] Change design
     - [ ] Math
