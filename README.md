@@ -32,6 +32,11 @@ A personal website made to look like my current OS running on my Macbook. Update
     - [ ] Open terminal here
     - [ ] Search design
     - [ ] Min & Max Size
+  - [ ] LaunchPad
+    - [ ] Design Search
+    - [ ] Design long names
+    - [ ] Transistion
+    - [ ] Reorder/move icons
   - [ ] Raycast
     - [ ] Change design
     - [ ] Math
