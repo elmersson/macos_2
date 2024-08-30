@@ -43,6 +43,16 @@ A personal website made to look like my current OS running on my Macbook. Update
     - [ ] AI 
   - [ ] Notes
     - [ ] Presentation styles
+    - [ ] New folder
+    - [ ] Scroll
+    - [ ] Content
+    - [ ] Change format
+    - [ ] Tobbar
+    - [ ] Create new
+    - [ ] Search
+    - [ ] Share
+    - [ ] Remove
+    - [ ] Right Click
   - [ ] Settings
     - [ ] Save choices
 - [ ] Bugs
