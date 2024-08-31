@@ -12,6 +12,9 @@ A personal website made to look like my current OS running on my Macbook. Update
   - [ ] Unit tests
   - [ ] E2E test
 - [ ] Add prompt for phones and tablets
+- [ ] Design
+  - [ ] Text Sizes
+  - [ ] Light mode
 - [ ] Apps
   - [ ] Finder
     - [ ] AirDrop design
@@ -55,6 +58,14 @@ A personal website made to look like my current OS running on my Macbook. Update
     - [ ] Right Click
   - [ ] Settings
     - [ ] Save choices
+    - [ ] Max width
+    - [ ] Search
+    - [ ] Selected Tab
+    - [ ] Check component
+    - [ ] Images
+    - [ ] Set global text size
+    - [ ] Change background
+    - [ ] Scroll
 - [ ] Bugs
   - [ ] App sizing dynamically
   - [ ] Initial load doesn't start always
