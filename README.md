@@ -66,6 +66,15 @@ A personal website made to look like my current OS running on my Macbook. Update
     - [ ] Set global text size
     - [ ] Change background
     - [ ] Scroll
+  - [ ] Arc
+    - [ ] Topbar
+    - [ ] Folders
+    - [ ] Links
+    - [ ] Right click
+    - [ ] Work
+    - [ ] New tab
+    - [ ] Downloads
+    - [ ] Scroll   
 - [ ] Bugs
   - [ ] App sizing dynamically
   - [ ] Initial load doesn't start always
