@@ -74,7 +74,20 @@ A personal website made to look like my current OS running on my Macbook. Update
     - [ ] Work
     - [ ] New tab
     - [ ] Downloads
-    - [ ] Scroll   
+    - [ ] Scroll
+  - [ ] Outlook
+    - [ ] Default size
+    - [ ] Third column
+    - [ ] Send Email
+    - [ ] Hide folders
+    - [ ] Folders
+    - [ ] Calendar
+    - [ ] Tab
+    - [ ] Contact
+    - [ ] Favorites
+    - [ ] Create profile
+    - [ ] Search
+    - [ ] Truncate
 - [ ] Bugs
   - [ ] App sizing dynamically
   - [ ] Initial load doesn't start always
