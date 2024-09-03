@@ -88,6 +88,11 @@ A personal website made to look like my current OS running on my Macbook. Update
     - [ ] Create profile
     - [ ] Search
     - [ ] Truncate
+  - [ ] Termial
+    - [ ] Delete
+    - [ ] Ai
+    - [ ] Vim
+    - [ ] Git  
 - [ ] Bugs
   - [ ] App sizing dynamically
   - [ ] Initial load doesn't start always
