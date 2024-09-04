@@ -92,7 +92,12 @@ A personal website made to look like my current OS running on my Macbook. Update
     - [ ] Delete
     - [ ] Ai
     - [ ] Vim
-    - [ ] Git  
+    - [ ] Git
+  - [ ] Widgets
+    - [ ] Calendar design
+    - [ ] Fullscreen
+    - [ ] Batteries
+    - [ ] Calendar data
 - [ ] Bugs
   - [ ] App sizing dynamically
   - [ ] Initial load doesn't start always
