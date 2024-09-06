@@ -7,7 +7,9 @@ A personal website made to look like my current OS running on my Macbook. Update
 ## TODO
 
 - [ ] CI/CD
+  - [ ] Playwright
 - [ ] Deployment
+  - [ ] Vercel 
 - [ ] Tests
   - [ ] Unit tests
   - [ ] E2E test
