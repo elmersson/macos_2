@@ -46,11 +46,11 @@ export default function Wallpaper() {
   }, [logedIn]);
 
   return (
-    <div className={`absolute inset-0 -z-50 bg-black`}>
+    <div className="absolute inset-0 -z-50 bg-black">
       {videoCanPlay ? (
         <video
           ref={videoRef}
-          src={'https://sylvan.apple.com/Videos/P001_C005_UHD_SDR_2K_AVC.mov'}
+          src="https://sylvan.apple.com/Videos/P001_C005_UHD_SDR_2K_AVC.mov"
           style={{
             width: '100%',
             height: '100%',
