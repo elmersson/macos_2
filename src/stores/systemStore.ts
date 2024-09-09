@@ -10,6 +10,8 @@ import { WeatherData } from '@/types/Weather';
 import { SystemData, SystemPage } from '@/components/apps/system';
 
 export interface SystemStore {
+  closedIsPhone: boolean;
+  setIsClosedPhone: (closedIsPhone: boolean) => void;
   bootProgress: number;
   setBootProgress: (bootProgress: number) => void;
   booted: boolean;
@@ -50,6 +52,8 @@ export const createSystemStore = (): StoreApi<SystemStore> => {
     persist(
       (set, get) => ({
         ...initialSystemData,
+        closedIsPhone: false,
+        setIsClosedPhone: () => set({ closedIsPhone: true }),
         weather: initialWeatherData,
         nameOfTheDay: initialNameOfTheDay,
         setBootProgress: (bootProgress) => set({ bootProgress }),

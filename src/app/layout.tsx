@@ -5,6 +5,7 @@ import QueryProvider from '@/components/providers/query-client';
 import { SFPRO } from '../assets/fonts/SFPRO';
 import { StoreProvider } from '@/components/providers/store-provider';
 import { Analytics } from '@vercel/analytics/react';
+import MobileWarningDialog from '@/components/MobileWarningDialog';
 
 const sfpro = SFPRO;
 
@@ -29,8 +30,9 @@ export default function RootLayout({
               disableTransitionOnChange
               storageKey="macos-theme"
             >
+              <MobileWarningDialog />
               {children}
-              <Analytics mode={'development'} />;
+              <Analytics mode={'development'} />
             </ThemeProvider>
           </StoreProvider>
         </body>

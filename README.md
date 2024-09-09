@@ -9,7 +9,7 @@ A personal website made to look like my current OS running on my Macbook. Update
 - [ ] CI/CD
   - [ ] Playwright
 - [ ] Deployment
-  - [ ] Vercel 
+  - [ ] Vercel
 - [ ] Tests
   - [ ] Unit tests
   - [ ] E2E test
@@ -45,7 +45,7 @@ A personal website made to look like my current OS running on my Macbook. Update
   - [ ] Raycast
     - [ ] Change design
     - [ ] Math
-    - [ ] AI 
+    - [ ] AI
   - [ ] Notes
     - [ ] Presentation styles
     - [ ] New folder
