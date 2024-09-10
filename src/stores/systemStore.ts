@@ -12,6 +12,8 @@ import { SystemData, SystemPage } from '@/components/apps/system';
 export interface SystemStore {
   closedIsPhone: boolean;
   setIsClosedPhone: (closedIsPhone: boolean) => void;
+  isSleeping: boolean;
+  setIsSleeping: (isSleeping: boolean) => void;
   bootProgress: number;
   setBootProgress: (bootProgress: number) => void;
   booted: boolean;
@@ -53,6 +55,16 @@ export const createSystemStore = (): StoreApi<SystemStore> => {
       (set, get) => ({
         ...initialSystemData,
         closedIsPhone: false,
+        isSleeping: false,
+        setIsSleeping: (isSleeping: boolean) => {
+          console.log(isSleeping);
+          set({ isSleeping });
+          if (isSleeping) {
+            console.log('display 0');
+
+            set({ display: 0 });
+          }
+        },
         setIsClosedPhone: () => set({ closedIsPhone: true }),
         weather: initialWeatherData,
         nameOfTheDay: initialNameOfTheDay,

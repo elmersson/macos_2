@@ -21,7 +21,9 @@ import {
 } from '../providers/store-provider';
 
 export function AppleMenu() {
-  const { setLogedIn, resetSystemStore } = useSystemStore((state) => state);
+  const { setLogedIn, resetSystemStore, setIsSleeping } = useSystemStore(
+    (state) => state
+  );
   const { resetAppStore, openApp, bringToFront } = useAppStore(
     (state) => state
   );
@@ -41,6 +43,10 @@ export function AppleMenu() {
 
   const handleSignOut = () => {
     setLogedIn(false);
+  };
+
+  const handleSleep = () => {
+    setIsSleeping(true);
   };
 
   const handleSystemSettings = () => {
@@ -112,7 +118,7 @@ export function AppleMenu() {
         </DropdownMenuItem>
         <DropdownMenuSeparator className="bg-white/20" />
         <DropdownMenuItem>
-          <p className="text-s" onClick={handleSignOut}>
+          <p className="text-s" onClick={handleSleep}>
             Sleep
           </p>
         </DropdownMenuItem>
