@@ -13,7 +13,6 @@ A personal website made to look like my current OS running on my Macbook. Update
 - [ ] Tests
   - [ ] Unit tests
   - [ ] E2E test
-- [ ] Add prompt for phones and tablets
 - [ ] Design
   - [ ] Text Sizes
   - [ ] Light mode
@@ -103,7 +102,6 @@ A personal website made to look like my current OS running on my Macbook. Update
 - [ ] Bugs
   - [ ] App sizing dynamically
   - [ ] Initial load doesn't start always
-  - [ ] Apple menu sleep and lock adds ; to the bottom and dont work
 
 ## Tech-stack
 
