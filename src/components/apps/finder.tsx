@@ -209,7 +209,7 @@ export function Finder({ appData }: AppProps) {
     >
       <div className="w-full h-full bg-transparent">
         <div className="flex h-full">
-          <ScrollArea className="w-40 bg-slate-800/70 bg-clip-padding backdrop-filter backdrop-blur-xl dark:bg-slate-800/70 p-4">
+          <ScrollArea className="w-40 bg-slate-800/70 bg-clip-padding backdrop-filter backdrop-blur-xl dark:bg-slate-800/70 p-4 ">
             <Favorites />
             <ICloud />
             <Tags />
@@ -444,7 +444,7 @@ function Favorites() {
 
 function ICloud() {
   return (
-    <Accordion type="single" collapsible className="w-full">
+    <Accordion type="single" collapsible className="w-full my-4">
       <AccordionItem value="item-1">
         <AccordionTrigger className="text-sm text-neutral-300">
           iCloud
