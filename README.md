@@ -31,7 +31,6 @@ A personal website made to look like my current OS running on my Macbook. Update
     - [ ] Choose multiple items
     - [ ] Sort By
     - [ ] List type
-    - [ ] Distant between menus in sidebar
     - [ ] Rightclick
     - [ ] Open terminal here
     - [ ] Search design
