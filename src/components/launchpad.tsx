@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Input } from './ui/input';
 import { useState, ChangeEvent } from 'react';
 import { useAppStore, useSystemStore } from './providers/store-provider';
+import { motion } from 'framer-motion'; // Import motion from framer-motion
 
 export function Launchpad() {
   const { launchPad, setLaunchPad } = useSystemStore((state) => state);
@@ -24,9 +25,13 @@ export function Launchpad() {
   );
 
   return (
-    <div
-      className={`z-[999999] fixed inset-0 bg-slate-800/50 backdrop-blur-2xl flex flex-col items-center p-10 transition-opacity duration-800 ${launchPad ? 'opacity-100' : 'opacity-0'}`}
+    <motion.div
+      className="z-[999999] fixed inset-0 bg-slate-800/50 backdrop-blur-2xl flex flex-col items-center p-10"
       onClick={handleClick}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: launchPad ? 1 : 0 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
     >
       <div onClick={(e) => e.stopPropagation()}>
         <Input
@@ -46,7 +51,7 @@ export function Launchpad() {
           />
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
