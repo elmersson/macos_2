@@ -1,7 +1,7 @@
-import { apps, AppData } from '@/data/Apps';
+import { apps, type AppData } from '@/data/Apps';
 import Image from 'next/image';
 import { Input } from './ui/input';
-import { useState, ChangeEvent } from 'react';
+import { useState, type ChangeEvent } from 'react';
 import { useAppStore, useSystemStore } from './providers/store-provider';
 import { motion } from 'framer-motion'; // Import motion from framer-motion
 
@@ -88,7 +88,7 @@ export function LaunchpadItem({
       onClick={handlePress}
     >
       <Image src={img} alt={title} className="w-36" />
-      <span className="text-white">{title}</span>
+      <span className="text-white line-clamp-1">{title}</span>
     </div>
   );
 }
