@@ -3,13 +3,15 @@ import Image from 'next/image';
 import { Input } from './ui/input';
 import { useState, type ChangeEvent } from 'react';
 import { useAppStore, useSystemStore } from './providers/store-provider';
-import { motion } from 'framer-motion'; // Import motion from framer-motion
+import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 export function Launchpad() {
   const { launchPad, setLaunchPad } = useSystemStore((state) => state);
   const { openApp, bringToFront } = useAppStore((state) => state);
 
   const [searchQuery, setSearchQuery] = useState('');
+  const [isFocused, setIsFocused] = useState<boolean>(false);
 
   const handleClick = () => {
     setLaunchPad(false);
@@ -34,11 +36,39 @@ export function Launchpad() {
       transition={{ duration: 0.3 }}
     >
       <div onClick={(e) => e.stopPropagation()}>
-        <Input
-          value={searchQuery}
-          onChange={handleSearchChange}
-          placeholder="Search"
-        />
+        <div className="relative w-56">
+          <span
+            className={cn(
+              'absolute inset-y-0 flex items-center transition-all duration-300 transform left-[35%] -translate-x-1/2',
+              isFocused && 'left-5'
+            )}
+          >
+            <svg
+              className="h-5 w-5 text-white transition-all duration-300 transform"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-label="Search Icon"
+            >
+              <title>Search Icon</title>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M21 21l-4.35-4.35m1.35-5.65a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+          </span>
+          <Input
+            value={searchQuery}
+            onChange={handleSearchChange}
+            placeholder="Search"
+            className="text-center text-lg bg-white/10 border-white/20 font-extralight focus:text-left pl-10 focus:pl-10 focus:outline-none"
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+          />
+        </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-7 gap-14 mt-10">
         {filteredApps.map((app) => (
