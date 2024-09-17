@@ -4,6 +4,8 @@
 
 A personal website made to look like my current OS running on my Macbook. Updated version from last try ([﻿MacOs](https://github.com/elmersson/MacOS)).
 
+not necessary good code, but fun code.
+
 ## TODO
 
 - [ ] CI/CD
