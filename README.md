@@ -38,7 +38,6 @@ not necessary good code, but fun code.
     - [ ] Search design
     - [ ] Min & Max Size
   - [ ] Raycast
-    - [ ] Change design
     - [ ] Math
     - [ ] AI
   - [ ] Notes
