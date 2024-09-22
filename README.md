@@ -21,21 +21,21 @@ not necessary good code, but fun code.
 - [ ] Apps
   - [ ] Finder
     - [ ] AirDrop design
-    - [ ] Can push same place twice by press down below
-    - [ ] Forward Arrow dosent disable when at front
+    - [ ] Can push the same place twice by pressing down below
+    - [ ] Forward Arrow doesn't disable when at the front
     - [ ] Disable default arrow press
     - [ ] History gets wrong
     - [ ] Scroll when larger the window size
-    - [ ] ICloud
+    - [ ] iCloud
     - [ ] Shared
     - [ ] Tags
-    - [ ] Amount of items choosen
+    - [ ] Amount of items chosen
     - [ ] Choose multiple items
     - [ ] Sort By
     - [ ] List type
     - [ ] Rightclick
     - [ ] Open terminal here
-    - [ ] Search design
+    - [ ] Search Design
     - [ ] Min & Max Size
   - [ ] Raycast
     - [ ] Math
@@ -81,10 +81,10 @@ not necessary good code, but fun code.
     - [ ] Tab
     - [ ] Contact
     - [ ] Favorites
-    - [ ] Create profile
+    - [ ] Create a profile
     - [ ] Search
     - [ ] Truncate
-  - [ ] Termial
+  - [ ] Terminal
     - [ ] Delete
     - [ ] Ai
     - [ ] Vim
