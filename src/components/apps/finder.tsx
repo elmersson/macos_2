@@ -16,7 +16,11 @@ import {
 } from 'react-icons/md';
 import { CiCloudOn } from 'react-icons/ci';
 import { DraggableItem } from './draggable-item';
-import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import {
+  IoIosArrowBack,
+  IoIosArrowDown,
+  IoIosArrowForward
+} from 'react-icons/io';
 import { BsGrid } from 'react-icons/bs';
 
 import {
@@ -29,13 +33,13 @@ import { BsLayoutThreeColumns } from 'react-icons/bs';
 import { MdOutlineIosShare } from 'react-icons/md';
 import { HiOutlineDotsCircleHorizontal } from 'react-icons/hi';
 
-import { AppProps, apps } from '@/data/Apps';
-import { FinderData } from '@/data/finderData';
+import { type AppProps, apps } from '@/data/Apps';
+import type { FinderData } from '@/data/finderData';
 import { useAppStore, useFinderStore } from '../providers/store-provider';
 import Image from 'next/image';
 import {
-  HTMLAttributes,
-  SetStateAction,
+  type HTMLAttributes,
+  type SetStateAction,
   useEffect,
   useRef,
   useState
@@ -56,6 +60,14 @@ import {
   ContextMenuTrigger
 } from '../ui/context-menu';
 import { cn } from '@/lib/utils';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuTrigger
+} from '../ui/dropdown-menu';
+import { FaCheck } from 'react-icons/fa6';
 
 export const findSelectedItem = (
   id: string,
@@ -517,9 +529,13 @@ interface ContentProps {
 
 function Content({ displayedItems, selectedFinderId }: ContentProps) {
   const { openApp, bringToFront } = useAppStore((state) => state);
-  const { setSelectedFinderId, addToRecent, recent } = useFinderStore(
-    (state) => state
-  );
+  const {
+    setSelectedFinderId,
+    addToRecent,
+    recent,
+    airdropSetting,
+    setAirdropSetting
+  } = useFinderStore((state) => state);
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
 
   const handleDoubleClick = (data: FinderData) => {
@@ -547,9 +563,49 @@ function Content({ displayedItems, selectedFinderId }: ContentProps) {
           <MdWifiTethering />
         </div>
         <span>AirDrop lets you share instantly with people nearby.</span>
-        <div className="text-sm text-blue-600">
-          <span>Allow me to be discovered by: Contacts Only</span>
-        </div>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button
+              type="button"
+              className="text-sm text-blue-400 active:text-blue-200 flex items-center"
+            >
+              Allow me to be discovered by: {airdropSetting}
+              <span className="ml-1">
+                <IoIosArrowDown />
+              </span>
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuGroup>
+              <DropdownMenuItem onClick={() => setAirdropSetting('No One')}>
+                <span className="flex items-center">
+                  <span className="w-3.5 h-3.5 mr-0.5">
+                    {airdropSetting === 'No One' && <FaCheck />}
+                  </span>
+                  No One
+                </span>
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => setAirdropSetting('Contacts Only')}
+              >
+                <span className="flex items-center">
+                  <span className="w-3.5 h-3.5 mr-0.5">
+                    {airdropSetting === 'Contacts Only' && <FaCheck />}
+                  </span>
+                  Contacts Only
+                </span>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setAirdropSetting('Everyone')}>
+                <span className="flex items-center">
+                  <span className="w-3.5 h-3.5 mr-0.5">
+                    {airdropSetting === 'Everyone' && <FaCheck />}
+                  </span>
+                  Everyone
+                </span>
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     );
   }

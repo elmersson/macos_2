@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
-import { FinderData } from '@/data/finderData';
-import { create, StoreApi } from 'zustand';
+import type { FinderData } from '@/data/finderData';
+import { create, type StoreApi } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { initialFinderData } from './initialData';
 import Trashcan from '@/assets/apps/trashcan.png';
@@ -20,6 +20,8 @@ export interface FinderStore {
   restoreFromBin: (id: string) => void;
   permanentlyDeleteFromBin: (id: string) => void;
   resetFinderStore: () => void;
+  airdropSetting: 'No One' | 'Contacts Only' | 'Everyone';
+  setAirdropSetting: (setting: 'No One' | 'Contacts Only' | 'Everyone') => void;
 }
 
 export const createFinderStore = (): StoreApi<FinderStore> => {
@@ -27,6 +29,9 @@ export const createFinderStore = (): StoreApi<FinderStore> => {
     persist(
       (set) => ({
         ...initialFinderData,
+        airdropSetting: 'Contacts Only',
+        setAirdropSetting: (setting) =>
+          set(() => ({ airdropSetting: setting })),
         setSelectedFinderId: (id) =>
           set((state) => {
             state.addToHistory(state.selectedFinderId);

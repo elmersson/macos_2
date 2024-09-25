@@ -65,8 +65,7 @@ export default function Wallpaper() {
         <Image
           src={BG}
           alt="Background image"
-          layout="fill"
-          objectFit="cover"
+          fill
           style={{
             width: '100%',
             height: '100%',
