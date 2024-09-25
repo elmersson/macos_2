@@ -1,7 +1,7 @@
 import weatherJson from '../data/Weather.json';
 import { apps } from '@/data/Apps';
 import { starterNotes } from '@/data/notes';
-import { FinderStore } from './finderStore';
+import type { FinderStore } from './finderStore';
 import { finderData } from '@/data/finderData';
 
 export const initialSystemData = {
@@ -42,10 +42,15 @@ export const initialNotesData = [{ dir: 'ICloud', folders: starterNotes }];
 
 export const initialFinderData: Pick<
   FinderStore,
-  'finderDataSet' | 'selectedFinderId' | 'finderHistory' | 'historyPosition'
+  | 'finderDataSet'
+  | 'selectedFinderId'
+  | 'finderHistory'
+  | 'historyPosition'
+  | 'airdropSetting'
 > = {
   finderDataSet: finderData,
   selectedFinderId: 'recent',
+  airdropSetting: 'Contacts Only',
   finderHistory: [],
   historyPosition: 0
 };
