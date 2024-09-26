@@ -357,21 +357,24 @@ function BarItem({
         <div className="flex flex-row relative items-center">
           {isSearching && (
             <div className="relative">
-              <IoSearchSharp className="absolute left-2 top-1/2 transform -translate-y-1/2 text-white" />
               <input
                 ref={inputRef}
                 type="text"
-                className="transition-transform transform scale-x-100 origin-right w-64 bg-neutral-700 text-white border border-neutral-500 rounded p-1 pl-8 pr-8 shadow-lg text-sm"
+                className="transition-transform transform scale-x-100 origin-right w-64 bg-neutral-700 text-white border border-neutral-500 rounded p-1 pl-8 pr-8 shadow-lg text-sm placeholder-neutral-500/70"
                 value={searchInput}
                 onChange={handleSearchChange}
-                placeholder="Search..."
+                placeholder="Search"
                 style={{ transform: isSearching ? 'scaleX(1)' : 'scaleX(0)' }}
               />
-              <IoCloseSharp
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-neutral-500 cursor-pointer"
-                role="button"
+              <IoSearchSharp className="absolute left-2 top-1/2 transform -translate-y-1/2 text-neutral-500" />
+
+              <button
+                type="button"
                 onClick={handleClearSearch}
-              />
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-neutral-500 cursor-pointer bg-neutral-400 rounded-full text-sm"
+              >
+                {searchInput ? <IoCloseSharp /> : null}
+              </button>
             </div>
           )}
           {!isSearching && (
