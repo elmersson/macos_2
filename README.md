@@ -20,7 +20,6 @@ not necessary good code, but fun code.
   - [ ] Light mode
 - [ ] Apps
   - [ ] Finder
-    - [ ] AirDrop design
     - [ ] Can push the same place twice by pressing down below
     - [ ] Forward Arrow doesn't disable when at the front
     - [ ] Disable default arrow press
@@ -35,7 +34,6 @@ not necessary good code, but fun code.
     - [ ] List type
     - [ ] Rightclick
     - [ ] Open terminal here
-    - [ ] Search Design
     - [ ] Min & Max Size
   - [ ] Raycast
     - [ ] Math
