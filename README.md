@@ -35,9 +35,6 @@ not necessary good code, but fun code.
     - [ ] Rightclick
     - [ ] Open terminal here
     - [ ] Min & Max Size
-  - [ ] Raycast
-    - [ ] Math
-    - [ ] AI
   - [ ] Notes
     - [ ] Presentation styles
     - [ ] New folder
