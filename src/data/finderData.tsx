@@ -1,5 +1,5 @@
-import { StaticImageData } from 'next/image';
-import { ReactNode } from 'react';
+import type { StaticImageData } from 'next/image';
+import type { ReactNode } from 'react';
 import Macintosh_HD from '@/assets/icons/Macintosh HD.png';
 import Folder from '@/assets/icons/folder.png';
 import File from '@/assets/icons/file.png';
@@ -331,6 +331,42 @@ export const finderData: FinderData[] = [
   {
     id: 'recent',
     title: 'Recent',
+    type: 'folder',
+    iconImg: Folder,
+    children: []
+  },
+  {
+    id: 'icloud-drive',
+    title: 'iCloud Drive',
+    type: 'folder',
+    iconImg: Folder,
+    children: [
+      {
+        id: 'keynote',
+        title: 'Keynote',
+        type: 'folder',
+        iconImg: Folder,
+        children: []
+      },
+      {
+        id: 'downloads',
+        title: 'Downloads',
+        type: 'folder',
+        iconImg: Folder,
+        children: []
+      },
+      {
+        id: 'shortcuts',
+        title: 'Shortcuts',
+        type: 'folder',
+        iconImg: Folder,
+        children: []
+      }
+    ]
+  },
+  {
+    id: 'shared',
+    title: 'Shared',
     type: 'folder',
     iconImg: Folder,
     children: []

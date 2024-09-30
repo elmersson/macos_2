@@ -250,7 +250,10 @@ export function Finder({ appData }: AppProps) {
                 ))}
               </div>
               <div className="bg-neutral-800 py-1 px-2 flex justify-center text-white/30">
-                {itemCount} items, 520,64 GB avalible
+                {itemCount} items,{' '}
+                {selectedFinderId === 'icloud-drive'
+                  ? '38,34 GB avalible on iCloud'
+                  : '520,64 GB avalible'}
               </div>
             </div>
           </div>
@@ -458,6 +461,8 @@ function Favorites() {
 }
 
 function ICloud() {
+  const { setSelectedFinderId } = useFinderStore((state) => state);
+
   return (
     <Accordion type="single" collapsible className="w-full my-4">
       <AccordionItem value="item-1">
@@ -466,11 +471,19 @@ function ICloud() {
         </AccordionTrigger>
         <AccordionContent>
           <ul className="space-y-4">
-            <li className="flex flex-row items-center space-x-1">
+            <li
+              className="flex flex-row items-center space-x-1"
+              onClick={() => setSelectedFinderId('icloud-drive')}
+              role="button"
+            >
               <CiCloudOn className=" size-[18px] text-teal-500" />
               <span>iCloud Drive</span>
             </li>
-            <li className="flex flex-row items-center space-x-1">
+            <li
+              className="flex flex-row items-center space-x-1"
+              onClick={() => setSelectedFinderId('shared')}
+              role="button"
+            >
               <PiFolderSimpleUserFill className=" size-[18px] text-teal-500" />
               <span>Shared</span>
             </li>
