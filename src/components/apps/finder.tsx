@@ -390,8 +390,6 @@ function BarItem({
 }
 
 function Favorites() {
-  const { setSelectedFinderId } = useFinderStore((state) => state);
-
   return (
     <Accordion
       type="single"
@@ -404,55 +402,25 @@ function Favorites() {
           Favorites
         </AccordionTrigger>
         <AccordionContent>
-          <ul className="space-y-4">
-            <li
-              className="flex flex-row items-center space-x-1"
-              onClick={() => setSelectedFinderId('airdrop')}
-              role="button"
-            >
-              <MdWifiTethering className=" size-[18px] text-blue-500" />
-              <span>AirDrop</span>
-            </li>
-            <li
-              className="flex flex-row items-center space-x-1"
-              onClick={() => setSelectedFinderId('recent')}
-              role="button"
-            >
-              <IoTimeOutline className=" size-[18px] text-blue-500" />
-              <span>Recent</span>
-            </li>
-            <li
-              className="flex flex-row items-center space-x-1"
-              onClick={() => setSelectedFinderId('applications')}
-              role="button"
-            >
-              <PiAppStoreLogoBold className=" size-[18px] text-blue-500" />
-              <span>Applications</span>
-            </li>
-            <li
-              className="flex flex-row items-center space-x-1"
-              onClick={() => setSelectedFinderId('desktop')}
-              role="button"
-            >
-              <BsWindowDesktop className=" size-[18px] text-blue-500" />
-              <span>Desktop</span>
-            </li>
-            <li
-              className="flex flex-row items-center space-x-1"
-              onClick={() => setSelectedFinderId('documents')}
-              role="button"
-            >
-              <HiOutlineDocument className=" size-[18px] text-blue-500" />
-              <span>Documents</span>
-            </li>
-            <li
-              className="flex flex-row items-center space-x-1"
-              onClick={() => setSelectedFinderId('downloads')}
-              role="button"
-            >
-              <MdOutlineDownloadForOffline className=" size-[18px] text-blue-500" />
-              <span>Downloads</span>
-            </li>
+          <ul className="space-y-2">
+            <FinderItem id="airdrop" icon={MdWifiTethering} label="AirDrop" />
+            <FinderItem id="recent" icon={IoTimeOutline} label="Recent" />
+            <FinderItem
+              id="applications"
+              icon={PiAppStoreLogoBold}
+              label="Applications"
+            />
+            <FinderItem id="desktop" icon={BsWindowDesktop} label="Desktop" />
+            <FinderItem
+              id="documents"
+              icon={HiOutlineDocument}
+              label="Documents"
+            />
+            <FinderItem
+              id="downloads"
+              icon={MdOutlineDownloadForOffline}
+              label="Downloads"
+            />
           </ul>
         </AccordionContent>
       </AccordionItem>
@@ -461,8 +429,6 @@ function Favorites() {
 }
 
 function ICloud() {
-  const { setSelectedFinderId } = useFinderStore((state) => state);
-
   return (
     <Accordion type="single" collapsible className="w-full my-4">
       <AccordionItem value="item-1">
@@ -470,23 +436,19 @@ function ICloud() {
           iCloud
         </AccordionTrigger>
         <AccordionContent>
-          <ul className="space-y-4">
-            <li
-              className="flex flex-row items-center space-x-1"
-              onClick={() => setSelectedFinderId('icloud-drive')}
-              role="button"
-            >
-              <CiCloudOn className=" size-[18px] text-teal-500" />
-              <span>iCloud Drive</span>
-            </li>
-            <li
-              className="flex flex-row items-center space-x-1"
-              onClick={() => setSelectedFinderId('shared')}
-              role="button"
-            >
-              <PiFolderSimpleUserFill className=" size-[18px] text-teal-500" />
-              <span>Shared</span>
-            </li>
+          <ul className="space-y-2">
+            <FinderItem
+              id="icloud-drive"
+              icon={CiCloudOn}
+              label="iCloud Drive"
+              color="text-teal-500"
+            />
+            <FinderItem
+              id="shared"
+              icon={PiFolderSimpleUserFill}
+              label="Shared"
+              color="text-teal-500"
+            />
           </ul>
         </AccordionContent>
       </AccordionItem>
@@ -502,41 +464,58 @@ function Tags() {
           Tags
         </AccordionTrigger>
         <AccordionContent>
-          <div className="flex flex-col space-y-4 ml-1">
-            <div className="flex items-center space-x-3">
-              <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-              <span>Red</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
-              <span>Orange</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-              <span>Yellow</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              <span>Green</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-              <span>Blue</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-              <span>Purple</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-3 h-3 bg-gray-500 rounded-full"></div>
-              <span>Gray</span>
-            </div>
+          <div className="flex flex-col space-y-1">
+            <FinderItem id="red" label="Red" bg="bg-red-500" />
+            <FinderItem id="orange" label="Orange" bg="bg-orange-500" />
+            <FinderItem id="yellow" label="Yellow" bg="bg-yellow-500" />
+            <FinderItem id="green" label="Green" bg="bg-green-500" />
+            <FinderItem id="blue" label="Blue" bg="bg-blue-500" />
+            <FinderItem id="purple" label="Purple" bg="bg-purple-500" />
+            <FinderItem id="gray" label="Gray" bg="bg-gray-500" />
           </div>
         </AccordionContent>
       </AccordionItem>
     </Accordion>
   );
 }
+
+interface FinderItemProps {
+  id: string;
+  label: string;
+  icon?: React.ElementType;
+  color?: string;
+  bg?: string;
+}
+
+const FinderItem: React.FC<FinderItemProps> = ({
+  id,
+  label,
+  icon: Icon,
+  color = 'text-blue-500',
+  bg = 'bg-blue-500'
+}) => {
+  const { setSelectedFinderId, selectedFinderId } = useFinderStore(
+    (state) => state
+  );
+
+  return (
+    <li
+      className={cn(
+        'flex flex-row items-center space-x-2 p-2 rounded-md cursor-pointer text-white',
+        selectedFinderId === id && 'bg-neutral-400/20'
+      )}
+      onClick={() => setSelectedFinderId(id)}
+      role="button"
+    >
+      {Icon ? (
+        <Icon className={cn('size-[18px]', color)} />
+      ) : (
+        <div className={cn('w-3 h-3 rounded-full', bg)} />
+      )}
+      <span>{label}</span>
+    </li>
+  );
+};
 
 interface ContentProps {
   displayedItems: FinderData[];
