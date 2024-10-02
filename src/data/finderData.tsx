@@ -370,5 +370,54 @@ export const finderData: FinderData[] = [
     type: 'folder',
     iconImg: Folder,
     children: []
+  },
+  {
+    id: 'red',
+    title: 'Red',
+    type: 'folder',
+    iconImg: Folder,
+    children: []
+  },
+  {
+    id: 'orange',
+    title: 'Orange',
+    type: 'folder',
+    iconImg: Folder,
+    children: []
+  },
+  {
+    id: 'yellow',
+    title: 'Yellow',
+    type: 'folder',
+    iconImg: Folder,
+    children: []
+  },
+  {
+    id: 'green',
+    title: 'Green',
+    type: 'folder',
+    iconImg: Folder,
+    children: []
+  },
+  {
+    id: 'blue',
+    title: 'Blue',
+    type: 'folder',
+    iconImg: Folder,
+    children: []
+  },
+  {
+    id: 'purple',
+    title: 'Purple',
+    type: 'folder',
+    iconImg: Folder,
+    children: []
+  },
+  {
+    id: 'gray',
+    title: 'Gray',
+    type: 'folder',
+    iconImg: Folder,
+    children: []
   }
 ] as const;
