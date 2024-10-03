@@ -25,9 +25,6 @@ not necessary good code, but fun code.
     - [ ] Disable default arrow press
     - [ ] History gets wrong
     - [ ] Scroll when larger the window size
-    - [ ] iCloud
-    - [ ] Shared
-    - [ ] Tags
     - [ ] Amount of items chosen
     - [ ] Choose multiple items
     - [ ] Sort By
