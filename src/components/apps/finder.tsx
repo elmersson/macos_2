@@ -165,10 +165,11 @@ export function Finder({ appData }: AppProps) {
   );
 
   const handleSetSelectedFinderId = (id: string) => {
-    const newPosition = historyPosition + 1;
-    setHistoryPosition(newPosition);
-    addToHistory(selectedFinderId);
-    setSelectedFinderId(id);
+    if (selectedFinderId !== id) {
+      addToHistory(selectedFinderId);
+      setHistoryPosition(historyPosition + 1);
+      setSelectedFinderId(id);
+    }
   };
 
   const handleBack = () => {
@@ -318,24 +319,37 @@ function BarItem({
     handleSearchToggle();
   };
 
+  console.log(
+    'historyPosition',
+    historyPosition,
+    'finderHistory',
+    finderHistory
+  );
+  const canGoBack = historyPosition > 0;
+  const canGoForward = historyPosition < finderHistory.length - 1;
+
   return (
     <div className="bg-neutral-800 flex flex-row w-full h-full items-center justify-between p-3">
       <div className="flex flex-row items-center space-x-3">
         <div
-          className={`text-lg ${historyPosition > 0 ? 'opacity-100 cursor-pointer' : 'opacity-40 cursor-not-allowed'}`}
+          className={`text-lg ${canGoBack ? 'opacity-100 cursor-pointer' : 'opacity-40 cursor-not-allowed'}`}
           role="button"
           onClick={() => {
-            handleBack();
+            if (canGoBack) {
+              handleBack();
+            }
           }}
         >
           <IoIosArrowBack />
         </div>
 
         <div
-          className={`text-lg ${historyPosition < finderHistory.length - 1 ? 'opacity-100 cursor-pointer' : 'opacity-40 cursor-not-allowed'}`}
+          className={`text-lg ${canGoForward ? 'opacity-100 cursor-pointer' : 'opacity-40 cursor-not-allowed'}`}
           role="button"
           onClick={() => {
-            handleForward();
+            if (canGoForward) {
+              handleForward();
+            }
           }}
         >
           <IoIosArrowForward />
@@ -494,9 +508,21 @@ const FinderItem: React.FC<FinderItemProps> = ({
   color = 'text-blue-500',
   bg = 'bg-blue-500'
 }) => {
-  const { setSelectedFinderId, selectedFinderId } = useFinderStore(
-    (state) => state
-  );
+  const {
+    setSelectedFinderId,
+    selectedFinderId,
+    addToHistory,
+    historyPosition,
+    setHistoryPosition
+  } = useFinderStore((state) => state);
+
+  const handleSetSelectedFinderId = (id: string) => {
+    if (selectedFinderId !== id) {
+      addToHistory(selectedFinderId);
+      setHistoryPosition(historyPosition + 1);
+      setSelectedFinderId(id);
+    }
+  };
 
   return (
     <li
@@ -504,7 +530,7 @@ const FinderItem: React.FC<FinderItemProps> = ({
         'flex flex-row items-center space-x-2 p-2 rounded-md cursor-pointer text-white',
         selectedFinderId === id && 'bg-neutral-400/20'
       )}
-      onClick={() => setSelectedFinderId(id)}
+      onClick={() => handleSetSelectedFinderId(id)}
       role="button"
     >
       {Icon ? (
@@ -529,7 +555,10 @@ function Content({ displayedItems, selectedFinderId }: ContentProps) {
     addToRecent,
     recent,
     airdropSetting,
-    setAirdropSetting
+    setAirdropSetting,
+    addToHistory,
+    setHistoryPosition,
+    historyPosition
   } = useFinderStore((state) => state);
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
 
@@ -541,8 +570,16 @@ function Content({ displayedItems, selectedFinderId }: ContentProps) {
         'noopener,noreferrer'
       );
     } else if (data.type === 'folder') {
-      setSelectedFinderId(data.id);
+      handleSetSelectedFinderId(data.id);
       addToRecent(data);
+    }
+  };
+
+  const handleSetSelectedFinderId = (id: string) => {
+    if (selectedFinderId !== id) {
+      addToHistory(selectedFinderId);
+      setHistoryPosition(historyPosition + 1);
+      setSelectedFinderId(id);
     }
   };
 
