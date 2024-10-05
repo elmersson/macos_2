@@ -30,39 +30,51 @@ export const createFinderStore = (): StoreApi<FinderStore> => {
       (set) => ({
         ...initialFinderData,
         airdropSetting: 'Contacts Only',
-        setAirdropSetting: (setting) =>
-          set(() => ({ airdropSetting: setting })),
-        setSelectedFinderId: (id) =>
+        setAirdropSetting: (
+          setting: 'No One' | 'Contacts Only' | 'Everyone'
+        ): void => set(() => ({ airdropSetting: setting })),
+        setSelectedFinderId: (id: string): void => {
           set((state) => {
             state.addToHistory(state.selectedFinderId);
             return { selectedFinderId: id };
-          }),
-        addToHistory: (id: string) =>
+          });
+        },
+        addToHistory: (id: string): void => {
           set((state) => {
-            if (state.historyPosition < state.finderHistory.length - 1) {
-              state.finderHistory.splice(state.historyPosition + 1);
-            }
+            const newHistory = state.finderHistory.slice(
+              0,
+              state.historyPosition + 1
+            );
             return {
-              finderHistory: [...state.finderHistory, id]
+              finderHistory: [...newHistory, id],
+              historyPosition: newHistory.length
             };
-          }),
-        setHistoryPosition: (position: number) =>
-          set(() => ({
-            historyPosition: position
+          });
+        },
+        setHistoryPosition: (position: number): void =>
+          set((state) => ({
+            historyPosition: Math.min(position, state.finderHistory.length - 1)
           })),
         recent: [],
-        addToRecent: (data: FinderData) =>
+        addToRecent: (data: FinderData): void => {
           set((state) => {
             const existingIndex = state.recent.findIndex(
               (item) => item.id === data.id
             );
-            if (existingIndex !== -1) {
-              state.recent.splice(existingIndex, 1);
-            }
+            const newRecent =
+              existingIndex !== -1
+                ? [
+                    data,
+                    ...state.recent.filter(
+                      (_, index) => index !== existingIndex
+                    )
+                  ]
+                : [data, ...state.recent];
             return {
-              recent: [data, ...state.recent]
+              recent: newRecent
             };
-          }),
+          });
+        },
         bin: {
           id: 'bin',
           title: 'Bin',
@@ -70,32 +82,36 @@ export const createFinderStore = (): StoreApi<FinderStore> => {
           iconImg: Trashcan,
           children: []
         },
-        removeById: (id: string) =>
+        removeById: (id: string): void => {
           set((state) => {
             const removeNodeById = (data: FinderData[]): FinderData[] => {
-              return data.filter((item) => {
+              const updatedData: FinderData[] = [];
+              for (const item of data) {
                 if (item.id === id) {
                   set((state) => ({
                     bin: {
                       ...state.bin,
-                      children: state.bin.children
-                        ? [...state.bin.children, item]
-                        : [item]
+                      children: [...(state.bin.children || []), item]
                     }
                   }));
-                  return false;
+                  continue;
                 }
-                if (item.children) {
-                  item.children = removeNodeById(item.children);
-                }
-                return true;
-              });
+                updatedData.push({
+                  ...item,
+                  children: item.children
+                    ? removeNodeById(item.children)
+                    : undefined
+                });
+              }
+              return updatedData;
             };
+
             return {
               finderDataSet: removeNodeById(state.finderDataSet)
             };
-          }),
-        restoreFromBin: (id: string) =>
+          });
+        },
+        restoreFromBin: (id: string): void => {
           set((state) => {
             const binChildren = state.bin.children || [];
             const itemToRestore = binChildren.find((item) => item.id === id);
@@ -109,17 +125,19 @@ export const createFinderStore = (): StoreApi<FinderStore> => {
               },
               finderDataSet: [...state.finderDataSet, itemToRestore]
             };
-          }),
-        permanentlyDeleteFromBin: (id: string) =>
+          });
+        },
+        permanentlyDeleteFromBin: (id: string): void => {
           set((state) => ({
             bin: {
               ...state.bin,
-              children: state.bin.children
-                ? state.bin.children.filter((item) => item.id !== id)
-                : []
+              children: (state.bin.children || []).filter(
+                (item) => item.id !== id
+              )
             }
-          })),
-        resetFinderStore: () => set({ ...initialFinderData })
+          }));
+        },
+        resetFinderStore: (): void => set({ ...initialFinderData })
       }),
       { name: 'finder-store-2' }
     )
