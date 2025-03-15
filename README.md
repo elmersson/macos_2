@@ -77,7 +77,7 @@ not necessary good code, but fun code.
 
 ### :art: Design: [﻿Figma](https://www.figma.com/file/VCxltAf7wcOtDc6djBIBCD/MacOS?type=design&node-id=2%3A5731&mode=design&t=B1iX5GHDvj0DTduN-1)
 
-### :technologist: Frontend: [Tanstack Start](https://tanstack.com/start/latest), [TailwindCSS](https://github.com/tailwindlabs/tailwindcss), [TypeScript](https://github.com/microsoft/TypeScript), [Shadcn](https://github.com/shadcn-ui/ui).
+### :technologist: Frontend: [NextJS](https://github.com/vercel/next.js), [Zustand](https://github.com/pmndrs/zustand), [TailwindCSS](https://github.com/tailwindlabs/tailwindcss), [TypeScript](https://github.com/microsoft/TypeScript), [Framer Motion](https://github.com/framer/motion), [react-draggable](https://github.com/react-grid-layout/react-draggable), [Playwright](https://github.com/microsoft/playwright), [Axios](https://github.com/axios/axios), [Shadcn](https://github.com/shadcn-ui/ui)
 
 ## Getting Started
 
